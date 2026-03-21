@@ -11,6 +11,7 @@
         href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=IBM+Plex+Mono:wght@300;400;500;700&display=swap"
         rel="stylesheet">
     <link rel="icon" href="assests/logos/logo.png" type="image/png">
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 
 
     <style>
@@ -207,28 +208,19 @@
        § 6. TOP NAVBAR
     ═══════════════════════════════════════════════════════ */
         .navbar-wrapper {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
+            position: relative;
             z-index: 100;
             border-bottom: 1px solid var(--wire);
-            background: rgba(3, 3, 3, .96);
-            backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
+            background: var(--void);
         }
 
-        @media(min-width:640px) {
-            .navbar-wrapper {
-                top: 0;
-            }
-        }
+
 
         .navbar {
             display: flex;
             justify-content: space-between;
             align-items: stretch;
-            height: 52px;
+            height: 70px;
             max-width: 1440px;
             margin: 0 auto;
             padding: 0 4px 0 0;
@@ -245,7 +237,7 @@
         }
 
         .nav-logo img {
-            height: 45px;
+            height: 60px;
             width: auto;
             object-fit: contain;
         }
@@ -264,7 +256,7 @@
             }
 
             .nav-logo img {
-                height: 26px;
+                height: 50px;
             }
         }
 
@@ -451,8 +443,8 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            width: 52px;
-            height: 52px;
+            width: 70px;
+            height: 70px;
             color: var(--cream);
             border-left: 1px solid var(--wire);
             flex-shrink: 0;
@@ -478,10 +470,10 @@
     ═══════════════════════════════════════════════════════ */
         .mob-menu {
             position: fixed;
-            top: 52px;
+            top: 70px;
             left: 0;
             right: 0;
-            height: calc(100vh - 52px - var(--safe-bottom));
+            height: calc(100vh - 70px - var(--safe-bottom));
             background: var(--void);
             z-index: 99;
             transform: translateX(100%);
@@ -498,7 +490,7 @@
 
         @media(min-width:640px) {
             .mob-menu {
-                top: 52px;
+                top: 70px;
             }
         }
 
@@ -689,7 +681,7 @@
             min-height: 44vh;
             display: flex;
             align-items: flex-end;
-            padding: 52px var(--px) 48px;
+            padding: 48px var(--px) 48px;
             background: var(--void-1);
             border-bottom: 2px solid var(--wire);
             position: relative;
@@ -698,7 +690,7 @@
 
         @media(min-width:640px) {
             .events-hero {
-                padding-top: 52px;
+                padding-top: 56px;
             }
         }
 
@@ -1732,6 +1724,31 @@
             </div>
             <p class="footer-copy">&copy; 2024 DEFFENSO ACADEMY. ALL RIGHTS RESERVED.</p>
         </div>
+        <div style="border-top:1px solid var(--wire);padding:32px var(--px);max-width:1440px;margin:0 auto;display:grid;grid-template-columns:1fr;gap:24px;">
+            <style>
+                @media(min-width:768px) {
+                    .footer-loc-grid { grid-template-columns: 1fr 1fr !important; }
+                }
+            </style>
+            <div class="footer-loc-grid" style="display:grid;grid-template-columns:1fr;gap:24px;">
+                <div style="display:flex;flex-direction:column;gap:14px;">
+                    <h4 style="font-size:9px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--blue)">[Headquarters]</h4>
+                    <p style="font-size:12px;color:var(--cream-2);line-height:1.75">KMEA Engineering College,<br/>Kuzhivelipady, Edathala,<br/>Aluva, Kerala 683561</p>
+                    <a href="https://www.google.com/maps/search/?api=1&query=KMEA+Engineering+College+Kuzhivelipady+Edathala+Aluva+Kerala+683561" target="_blank" rel="noreferrer" style="display:inline-flex;align-items:center;gap:8px;padding:10px 16px;border:1px solid var(--wire);font-size:9px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--cream-3);transition:all .18s;min-height:44px;width:fit-content">
+                        <svg width="14" height="14" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+                        Open in Google Maps
+                    </a>
+                </div>
+                <div style="border:1px solid var(--wire);overflow:hidden;aspect-ratio:16/9;max-height:220px;width:100%;max-width:400px;" class="ftr-map-wrap">
+                    <iframe src="https://www.google.com/maps?q=KMEA+Engineering+College+Kuzhivelipady+Edathala+Aluva+Kerala+683561&output=embed" style="width:100%;height:100%;border:none;filter:invert(90%) hue-rotate(180deg) brightness(0.95) contrast(1.1)" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                </div>
+            </div>
+        </div>
+        <style>
+            @media(min-width:768px) {
+                .ftr-map-wrap { justify-self: end; }
+            }
+        </style>
         <div class="footer-terminal">
             <span class="ftr-prompt">root@deffenso:~$</span>
             <span>events.html — session active.</span>
@@ -1886,9 +1903,18 @@
             });
         });
 
+        /* ─── EmailJS Initialization ─────────────────────── */
+        (function() {
+            emailjs.init({
+                publicKey: "YOUR_PUBLIC_KEY",
+            });
+        })();
+
         /* ─── Register modal ──────────────────────────────── */
         function openModal(id, title) {
             document.getElementById('modal-event-label').textContent = title;
+            document.getElementById('hidden-event-id').value = id;
+            document.getElementById('hidden-event-title').value = title;
             document.getElementById('modal-form-wrap').style.display = 'block';
             document.getElementById('modal-success').classList.remove('show');
             document.getElementById('register-modal').classList.add('open');
@@ -1901,10 +1927,28 @@
         function handleOverlayClick(e) { if (e.target === e.currentTarget) closeModal(); }
         document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
 
-        function handleRegister(e) {
+        async function handleRegister(e) {
             e.preventDefault();
-            document.getElementById('modal-form-wrap').style.display = 'none';
-            document.getElementById('modal-success').classList.add('show');
+            const form = e.target;
+            const btn = form.querySelector('.form-submit');
+            const originalText = btn.textContent;
+
+            try {
+                btn.textContent = "// TRANSMITTING...";
+                btn.disabled = true;
+
+                await emailjs.sendForm('service_jofne0x', 'YOUR_TEMPLATE_ID', form);
+
+                document.getElementById('modal-form-wrap').style.display = 'none';
+                document.getElementById('modal-success').classList.add('show');
+                form.reset();
+            } catch (error) {
+                console.error('EmailJS Error:', error);
+                alert('TRANSMISSION FAILED. CHECK CONSOLE FOR LOGS.');
+            } finally {
+                btn.textContent = originalText;
+                btn.disabled = false;
+            }
         }
 
         /* ─── Hamburger ───────────────────────────────────── */

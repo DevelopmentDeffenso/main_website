@@ -107,19 +107,17 @@
 
 
         .navbar-wrapper {
-            position: sticky;
-            top: 0;
+            position: relative;
             z-index: 100;
             border-bottom: 1px solid var(--wire);
-            background: rgba(3, 3, 3, .97);
-            backdrop-filter: blur(20px)
+            background: var(--void);
         }
 
         .navbar {
             display: flex;
             justify-content: space-between;
             align-items: stretch;
-            height: 52px;
+            height: 70px;
             max-width: 1440px;
             margin: 0 auto
         }
@@ -132,7 +130,7 @@
             text-decoration: none
         }
         .nav-logo img {
-            height: 45px;
+            height: 60px;
             width: auto;
             object-fit: contain;
         }
@@ -324,8 +322,8 @@
 
         .sidebar {
             position: sticky;
-            top: 52px;
-            height: calc(100vh - 52px);
+            top: 0;
+            height: 100vh;
             border-right: 1px solid var(--wire);
             overflow-y: auto;
             background: var(--void-1);
@@ -402,7 +400,7 @@
             border-top: 1px solid var(--wire);
             border-bottom: 1px solid var(--wire);
             position: sticky;
-            top: 52px;
+            top: 0;
             z-index: 50
         }
 
@@ -1189,6 +1187,25 @@
                 <a href="index.html">Home</a>
                 <a href="term&con.html">Terms</a>
                 <a href="privacy.html">Privacy</a>
+            </div>
+        </div>
+        <div style="border-top:1px solid var(--wire);padding:32px 40px;max-width:1440px;margin:0 auto;display:grid;gap:24px">
+            <style>
+                .ftr-loc-grid{display:grid;grid-template-columns:1fr;gap:24px}
+                @media(min-width:768px){.ftr-loc-grid{grid-template-columns:1fr 1fr}}
+            </style>
+            <div class="ftr-loc-grid">
+                <div style="display:flex;flex-direction:column;gap:14px">
+                    <h4 style="font-size:9px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--blue)">[Headquarters]</h4>
+                    <p style="font-size:12px;color:var(--cream-2);line-height:1.75">KMEA Engineering College,<br/>Kuzhivelipady, Edathala,<br/>Aluva, Kerala 683561</p>
+                    <a href="https://www.google.com/maps/search/?api=1&query=KMEA+Engineering+College+Kuzhivelipady+Edathala+Aluva+Kerala+683561" target="_blank" rel="noreferrer" style="display:inline-flex;align-items:center;gap:8px;padding:10px 16px;border:1px solid var(--wire);font-size:9px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--cream-3);min-height:44px;width:fit-content">
+                        <svg width="14" height="14" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+                        Open in Google Maps
+                    </a>
+                </div>
+                <div style="border:1px solid var(--wire);overflow:hidden;aspect-ratio:16/9;max-height:220px;width:100%;max-width:400px;justify-self:end">
+                    <iframe src="https://www.google.com/maps?q=KMEA+Engineering+College+Kuzhivelipady+Edathala+Aluva+Kerala+683561&output=embed" style="width:100%;height:100%;border:none;filter:invert(90%) hue-rotate(180deg) brightness(0.95) contrast(1.1)" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                </div>
             </div>
         </div>
     </footer>
