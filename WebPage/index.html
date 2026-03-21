@@ -4578,9 +4578,8 @@
           console.warn('Developer Note: You must replace YOUR_GOOGLE_APPS_SCRIPT_WEB_APP_URL with your Apps Script Web App URL.');
         }
 
-        const formData = new FormData(form);
-        const email = formData.get('email');
-        
+        const email = input.value;
+
         // Append email as a URL parameter
         const finalURL = scriptURL + '?email=' + encodeURIComponent(email);
 
