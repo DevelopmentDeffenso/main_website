@@ -4528,26 +4528,26 @@
     /* ═══════════════════════════════════════════════════════
        JS § 0. EMAILJS INITIALIZATION
     ═══════════════════════════════════════════════════════ */
-    (function() {
+    (function () {
       // https://dashboard.emailjs.com/admin/account
       emailjs.init({
-        publicKey: "YOUR_PUBLIC_KEY",
+        publicKey: "fp1RSsu0EURzhgU4a",
       });
     })();
 
     async function sendEmail(e) {
       e.preventDefault();
       const form = e.target;
-      const btn = form.querySelector('.form-submit');
+      const btn = form.querySelector('.form-submit') || form.querySelector('.f-submit') || form.querySelector('[type="submit"]');
       const originalText = btn.textContent;
-      
+
       try {
         btn.textContent = "// TRANSMITTING...";
         btn.disabled = true;
 
         // Service ID, Template ID, Form Element
-        await emailjs.sendForm('service_jofne0x', 'YOUR_TEMPLATE_ID', form);
-        
+        await emailjs.sendForm('service_jofne0x', 'template_g5b9j5r', form);
+
         alert('TRANSMISSION SUCCESSFUL. MESSAGE ENCRYPTED AND SENT.');
         form.reset();
       } catch (error) {
@@ -4556,6 +4556,47 @@
       } finally {
         btn.textContent = originalText;
         btn.disabled = false;
+      }
+    }
+
+    async function subscribeNewsletter(e) {
+      e.preventDefault();
+      const form = e.target;
+      const btn = form.querySelector('.newsletter-submit');
+      const input = form.querySelector('.newsletter-input');
+      const originalText = btn.innerHTML;
+
+      try {
+        btn.innerHTML = '// SUBSCRIBING...';
+        btn.disabled = true;
+        input.disabled = true;
+
+        // URL of your deployed Google Apps Script Web App
+        const scriptURL = 'https://script.google.com/macros/s/AKfycbzP1GLt0laeVlqG0yWyjcAksmWXyfOh1zqhfh5vMT_Xh6srhH0sSFSkLKw6MK9-GP_hMQ/exec';
+
+        if (scriptURL === 'YOUR_GOOGLE_APPS_SCRIPT_WEB_APP_URL') {
+          console.warn('Developer Note: You must replace YOUR_GOOGLE_APPS_SCRIPT_WEB_APP_URL with your Apps Script Web App URL.');
+        }
+
+        const formData = new FormData(form);
+        const email = formData.get('email');
+        
+        // Append email as a URL parameter
+        const finalURL = scriptURL + '?email=' + encodeURIComponent(email);
+
+        await fetch(finalURL, {
+          method: 'GET',
+          mode: 'no-cors'
+        });
+
+        btn.innerHTML = '// SUBSCRIBED';
+        alert('Welcome! You have been subscribed to the Intel Dispatch.');
+      } catch (error) {
+        console.error('Newsletter Error:', error);
+        alert('SUBSCRIPTION FAILED. PLEASE TRY AGAIN');
+        btn.innerHTML = originalText;
+        btn.disabled = false;
+        input.disabled = false;
       }
     }
 
@@ -4792,7 +4833,7 @@
         <section class="why-section">
           <div class="why-inner">
             <p class="why-eyebrow">// OPERATIONAL ADVANTAGE</p>
-            <h2 class="why-h">BUILT FOR<br/><span>OPERATORS.</span></h2>
+            <h2 class="why-h">BUILT FOR <br/><span>OPERATORS.</span></h2>
             <div class="why-grid">${WHY}</div>
             <div class="why-cta-strip">
               <p class="why-cta-text">Still deciding? <strong>7-day money-back guarantee</strong> on all programs — no risk, no questions asked.</p>
@@ -4827,7 +4868,7 @@
         <section class="gallery-section">
           <div class="gallery-inner">
             <p class="gallery-eyebrow">// FIELD MOMENTS</p>
-            <h2 class="gallery-h">CAPTURED<br/><span style="color:var(--blue)">IN ACTION.</span></h2>
+            <h2 class="gallery-h">CAPTURED <br/><span style="color:var(--blue)">IN ACTION.</span></h2>
             <p class="gallery-sub">Snapshots from workshops, competitions, bootcamps, and graduation ceremonies across our programs.</p>
             <div class="gallery-filters">
               <button class="gallery-filter-btn active" onclick="filterGallery('all',this)">ALL</button>
@@ -4861,10 +4902,10 @@
             <div>
               <div class="newsletter-form-wrap">
                 <h3 class="newsletter-form-h">JOIN THE<br/>DISPATCH.</h3>
-                <p class="newsletter-form-sub">1,200+ operators already subscribed. New intel every Monday.</p>
-                <form onsubmit="event.preventDefault();this.querySelector('.newsletter-submit').textContent='// SUBSCRIBED';this.querySelector('.newsletter-input').disabled=true;this.querySelector('.newsletter-submit').disabled=true">
+                <p class="newsletter-form-sub">50+ operators already subscribed. New intel every Monday.</p>
+                <form id="newsletter-form" onsubmit="subscribeNewsletter(event)">
                   <div class="newsletter-input-wrap">
-                    <input type="email" placeholder="your@email.com" required class="newsletter-input" autocomplete="email"/>
+                    <input type="email" name="email" placeholder="your@email.com" required class="newsletter-input" autocomplete="email"/>
                     <button type="submit" class="newsletter-submit">SUBSCRIBE ${ARR}</button>
                   </div>
                 </form>
@@ -4891,7 +4932,7 @@
             <div class="faq-layout">
               <div>
                 <p class="faq-eyebrow">// INTELLIGENCE BRIEF</p>
-                <h2 class="faq-h">COMMON<br/>QUESTIONS</h2>
+                <h2 class="faq-h">COMMON <br/>QUESTIONS</h2>
                 <p class="faq-desc">Everything you need to know before you begin training with Deffenso Academy.</p>
                 ${faqs.map((f, i) => `
                   <div class="faq-item">
@@ -4906,10 +4947,11 @@
                 <div class="faq-contact">
                   <h3 class="faq-contact-h">STILL HAVE<br/>QUESTIONS?</h3>
                   <p class="faq-contact-sub">Our team responds within 24 hours. Send a secure transmission.</p>
-                  <form onsubmit="event.preventDefault();alert('Transmission sent.');this.reset()" style="display:flex;flex-direction:column">
-                    <input type="text" placeholder="Your Name" required class="f-input" autocomplete="name"/>
-                    <input type="email" placeholder="Email Address" required class="f-input" autocomplete="email"/>
-                    <textarea rows="4" placeholder="Your question..." required class="f-textarea"></textarea>
+                  <form onsubmit="sendEmail(event)" style="display:flex;flex-direction:column">
+                    <input type="hidden" name="subject" value="FAQ Question"/>
+                    <input type="text" name="from_name" placeholder="Your Name" required class="f-input" autocomplete="name"/>
+                    <input type="email" name="reply_to" placeholder="Email Address" required class="f-input" autocomplete="email"/>
+                    <textarea rows="4" name="message" placeholder="Your question..." required class="f-textarea"></textarea>
                     <button type="submit" class="f-submit">// SEND TRANSMISSION</button>
                   </form>
                 </div>

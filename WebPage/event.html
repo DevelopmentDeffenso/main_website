@@ -27,6 +27,8 @@
             --cream-3: #5A5249;
             --blue: #007BFF;
             --blue-hi: #3DA5FF;
+            --blue-dim: #003d7a;
+            --blue-glow: rgba(0, 123, 255, 0.12);
             --green: #00FF41;
             --wire: #1E1E1E;
             --wire-2: #2A2A2A;
@@ -160,6 +162,57 @@
             }
         }
 
+        @keyframes blinkCursor {
+
+            0%,
+            49% {
+                opacity: 1;
+            }
+
+            50%,
+            100% {
+                opacity: 0;
+            }
+        }
+
+        @keyframes ecGlitch {
+
+            0%,
+            88%,
+            100% {
+                transform: translate(0);
+                clip-path: none;
+            }
+
+            90% {
+                transform: translate(-3px, 1px);
+                clip-path: inset(15% 0 55% 0);
+                color: var(--blue-hi);
+            }
+
+            92% {
+                transform: translate(3px, -1px);
+                clip-path: inset(55% 0 15% 0);
+                color: #ff4466;
+            }
+
+            94% {
+                transform: translate(0);
+                clip-path: none;
+                color: var(--cream);
+            }
+        }
+
+        @keyframes scanPan {
+            0% {
+                transform: translateY(-100%);
+            }
+
+            100% {
+                transform: translateY(100%);
+            }
+        }
+
         /* ═══════════════════════════════════════════════════════
        § 4. GLOBAL UTILITIES
     ═══════════════════════════════════════════════════════ */
@@ -200,11 +253,6 @@
         }
 
         /* ═══════════════════════════════════════════════════════
-       § 5. CLASSIFICATION BANNER
-    ═══════════════════════════════════════════════════════ */
-
-
-        /* ═══════════════════════════════════════════════════════
        § 6. TOP NAVBAR
     ═══════════════════════════════════════════════════════ */
         .navbar-wrapper {
@@ -213,8 +261,6 @@
             border-bottom: 1px solid var(--wire);
             background: var(--void);
         }
-
-
 
         .navbar {
             display: flex;
@@ -241,7 +287,6 @@
             width: auto;
             object-fit: contain;
         }
-
 
         .nav-logo-text {
             font-family: var(--font-d);
@@ -749,7 +794,6 @@
             line-height: 1.7;
         }
 
-        /* Meta strip */
         .events-meta-strip {
             display: flex;
             align-items: center;
@@ -839,252 +883,620 @@
         }
 
         /* ═══════════════════════════════════════════════════════
-       § 11. EVENTS TABLE
+       § 11. EVENT CARDS — TERMINAL REDESIGN
     ═══════════════════════════════════════════════════════ */
         .events-section {
             padding: var(--space-xl) 0;
+            background: var(--void);
         }
 
         .events-inner {
             padding: 0 var(--px);
-            max-width: 1440px;
+            max-width: 1200px;
             margin: 0 auto;
         }
 
-        .table-wrap {
+        #events-tbody {
+            display: flex;
+            flex-direction: column;
+            gap: 48px;
+        }
+
+        /* ── Card shell ────────────────────────────────────── */
+        .event-card {
+            position: relative;
+            display: grid;
+            grid-template-columns: 1fr;
+            background: var(--void-1);
             border: 1px solid var(--wire);
-            border-top: 2px solid var(--blue);
-            overflow-x: auto;
-            -webkit-overflow-scrolling: touch;
+            overflow: hidden;
         }
 
-        .events-table {
-            width: 100%;
-            border-collapse: collapse;
-            font-family: var(--font-m);
+        @media(min-width: 900px) {
+            .event-card {
+                grid-template-columns: 1fr 1.15fr;
+            }
         }
 
-        /* Head */
-        .events-table thead tr {
+        /* Corner bracket decorations */
+        .event-card::before,
+        .event-card::after {
+            content: '';
+            position: absolute;
+            width: 14px;
+            height: 14px;
+            border-color: var(--blue);
+            border-style: solid;
+            z-index: 10;
+            pointer-events: none;
+        }
+
+        .event-card::before {
+            top: -1px;
+            left: -1px;
+            border-width: 2px 0 0 2px;
+        }
+
+        .event-card::after {
+            bottom: -1px;
+            right: -1px;
+            border-width: 0 2px 2px 0;
+        }
+
+        .ec-corner-tr,
+        .ec-corner-bl {
+            position: absolute;
+            width: 14px;
+            height: 14px;
+            border-style: solid;
+            border-color: var(--blue);
+            pointer-events: none;
+            z-index: 10;
+        }
+
+        .ec-corner-tr {
+            top: -1px;
+            right: -1px;
+            border-width: 2px 2px 0 0;
+        }
+
+        .ec-corner-bl {
+            bottom: -1px;
+            left: -1px;
+            border-width: 0 0 2px 2px;
+        }
+
+        /* ── LEFT panel (poster) ───────────────────────────── */
+        .ec-left {
+            position: relative;
+            display: flex;
+            flex-direction: column;
             background: var(--void-2);
             border-bottom: 1px solid var(--wire);
         }
 
-        .events-table th {
-            padding: 12px 16px;
-            text-align: left;
-            font-size: 8.5px;
-            font-weight: 700;
-            letter-spacing: .2em;
-            text-transform: uppercase;
-            color: var(--blue);
-            white-space: nowrap;
-            border-right: 1px solid var(--wire);
+        @media(min-width: 900px) {
+            .ec-left {
+                border-bottom: none;
+                border-right: 1px solid var(--wire);
+            }
         }
 
-        .events-table th:last-child {
-            border-right: none;
-        }
-
-        /* Body */
-        .events-table tbody tr {
-            border-bottom: 1px solid var(--wire);
-            transition: background .15s;
-        }
-
-        .events-table tbody tr:last-child {
-            border-bottom: none;
-        }
-
-        .events-table tbody tr:hover {
-            background: rgba(0, 123, 255, .04);
-        }
-
-        .events-table td {
-            padding: 16px;
-            font-size: 12px;
-            color: var(--cream-2);
-            vertical-align: middle;
-            border-right: 1px solid var(--wire);
-        }
-
-        .events-table td:last-child {
-            border-right: none;
-        }
-
-        /* Date cell */
-        .td-date-day {
-            font-family: var(--font-d);
-            font-size: 28px;
-            line-height: 1;
-            color: var(--blue);
-            letter-spacing: .02em;
-        }
-
-        .td-date-meta {
-            font-size: 9px;
-            letter-spacing: .12em;
-            text-transform: uppercase;
-            color: var(--cream-3);
-            margin-top: 2px;
-        }
-
-        /* Status badge */
-        .event-badge {
-            display: inline-flex;
+        /* Terminal titlebar */
+        .ec-titlebar {
+            display: flex;
             align-items: center;
-            gap: 5px;
-            padding: 3px 9px;
-            font-size: 7.5px;
-            font-weight: 700;
-            letter-spacing: .16em;
-            text-transform: uppercase;
-            white-space: nowrap;
-        }
-
-        .event-badge.live {
-            background: rgba(0, 255, 65, .1);
-            border: 1px solid rgba(0, 255, 65, .25);
-            color: var(--green);
-        }
-
-        .event-badge.upcoming {
-            background: rgba(0, 123, 255, .12);
-            border: 1px solid rgba(0, 123, 255, .3);
-            color: var(--blue);
-        }
-
-        .event-badge.workshop {
-            background: rgba(255, 140, 0, .1);
-            border: 1px solid rgba(255, 140, 0, .3);
-            color: #FF8C00;
-        }
-
-        .event-badge.comp {
-            background: rgba(160, 32, 255, .1);
-            border: 1px solid rgba(160, 32, 255, .3);
-            color: #A020FF;
-        }
-
-        .event-badge.webinar {
-            background: rgba(0, 188, 212, .1);
-            border: 1px solid rgba(0, 188, 212, .3);
-            color: #00BCD4;
-        }
-
-        .event-badge.done {
-            background: rgba(90, 82, 73, .15);
-            border: 1px solid var(--wire-2);
-            color: var(--cream-3);
-        }
-
-        .badge-dot {
-            width: 5px;
-            height: 5px;
-            border-radius: 50%;
-            background: currentColor;
+            gap: 7px;
+            padding: 9px 14px;
+            background: var(--void);
+            border-bottom: 1px solid var(--wire);
             flex-shrink: 0;
         }
 
-        .badge-dot.pulse {
+        .ec-tb-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            flex-shrink: 0;
+        }
+
+        .ec-tb-dot-r {
+            background: #ff5f57;
+        }
+
+        .ec-tb-dot-y {
+            background: #ffbd2e;
+        }
+
+        .ec-tb-dot-g {
+            background: var(--green);
+        }
+
+        .ec-tb-label {
+            margin-left: 6px;
+            font-size: 9px;
+            font-weight: 700;
+            letter-spacing: .14em;
+            text-transform: uppercase;
+            color: var(--cream-3);
+        }
+
+        .ec-tb-id {
+            margin-left: auto;
+            font-size: 9px;
+            letter-spacing: .1em;
+            color: var(--blue);
+        }
+
+        /* Poster area */
+        .ec-poster-frame {
+            flex: 1;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 24px;
+            background: radial-gradient(ellipse at center, #0d1117 0%, var(--void-2) 70%);
+            min-height: 260px;
+        }
+
+        /* Scanline overlay */
+        .ec-poster-frame::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: repeating-linear-gradient(0deg,
+                    transparent,
+                    transparent 3px,
+                    rgba(0, 123, 255, 0.025) 3px,
+                    rgba(0, 123, 255, 0.025) 4px);
+            pointer-events: none;
+            z-index: 2;
+        }
+
+        /* Grid overlay */
+        .ec-poster-frame::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background-image:
+                linear-gradient(rgba(0, 123, 255, 0.04) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0, 123, 255, 0.04) 1px, transparent 1px);
+            background-size: 28px 28px;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .ec-poster {
+            width: 100%;
+            height: auto;
+            max-height: 460px;
+            max-width: 340px;
+            object-fit: contain;
+            display: block;
+            position: relative;
+            z-index: 3;
+            filter: saturate(0.85) contrast(1.05);
+            transition: filter .3s;
+        }
+
+        .event-card:hover .ec-poster {
+            filter: saturate(1) contrast(1.1);
+        }
+
+        .ec-no-poster {
+            height: 280px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--wire-2);
+            font-size: 11px;
+            letter-spacing: .2em;
+            position: relative;
+            z-index: 3;
+        }
+
+        /* Status strip at bottom of poster panel */
+        .ec-status-strip {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            padding: 8px 14px;
+            background: var(--void);
+            border-top: 1px solid var(--wire);
+            flex-shrink: 0;
+        }
+
+        .ec-sig {
+            display: flex;
+            align-items: flex-end;
+            gap: 2px;
+        }
+
+        .ec-sig-bar {
+            width: 3px;
+            background: var(--wire);
+            border-radius: 1px;
+        }
+
+        .ec-sig-bar:nth-child(1) {
+            height: 5px;
+        }
+
+        .ec-sig-bar:nth-child(2) {
+            height: 8px;
+        }
+
+        .ec-sig-bar:nth-child(3) {
+            height: 11px;
+        }
+
+        .ec-sig-bar:nth-child(4) {
+            height: 14px;
+        }
+
+        .ec-sig-bar.on {
+            background: var(--blue);
+        }
+
+        .ec-ping {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: var(--blue);
             animation: pulseDot 1.2s infinite;
         }
 
-        /* Title cell */
-        .td-title-main {
-            font-size: 13px;
-            font-weight: 500;
-            color: var(--cream);
-            line-height: 1.4;
+        .ec-ping-label {
+            font-size: 9px;
+            color: var(--blue);
+            letter-spacing: .12em;
         }
 
-        .td-title-sub {
+        .ec-session-id {
+            font-size: 9px;
+            color: var(--cream-3);
+            letter-spacing: .08em;
+            margin-left: auto;
+        }
+
+        /* ── RIGHT panel (details) ─────────────────────────── */
+        .ec-right {
+            padding: 28px 28px 32px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        @media(min-width: 900px) {
+            .ec-right {
+                padding: 36px 44px 44px;
+            }
+        }
+
+        /* Command-line prompt header */
+        .ec-cmd {
             font-size: 10px;
             color: var(--cream-3);
-            margin-top: 3px;
-            letter-spacing: .06em;
+            letter-spacing: .1em;
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            gap: 0;
+            flex-wrap: wrap;
         }
 
-        /* Action button */
-        .btn-reg {
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-            padding: 8px 16px;
-            min-height: 36px;
+        .ec-cmd-prompt {
+            color: var(--blue);
+            font-weight: 700;
+            margin-right: 8px;
+        }
+
+        .ec-cmd-arg {
+            color: var(--cream-2);
+        }
+
+        /* Badges */
+        .ec-badges {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+
+        .ec-badge {
+            padding: 5px 12px;
+            border: 1px solid currentColor;
             font-family: var(--font-m);
             font-size: 9px;
             font-weight: 700;
-            letter-spacing: .16em;
+            letter-spacing: .18em;
             text-transform: uppercase;
-            border: 1px solid var(--wire-2);
-            color: var(--cream-3);
             background: transparent;
+        }
+
+        /* Badge before/after brackets */
+        .ec-badge::before {
+            content: '[ ';
+            opacity: .6;
+        }
+
+        .ec-badge::after {
+            content: ' ]';
+            opacity: .6;
+        }
+
+        .badge-upcoming {
+            border-color: rgba(255, 90, 0, .5);
+            color: #FF5A00;
+            background: rgba(255, 90, 0, .04);
+        }
+
+        .badge-free {
+            border-color: rgba(0, 123, 255, .5);
+            color: var(--blue);
+            background: var(--blue-glow);
+        }
+
+        .badge-webinar {
+            border-color: rgba(255, 90, 0, .5);
+            color: #FF5A00;
+        }
+
+        .badge-done {
+            border-color: rgba(90, 82, 73, .6);
+            color: var(--cream-3);
+        }
+
+        .badge-workshop {
+            border-color: rgba(0, 188, 212, .5);
+            color: #00BCD4;
+            background: rgba(0, 188, 212, .04);
+        }
+
+        .badge-live {
+            border-color: rgba(0, 255, 65, .5);
+            color: var(--green);
+        }
+
+        .badge-comp {
+            border-color: rgba(0, 123, 255, .5);
+            color: var(--blue);
+        }
+
+        .badge-default {
+            border-color: rgba(0, 123, 255, .4);
+            color: var(--blue);
+        }
+
+        /* Event title */
+        .ec-title {
+            font-family: var(--font-d);
+            font-size: clamp(30px, 4.5vw, 52px);
+            line-height: 1.02;
+            letter-spacing: .03em;
+            color: var(--cream);
+            margin-bottom: 4px;
+            text-transform: uppercase;
+            animation: ecGlitch 9s infinite;
+        }
+
+        /* Blinking cursor after title */
+        .ec-title-cursor {
+            display: inline-block;
+            width: 3px;
+            height: 0.7em;
+            background: var(--blue);
+            margin-left: 6px;
+            vertical-align: middle;
+            animation: blinkCursor .8s steps(1) infinite;
+        }
+
+        .ec-tagline {
+            font-size: 12px;
+            color: var(--cream-3);
+            line-height: 1.65;
+            padding: 8px 12px;
+            border-left: 2px solid var(--wire);
+            background: rgba(255, 255, 255, .015);
+            margin-bottom: 10px;
+        }
+
+        .ec-tagline::before {
+            content: '>_ ';
+            color: var(--blue);
+            font-weight: 700;
+        }
+
+        .ec-orgs {
+            font-size: 10px;
+            color: var(--blue);
+            letter-spacing: .04em;
+            margin-bottom: 20px;
+            line-height: 1.55;
+        }
+
+        .ec-orgs::before {
+            content: '// ';
+            opacity: .5;
+        }
+
+        /* Divider */
+        .ec-divider {
+            height: 1px;
+            background: var(--wire);
+            margin: 18px 0;
+            position: relative;
+        }
+
+        .ec-divider::after {
+            content: '──────────────── ◆ ────────────────';
+            position: absolute;
+            left: 0;
+            top: -6px;
+            font-size: 8px;
+            color: var(--wire-2);
+            letter-spacing: -1px;
+            white-space: nowrap;
+            overflow: hidden;
+            width: 100%;
+        }
+
+        /* Details grid */
+        .ec-details {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 16px 24px;
+        }
+
+        @media(min-width: 520px) {
+            .ec-details {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        .ec-detail-item {}
+
+        .ec-detail-lbl {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            font-size: 9px;
+            font-weight: 700;
+            letter-spacing: .2em;
+            color: #2c2c2c;
+            color: var(--cream-3);
+            text-transform: uppercase;
+            margin-bottom: 5px;
+        }
+
+        .ec-detail-lbl svg {
+            color: var(--blue);
+            flex-shrink: 0;
+        }
+
+        .ec-detail-val {
+            font-family: var(--font-d);
+            font-size: 17px;
+            color: var(--cream);
+            letter-spacing: .04em;
+            text-transform: uppercase;
+            line-height: 1.1;
+        }
+
+        .ec-detail-val-sm {
+            font-family: var(--font-m);
+            font-size: 11px;
+            color: var(--cream-2);
+            letter-spacing: .04em;
+            text-transform: uppercase;
+            line-height: 1.4;
+        }
+
+        /* Tutor tags */
+        .ec-tutor-list {
+            display: flex;
+            gap: 6px;
+            flex-wrap: wrap;
+            margin-top: 2px;
+        }
+
+        .ec-tutor-tag {
+            font-size: 10px;
+            color: var(--blue-hi);
+            border: 1px solid rgba(0, 123, 255, .25);
+            padding: 3px 10px;
+            background: var(--blue-glow);
+            letter-spacing: .06em;
+        }
+
+        /* Action buttons */
+        .ec-actions {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+            margin-top: auto;
+            padding-top: 24px;
+        }
+
+        .btn-ec-primary {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 13px 24px;
+            font-family: var(--font-m);
+            font-size: 10px;
+            font-weight: 700;
+            letter-spacing: .18em;
+            color: #fff;
+            background: var(--blue);
+            border: 1px solid var(--blue);
+            cursor: pointer;
+            transition: background .18s;
+            text-transform: uppercase;
+            text-decoration: none;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-ec-primary::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: var(--blue-hi);
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform .2s;
+        }
+
+        .btn-ec-primary:hover::before {
+            transform: scaleX(1);
+        }
+
+        .btn-ec-primary span {
+            position: relative;
+            z-index: 1;
+        }
+
+        .btn-ec-outline {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 13px 24px;
+            font-family: var(--font-m);
+            font-size: 10px;
+            font-weight: 700;
+            letter-spacing: .18em;
+            color: var(--cream-2);
+            background: transparent;
+            border: 1px solid var(--wire-2);
             cursor: pointer;
             transition: all .18s;
-            white-space: nowrap;
+            text-transform: uppercase;
+            text-decoration: none;
         }
 
-        .btn-reg:hover {
-            background: var(--blue);
+        .btn-ec-outline:hover {
             border-color: var(--blue);
-            color: #fff;
+            color: var(--cream);
+            background: var(--blue-glow);
         }
 
-        .btn-reg.primary {
-            background: var(--blue);
-            border-color: var(--blue);
-            color: #fff;
-        }
-
-        .btn-reg.primary:hover {
-            background: var(--blue-hi);
-        }
-
-        .btn-reg.disabled {
-            opacity: .38;
+        .btn-ec-disabled {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 13px 24px;
+            font-family: var(--font-m);
+            font-size: 10px;
+            font-weight: 700;
+            letter-spacing: .18em;
+            color: var(--cream-3);
+            background: rgba(255, 255, 255, .03);
+            border: 1px solid var(--wire);
             cursor: not-allowed;
-            pointer-events: none;
-        }
-
-        /* Mobile: stack cells */
-        @media(max-width:639px) {
-            .events-table thead {
-                display: none;
-            }
-
-            .events-table tbody tr {
-                display: block;
-                padding: 4px 0;
-                background: var(--void-1);
-                margin-bottom: 1px;
-            }
-
-            .events-table td {
-                display: flex;
-                align-items: flex-start;
-                gap: 10px;
-                padding: 10px 16px;
-                border-right: none;
-                border-bottom: 1px solid rgba(255, 255, 255, .04);
-                font-size: 12px;
-            }
-
-            .events-table td::before {
-                content: attr(data-label);
-                font-size: 8px;
-                font-weight: 700;
-                letter-spacing: .18em;
-                text-transform: uppercase;
-                color: var(--cream-3);
-                flex-shrink: 0;
-                padding-top: 2px;
-                min-width: 72px;
-            }
-
-            .events-table td:last-child {
-                border-bottom: none;
-            }
+            text-transform: uppercase;
+            text-decoration: none;
         }
 
         /* ─── Empty state ─── */
@@ -1140,7 +1552,7 @@
        § 12. CTA STRIP
     ═══════════════════════════════════════════════════════ */
         .events-cta {
-            margin-top: 32px;
+            margin-top: 40px;
             padding: 22px 24px;
             border: 1px solid var(--wire);
             border-left: 3px solid var(--blue);
@@ -1263,7 +1675,6 @@
             line-height: 1.5;
         }
 
-        /* Form */
         .form-label {
             display: block;
             font-size: 9px;
@@ -1337,7 +1748,6 @@
             background: var(--blue-hi);
         }
 
-        /* Success */
         .modal-success {
             display: none;
             flex-direction: column;
@@ -1408,7 +1818,6 @@
             width: auto;
         }
 
-
         .footer-tagline {
             font-size: 11px;
             color: var(--cream-3);
@@ -1446,11 +1855,7 @@
 
 <body>
 
-
-
-    <!-- ═══════════════════════════════════════════════════════
-       TOP NAVBAR
-  ═══════════════════════════════════════════════════════ -->
+    <!-- TOP NAVBAR -->
     <div class="navbar-wrapper">
         <nav class="navbar">
             <div class="nav-logo" onclick="window.location.href='index.html'">
@@ -1476,7 +1881,6 @@
                         <a href="index.html#forensics">Cyber Forensics</a>
                     </div>
                 </div>
-                <!-- Current page — dimmed, non-clickable -->
                 <button class="btn-nav-events current">
                     <svg width="12" height="12" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -1502,9 +1906,7 @@
         </nav>
     </div>
 
-    <!-- ═══════════════════════════════════════════════════════
-       MOBILE MENU
-  ═══════════════════════════════════════════════════════ -->
+    <!-- MOBILE MENU -->
     <div class="mob-menu" id="mob-menu" aria-hidden="true">
         <div class="mob-menu-body">
             <button class="mob-nav-item" onclick="window.location.href='index.html'"><span>Home</span><svg width="14"
@@ -1546,10 +1948,7 @@
         </div>
     </div>
 
-
-    <!-- ═══════════════════════════════════════════════════════
-       EVENTS HERO
-  ═══════════════════════════════════════════════════════ -->
+    <!-- EVENTS HERO -->
     <section class="events-hero">
         <div class="events-hero-inner">
             <p class="events-hero-tag">// UPCOMING &amp; LIVE</p>
@@ -1566,21 +1965,15 @@
         </div>
     </section>
 
-
-    <!-- ═══════════════════════════════════════════════════════
-       SECTION HEADER
-  ═══════════════════════════════════════════════════════ -->
+    <!-- SECTION HEADER -->
     <div class="section-hdr">
         <span class="shdr-id">[EVT]</span>
         <span class="shdr-title">ALL EVENTS</span>
-        <span class="shdr-right">Sorted by date</span>
+        <span class="shdr-right">Sorted by newest</span>
         <span class="shdr-clock"><span class="shdr-blink"></span><span id="live-clock"></span></span>
     </div>
 
-
-    <!-- ═══════════════════════════════════════════════════════
-       FILTER BAR
-  ═══════════════════════════════════════════════════════ -->
+    <!-- FILTER BAR -->
     <div class="filter-wrap">
         <div class="filter-inner">
             <button class="filter-btn active" data-filter="all">ALL</button>
@@ -1593,55 +1986,23 @@
         </div>
     </div>
 
-
-    <!-- ═══════════════════════════════════════════════════════
-       EVENTS TABLE
-  ═══════════════════════════════════════════════════════ -->
+    <!-- EVENTS TABLE -->
     <section class="events-section">
         <div class="events-inner">
+            <div id="events-tbody"></div>
 
-            <div class="table-wrap">
-                <table class="events-table">
-                    <thead>
-                        <tr>
-                            <th style="width:88px">DATE</th>
-                            <th style="width:120px">STATUS</th>
-                            <th>EVENT</th>
-                            <th style="width:120px">TYPE</th>
-                            <th style="width:170px">LOCATION</th>
-                            <th style="width:110px">SEATS</th>
-                            <th style="width:130px">ACTION</th>
-                        </tr>
-                    </thead>
-                    <tbody id="events-tbody">
-                        <!--
-              ════════════════════════════════════════════════
-              EVENTS DATA — ADD ROWS HERE
-              ────────────────────────────────────────────────
-              Call addEvent({...}) in the <script> section
-              below to populate this table. No HTML editing
-              required — just fill in the JS data object.
-              ════════════════════════════════════════════════
-            -->
-                    </tbody>
-                </table>
-
-                <!-- Shown automatically when table is empty -->
-                <div class="events-empty" id="events-empty">
-                    <div class="empty-icon">
-                        <svg width="52" height="52" fill="none" stroke="currentColor" viewBox="0 0 24 24" opacity=".4">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
-                                d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
-                        </svg>
-                    </div>
-                    <div class="empty-title">NO EVENTS YET</div>
-                    <p class="empty-sub">Events will appear here once added. Subscribe below to be the first to know.
-                    </p>
-                    <span class="empty-tag">COMING SOON</span>
+            <div class="events-empty" id="events-empty">
+                <div class="empty-icon">
+                    <svg width="52" height="52" fill="none" stroke="currentColor" viewBox="0 0 24 24" opacity=".4">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                            d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                    </svg>
                 </div>
+                <div class="empty-title">NO EVENTS YET</div>
+                <p class="empty-sub">Events will appear here once added. Subscribe below to be the first to know.</p>
+                <span class="empty-tag">COMING SOON</span>
             </div>
 
-            <!-- CTA strip -->
             <div class="events-cta">
                 <p class="cta-text">Want early access to event announcements?<br /><strong>Subscribe to Intel
                         Dispatch</strong> — every new event drops there first.</p>
@@ -1653,14 +2014,10 @@
                     </svg>
                 </button>
             </div>
-
         </div>
     </section>
 
-
-    <!-- ═══════════════════════════════════════════════════════
-       REGISTER MODAL
-  ═══════════════════════════════════════════════════════ -->
+    <!-- REGISTER MODAL -->
     <div class="modal-overlay" id="register-modal" onclick="handleOverlayClick(event)">
         <div class="modal-card" onclick="event.stopPropagation()">
             <div class="modal-header">
@@ -1668,27 +2025,29 @@
                 <button class="modal-close" onclick="closeModal()">✕</button>
             </div>
             <div class="modal-body">
-                <!-- Registration form (shown by default) -->
                 <div id="modal-form-wrap">
                     <p class="modal-event-label" id="modal-event-label">— Event —</p>
                     <form id="register-form" onsubmit="handleRegister(event)"
                         style="display:flex;flex-direction:column">
+                        <input type="hidden" id="hidden-event-id" name="event_id" />
+                        <input type="hidden" id="hidden-event-title" name="event_title" />
                         <div class="form-row">
                             <div>
                                 <label class="form-label">Full Name</label>
                                 <input type="text" placeholder="Your Name" required class="form-input"
-                                    autocomplete="name" />
+                                    autocomplete="name" name="from_name" />
                             </div>
                             <div>
                                 <label class="form-label">Email</label>
                                 <input type="email" placeholder="email@address.com" required class="form-input"
-                                    autocomplete="email" />
+                                    autocomplete="email" name="reply_to" />
                             </div>
                         </div>
                         <label class="form-label">Phone (optional)</label>
-                        <input type="tel" placeholder="+91 00000 00000" class="form-input" autocomplete="tel" />
+                        <input type="tel" placeholder="+91 00000 00000" class="form-input" autocomplete="tel"
+                            name="phone" />
                         <label class="form-label">Program / Track</label>
-                        <select class="form-select" style="margin-bottom:24px">
+                        <select class="form-select" style="margin-bottom:24px" name="program">
                             <option value="">— Select your program —</option>
                             <option>Jr Ethical Hacking</option>
                             <option>Robotics</option>
@@ -1699,7 +2058,6 @@
                         <button type="submit" class="form-submit">// CONFIRM REGISTRATION</button>
                     </form>
                 </div>
-                <!-- Success state -->
                 <div class="modal-success" id="modal-success">
                     <div class="success-icon">✓</div>
                     <div class="success-title">REGISTERED.</div>
@@ -1710,10 +2068,7 @@
         </div>
     </div>
 
-
-    <!-- ═══════════════════════════════════════════════════════
-       FOOTER
-  ═══════════════════════════════════════════════════════ -->
+    <!-- FOOTER -->
     <footer class="footer">
         <div class="footer-inner">
             <div class="footer-brand">
@@ -1724,29 +2079,48 @@
             </div>
             <p class="footer-copy">&copy; 2024 DEFFENSO ACADEMY. ALL RIGHTS RESERVED.</p>
         </div>
-        <div style="border-top:1px solid var(--wire);padding:32px var(--px);max-width:1440px;margin:0 auto;display:grid;grid-template-columns:1fr;gap:24px;">
+        <div
+            style="border-top:1px solid var(--wire);padding:32px var(--px);max-width:1440px;margin:0 auto;display:grid;grid-template-columns:1fr;gap:24px;">
             <style>
                 @media(min-width:768px) {
-                    .footer-loc-grid { grid-template-columns: 1fr 1fr !important; }
+                    .footer-loc-grid {
+                        grid-template-columns: 1fr 1fr !important;
+                    }
                 }
             </style>
             <div class="footer-loc-grid" style="display:grid;grid-template-columns:1fr;gap:24px;">
                 <div style="display:flex;flex-direction:column;gap:14px;">
-                    <h4 style="font-size:9px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--blue)">[Headquarters]</h4>
-                    <p style="font-size:12px;color:var(--cream-2);line-height:1.75">KMEA Engineering College,<br/>Kuzhivelipady, Edathala,<br/>Aluva, Kerala 683561</p>
-                    <a href="https://www.google.com/maps/search/?api=1&query=KMEA+Engineering+College+Kuzhivelipady+Edathala+Aluva+Kerala+683561" target="_blank" rel="noreferrer" style="display:inline-flex;align-items:center;gap:8px;padding:10px 16px;border:1px solid var(--wire);font-size:9px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--cream-3);transition:all .18s;min-height:44px;width:fit-content">
-                        <svg width="14" height="14" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+                    <h4
+                        style="font-size:9px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--blue)">
+                        [Headquarters]</h4>
+                    <p style="font-size:12px;color:var(--cream-2);line-height:1.75">KMEA Engineering
+                        College,<br />Kuzhivelipady, Edathala,<br />Aluva, Kerala 683561</p>
+                    <a href="https://www.google.com/maps/search/?api=1&query=KMEA+Engineering+College+Kuzhivelipady+Edathala+Aluva+Kerala+683561"
+                        target="_blank" rel="noreferrer"
+                        style="display:inline-flex;align-items:center;gap:8px;padding:10px 16px;border:1px solid var(--wire);font-size:9px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--cream-3);transition:all .18s;min-height:44px;width:fit-content">
+                        <svg width="14" height="14" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                        </svg>
                         Open in Google Maps
                     </a>
                 </div>
-                <div style="border:1px solid var(--wire);overflow:hidden;aspect-ratio:16/9;max-height:220px;width:100%;max-width:400px;" class="ftr-map-wrap">
-                    <iframe src="https://www.google.com/maps?q=KMEA+Engineering+College+Kuzhivelipady+Edathala+Aluva+Kerala+683561&output=embed" style="width:100%;height:100%;border:none;filter:invert(90%) hue-rotate(180deg) brightness(0.95) contrast(1.1)" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                <div style="border:1px solid var(--wire);overflow:hidden;aspect-ratio:16/9;max-height:220px;width:100%;max-width:400px;"
+                    class="ftr-map-wrap">
+                    <iframe
+                        src="https://www.google.com/maps?q=KMEA+Engineering+College+Kuzhivelipady+Edathala+Aluva+Kerala+683561&output=embed"
+                        style="width:100%;height:100%;border:none;filter:invert(90%) hue-rotate(180deg) brightness(0.95) contrast(1.1)"
+                        allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
                 </div>
             </div>
         </div>
         <style>
             @media(min-width:768px) {
-                .ftr-map-wrap { justify-self: end; }
+                .ftr-map-wrap {
+                    justify-self: end;
+                }
             }
         </style>
         <div class="footer-terminal">
@@ -1759,55 +2133,49 @@
 
     <script>
         /* ═══════════════════════════════════════════════════════
-           JS § 1. EVENT DATA SYSTEM
-           ─────────────────────────────────────────────────────
-           HOW TO ADD AN EVENT:
-           Call addEvent({ field: value, ... }) below the
-           "ADD YOUR EVENTS BELOW" comment.
-    
-           FIELDS:
-             id        — unique string, e.g. 'evt-001'
-             date      — 'YYYY-MM-DD', e.g. '2026-04-05'
-             status    — 'live' | 'upcoming' | 'workshop' |
-                         'comp' | 'webinar' | 'done'
-             title     — Main event name (required)
-             subtitle  — Short one-liner (optional)
-             type      — Display type, e.g. 'BOOTCAMP', 'CTF'
-             location  — e.g. 'Deffenso HQ' or 'Online · Zoom'
-             seats     — e.g. '18 seats left' or 'Open'
-             action    — Register button text
-             link      — External URL (optional). If blank,
-                         opens the built-in register modal.
-    
-           EXAMPLE:
-             addEvent({
-               id:       'evt-001',
-               date:     '2026-04-10',
-               status:   'upcoming',
-               title:    'Jr Ethical Hacking Bootcamp',
-               subtitle: 'Intensive 3-day hands-on training',
-               type:     'BOOTCAMP',
-               location: 'Deffenso HQ, Kochi',
-               seats:    '18 seats left',
-               action:   'REGISTER NOW',
-             });
+           EVENT DATA SYSTEM
         ═══════════════════════════════════════════════════════ */
-
         const EVENTS = [];
-
         function addEvent(ev) { EVENTS.push(ev); }
 
-        /* ══════════════════════════════════════════════════════
-           ↓↓↓  ADD YOUR EVENTS BELOW THIS LINE  ↓↓↓
-        ══════════════════════════════════════════════════════ */
+        /* ↓↓↓  ADD YOUR EVENTS BELOW THIS LINE  ↓↓↓ */
 
+        addEvent({
+            id: 'evt-networking-pentesting',
+            date: '2024-03-18',
+            status: 'done',
+            title: 'Networking and Pentesting',
+            subtitle: 'Probe every packet, exploit every weakness, protect every system.',
+            type: 'WORKSHOP',
+            time: '10:00 AM IST',
+            location: 'On-site (KMCT Branding)',
+            seats: 'Closed',
+            poster: 'assests/event poster/workshop.png',
+            organizations: 'Deffenso Hackers Academy + Deffenso Research & Developments + KMCT Group of Institutions',
+            tutors: 'Mohamed Shidin, Alan T Reji',
+            action: 'CLOSED'
+        });
 
+        addEvent({
+            id: 'evt-cyber-awareness',
+            date: '2024-02-14',
+            status: 'done',
+            title: 'Cyber Awareness',
+            subtitle: 'Think. Verify. Secure.',
+            type: 'WEBINAR',
+            time: '07:30 PM IST',
+            location: 'Live on Google Meet',
+            seats: 'Closed',
+            poster: 'assests/event poster/Artboard 1.png',
+            organizations: 'Deffenso Hackers Academy',
+            speaker: 'Calvin Shejin George',
+            speakerRole: 'Founder / CEO of Deffenso',
+            action: 'CLOSED'
+        });
 
-        /* ↑↑↑  END OF EVENTS DATA  ↑↑↑                      */
-        /* ══════════════════════════════════════════════════════ */
+        /* ↑↑↑  END OF EVENTS DATA  ↑↑↑ */
 
-
-        /* ─── Badge config ────────────────────────────────── */
+        /* ─── Badge config ─── */
         const BADGE_CFG = {
             live: { cls: 'live', label: 'LIVE NOW', pulse: true },
             upcoming: { cls: 'upcoming', label: 'UPCOMING', pulse: false },
@@ -1817,7 +2185,6 @@
             done: { cls: 'done', label: 'COMPLETED', pulse: false },
         };
 
-        /* ─── Helpers ─────────────────────────────────────── */
         function fmtDate(iso) {
             const d = new Date(iso + 'T00:00:00');
             return {
@@ -1829,14 +2196,23 @@
         function esc(s) { return String(s).replace(/'/g, "\\'").replace(/"/g, '&quot;'); }
 
         function buildAction(ev) {
-            if (ev.status === 'done')
-                return `<button class="btn-reg disabled" disabled>CLOSED</button>`;
-            if (ev.link)
-                return `<a href="${ev.link}" target="_blank" rel="noreferrer" class="btn-reg primary">${ev.action || 'DETAILS'}</a>`;
-            return `<button class="btn-reg primary" onclick="openModal('${esc(ev.id)}','${esc(ev.title)}')">${ev.action || 'REGISTER'}</button>`;
+            let primary = '';
+            if (ev.status === 'done') {
+                primary = `<span class="btn-ec-disabled">[ CLOSED ]</span>`;
+            } else if (ev.link) {
+                primary = `<a href="${ev.link}" target="_blank" rel="noreferrer" class="btn-ec-primary"><span>${ev.action || 'REGISTER FREE'} →</span></a>`;
+            } else {
+                primary = `<button class="btn-ec-primary" onclick="openModal('${esc(ev.id)}','${esc(ev.title)}')"><span>${ev.action || 'REGISTER FREE'} →</span></button>`;
+            }
+
+            let secondary = '';
+            if (ev.poster || ev.link) {
+                secondary = `<a href="${ev.link || ev.poster}" target="_blank" rel="noreferrer" class="btn-ec-outline">VIEW POSTER →</a>`;
+            }
+            return primary + secondary;
         }
 
-        /* ─── Render ──────────────────────────────────────── */
+        /* ─── Render ─── */
         let activeFilter = 'all';
 
         function renderTable() {
@@ -1847,7 +2223,6 @@
                 ? EVENTS
                 : EVENTS.filter(e => e.status === activeFilter);
 
-            // Update meta counters
             const isActive = s => ['live', 'upcoming', 'workshop', 'comp', 'webinar'].includes(s);
             document.getElementById('meta-total').textContent = EVENTS.length || '—';
             document.getElementById('meta-upcoming').textContent = EVENTS.filter(e => isActive(e.status)).length || '—';
@@ -1860,40 +2235,129 @@
             }
             emptyEl.style.display = 'none';
 
-            // Sort: live first → date ascending
             const sorted = [...filtered].sort((a, b) => {
                 if (a.status === 'live' && b.status !== 'live') return -1;
                 if (b.status === 'live' && a.status !== 'live') return 1;
-                return new Date(a.date) - new Date(b.date);
+                return new Date(b.date) - new Date(a.date);
             });
 
-            tbody.innerHTML = sorted.map(ev => {
+            /* SVG icons */
+            const iDate = `<svg width="13" height="13" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>`;
+            const iTime = `<svg width="13" height="13" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>`;
+            const iPlatform = `<svg width="13" height="13" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"/></svg>`;
+            const iTutor = `<svg width="13" height="13" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/></svg>`;
+
+            tbody.innerHTML = sorted.map((ev, idx) => {
                 const d = fmtDate(ev.date);
                 const b = BADGE_CFG[ev.status] || BADGE_CFG.upcoming;
-                return `<tr data-status="${ev.status}">
-          <td data-label="DATE">
-            <div class="td-date-day">${d.day}</div>
-            <div class="td-date-meta">${d.month} ${d.year}</div>
-          </td>
-          <td data-label="STATUS">
-            <span class="event-badge ${b.cls}">
-              <span class="badge-dot${b.pulse ? ' pulse' : ''}"></span>
-              ${b.label}
-            </span>
-          </td>
-          <td data-label="EVENT">
-            <div class="td-title-main">${ev.title}</div>
-            ${ev.subtitle ? `<div class="td-title-sub">${ev.subtitle}</div>` : ''}
-          </td>
-          <td data-label="TYPE" style="font-size:10px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--cream-3)">${ev.type || '—'}</td>
-          <td data-label="LOCATION" style="font-size:11px;color:var(--cream-3)">${ev.location || '—'}</td>
-          <td data-label="SEATS" style="font-size:11px;color:var(--cream-3)">${ev.seats || '—'}</td>
-          <td data-label="ACTION">${buildAction(ev)}</td>
-        </tr>`;
+                const sessionId = `EVT-${String(idx + 1).padStart(3, '0')}::${ev.id.toUpperCase().slice(0, 12)}`;
+
+                /* Signal bars — 3 lit for done, 4 for live */
+                const sigCount = ev.status === 'live' ? 4 : 3;
+                const sigBars = [1, 2, 3, 4].map(i =>
+                    `<div class="ec-sig-bar${i <= sigCount ? ' on' : ''}"></div>`
+                ).join('');
+
+                /* Tutor tags */
+                const tutorTags = ev.tutors
+                    ? ev.tutors.split(',').map(t =>
+                        `<span class="ec-tutor-tag">${t.trim()}</span>`
+                    ).join('')
+                    : '';
+
+                /* Type badge class */
+                const typeClsMap = { WORKSHOP: 'workshop', CTF: 'comp', BOOTCAMP: 'upcoming', WEBINAR: 'webinar' };
+                const typeCls = ev.type ? (typeClsMap[ev.type] || 'default') : 'default';
+
+                return `
+                <div class="event-card" data-status="${ev.status}">
+                    <div class="ec-corner-tr"></div>
+                    <div class="ec-corner-bl"></div>
+
+                    <!-- LEFT: poster panel -->
+                    <div class="ec-left">
+                        <div class="ec-titlebar">
+                            <div class="ec-tb-dot ec-tb-dot-r"></div>
+                            <div class="ec-tb-dot ec-tb-dot-y"></div>
+                            <div class="ec-tb-dot ec-tb-dot-g"></div>
+                            <span class="ec-tb-label">SESSION://POSTER_PREVIEW</span>
+                            <span class="ec-tb-id">${String(idx + 1).padStart(3, '0')}</span>
+                        </div>
+                        <div class="ec-poster-frame">
+                            ${ev.poster
+                        ? `<img src="${ev.poster}" alt="${ev.title}" class="ec-poster" />`
+                        : `<div class="ec-no-poster">[ NO POSTER ]</div>`
+                    }
+                        </div>
+                        <div class="ec-status-strip">
+                            <div class="ec-sig">${sigBars}</div>
+                            <div class="ec-ping"></div>
+                            <span class="ec-ping-label">${ev.status === 'live' ? 'LIVE' : ev.status === 'done' ? 'CLOSED' : 'STANDBY'}</span>
+                            <span class="ec-session-id">${sessionId}</span>
+                        </div>
+                    </div>
+
+                    <!-- RIGHT: details panel -->
+                    <div class="ec-right">
+                        <div class="ec-cmd">
+                            <span class="ec-cmd-prompt">root@deffenso:~$</span>
+                            <span class="ec-cmd-arg">./load_event --id=${ev.id}</span>
+                        </div>
+
+                        <div class="ec-badges">
+                            <span class="ec-badge badge-${b.cls}">${b.label}</span>
+                            <span class="ec-badge badge-free">FREE</span>
+                            ${ev.type ? `<span class="ec-badge badge-${typeCls}">${ev.type}</span>` : ''}
+                        </div>
+
+                        <h3 class="ec-title">${ev.title}<span class="ec-title-cursor"></span></h3>
+
+                        <div class="ec-tagline">${ev.subtitle}</div>
+
+                        ${ev.organizations
+                        ? `<p class="ec-orgs">${ev.organizations}</p>`
+                        : ''
+                    }
+
+                        <div class="ec-divider"></div>
+
+                        <div class="ec-details">
+                            <div class="ec-detail-item">
+                                <div class="ec-detail-lbl">${iDate} DATE</div>
+                                <div class="ec-detail-val">${d.day} ${d.month}</div>
+                            </div>
+                            <div class="ec-detail-item">
+                                <div class="ec-detail-lbl">${iTime} TIME</div>
+                                <div class="ec-detail-val">${ev.time || '10:00 AM IST'}</div>
+                            </div>
+                            <div class="ec-detail-item">
+                                <div class="ec-detail-lbl">${iPlatform} PLATFORM</div>
+                                <div class="ec-detail-val-sm">${ev.location || 'TBA'}</div>
+                            </div>
+                            ${ev.tutors ? `
+                            <div class="ec-detail-item" style="grid-column: 1 / -1;">
+                                <div class="ec-detail-lbl">${iTutor} TUTORS</div>
+                                <div class="ec-tutor-list">${tutorTags}</div>
+                            </div>` : ''}
+                            ${ev.speaker ? `
+                            <div class="ec-detail-item" style="grid-column: 1 / -1;">
+                                <div class="ec-detail-lbl">${iTutor} SPEAKER</div>
+                                <div class="ec-tutor-list">
+                                    <span class="ec-tutor-tag">${ev.speaker}</span>
+                                    ${ev.speakerRole ? `<span style="font-size:10px;color:var(--cream-3);letter-spacing:.06em;padding:3px 10px;border:1px solid var(--wire);background:rgba(255,255,255,.02)">${ev.speakerRole}</span>` : ''}
+                                </div>
+                            </div>` : ''}
+                        </div>
+
+                        <div class="ec-actions">
+                            ${buildAction(ev)}
+                        </div>
+                    </div>
+                </div>`;
             }).join('');
         }
 
-        /* ─── Filter buttons ──────────────────────────────── */
+        /* ─── Filter buttons ─── */
         document.querySelectorAll('.filter-btn').forEach(btn => {
             btn.addEventListener('click', () => {
                 document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
@@ -1903,14 +2367,12 @@
             });
         });
 
-        /* ─── EmailJS Initialization ─────────────────────── */
-        (function() {
-            emailjs.init({
-                publicKey: "YOUR_PUBLIC_KEY",
-            });
+        /* ─── EmailJS ─── */
+        (function () {
+            emailjs.init({ publicKey: "fp1RSsu0EURzhgU4a" });
         })();
 
-        /* ─── Register modal ──────────────────────────────── */
+        /* ─── Modal ─── */
         function openModal(id, title) {
             document.getElementById('modal-event-label').textContent = title;
             document.getElementById('hidden-event-id').value = id;
@@ -1931,27 +2393,24 @@
             e.preventDefault();
             const form = e.target;
             const btn = form.querySelector('.form-submit');
-            const originalText = btn.textContent;
-
+            const orig = btn.textContent;
             try {
-                btn.textContent = "// TRANSMITTING...";
+                btn.textContent = '// TRANSMITTING...';
                 btn.disabled = true;
-
-                await emailjs.sendForm('service_jofne0x', 'YOUR_TEMPLATE_ID', form);
-
+                await emailjs.sendForm('service_jofne0x', 'template_g5b9j5r', form);
                 document.getElementById('modal-form-wrap').style.display = 'none';
                 document.getElementById('modal-success').classList.add('show');
                 form.reset();
-            } catch (error) {
-                console.error('EmailJS Error:', error);
+            } catch (err) {
+                console.error('EmailJS Error:', err);
                 alert('TRANSMISSION FAILED. CHECK CONSOLE FOR LOGS.');
             } finally {
-                btn.textContent = originalText;
+                btn.textContent = orig;
                 btn.disabled = false;
             }
         }
 
-        /* ─── Hamburger ───────────────────────────────────── */
+        /* ─── Hamburger ─── */
         document.getElementById('mob-ham').addEventListener('click', () => {
             const menu = document.getElementById('mob-menu');
             const ham = document.getElementById('mob-ham');
@@ -1967,7 +2426,7 @@
             if (chev) chev.style.transform = panel.classList.contains('open') ? 'rotate(180deg)' : '';
         });
 
-        /* ─── Live clock ──────────────────────────────────── */
+        /* ─── Live clock ─── */
         function tickClock() {
             const el = document.getElementById('live-clock');
             if (el) el.textContent = new Date().toTimeString().slice(0, 8);
@@ -1975,7 +2434,7 @@
         tickClock();
         setInterval(tickClock, 1000);
 
-        /* ─── Boot ────────────────────────────────────────── */
+        /* ─── Boot ─── */
         renderTable();
     </script>
 
