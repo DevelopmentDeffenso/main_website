@@ -266,10 +266,16 @@
             display: flex;
             justify-content: space-between;
             align-items: stretch;
-            height: 70px;
+            height: 52px;
             max-width: 1440px;
             margin: 0 auto;
             padding: 0 4px 0 0;
+        }
+
+        @media(min-width:640px) {
+            .navbar {
+                height: 70px;
+            }
         }
 
         .nav-logo {
@@ -283,7 +289,7 @@
         }
 
         .nav-logo img {
-            height: 60px;
+            height: 38px;
             width: auto;
             object-fit: contain;
         }
@@ -723,10 +729,10 @@
        § 9. EVENTS HERO
     ═══════════════════════════════════════════════════════ */
         .events-hero {
-            min-height: 44vh;
+            min-height: auto;
             display: flex;
-            align-items: flex-end;
-            padding: 48px var(--px) 48px;
+            align-items: center;
+            padding: 100px var(--px) 52px;
             background: var(--void-1);
             border-bottom: 2px solid var(--wire);
             position: relative;
@@ -735,7 +741,10 @@
 
         @media(min-width:640px) {
             .events-hero {
+                min-height: 44vh;
                 padding-top: 56px;
+                align-items: flex-end;
+                padding-bottom: 48px;
             }
         }
 
