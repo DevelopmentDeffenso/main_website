@@ -1,0 +1,1938 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <meta name="theme-color" content="#030303" />
+    <title>EVENTS — DEFFENSO ACADEMY</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=IBM+Plex+Mono:wght@300;400;500;700&display=swap"
+        rel="stylesheet">
+
+    <style>
+        /* ═══════════════════════════════════════════════════════
+       § 1. DESIGN TOKENS
+    ═══════════════════════════════════════════════════════ */
+        :root {
+            --void: #030303;
+            --void-1: #0A0A0A;
+            --void-2: #111111;
+            --cream: #E2D9C8;
+            --cream-2: #A89E8D;
+            --cream-3: #5A5249;
+            --blue: #007BFF;
+            --blue-hi: #3DA5FF;
+            --green: #00FF41;
+            --wire: #1E1E1E;
+            --wire-2: #2A2A2A;
+            --font-d: 'Bebas Neue', sans-serif;
+            --font-m: 'IBM Plex Mono', monospace;
+            --safe-bottom: env(safe-area-inset-bottom, 0px);
+            --space-xl: 64px;
+            --px: 20px;
+        }
+
+        /* ═══════════════════════════════════════════════════════
+       § 2. RESET & BASE
+    ═══════════════════════════════════════════════════════ */
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            -webkit-text-size-adjust: 100%;
+        }
+
+        body {
+            background: var(--void);
+            color: var(--cream);
+            font-family: var(--font-m);
+            font-size: 14px;
+            line-height: 1.55;
+            -webkit-font-smoothing: antialiased;
+            overflow-x: hidden;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        button {
+            border: none;
+            background: none;
+            font-family: inherit;
+            color: inherit;
+        }
+
+        img {
+            max-width: 100%;
+            display: block;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        * {
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        ::-webkit-scrollbar {
+            width: 2px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--void);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--blue);
+        }
+
+        /* ═══════════════════════════════════════════════════════
+       § 3. KEYFRAMES
+    ═══════════════════════════════════════════════════════ */
+        @keyframes pulseDot {
+
+            0%,
+            100% {
+                opacity: 1
+            }
+
+            50% {
+                opacity: .3
+            }
+        }
+
+        @keyframes bannerScroll {
+            0% {
+                transform: translateX(100vw)
+            }
+
+            100% {
+                transform: translateX(-100%)
+            }
+        }
+
+        @keyframes uscore {
+
+            0%,
+            49% {
+                opacity: 1
+            }
+
+            50%,
+            100% {
+                opacity: 0
+            }
+        }
+
+        @keyframes gradientSlide {
+            0% {
+                background-position: 0%
+            }
+
+            100% {
+                background-position: 200%
+            }
+        }
+
+        @keyframes modalIn {
+            from {
+                opacity: 0;
+                transform: translateY(12px)
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0)
+            }
+        }
+
+        /* ═══════════════════════════════════════════════════════
+       § 4. GLOBAL UTILITIES
+    ═══════════════════════════════════════════════════════ */
+        .px {
+            padding-left: var(--px);
+            padding-right: var(--px);
+        }
+
+        .max-w {
+            max-width: 1440px;
+            margin: 0 auto;
+        }
+
+        .u-cursor::after {
+            content: '_';
+            color: var(--blue);
+            font-weight: 700;
+            animation: uscore .8s infinite;
+        }
+
+        .shdr-blink {
+            display: inline-block;
+            width: 6px;
+            height: 6px;
+            background: var(--blue);
+            border-radius: 50%;
+            margin-right: 6px;
+            animation: pulseDot 1.4s ease-in-out infinite;
+        }
+
+        .status-dot {
+            width: 6px;
+            height: 6px;
+            background: var(--green);
+            border-radius: 50%;
+            animation: pulseDot 2s ease-in-out infinite;
+            flex-shrink: 0;
+        }
+
+        /* ═══════════════════════════════════════════════════════
+       § 5. CLASSIFICATION BANNER
+    ═══════════════════════════════════════════════════════ */
+
+
+        /* ═══════════════════════════════════════════════════════
+       § 6. TOP NAVBAR
+    ═══════════════════════════════════════════════════════ */
+        .navbar-wrapper {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 100;
+            border-bottom: 1px solid var(--wire);
+            background: rgba(3, 3, 3, .96);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+        }
+
+        @media(min-width:640px) {
+            .navbar-wrapper {
+                top: 0;
+            }
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: stretch;
+            height: 52px;
+            max-width: 1440px;
+            margin: 0 auto;
+            padding: 0 4px 0 0;
+        }
+
+        .nav-logo {
+            display: flex;
+            align-items: center;
+            padding: 0 16px;
+            gap: 10px;
+            border-right: 1px solid var(--wire);
+            min-width: 52px;
+            cursor: pointer;
+        }
+
+        .nav-logo img {
+            height: 24px;
+            width: auto;
+            object-fit: contain;
+            filter: brightness(0) invert(1);
+        }
+
+        .nav-logo-text {
+            font-family: var(--font-d);
+            font-size: 20px;
+            letter-spacing: .06em;
+            color: var(--cream);
+        }
+
+        @media(min-width:640px) {
+            .nav-logo {
+                padding: 0 24px;
+            }
+
+            .nav-logo img {
+                height: 26px;
+            }
+        }
+
+        .nav-links {
+            display: none;
+        }
+
+        @media(min-width:1024px) {
+            .nav-links {
+                display: flex;
+                align-items: stretch;
+            }
+        }
+
+        .nav-link {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            padding: 0 18px;
+            font-size: 10px;
+            font-weight: 500;
+            letter-spacing: .2em;
+            text-transform: uppercase;
+            color: var(--cream-3);
+            border-right: 1px solid var(--wire);
+            transition: color .18s, background .18s;
+            cursor: pointer;
+        }
+
+        .nav-link:hover {
+            color: var(--cream);
+            background: rgba(255, 255, 255, .03);
+        }
+
+        .btn-nav-events {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            padding: 0 18px;
+            font-size: 10px;
+            font-weight: 700;
+            letter-spacing: .2em;
+            text-transform: uppercase;
+            border-right: 1px solid rgba(255, 255, 255, .12);
+            border-top: none;
+            border-bottom: none;
+            border-left: none;
+            cursor: pointer;
+            transition: filter .18s;
+            background: linear-gradient(90deg, #0066CC, #007BFF, #3DA5FF, #007BFF, #0066CC);
+            background-size: 200% auto;
+            color: #fff;
+            animation: gradientSlide 3s linear infinite;
+        }
+
+        .btn-nav-events.current {
+            filter: brightness(.8);
+            cursor: default;
+            animation: none;
+            background: #007BFF;
+        }
+
+        .nav-prog-wrapper {
+            position: relative;
+            display: flex;
+            align-items: stretch;
+        }
+
+        .nav-chevron {
+            width: 10px;
+            height: 10px;
+            transition: transform .2s;
+            flex-shrink: 0;
+        }
+
+        .nav-prog-wrapper:hover .nav-chevron {
+            transform: rotate(180deg);
+        }
+
+        .nav-dropdown {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            width: 220px;
+            background: var(--void-1);
+            border: 1px solid var(--wire);
+            border-top: 2px solid var(--blue);
+            opacity: 0;
+            visibility: hidden;
+            transition: all .18s ease;
+            transform: translateY(-4px);
+            z-index: 50;
+        }
+
+        .nav-prog-wrapper:hover .nav-dropdown {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .nav-dropdown a {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 13px 18px;
+            font-size: 9.5px;
+            letter-spacing: .16em;
+            text-transform: uppercase;
+            color: var(--cream-3);
+            border-bottom: 1px solid var(--wire);
+            transition: all .15s;
+            cursor: pointer;
+        }
+
+        .nav-dropdown a:last-child {
+            border-bottom: none;
+        }
+
+        .nav-dropdown a::before {
+            content: '›';
+            color: var(--blue);
+            font-size: 14px;
+            font-family: sans-serif;
+        }
+
+        .nav-dropdown a:hover {
+            color: var(--cream);
+            background: rgba(0, 123, 255, .06);
+            padding-left: 24px;
+        }
+
+        .nav-right {
+            display: flex;
+            align-items: stretch;
+            margin-left: auto;
+        }
+
+        .nav-status {
+            display: none;
+            align-items: center;
+            gap: 8px;
+            padding: 0 18px;
+            font-size: 9px;
+            letter-spacing: .14em;
+            text-transform: uppercase;
+            color: var(--cream-3);
+            border-left: 1px solid var(--wire);
+        }
+
+        @media(min-width:1200px) {
+            .nav-status {
+                display: flex;
+            }
+        }
+
+        .btn-nav-enroll {
+            display: none;
+            padding: 0 24px;
+            background: var(--blue);
+            color: #fff;
+            font-size: 10px;
+            font-weight: 700;
+            letter-spacing: .22em;
+            text-transform: uppercase;
+            border: none;
+            align-items: center;
+            border-left: 1px solid rgba(255, 255, 255, .08);
+            transition: background .18s;
+            white-space: nowrap;
+            cursor: pointer;
+        }
+
+        .btn-nav-enroll:hover {
+            background: var(--blue-hi);
+        }
+
+        @media(min-width:640px) {
+            .btn-nav-enroll {
+                display: flex;
+            }
+        }
+
+        .mob-hamburger {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 52px;
+            height: 52px;
+            color: var(--cream);
+            border-left: 1px solid var(--wire);
+            flex-shrink: 0;
+            cursor: pointer;
+        }
+
+        .mob-hamburger svg {
+            transition: transform .22s;
+        }
+
+        .mob-hamburger.open svg {
+            transform: rotate(45deg);
+        }
+
+        @media(min-width:1024px) {
+            .mob-hamburger {
+                display: none;
+            }
+        }
+
+        /* ═══════════════════════════════════════════════════════
+       § 7. MOBILE MENU
+    ═══════════════════════════════════════════════════════ */
+        .mob-menu {
+            position: fixed;
+            top: 52px;
+            left: 0;
+            right: 0;
+            height: calc(100vh - 52px - var(--safe-bottom));
+            background: var(--void);
+            z-index: 99;
+            transform: translateX(100%);
+            transition: transform .32s cubic-bezier(.22, .61, .36, 1);
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            border-top: 2px solid var(--blue);
+        }
+
+        .mob-menu.open {
+            transform: translateX(0);
+        }
+
+        @media(min-width:640px) {
+            .mob-menu {
+                top: 52px;
+            }
+        }
+
+        .mob-menu-body {
+            flex: 1;
+            padding: 24px;
+        }
+
+        .mob-nav-item {
+            display: flex;
+            align-items: center;
+            min-height: 56px;
+            padding: 0 4px;
+            border-bottom: 1px solid var(--wire);
+            font-size: 13px;
+            font-weight: 700;
+            letter-spacing: .18em;
+            text-transform: uppercase;
+            color: var(--cream-2);
+            width: 100%;
+            justify-content: space-between;
+            cursor: pointer;
+        }
+
+        .mob-nav-item:active {
+            color: var(--cream);
+        }
+
+        .mob-programs-panel {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height .3s ease;
+        }
+
+        .mob-programs-panel.open {
+            max-height: 400px;
+        }
+
+        .mob-program-link {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            min-height: 48px;
+            padding: 0 16px;
+            font-size: 11px;
+            letter-spacing: .14em;
+            text-transform: uppercase;
+            color: var(--cream-3);
+            border-bottom: 1px solid rgba(255, 255, 255, .04);
+            cursor: pointer;
+        }
+
+        .mob-program-link::before {
+            content: '//';
+            color: var(--blue);
+            font-size: 9px;
+        }
+
+        .mob-events-active {
+            display: flex;
+            align-items: center;
+            min-height: 56px;
+            padding: 0 4px;
+            border-bottom: 1px solid var(--wire);
+            font-size: 13px;
+            font-weight: 700;
+            letter-spacing: .18em;
+            text-transform: uppercase;
+            color: var(--blue);
+            width: 100%;
+            background: none;
+            cursor: default;
+        }
+
+        .mob-menu-footer {
+            padding: 24px;
+            padding-bottom: calc(24px + var(--safe-bottom));
+            border-top: 1px solid var(--wire);
+            background: var(--void-1);
+        }
+
+        .mob-status-row {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 14px;
+            font-size: 9px;
+            letter-spacing: .16em;
+            text-transform: uppercase;
+            color: var(--cream-3);
+        }
+
+        .mob-enroll-btn {
+            width: 100%;
+            min-height: 52px;
+            background: var(--blue);
+            color: #fff;
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: .24em;
+            text-transform: uppercase;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            border: none;
+            cursor: pointer;
+        }
+
+        .mob-enroll-btn:active {
+            background: var(--blue-hi);
+        }
+
+        /* ═══════════════════════════════════════════════════════
+       § 8. SECTION HEADER BAR
+    ═══════════════════════════════════════════════════════ */
+        .section-hdr {
+            display: flex;
+            align-items: center;
+            height: 40px;
+            gap: 10px;
+            padding: 0 var(--px);
+            background: var(--void-1);
+            border-top: 1px solid var(--wire);
+            border-bottom: 1px solid var(--wire);
+            overflow: hidden;
+        }
+
+        @media(min-width:640px) {
+            .section-hdr {
+                height: 44px;
+            }
+        }
+
+        .shdr-id {
+            font-size: 9px;
+            font-weight: 700;
+            letter-spacing: .2em;
+            text-transform: uppercase;
+            color: var(--blue);
+            padding-right: 10px;
+            border-right: 1px solid var(--wire);
+            white-space: nowrap;
+            flex-shrink: 0;
+        }
+
+        .shdr-title {
+            font-size: 8.5px;
+            font-weight: 500;
+            letter-spacing: .2em;
+            text-transform: uppercase;
+            color: var(--cream-3);
+            white-space: nowrap;
+        }
+
+        .shdr-right {
+            margin-left: auto;
+            font-size: 9px;
+            letter-spacing: .12em;
+            color: var(--cream-3);
+            white-space: nowrap;
+            display: none;
+        }
+
+        @media(min-width:640px) {
+            .shdr-title {
+                font-size: 9px;
+            }
+
+            .shdr-right {
+                display: block;
+            }
+        }
+
+        .shdr-clock {
+            margin-left: auto;
+            font-size: 9px;
+            letter-spacing: .1em;
+            color: var(--cream-3);
+            white-space: nowrap;
+            font-family: var(--font-m);
+        }
+
+        /* ═══════════════════════════════════════════════════════
+       § 9. EVENTS HERO
+    ═══════════════════════════════════════════════════════ */
+        .events-hero {
+            min-height: 44vh;
+            display: flex;
+            align-items: flex-end;
+            padding: 52px var(--px) 48px;
+            background: var(--void-1);
+            border-bottom: 2px solid var(--wire);
+            position: relative;
+            overflow: hidden;
+        }
+
+        @media(min-width:640px) {
+            .events-hero {
+                padding-top: 52px;
+            }
+        }
+
+        .events-hero::before {
+            content: 'EVENTS';
+            position: absolute;
+            right: -20px;
+            top: 50%;
+            transform: translateY(-50%) rotate(90deg);
+            font-family: var(--font-d);
+            font-size: 120px;
+            letter-spacing: .06em;
+            color: transparent;
+            -webkit-text-stroke: 1px rgba(0, 123, 255, .05);
+            pointer-events: none;
+            user-select: none;
+            white-space: nowrap;
+        }
+
+        @media(min-width:640px) {
+            .events-hero::before {
+                font-size: 160px;
+            }
+        }
+
+        .events-hero-inner {
+            max-width: 1440px;
+            margin: 0 auto;
+            width: 100%;
+            position: relative;
+            z-index: 1;
+        }
+
+        .events-hero-tag {
+            font-size: 9px;
+            font-weight: 700;
+            letter-spacing: .24em;
+            text-transform: uppercase;
+            color: var(--blue);
+            margin-bottom: 8px;
+        }
+
+        .events-hero-h {
+            font-family: var(--font-d);
+            font-size: clamp(48px, 12vw, 120px);
+            line-height: .92;
+            letter-spacing: .02em;
+            margin-top: 8px;
+        }
+
+        .events-hero-sub {
+            font-size: 13px;
+            color: var(--cream-3);
+            margin-top: 14px;
+            max-width: 520px;
+            line-height: 1.7;
+        }
+
+        /* Meta strip */
+        .events-meta-strip {
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 0;
+            margin-top: 28px;
+            border: 1px solid var(--wire);
+            width: fit-content;
+        }
+
+        .events-meta-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 18px;
+            border-right: 1px solid var(--wire);
+            font-size: 9px;
+            font-weight: 700;
+            letter-spacing: .18em;
+            text-transform: uppercase;
+            color: var(--cream-3);
+        }
+
+        .events-meta-item:last-child {
+            border-right: none;
+        }
+
+        .events-meta-item .val {
+            color: var(--cream);
+            font-family: var(--font-d);
+            font-size: 18px;
+            letter-spacing: .02em;
+        }
+
+        .live-dot {
+            width: 5px;
+            height: 5px;
+            background: var(--green);
+            border-radius: 50%;
+            box-shadow: 0 0 5px var(--green);
+            animation: pulseDot 1.2s infinite;
+            flex-shrink: 0;
+        }
+
+        /* ═══════════════════════════════════════════════════════
+       § 10. FILTER BAR
+    ═══════════════════════════════════════════════════════ */
+        .filter-wrap {
+            background: var(--void-1);
+            border-bottom: 1px solid var(--wire);
+        }
+
+        .filter-inner {
+            display: flex;
+            align-items: center;
+            gap: 1px;
+            flex-wrap: wrap;
+            padding: 16px var(--px);
+            max-width: 1440px;
+            margin: 0 auto;
+        }
+
+        .filter-btn {
+            padding: 9px 18px;
+            min-height: 36px;
+            font-family: var(--font-m);
+            font-size: 9px;
+            font-weight: 700;
+            letter-spacing: .16em;
+            text-transform: uppercase;
+            border: 1px solid var(--wire);
+            color: var(--cream-3);
+            background: transparent;
+            cursor: pointer;
+            transition: all .18s;
+        }
+
+        .filter-btn.active {
+            background: var(--blue);
+            border-color: var(--blue);
+            color: #fff;
+        }
+
+        .filter-btn:hover:not(.active) {
+            border-color: var(--blue);
+            color: var(--cream);
+        }
+
+        /* ═══════════════════════════════════════════════════════
+       § 11. EVENTS TABLE
+    ═══════════════════════════════════════════════════════ */
+        .events-section {
+            padding: var(--space-xl) 0;
+        }
+
+        .events-inner {
+            padding: 0 var(--px);
+            max-width: 1440px;
+            margin: 0 auto;
+        }
+
+        .table-wrap {
+            border: 1px solid var(--wire);
+            border-top: 2px solid var(--blue);
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        .events-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-family: var(--font-m);
+        }
+
+        /* Head */
+        .events-table thead tr {
+            background: var(--void-2);
+            border-bottom: 1px solid var(--wire);
+        }
+
+        .events-table th {
+            padding: 12px 16px;
+            text-align: left;
+            font-size: 8.5px;
+            font-weight: 700;
+            letter-spacing: .2em;
+            text-transform: uppercase;
+            color: var(--blue);
+            white-space: nowrap;
+            border-right: 1px solid var(--wire);
+        }
+
+        .events-table th:last-child {
+            border-right: none;
+        }
+
+        /* Body */
+        .events-table tbody tr {
+            border-bottom: 1px solid var(--wire);
+            transition: background .15s;
+        }
+
+        .events-table tbody tr:last-child {
+            border-bottom: none;
+        }
+
+        .events-table tbody tr:hover {
+            background: rgba(0, 123, 255, .04);
+        }
+
+        .events-table td {
+            padding: 16px;
+            font-size: 12px;
+            color: var(--cream-2);
+            vertical-align: middle;
+            border-right: 1px solid var(--wire);
+        }
+
+        .events-table td:last-child {
+            border-right: none;
+        }
+
+        /* Date cell */
+        .td-date-day {
+            font-family: var(--font-d);
+            font-size: 28px;
+            line-height: 1;
+            color: var(--blue);
+            letter-spacing: .02em;
+        }
+
+        .td-date-meta {
+            font-size: 9px;
+            letter-spacing: .12em;
+            text-transform: uppercase;
+            color: var(--cream-3);
+            margin-top: 2px;
+        }
+
+        /* Status badge */
+        .event-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            padding: 3px 9px;
+            font-size: 7.5px;
+            font-weight: 700;
+            letter-spacing: .16em;
+            text-transform: uppercase;
+            white-space: nowrap;
+        }
+
+        .event-badge.live {
+            background: rgba(0, 255, 65, .1);
+            border: 1px solid rgba(0, 255, 65, .25);
+            color: var(--green);
+        }
+
+        .event-badge.upcoming {
+            background: rgba(0, 123, 255, .12);
+            border: 1px solid rgba(0, 123, 255, .3);
+            color: var(--blue);
+        }
+
+        .event-badge.workshop {
+            background: rgba(255, 140, 0, .1);
+            border: 1px solid rgba(255, 140, 0, .3);
+            color: #FF8C00;
+        }
+
+        .event-badge.comp {
+            background: rgba(160, 32, 255, .1);
+            border: 1px solid rgba(160, 32, 255, .3);
+            color: #A020FF;
+        }
+
+        .event-badge.webinar {
+            background: rgba(0, 188, 212, .1);
+            border: 1px solid rgba(0, 188, 212, .3);
+            color: #00BCD4;
+        }
+
+        .event-badge.done {
+            background: rgba(90, 82, 73, .15);
+            border: 1px solid var(--wire-2);
+            color: var(--cream-3);
+        }
+
+        .badge-dot {
+            width: 5px;
+            height: 5px;
+            border-radius: 50%;
+            background: currentColor;
+            flex-shrink: 0;
+        }
+
+        .badge-dot.pulse {
+            animation: pulseDot 1.2s infinite;
+        }
+
+        /* Title cell */
+        .td-title-main {
+            font-size: 13px;
+            font-weight: 500;
+            color: var(--cream);
+            line-height: 1.4;
+        }
+
+        .td-title-sub {
+            font-size: 10px;
+            color: var(--cream-3);
+            margin-top: 3px;
+            letter-spacing: .06em;
+        }
+
+        /* Action button */
+        .btn-reg {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 8px 16px;
+            min-height: 36px;
+            font-family: var(--font-m);
+            font-size: 9px;
+            font-weight: 700;
+            letter-spacing: .16em;
+            text-transform: uppercase;
+            border: 1px solid var(--wire-2);
+            color: var(--cream-3);
+            background: transparent;
+            cursor: pointer;
+            transition: all .18s;
+            white-space: nowrap;
+        }
+
+        .btn-reg:hover {
+            background: var(--blue);
+            border-color: var(--blue);
+            color: #fff;
+        }
+
+        .btn-reg.primary {
+            background: var(--blue);
+            border-color: var(--blue);
+            color: #fff;
+        }
+
+        .btn-reg.primary:hover {
+            background: var(--blue-hi);
+        }
+
+        .btn-reg.disabled {
+            opacity: .38;
+            cursor: not-allowed;
+            pointer-events: none;
+        }
+
+        /* Mobile: stack cells */
+        @media(max-width:639px) {
+            .events-table thead {
+                display: none;
+            }
+
+            .events-table tbody tr {
+                display: block;
+                padding: 4px 0;
+                background: var(--void-1);
+                margin-bottom: 1px;
+            }
+
+            .events-table td {
+                display: flex;
+                align-items: flex-start;
+                gap: 10px;
+                padding: 10px 16px;
+                border-right: none;
+                border-bottom: 1px solid rgba(255, 255, 255, .04);
+                font-size: 12px;
+            }
+
+            .events-table td::before {
+                content: attr(data-label);
+                font-size: 8px;
+                font-weight: 700;
+                letter-spacing: .18em;
+                text-transform: uppercase;
+                color: var(--cream-3);
+                flex-shrink: 0;
+                padding-top: 2px;
+                min-width: 72px;
+            }
+
+            .events-table td:last-child {
+                border-bottom: none;
+            }
+        }
+
+        /* ─── Empty state ─── */
+        .events-empty {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 14px;
+            padding: 80px 20px;
+            text-align: center;
+        }
+
+        .empty-icon {
+            color: rgba(0, 123, 255, .22);
+        }
+
+        .empty-title {
+            font-family: var(--font-d);
+            font-size: 32px;
+            letter-spacing: .02em;
+            color: var(--cream-3);
+        }
+
+        .empty-sub {
+            font-size: 12px;
+            color: var(--cream-3);
+            line-height: 1.7;
+            max-width: 340px;
+        }
+
+        .empty-tag {
+            font-size: 9px;
+            font-weight: 700;
+            letter-spacing: .2em;
+            text-transform: uppercase;
+            color: var(--blue);
+        }
+
+        .empty-tag::before {
+            content: '[';
+            opacity: .5;
+            margin-right: 3px;
+        }
+
+        .empty-tag::after {
+            content: ']';
+            opacity: .5;
+            margin-left: 3px;
+        }
+
+        /* ═══════════════════════════════════════════════════════
+       § 12. CTA STRIP
+    ═══════════════════════════════════════════════════════ */
+        .events-cta {
+            margin-top: 32px;
+            padding: 22px 24px;
+            border: 1px solid var(--wire);
+            border-left: 3px solid var(--blue);
+            background: var(--void-1);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 16px;
+        }
+
+        .cta-text {
+            font-size: 12px;
+            color: var(--cream-3);
+            line-height: 1.65;
+            max-width: 420px;
+        }
+
+        .cta-text strong {
+            color: var(--cream);
+        }
+
+        .btn-primary {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            min-height: 48px;
+            padding: 0 28px;
+            background: var(--blue);
+            color: #fff;
+            font-size: 10px;
+            font-weight: 700;
+            letter-spacing: .22em;
+            text-transform: uppercase;
+            border: none;
+            cursor: pointer;
+            transition: background .18s;
+        }
+
+        .btn-primary:hover {
+            background: var(--blue-hi);
+        }
+
+        /* ═══════════════════════════════════════════════════════
+       § 13. REGISTER MODAL
+    ═══════════════════════════════════════════════════════ */
+        .modal-overlay {
+            position: fixed;
+            inset: 0;
+            z-index: 9000;
+            background: rgba(0, 0, 0, .88);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 24px;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity .2s, visibility .2s;
+        }
+
+        .modal-overlay.open {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .modal-card {
+            width: 100%;
+            max-width: 480px;
+            background: var(--void-1);
+            border: 1px solid var(--wire);
+            border-top: 2px solid var(--blue);
+            animation: modalIn .25s ease;
+        }
+
+        .modal-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 16px 24px;
+            border-bottom: 1px solid var(--wire);
+            background: var(--void-2);
+        }
+
+        .modal-title-h {
+            font-family: var(--font-d);
+            font-size: 24px;
+            letter-spacing: .02em;
+        }
+
+        .modal-close {
+            width: 36px;
+            height: 36px;
+            border: 1px solid var(--wire);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            color: var(--cream-3);
+            font-size: 16px;
+            transition: border-color .18s, color .18s;
+        }
+
+        .modal-close:hover {
+            border-color: var(--blue);
+            color: var(--cream);
+        }
+
+        .modal-body {
+            padding: 24px;
+        }
+
+        .modal-event-label {
+            font-size: 10px;
+            font-weight: 700;
+            letter-spacing: .16em;
+            text-transform: uppercase;
+            color: var(--blue);
+            margin-bottom: 18px;
+            line-height: 1.5;
+        }
+
+        /* Form */
+        .form-label {
+            display: block;
+            font-size: 9px;
+            font-weight: 700;
+            letter-spacing: .18em;
+            text-transform: uppercase;
+            color: var(--cream-3);
+            margin-bottom: 6px;
+        }
+
+        .form-input,
+        .form-select {
+            width: 100%;
+            background: transparent;
+            border: none;
+            border-bottom: 1px solid var(--wire);
+            padding: 12px 0;
+            color: var(--cream);
+            font-size: 14px;
+            font-family: var(--font-m);
+            outline: none;
+            margin-bottom: 20px;
+            transition: border-color .2s;
+            appearance: none;
+            min-height: 48px;
+            border-radius: 0;
+        }
+
+        .form-input::placeholder {
+            color: var(--cream-3);
+        }
+
+        .form-input:focus,
+        .form-select:focus {
+            border-bottom-color: var(--blue);
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 0;
+        }
+
+        @media(min-width:480px) {
+            .form-row {
+                grid-template-columns: 1fr 1fr;
+                gap: 20px;
+            }
+        }
+
+        .form-submit {
+            width: 100%;
+            min-height: 52px;
+            padding: 0 24px;
+            background: var(--blue);
+            color: #fff;
+            font-family: var(--font-m);
+            font-size: 10px;
+            font-weight: 700;
+            letter-spacing: .22em;
+            text-transform: uppercase;
+            border: none;
+            cursor: pointer;
+            transition: background .18s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .form-submit:hover {
+            background: var(--blue-hi);
+        }
+
+        /* Success */
+        .modal-success {
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            gap: 14px;
+            padding: 44px 24px;
+            text-align: center;
+        }
+
+        .modal-success.show {
+            display: flex;
+        }
+
+        .success-icon {
+            color: var(--green);
+            font-size: 36px;
+        }
+
+        .success-title {
+            font-family: var(--font-d);
+            font-size: 32px;
+            letter-spacing: .02em;
+        }
+
+        .success-sub {
+            font-size: 12px;
+            color: var(--cream-3);
+            line-height: 1.65;
+            max-width: 280px;
+        }
+
+        /* ═══════════════════════════════════════════════════════
+       § 14. FOOTER
+    ═══════════════════════════════════════════════════════ */
+        .footer {
+            background: var(--void);
+            border-top: 2px solid var(--wire);
+            overflow: hidden;
+            margin-top: 80px;
+        }
+
+        .footer-inner {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            padding: 24px var(--px);
+            max-width: 1440px;
+            margin: 0 auto;
+            border-bottom: 1px solid var(--wire);
+        }
+
+        @media(min-width:640px) {
+            .footer-inner {
+                flex-direction: row;
+                align-items: center;
+                justify-content: space-between;
+            }
+        }
+
+        .footer-brand {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .footer-logo {
+            height: 26px;
+            width: auto;
+            filter: brightness(0) invert(1);
+        }
+
+        .footer-tagline {
+            font-size: 11px;
+            color: var(--cream-3);
+        }
+
+        .footer-tagline .acc {
+            color: var(--blue);
+        }
+
+        .footer-copy {
+            font-size: 9px;
+            letter-spacing: .12em;
+            text-transform: uppercase;
+            color: var(--cream-3);
+        }
+
+        .footer-terminal {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 12px var(--px);
+            font-family: var(--font-m);
+            font-size: 10px;
+            color: var(--cream-3);
+            max-width: 1440px;
+            margin: 0 auto;
+        }
+
+        .ftr-prompt {
+            color: var(--blue);
+            font-weight: 700;
+        }
+    </style>
+</head>
+
+<body>
+
+
+
+    <!-- ═══════════════════════════════════════════════════════
+       TOP NAVBAR
+  ═══════════════════════════════════════════════════════ -->
+    <div class="navbar-wrapper">
+        <nav class="navbar">
+            <div class="nav-logo" onclick="window.location.href='index.html'">
+                <img src="https://raw.githubusercontent.com/DevelopmentDeffenso/website/main/public/assets/logo/Official_logo.png"
+                    alt="Deffenso" onerror="this.style.display='none';this.nextElementSibling.style.display='block'" />
+                <span class="nav-logo-text" style="display:none">DEFFENSO</span>
+            </div>
+
+            <div class="nav-links">
+                <a class="nav-link" href="index.html">HOME</a>
+                <a class="nav-link" href="index.html#about">ABOUT</a>
+                <div class="nav-prog-wrapper">
+                    <button class="nav-link" style="cursor:pointer">
+                        PROGRAMS
+                        <svg class="nav-chevron" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                        </svg>
+                    </button>
+                    <div class="nav-dropdown">
+                        <a href="index.html#jreh">Jr Ethical Hacking</a>
+                        <a href="index.html#robotics">Robotics</a>
+                        <a href="index.html#coding">Coding</a>
+                        <a href="index.html#forensics">Cyber Forensics</a>
+                    </div>
+                </div>
+                <!-- Current page — dimmed, non-clickable -->
+                <button class="btn-nav-events current">
+                    <svg width="12" height="12" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                    </svg>
+                    EVENTS
+                </button>
+                <a class="nav-link" href="index.html#contact">CONTACT</a>
+            </div>
+
+            <div class="nav-right">
+                <div class="nav-status">
+                    <div class="status-dot"></div><span>SYSTEMS ONLINE</span>
+                </div>
+                <button class="btn-nav-enroll" onclick="window.location.href='index.html#contact'">ENROLL NOW</button>
+                <button class="mob-hamburger" id="mob-ham" aria-label="Toggle menu" aria-expanded="false">
+                    <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M4 6h16M4 12h16M4 18h16" />
+                    </svg>
+                </button>
+            </div>
+        </nav>
+    </div>
+
+    <!-- ═══════════════════════════════════════════════════════
+       MOBILE MENU
+  ═══════════════════════════════════════════════════════ -->
+    <div class="mob-menu" id="mob-menu" aria-hidden="true">
+        <div class="mob-menu-body">
+            <button class="mob-nav-item" onclick="window.location.href='index.html'"><span>Home</span><svg width="14"
+                    height="14" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 18l6-6-6-6" />
+                </svg></button>
+            <button class="mob-nav-item" onclick="window.location.href='index.html#about'"><span>About</span><svg
+                    width="14" height="14" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 18l6-6-6-6" />
+                </svg></button>
+            <div>
+                <button class="mob-nav-item" id="mob-prog-toggle"><span>Programs</span><svg class="nav-chevron"
+                        width="14" height="14" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                    </svg></button>
+                <div class="mob-programs-panel" id="mob-prog-panel">
+                    <a class="mob-program-link" href="index.html#jreh">Jr Ethical Hacking</a>
+                    <a class="mob-program-link" href="index.html#robotics">Robotics</a>
+                    <a class="mob-program-link" href="index.html#coding">Coding</a>
+                    <a class="mob-program-link" href="index.html#forensics">Cyber Forensics</a>
+                </div>
+            </div>
+            <div class="mob-events-active">⚡ Events — current page</div>
+            <button class="mob-nav-item" onclick="window.location.href='index.html#contact'"><span>Contact</span><svg
+                    width="14" height="14" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 18l6-6-6-6" />
+                </svg></button>
+        </div>
+        <div class="mob-menu-footer">
+            <div class="mob-status-row">
+                <div class="status-dot"></div><span>SYSTEMS ONLINE</span>
+            </div>
+            <button class="mob-enroll-btn" onclick="window.location.href='index.html#contact'">
+                ENROLL NOW
+                <svg width="14" height="14" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h14M12 5l7 7-7 7" />
+                </svg>
+            </button>
+        </div>
+    </div>
+
+
+    <!-- ═══════════════════════════════════════════════════════
+       EVENTS HERO
+  ═══════════════════════════════════════════════════════ -->
+    <section class="events-hero">
+        <div class="events-hero-inner">
+            <p class="events-hero-tag">// UPCOMING &amp; LIVE</p>
+            <h1 class="events-hero-h">EVENTS &amp;<br /><span style="color:var(--blue)">COMPETITIONS.</span></h1>
+            <p class="events-hero-sub">Workshops, CTF challenges, bootcamps, webinars, and graduation ceremonies — all
+                in one place.</p>
+            <div class="events-meta-strip">
+                <div class="events-meta-item">
+                    <div class="live-dot"></div><span>TOTAL</span><span class="val" id="meta-total">—</span>
+                </div>
+                <div class="events-meta-item"><span>UPCOMING</span><span class="val" id="meta-upcoming">—</span></div>
+                <div class="events-meta-item"><span>COMPLETED</span><span class="val" id="meta-done">—</span></div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- ═══════════════════════════════════════════════════════
+       SECTION HEADER
+  ═══════════════════════════════════════════════════════ -->
+    <div class="section-hdr">
+        <span class="shdr-id">[EVT]</span>
+        <span class="shdr-title">ALL EVENTS</span>
+        <span class="shdr-right">Sorted by date</span>
+        <span class="shdr-clock"><span class="shdr-blink"></span><span id="live-clock"></span></span>
+    </div>
+
+
+    <!-- ═══════════════════════════════════════════════════════
+       FILTER BAR
+  ═══════════════════════════════════════════════════════ -->
+    <div class="filter-wrap">
+        <div class="filter-inner">
+            <button class="filter-btn active" data-filter="all">ALL</button>
+            <button class="filter-btn" data-filter="live">LIVE</button>
+            <button class="filter-btn" data-filter="upcoming">UPCOMING</button>
+            <button class="filter-btn" data-filter="workshop">WORKSHOPS</button>
+            <button class="filter-btn" data-filter="comp">COMPETITIONS</button>
+            <button class="filter-btn" data-filter="webinar">WEBINARS</button>
+            <button class="filter-btn" data-filter="done">COMPLETED</button>
+        </div>
+    </div>
+
+
+    <!-- ═══════════════════════════════════════════════════════
+       EVENTS TABLE
+  ═══════════════════════════════════════════════════════ -->
+    <section class="events-section">
+        <div class="events-inner">
+
+            <div class="table-wrap">
+                <table class="events-table">
+                    <thead>
+                        <tr>
+                            <th style="width:88px">DATE</th>
+                            <th style="width:120px">STATUS</th>
+                            <th>EVENT</th>
+                            <th style="width:120px">TYPE</th>
+                            <th style="width:170px">LOCATION</th>
+                            <th style="width:110px">SEATS</th>
+                            <th style="width:130px">ACTION</th>
+                        </tr>
+                    </thead>
+                    <tbody id="events-tbody">
+                        <!--
+              ════════════════════════════════════════════════
+              EVENTS DATA — ADD ROWS HERE
+              ────────────────────────────────────────────────
+              Call addEvent({...}) in the <script> section
+              below to populate this table. No HTML editing
+              required — just fill in the JS data object.
+              ════════════════════════════════════════════════
+            -->
+                    </tbody>
+                </table>
+
+                <!-- Shown automatically when table is empty -->
+                <div class="events-empty" id="events-empty">
+                    <div class="empty-icon">
+                        <svg width="52" height="52" fill="none" stroke="currentColor" viewBox="0 0 24 24" opacity=".4">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                                d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                        </svg>
+                    </div>
+                    <div class="empty-title">NO EVENTS YET</div>
+                    <p class="empty-sub">Events will appear here once added. Subscribe below to be the first to know.
+                    </p>
+                    <span class="empty-tag">COMING SOON</span>
+                </div>
+            </div>
+
+            <!-- CTA strip -->
+            <div class="events-cta">
+                <p class="cta-text">Want early access to event announcements?<br /><strong>Subscribe to Intel
+                        Dispatch</strong> — every new event drops there first.</p>
+                <button class="btn-primary" onclick="window.location.href='index.html#newsletter'">
+                    SUBSCRIBE TO INTEL
+                    <svg width="14" height="14" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M5 12h14M12 5l7 7-7 7" />
+                    </svg>
+                </button>
+            </div>
+
+        </div>
+    </section>
+
+
+    <!-- ═══════════════════════════════════════════════════════
+       REGISTER MODAL
+  ═══════════════════════════════════════════════════════ -->
+    <div class="modal-overlay" id="register-modal" onclick="handleOverlayClick(event)">
+        <div class="modal-card" onclick="event.stopPropagation()">
+            <div class="modal-header">
+                <span class="modal-title-h">REGISTER</span>
+                <button class="modal-close" onclick="closeModal()">✕</button>
+            </div>
+            <div class="modal-body">
+                <!-- Registration form (shown by default) -->
+                <div id="modal-form-wrap">
+                    <p class="modal-event-label" id="modal-event-label">— Event —</p>
+                    <form id="register-form" onsubmit="handleRegister(event)"
+                        style="display:flex;flex-direction:column">
+                        <div class="form-row">
+                            <div>
+                                <label class="form-label">Full Name</label>
+                                <input type="text" placeholder="Your Name" required class="form-input"
+                                    autocomplete="name" />
+                            </div>
+                            <div>
+                                <label class="form-label">Email</label>
+                                <input type="email" placeholder="email@address.com" required class="form-input"
+                                    autocomplete="email" />
+                            </div>
+                        </div>
+                        <label class="form-label">Phone (optional)</label>
+                        <input type="tel" placeholder="+91 00000 00000" class="form-input" autocomplete="tel" />
+                        <label class="form-label">Program / Track</label>
+                        <select class="form-select" style="margin-bottom:24px">
+                            <option value="">— Select your program —</option>
+                            <option>Jr Ethical Hacking</option>
+                            <option>Robotics</option>
+                            <option>Coding</option>
+                            <option>Cyber Forensics</option>
+                            <option>Not enrolled yet</option>
+                        </select>
+                        <button type="submit" class="form-submit">// CONFIRM REGISTRATION</button>
+                    </form>
+                </div>
+                <!-- Success state -->
+                <div class="modal-success" id="modal-success">
+                    <div class="success-icon">✓</div>
+                    <div class="success-title">REGISTERED.</div>
+                    <p class="success-sub">Your spot is reserved. A confirmation will be sent to your email shortly.</p>
+                    <button class="btn-primary" style="margin-top:8px" onclick="closeModal()">DONE</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- ═══════════════════════════════════════════════════════
+       FOOTER
+  ═══════════════════════════════════════════════════════ -->
+    <footer class="footer">
+        <div class="footer-inner">
+            <div class="footer-brand">
+                <img src="https://raw.githubusercontent.com/DevelopmentDeffenso/website/main/public/assets/logo/weblogo.png"
+                    alt="Deffenso" class="footer-logo" onerror="this.style.display='none'" />
+                <p class="footer-tagline">Securing the future by <span class="acc">training the next generation.</span>
+                </p>
+            </div>
+            <p class="footer-copy">&copy; 2024 DEFFENSO ACADEMY. ALL RIGHTS RESERVED.</p>
+        </div>
+        <div class="footer-terminal">
+            <span class="ftr-prompt">root@deffenso:~$</span>
+            <span>events.html — session active.</span>
+            <span class="u-cursor"></span>
+        </div>
+    </footer>
+
+
+    <script>
+        /* ═══════════════════════════════════════════════════════
+           JS § 1. EVENT DATA SYSTEM
+           ─────────────────────────────────────────────────────
+           HOW TO ADD AN EVENT:
+           Call addEvent({ field: value, ... }) below the
+           "ADD YOUR EVENTS BELOW" comment.
+    
+           FIELDS:
+             id        — unique string, e.g. 'evt-001'
+             date      — 'YYYY-MM-DD', e.g. '2026-04-05'
+             status    — 'live' | 'upcoming' | 'workshop' |
+                         'comp' | 'webinar' | 'done'
+             title     — Main event name (required)
+             subtitle  — Short one-liner (optional)
+             type      — Display type, e.g. 'BOOTCAMP', 'CTF'
+             location  — e.g. 'Deffenso HQ' or 'Online · Zoom'
+             seats     — e.g. '18 seats left' or 'Open'
+             action    — Register button text
+             link      — External URL (optional). If blank,
+                         opens the built-in register modal.
+    
+           EXAMPLE:
+             addEvent({
+               id:       'evt-001',
+               date:     '2026-04-10',
+               status:   'upcoming',
+               title:    'Jr Ethical Hacking Bootcamp',
+               subtitle: 'Intensive 3-day hands-on training',
+               type:     'BOOTCAMP',
+               location: 'Deffenso HQ, Kochi',
+               seats:    '18 seats left',
+               action:   'REGISTER NOW',
+             });
+        ═══════════════════════════════════════════════════════ */
+
+        const EVENTS = [];
+
+        function addEvent(ev) { EVENTS.push(ev); }
+
+        /* ══════════════════════════════════════════════════════
+           ↓↓↓  ADD YOUR EVENTS BELOW THIS LINE  ↓↓↓
+        ══════════════════════════════════════════════════════ */
+
+
+
+        /* ↑↑↑  END OF EVENTS DATA  ↑↑↑                      */
+        /* ══════════════════════════════════════════════════════ */
+
+
+        /* ─── Badge config ────────────────────────────────── */
+        const BADGE_CFG = {
+            live: { cls: 'live', label: 'LIVE NOW', pulse: true },
+            upcoming: { cls: 'upcoming', label: 'UPCOMING', pulse: false },
+            workshop: { cls: 'workshop', label: 'WORKSHOP', pulse: false },
+            comp: { cls: 'comp', label: 'COMPETITION', pulse: false },
+            webinar: { cls: 'webinar', label: 'WEBINAR', pulse: false },
+            done: { cls: 'done', label: 'COMPLETED', pulse: false },
+        };
+
+        /* ─── Helpers ─────────────────────────────────────── */
+        function fmtDate(iso) {
+            const d = new Date(iso + 'T00:00:00');
+            return {
+                day: d.getDate().toString().padStart(2, '0'),
+                month: d.toLocaleString('en-GB', { month: 'short' }).toUpperCase(),
+                year: d.getFullYear(),
+            };
+        }
+        function esc(s) { return String(s).replace(/'/g, "\\'").replace(/"/g, '&quot;'); }
+
+        function buildAction(ev) {
+            if (ev.status === 'done')
+                return `<button class="btn-reg disabled" disabled>CLOSED</button>`;
+            if (ev.link)
+                return `<a href="${ev.link}" target="_blank" rel="noreferrer" class="btn-reg primary">${ev.action || 'DETAILS'}</a>`;
+            return `<button class="btn-reg primary" onclick="openModal('${esc(ev.id)}','${esc(ev.title)}')">${ev.action || 'REGISTER'}</button>`;
+        }
+
+        /* ─── Render ──────────────────────────────────────── */
+        let activeFilter = 'all';
+
+        function renderTable() {
+            const tbody = document.getElementById('events-tbody');
+            const emptyEl = document.getElementById('events-empty');
+
+            const filtered = activeFilter === 'all'
+                ? EVENTS
+                : EVENTS.filter(e => e.status === activeFilter);
+
+            // Update meta counters
+            const isActive = s => ['live', 'upcoming', 'workshop', 'comp', 'webinar'].includes(s);
+            document.getElementById('meta-total').textContent = EVENTS.length || '—';
+            document.getElementById('meta-upcoming').textContent = EVENTS.filter(e => isActive(e.status)).length || '—';
+            document.getElementById('meta-done').textContent = EVENTS.filter(e => e.status === 'done').length || '—';
+
+            if (filtered.length === 0) {
+                tbody.innerHTML = '';
+                emptyEl.style.display = 'flex';
+                return;
+            }
+            emptyEl.style.display = 'none';
+
+            // Sort: live first → date ascending
+            const sorted = [...filtered].sort((a, b) => {
+                if (a.status === 'live' && b.status !== 'live') return -1;
+                if (b.status === 'live' && a.status !== 'live') return 1;
+                return new Date(a.date) - new Date(b.date);
+            });
+
+            tbody.innerHTML = sorted.map(ev => {
+                const d = fmtDate(ev.date);
+                const b = BADGE_CFG[ev.status] || BADGE_CFG.upcoming;
+                return `<tr data-status="${ev.status}">
+          <td data-label="DATE">
+            <div class="td-date-day">${d.day}</div>
+            <div class="td-date-meta">${d.month} ${d.year}</div>
+          </td>
+          <td data-label="STATUS">
+            <span class="event-badge ${b.cls}">
+              <span class="badge-dot${b.pulse ? ' pulse' : ''}"></span>
+              ${b.label}
+            </span>
+          </td>
+          <td data-label="EVENT">
+            <div class="td-title-main">${ev.title}</div>
+            ${ev.subtitle ? `<div class="td-title-sub">${ev.subtitle}</div>` : ''}
+          </td>
+          <td data-label="TYPE" style="font-size:10px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--cream-3)">${ev.type || '—'}</td>
+          <td data-label="LOCATION" style="font-size:11px;color:var(--cream-3)">${ev.location || '—'}</td>
+          <td data-label="SEATS" style="font-size:11px;color:var(--cream-3)">${ev.seats || '—'}</td>
+          <td data-label="ACTION">${buildAction(ev)}</td>
+        </tr>`;
+            }).join('');
+        }
+
+        /* ─── Filter buttons ──────────────────────────────── */
+        document.querySelectorAll('.filter-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                activeFilter = btn.dataset.filter;
+                renderTable();
+            });
+        });
+
+        /* ─── Register modal ──────────────────────────────── */
+        function openModal(id, title) {
+            document.getElementById('modal-event-label').textContent = title;
+            document.getElementById('modal-form-wrap').style.display = 'block';
+            document.getElementById('modal-success').classList.remove('show');
+            document.getElementById('register-modal').classList.add('open');
+            document.body.style.overflow = 'hidden';
+        }
+        function closeModal() {
+            document.getElementById('register-modal').classList.remove('open');
+            document.body.style.overflow = '';
+        }
+        function handleOverlayClick(e) { if (e.target === e.currentTarget) closeModal(); }
+        document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+
+        function handleRegister(e) {
+            e.preventDefault();
+            document.getElementById('modal-form-wrap').style.display = 'none';
+            document.getElementById('modal-success').classList.add('show');
+        }
+
+        /* ─── Hamburger ───────────────────────────────────── */
+        document.getElementById('mob-ham').addEventListener('click', () => {
+            const menu = document.getElementById('mob-menu');
+            const ham = document.getElementById('mob-ham');
+            const open = menu.classList.toggle('open');
+            ham.classList.toggle('open', open);
+            ham.setAttribute('aria-expanded', open ? 'true' : 'false');
+            document.body.style.overflow = open ? 'hidden' : '';
+        });
+        document.getElementById('mob-prog-toggle').addEventListener('click', () => {
+            const panel = document.getElementById('mob-prog-panel');
+            panel.classList.toggle('open');
+            const chev = document.getElementById('mob-prog-toggle').querySelector('.nav-chevron');
+            if (chev) chev.style.transform = panel.classList.contains('open') ? 'rotate(180deg)' : '';
+        });
+
+        /* ─── Live clock ──────────────────────────────────── */
+        function tickClock() {
+            const el = document.getElementById('live-clock');
+            if (el) el.textContent = new Date().toTimeString().slice(0, 8);
+        }
+        tickClock();
+        setInterval(tickClock, 1000);
+
+        /* ─── Boot ────────────────────────────────────────── */
+        renderTable();
+    </script>
+
+</body>
+
+</html>

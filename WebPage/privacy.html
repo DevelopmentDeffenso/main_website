@@ -1,0 +1,1207 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+    <title>Privacy Policy — DEFFENSO ACADEMY</title>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=IBM+Plex+Mono:wght@300;400;700&display=swap"
+        rel="stylesheet" />
+    <style>
+        :root {
+            --blue: #007BFF;
+            --blue-hi: #3DA5FF;
+            --blue-dim: rgba(0, 123, 255, .07);
+            --green: #00FF41;
+            --amber: #FFB700;
+            --red: #FF3B3B;
+            --cream: #E2D9C8;
+            --cream-2: #A89E8D;
+            --cream-3: #5A5249;
+            --void: #030303;
+            --void-1: #0A0A0A;
+            --void-2: #0d0d0d;
+            --wire: #1c1c1c;
+            --wire-2: #242424;
+            --font-d: 'Bebas Neue', sans-serif;
+            --font-m: 'IBM Plex Mono', monospace;
+        }
+
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0
+        }
+
+        html {
+            scroll-behavior: smooth
+        }
+
+        body {
+            background: var(--void);
+            color: var(--cream);
+            font-family: var(--font-m);
+            font-size: 14px;
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+            overflow-x: hidden;
+        }
+
+        ::-webkit-scrollbar {
+            width: 2px
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--void)
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--blue)
+        }
+
+        #crt {
+            position: fixed;
+            inset: 0;
+            z-index: 9990;
+            pointer-events: none;
+            background: repeating-linear-gradient(to bottom, transparent 0, transparent 2px, rgba(0, 0, 0, .06) 2px, rgba(0, 0, 0, .06) 3px);
+            animation: crtf 7s steps(1) infinite
+        }
+
+        @keyframes crtf {
+
+            0%,
+            100% {
+                opacity: 1
+            }
+
+            12% {
+                opacity: .97
+            }
+
+            12.3% {
+                opacity: 1
+            }
+
+            44% {
+                opacity: .98
+            }
+
+            44.2% {
+                opacity: 1
+            }
+
+            71% {
+                opacity: .96
+            }
+
+            71.4% {
+                opacity: 1
+            }
+        }
+
+
+
+        .navbar-wrapper {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            border-bottom: 1px solid var(--wire);
+            background: rgba(3, 3, 3, .97);
+            backdrop-filter: blur(20px)
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: stretch;
+            height: 52px;
+            max-width: 1440px;
+            margin: 0 auto
+        }
+
+        .nav-logo {
+            display: flex;
+            align-items: center;
+            padding: 0 22px;
+            font-family: var(--font-d);
+            font-size: 22px;
+            letter-spacing: .06em;
+            color: var(--cream);
+            border-right: 1px solid var(--wire);
+            text-decoration: none
+        }
+
+        .nav-right {
+            display: flex;
+            align-items: stretch;
+            margin-left: auto
+        }
+
+        .nav-back {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 0 22px;
+            font-size: 9px;
+            font-weight: 700;
+            letter-spacing: .2em;
+            text-transform: uppercase;
+            color: var(--cream-3);
+            border-left: 1px solid var(--wire);
+            text-decoration: none;
+            transition: color .18s
+        }
+
+        .nav-back:hover {
+            color: var(--cream)
+        }
+
+        .nav-back::before {
+            content: '←';
+            color: var(--blue);
+            font-size: 11px
+        }
+
+        /* hero — slightly different ghost text from terms */
+        .page-hero {
+            position: relative;
+            padding: 80px 40px 60px;
+            border-bottom: 1px solid var(--wire);
+            overflow: hidden;
+            background: var(--void-1)
+        }
+
+        .page-hero::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, rgba(0, 123, 255, .04) 0%, transparent 60%);
+            pointer-events: none
+        }
+
+        .page-hero::after {
+            content: 'PP';
+            position: absolute;
+            right: -10px;
+            bottom: -20px;
+            font-family: var(--font-d);
+            font-size: clamp(120px, 18vw, 220px);
+            letter-spacing: .04em;
+            color: transparent;
+            -webkit-text-stroke: 1px rgba(0, 123, 255, .05);
+            pointer-events: none;
+            user-select: none;
+            line-height: 1;
+        }
+
+        .page-hero-inner {
+            max-width: 1440px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1
+        }
+
+        .page-doc-type {
+            font-size: 8px;
+            font-weight: 700;
+            letter-spacing: .4em;
+            text-transform: uppercase;
+            color: rgba(0, 123, 255, .5);
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            gap: 10px
+        }
+
+        .page-doc-type::before {
+            content: '// '
+        }
+
+        .page-title {
+            font-family: var(--font-d);
+            font-size: clamp(52px, 9vw, 100px);
+            line-height: .92;
+            letter-spacing: .02em;
+            color: var(--cream);
+            margin-bottom: 6px
+        }
+
+        .page-title span {
+            color: var(--blue)
+        }
+
+        .page-subtitle {
+            font-size: 11px;
+            color: var(--cream-3);
+            letter-spacing: .14em;
+            text-transform: uppercase;
+            margin-top: 16px;
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            flex-wrap: wrap
+        }
+
+        .page-subtitle::before {
+            content: '';
+            width: 30px;
+            height: 1px;
+            background: var(--blue);
+            flex-shrink: 0
+        }
+
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 4px 10px;
+            border: 1px solid;
+            font-size: 8px;
+            font-weight: 700;
+            letter-spacing: .16em;
+            text-transform: uppercase
+        }
+
+        .badge.secure {
+            color: var(--blue);
+            border-color: rgba(0, 123, 255, .3);
+            background: rgba(0, 123, 255, .05)
+        }
+
+        .badge.active {
+            color: var(--green);
+            border-color: rgba(0, 255, 65, .3);
+            background: rgba(0, 255, 65, .04)
+        }
+
+        .badge.warn {
+            color: var(--amber);
+            border-color: rgba(255, 183, 0, .3);
+            background: rgba(255, 183, 0, .05)
+        }
+
+        .badge-dot {
+            width: 5px;
+            height: 5px;
+            border-radius: 50%;
+            background: currentColor;
+            animation: bdp 1.8s ease-in-out infinite
+        }
+
+        @keyframes bdp {
+
+            0%,
+            100% {
+                opacity: 1
+            }
+
+            50% {
+                opacity: .2
+            }
+        }
+
+        .layout {
+            display: grid;
+            grid-template-columns: 240px 1fr;
+            gap: 0;
+            max-width: 1440px;
+            margin: 0 auto
+        }
+
+        @media(max-width:900px) {
+            .layout {
+                grid-template-columns: 1fr
+            }
+        }
+
+        .sidebar {
+            position: sticky;
+            top: 52px;
+            height: calc(100vh - 52px);
+            border-right: 1px solid var(--wire);
+            overflow-y: auto;
+            background: var(--void-1);
+            align-self: start
+        }
+
+        @media(max-width:900px) {
+            .sidebar {
+                display: none
+            }
+        }
+
+        .sidebar-head {
+            padding: 16px 20px;
+            border-bottom: 1px solid var(--wire);
+            font-size: 8px;
+            font-weight: 700;
+            letter-spacing: .24em;
+            text-transform: uppercase;
+            color: var(--blue)
+        }
+
+        .sidebar-head::before {
+            content: '[';
+            opacity: .5
+        }
+
+        .sidebar-head::after {
+            content: ']';
+            opacity: .5
+        }
+
+        .sidebar-link {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 11px 20px;
+            font-size: 9px;
+            font-weight: 700;
+            letter-spacing: .14em;
+            text-transform: uppercase;
+            color: var(--cream-3);
+            border-bottom: 1px solid rgba(255, 255, 255, .03);
+            text-decoration: none;
+            transition: all .18s
+        }
+
+        .sidebar-link:hover,
+        .sidebar-link.active {
+            color: var(--cream);
+            background: rgba(0, 123, 255, .06);
+            border-left: 2px solid var(--blue);
+            padding-left: 18px
+        }
+
+        .sidebar-num {
+            color: var(--blue);
+            font-size: 8px;
+            opacity: .7
+        }
+
+        .main {
+            padding: 0;
+            min-width: 0
+        }
+
+        .sec-hdr {
+            display: flex;
+            align-items: center;
+            height: 40px;
+            gap: 10px;
+            padding: 0 40px;
+            background: var(--void-2);
+            border-top: 1px solid var(--wire);
+            border-bottom: 1px solid var(--wire);
+            position: sticky;
+            top: 52px;
+            z-index: 50
+        }
+
+        .sec-hdr-id {
+            font-size: 9px;
+            font-weight: 700;
+            letter-spacing: .2em;
+            text-transform: uppercase;
+            color: var(--blue);
+            padding-right: 10px;
+            border-right: 1px solid var(--wire);
+            white-space: nowrap
+        }
+
+        .sec-hdr-title {
+            font-size: 8.5px;
+            letter-spacing: .2em;
+            text-transform: uppercase;
+            color: var(--cream-3)
+        }
+
+        .sec-hdr-ts {
+            margin-left: auto;
+            font-size: 8px;
+            letter-spacing: .1em;
+            color: var(--cream-3)
+        }
+
+        .content-section {
+            padding: 48px 40px;
+            border-bottom: 1px solid var(--wire)
+        }
+
+        @media(max-width:640px) {
+            .content-section {
+                padding: 36px 20px
+            }
+        }
+
+        .section-num {
+            font-family: var(--font-d);
+            font-size: 60px;
+            color: rgba(0, 123, 255, .1);
+            letter-spacing: .02em;
+            line-height: 1;
+            margin-bottom: 0;
+            border-bottom: 1px solid var(--wire);
+            padding-bottom: 8px;
+            display: inline-block
+        }
+
+        .section-title {
+            font-family: var(--font-d);
+            font-size: clamp(28px, 4vw, 38px);
+            letter-spacing: .02em;
+            color: var(--cream);
+            margin: 10px 0 6px;
+            line-height: 1
+        }
+
+        .section-tag {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            margin-bottom: 20px
+        }
+
+        .section-body {
+            color: var(--cream-2);
+            font-size: 12.5px;
+            line-height: 1.8;
+            max-width: 720px
+        }
+
+        .section-body p+p {
+            margin-top: 14px
+        }
+
+        .section-body strong {
+            color: var(--cream);
+            font-weight: 700
+        }
+
+        /* data table */
+        .data-table {
+            width: 100%;
+            margin-top: 20px;
+            border-collapse: collapse;
+            border: 1px solid var(--wire);
+            border-top: 2px solid var(--blue)
+        }
+
+        .data-table th {
+            padding: 10px 16px;
+            background: rgba(0, 0, 0, .5);
+            font-size: 8px;
+            font-weight: 700;
+            letter-spacing: .2em;
+            text-transform: uppercase;
+            color: var(--blue);
+            text-align: left;
+            border-bottom: 1px solid var(--wire)
+        }
+
+        .data-table td {
+            padding: 11px 16px;
+            font-size: 11.5px;
+            color: var(--cream-2);
+            border-bottom: 1px solid rgba(255, 255, 255, .04);
+            vertical-align: top;
+            line-height: 1.6
+        }
+
+        .data-table tr:last-child td {
+            border-bottom: none
+        }
+
+        .data-table tr:hover td {
+            background: rgba(0, 123, 255, .03)
+        }
+
+        .data-table td:first-child {
+            color: var(--cream);
+            font-weight: 700;
+            font-size: 11px;
+            white-space: nowrap
+        }
+
+        .data-table td:last-child {
+            color: var(--cream-3);
+            font-size: 10.5px
+        }
+
+        .plist {
+            margin-top: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 0;
+            border: 1px solid var(--wire);
+            border-top: 2px solid var(--red)
+        }
+
+        .plist-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            padding: 12px 16px;
+            border-bottom: 1px solid var(--wire);
+            font-size: 11.5px;
+            color: var(--cream-2);
+            line-height: 1.55
+        }
+
+        .plist-item:last-child {
+            border-bottom: none
+        }
+
+        .plist-item::before {
+            content: '✕';
+            color: var(--red);
+            font-size: 9px;
+            font-weight: 700;
+            flex-shrink: 0;
+            margin-top: 2px;
+            letter-spacing: .04em
+        }
+
+        .plist.positive {
+            border-top-color: var(--green)
+        }
+
+        .plist.positive .plist-item::before {
+            content: '✓';
+            color: var(--green)
+        }
+
+        .plist.neutral {
+            border-top-color: var(--blue)
+        }
+
+        .plist.neutral .plist-item::before {
+            content: '//';
+            color: var(--blue);
+            font-size: 8px;
+            font-weight: 700
+        }
+
+        .warn-box {
+            margin-top: 20px;
+            padding: 16px 20px;
+            border: 1px solid rgba(255, 183, 0, .25);
+            border-left: 3px solid var(--amber);
+            background: rgba(255, 183, 0, .04)
+        }
+
+        .warn-box-head {
+            font-size: 8.5px;
+            font-weight: 700;
+            letter-spacing: .22em;
+            text-transform: uppercase;
+            color: var(--amber);
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 8px
+        }
+
+        .warn-box-head::before {
+            content: '⚠';
+            font-size: 11px
+        }
+
+        .warn-box p {
+            font-size: 11.5px;
+            color: var(--cream-2);
+            line-height: 1.7
+        }
+
+        .info-box {
+            margin-top: 20px;
+            padding: 16px 20px;
+            border: 1px solid rgba(0, 123, 255, .2);
+            border-left: 3px solid var(--blue);
+            background: rgba(0, 123, 255, .04)
+        }
+
+        .info-box-head {
+            font-size: 8.5px;
+            font-weight: 700;
+            letter-spacing: .22em;
+            text-transform: uppercase;
+            color: var(--blue);
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 8px
+        }
+
+        .info-box-head::before {
+            content: '//'
+        }
+
+        .info-box p {
+            font-size: 11.5px;
+            color: var(--cream-2);
+            line-height: 1.7
+        }
+
+        /* rights grid */
+        .rights-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1px;
+            background: var(--wire);
+            margin-top: 20px;
+            border: 1px solid var(--wire)
+        }
+
+        .right-card {
+            background: var(--void-1);
+            padding: 20px;
+            transition: background .2s
+        }
+
+        .right-card:hover {
+            background: rgba(0, 123, 255, .04)
+        }
+
+        .right-icon {
+            font-size: 9px;
+            font-weight: 700;
+            letter-spacing: .14em;
+            text-transform: uppercase;
+            color: var(--blue);
+            margin-bottom: 8px
+        }
+
+        .right-icon::before {
+            content: '['
+        }
+
+        .right-icon::after {
+            content: ']'
+        }
+
+        .right-text {
+            font-size: 11px;
+            color: var(--cream-2);
+            line-height: 1.6
+        }
+
+        /* commitment terminal */
+        .ack-terminal {
+            margin: 0;
+            background: var(--void-2);
+            border-top: 2px solid var(--blue)
+        }
+
+        .ack-bar {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            padding: 8px 20px;
+            background: rgba(0, 0, 0, .5);
+            border-bottom: 1px solid var(--wire)
+        }
+
+        .ack-dot {
+            width: 7px;
+            height: 7px;
+            border-radius: 50%
+        }
+
+        .ack-dot.r {
+            background: #FF5F57
+        }
+
+        .ack-dot.y {
+            background: #FEBC2E
+        }
+
+        .ack-dot.g {
+            background: #28C840
+        }
+
+        .ack-title {
+            margin-left: 8px;
+            font-size: 7.5px;
+            letter-spacing: .18em;
+            text-transform: uppercase;
+            color: var(--cream-3)
+        }
+
+        .ack-body {
+            padding: 28px 40px
+        }
+
+        @media(max-width:640px) {
+            .ack-body {
+                padding: 24px 20px
+            }
+        }
+
+        .ack-text {
+            font-size: 11.5px;
+            color: var(--cream-2);
+            line-height: 1.8;
+            border-left: 2px solid rgba(0, 123, 255, .3);
+            padding-left: 16px;
+            margin-bottom: 20px
+        }
+
+        .ack-line {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 10px;
+            letter-spacing: .1em;
+            color: var(--cream-3)
+        }
+
+        .ack-prompt {
+            color: var(--blue);
+            font-weight: 700
+        }
+
+        .ack-blink::after {
+            content: '_';
+            color: var(--blue);
+            animation: ab .8s infinite
+        }
+
+        @keyframes ab {
+
+            0%,
+            49% {
+                opacity: 1
+            }
+
+            50%,
+            100% {
+                opacity: 0
+            }
+        }
+
+        .footer {
+            background: var(--void);
+            border-top: 2px solid var(--wire);
+            padding: 32px 40px
+        }
+
+        @media(max-width:640px) {
+            .footer {
+                padding: 24px 20px
+            }
+        }
+
+        .footer-inner {
+            max-width: 1440px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 16px
+        }
+
+        .footer-logo {
+            font-family: var(--font-d);
+            font-size: 22px;
+            letter-spacing: .06em;
+            color: var(--cream)
+        }
+
+        .footer-meta {
+            font-size: 9px;
+            letter-spacing: .14em;
+            text-transform: uppercase;
+            color: var(--cream-3)
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 0
+        }
+
+        .footer-links a {
+            font-size: 9px;
+            font-weight: 700;
+            letter-spacing: .14em;
+            text-transform: uppercase;
+            color: var(--cream-3);
+            text-decoration: none;
+            padding: 0 14px;
+            border-left: 1px solid var(--wire);
+            transition: color .18s
+        }
+
+        .footer-links a:hover {
+            color: var(--blue)
+        }
+
+        .footer-links a:first-child {
+            border-left: none
+        }
+    </style>
+</head>
+
+<body>
+
+    <div id="crt"></div>
+
+
+
+    <div class="navbar-wrapper">
+        <nav class="navbar">
+            <a class="nav-logo" href="index.html">DEFFENSO</a>
+            <div class="nav-right">
+                <a class="nav-back" href="index.html">Back to Academy</a>
+            </div>
+        </nav>
+    </div>
+
+    <div class="page-hero">
+        <div class="page-hero-inner">
+            <div class="page-doc-type">Legal Document</div>
+            <h1 class="page-title">Privacy<br /><span>Policy</span></h1>
+            <div style="margin-top:16px;display:flex;align-items:center;gap:10px;flex-wrap:wrap">
+                <span class="badge secure"><span class="badge-dot"></span>Data Protection</span>
+                <span class="badge active"><span class="badge-dot"></span>Currently Active</span>
+                <span class="badge warn"><span class="badge-dot"></span>Monitor Notice</span>
+            </div>
+            <div class="page-subtitle">Deffenso Hackers Academy & Development — Data Protection Statement &nbsp;·&nbsp;
+                Effective: 2025.01.01</div>
+        </div>
+    </div>
+
+    <!-- meta strip -->
+    <div style="border-bottom:1px solid var(--wire);background:var(--void-2)">
+        <div
+            style="max-width:1440px;margin:0 auto;display:grid;grid-template-columns:repeat(3,1fr);border-left:1px solid var(--wire)">
+            <div style="padding:14px 24px;border-right:1px solid var(--wire)">
+                <div
+                    style="font-size:7.5px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--cream-3);margin-bottom:3px">
+                    Organization</div>
+                <div style="font-size:12px;color:var(--cream)">Deffenso Academy</div>
+            </div>
+            <div style="padding:14px 24px;border-right:1px solid var(--wire)">
+                <div
+                    style="font-size:7.5px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--cream-3);margin-bottom:3px">
+                    Effective Date</div>
+                <div style="font-size:12px;color:var(--cream)">2025.01.01</div>
+            </div>
+            <div style="padding:14px 24px">
+                <div
+                    style="font-size:7.5px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--cream-3);margin-bottom:3px">
+                    Applies To</div>
+                <div style="font-size:12px;color:var(--cream)">All Members</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="layout">
+
+        <aside class="sidebar">
+            <div class="sidebar-head">Contents</div>
+            <a class="sidebar-link active" href="#s01"><span class="sidebar-num">01</span>Introduction</a>
+            <a class="sidebar-link" href="#s02"><span class="sidebar-num">02</span>Information We Collect</a>
+            <a class="sidebar-link" href="#s03"><span class="sidebar-num">03</span>How We Use Your Data</a>
+            <a class="sidebar-link" href="#s04"><span class="sidebar-num">04</span>Monitoring & Tracking</a>
+            <a class="sidebar-link" href="#s05"><span class="sidebar-num">05</span>Data Sharing</a>
+            <a class="sidebar-link" href="#s06"><span class="sidebar-num">06</span>Data Security</a>
+            <a class="sidebar-link" href="#s07"><span class="sidebar-num">07</span>Member Data Rights</a>
+            <a class="sidebar-link" href="#s08"><span class="sidebar-num">08</span>Retention & Updates</a>
+            <a class="sidebar-link" href="#ack"><span class="sidebar-num">—</span>Commitment</a>
+        </aside>
+
+        <main class="main">
+
+            <div class="sec-hdr">
+                <span class="sec-hdr-id">[PRIVACY]</span>
+                <span class="sec-hdr-title">Data Protection Statement — Deffenso Hackers Academy</span>
+                <span class="sec-hdr-ts" id="ts"></span>
+            </div>
+
+            <!-- 01 -->
+            <section class="content-section" id="s01">
+                <div class="section-num">01</div>
+                <h2 class="section-title">Introduction</h2>
+                <div class="section-body">
+                    <p>Deffenso Hackers Academy & Development ("the Academy", "we", "us") is committed to protecting the
+                        privacy and security of all member information. This Privacy Policy explains how we collect,
+                        use, store, and protect personal data in connection with Academy membership and activities.</p>
+                    <p>As a <strong>cybersecurity-focused organization</strong>, we hold ourselves to the highest data
+                        protection standards — the same standards we teach our members to uphold.</p>
+                </div>
+            </section>
+
+            <!-- 02 -->
+            <section class="content-section" id="s02">
+                <div class="section-num">02</div>
+                <h2 class="section-title">Information We Collect</h2>
+                <span class="section-tag"><span class="badge secure"><span
+                            class="badge-dot"></span>Transparency</span></span>
+                <div class="section-body">
+                    <p>We collect information necessary for Academy operations and member management:</p>
+                </div>
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>Data Category</th>
+                            <th>Examples</th>
+                            <th>Purpose</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Identity Information</td>
+                            <td style="color:var(--cream-2)">Name, username, profile details</td>
+                            <td>Member identification & access control</td>
+                        </tr>
+                        <tr>
+                            <td>Contact Information</td>
+                            <td style="color:var(--cream-2)">Email address, messaging handle</td>
+                            <td>Communication & notifications</td>
+                        </tr>
+                        <tr>
+                            <td>Activity Data</td>
+                            <td style="color:var(--cream-2)">Training logs, task completions, participation records</td>
+                            <td>Performance evaluation & progress tracking</td>
+                        </tr>
+                        <tr>
+                            <td>Platform Usage</td>
+                            <td style="color:var(--cream-2)">Login times, accessed resources, tool usage</td>
+                            <td>Security monitoring & quality assurance</td>
+                        </tr>
+                        <tr>
+                            <td>Communications</td>
+                            <td style="color:var(--cream-2)">Messages sent within Academy channels</td>
+                            <td>Safety, conduct compliance & record keeping</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+
+            <!-- 03 -->
+            <section class="content-section" id="s03">
+                <div class="section-num">03</div>
+                <h2 class="section-title">How We Use Your Information</h2>
+                <div class="section-body">
+                    <p>All data collected is used exclusively for lawful Academy purposes:</p>
+                </div>
+                <div class="plist neutral" style="margin-top:20px">
+                    <div class="plist-item">Managing and administering your Academy membership</div>
+                    <div class="plist-item">Facilitating training programs and evaluating member progress</div>
+                    <div class="plist-item">Monitoring compliance with Academy terms, conduct standards, and applicable
+                        laws</div>
+                    <div class="plist-item">Ensuring platform security and preventing unauthorized access or misuse
+                    </div>
+                    <div class="plist-item">Communicating important Academy updates, policy changes, or security alerts
+                    </div>
+                    <div class="plist-item">Improving Academy programs, tools, and resources</div>
+                </div>
+                <div class="plist" style="margin-top:16px">
+                    <div class="plist-item">We do NOT sell or commercially exploit your personal data</div>
+                    <div class="plist-item">We do NOT share your data with third parties for marketing purposes</div>
+                </div>
+            </section>
+
+            <!-- 04 -->
+            <section class="content-section" id="s04">
+                <div class="section-num">04</div>
+                <h2 class="section-title">Monitoring &<br />Activity Tracking</h2>
+                <span class="section-tag"><span class="badge warn"><span class="badge-dot"></span>Important
+                        Notice</span></span>
+                <div class="section-body">
+                    <p>In accordance with our Terms & Conditions, the Academy reserves the right to <strong>monitor
+                            member activities</strong> conducted within Academy platforms, channels, and systems. This
+                        monitoring serves to:</p>
+                </div>
+                <div class="plist neutral" style="margin-top:20px">
+                    <div class="plist-item">Detect and prevent violations of Academy terms or ethical standards</div>
+                    <div class="plist-item">Ensure the security and integrity of Academy infrastructure</div>
+                    <div class="plist-item">Maintain quality control over training programs and outcomes</div>
+                    <div class="plist-item">Investigate suspected misconduct or unauthorized activity</div>
+                </div>
+                <div class="warn-box">
+                    <div class="warn-box-head">No Expectation of Privacy</div>
+                    <p>Members should have <strong>no expectation of privacy</strong> when using Academy-owned
+                        platforms, tools, or communication channels for Academy activities.</p>
+                </div>
+            </section>
+
+            <!-- 05 -->
+            <section class="content-section" id="s05">
+                <div class="section-num">05</div>
+                <h2 class="section-title">Data Sharing<br />& Disclosure</h2>
+                <div class="section-body">
+                    <p>We do not disclose member information to external parties except in the following circumstances:
+                    </p>
+                </div>
+                <div class="plist neutral" style="margin-top:20px">
+                    <div class="plist-item">When required by applicable law or a lawful order from a competent authority
+                    </div>
+                    <div class="plist-item">When necessary to investigate, prevent, or respond to suspected illegal
+                        activity conducted by a member using Academy resources or knowledge</div>
+                    <div class="plist-item">To protect the rights, property, or safety of the Academy, its members, or
+                        the public</div>
+                    <div class="plist-item">With trusted service providers who support Academy operations under strict
+                        confidentiality obligations</div>
+                </div>
+                <div class="info-box">
+                    <div class="info-box-head">Law Enforcement</div>
+                    <p>Any disclosure to law enforcement authorities will be made in full cooperation where a member's
+                        activities are suspected to violate applicable cybercrime laws.</p>
+                </div>
+            </section>
+
+            <!-- 06 -->
+            <section class="content-section" id="s06">
+                <div class="section-num">06</div>
+                <h2 class="section-title">Data Security</h2>
+                <div class="section-body">
+                    <p>As a cybersecurity-focused organization, we implement appropriate technical and organizational
+                        measures to protect member data against unauthorized access, disclosure, alteration, or
+                        destruction.</p>
+                </div>
+                <div class="plist positive" style="margin-top:20px">
+                    <div class="plist-item">Access controls limiting data access to authorized personnel only</div>
+                    <div class="plist-item">Encryption of sensitive data at rest and in transit</div>
+                    <div class="plist-item">Regular security audits of Academy systems and infrastructure</div>
+                    <div class="plist-item">Incident response procedures for suspected data breaches</div>
+                </div>
+                <div class="info-box" style="margin-top:16px">
+                    <div class="info-box-head">Member Responsibility</div>
+                    <p>Members are also responsible for maintaining the security of their own credentials and must
+                        promptly report any suspected unauthorized access to Academy leadership.</p>
+                </div>
+            </section>
+
+            <!-- 07 -->
+            <section class="content-section" id="s07">
+                <div class="section-num">07</div>
+                <h2 class="section-title">Member Data Rights</h2>
+                <span class="section-tag"><span class="badge active"><span class="badge-dot"></span>Your
+                        Rights</span></span>
+                <div class="section-body">
+                    <p>Members may exercise the following rights with respect to their personal data held by the
+                        Academy:</p>
+                </div>
+                <div class="rights-grid">
+                    <div class="right-card">
+                        <div class="right-icon">Access</div>
+                        <div class="right-text">Request access to the personal information we hold about you</div>
+                    </div>
+                    <div class="right-card">
+                        <div class="right-icon">Correction</div>
+                        <div class="right-text">Request correction of inaccurate or outdated information</div>
+                    </div>
+                    <div class="right-card">
+                        <div class="right-icon">Deletion</div>
+                        <div class="right-text">Request deletion of your data upon termination of membership, subject to
+                            legal retention obligations</div>
+                    </div>
+                    <div class="right-card">
+                        <div class="right-icon">Objection</div>
+                        <div class="right-text">Object to specific uses of your data where permitted by applicable law
+                        </div>
+                    </div>
+                </div>
+                <div class="info-box" style="margin-top:20px">
+                    <div class="info-box-head">How to Exercise Your Rights</div>
+                    <p>To exercise any of these rights, contact Academy leadership through official channels. Requests
+                        will be reviewed and responded to in a timely manner.</p>
+                </div>
+            </section>
+
+            <!-- 08 -->
+            <section class="content-section" id="s08">
+                <div class="section-num">08</div>
+                <h2 class="section-title">Data Retention<br />& Policy Updates</h2>
+                <div class="section-body">
+                    <p>Member data is retained for as long as membership is active and for a reasonable period
+                        thereafter as required for legal compliance, dispute resolution, or legitimate operational
+                        purposes. Activity and conduct records may be retained <strong>indefinitely</strong> where
+                        relevant to a security incident or legal matter.</p>
+                    <p>This Privacy Policy may be updated at any time to reflect changes in our practices, technology,
+                        or applicable regulations. Members will be notified of material changes through official Academy
+                        channels. Continued participation following any update constitutes acceptance of the revised
+                        policy.</p>
+                </div>
+            </section>
+
+            <!-- Commitment Terminal -->
+            <div class="ack-terminal" id="ack">
+                <div class="ack-bar">
+                    <div class="ack-dot r"></div>
+                    <div class="ack-dot y"></div>
+                    <div class="ack-dot g"></div>
+                    <span class="ack-title">data_protection_commitment.sh — privacy assurance</span>
+                </div>
+                <div class="ack-body">
+                    <div class="ack-text">
+                        Deffenso Hackers Academy & Development is committed to protecting member privacy while
+                        maintaining the security and integrity of our community and platforms. As a cybersecurity
+                        organization, data protection is not just a policy — it is a core principle of everything we do.
+                    </div>
+                    <div class="ack-line">
+                        <span class="ack-prompt">deffenso@system:~$</span>
+                        <span style="color:var(--cream-2)">commit --privacy=enforced --standard=highest
+                            --date=2025</span>
+                        <span class="ack-blink"></span>
+                    </div>
+                    <div
+                        style="margin-top:20px;padding-top:16px;border-top:1px solid var(--wire);display:flex;align-items:center;gap:12px;font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:var(--cream-3);flex-wrap:wrap">
+                        <span style="color:var(--green);font-weight:700">STATUS: POLICY ACTIVE</span>
+                        <span style="color:var(--wire-2)">·</span>
+                        <span>Effective: 2025.01.01</span>
+                        <span style="color:var(--wire-2)">·</span>
+                        <span>Deffenso Hackers Academy & Development</span>
+                        <span style="color:var(--wire-2)">·</span>
+                        <span>All Rights Reserved</span>
+                    </div>
+                </div>
+            </div>
+
+        </main>
+    </div>
+
+    <footer class="footer">
+        <div class="footer-inner">
+            <div>
+                <div class="footer-logo">DEFFENSO</div>
+                <div class="footer-meta" style="margin-top:4px">© 2025 Deffenso Hackers Academy & Development. All
+                    rights reserved.</div>
+            </div>
+            <div class="footer-links">
+                <a href="index.html">Home</a>
+                <a href="term&con.html">Terms</a>
+                <a href="privacy.html">Privacy</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        function ts() {
+            const n = new Date(), p = n => String(n).padStart(2, '0');
+            document.getElementById('ts').textContent = `${n.getFullYear()}.${p(n.getMonth() + 1)}.${p(n.getDate())} ${p(n.getHours())}:${p(n.getMinutes())}:${p(n.getSeconds())}`;
+        }
+        ts(); setInterval(ts, 1000);
+
+        const sections = document.querySelectorAll('[id^="s"]');
+        const links = document.querySelectorAll('.sidebar-link');
+        const obs = new IntersectionObserver(entries => {
+            entries.forEach(e => {
+                if (e.isIntersecting) {
+                    links.forEach(l => l.classList.remove('active'));
+                    const match = [...links].find(l => l.getAttribute('href') === '#' + e.target.id);
+                    if (match) match.classList.add('active');
+                }
+            });
+        }, { threshold: .4 });
+        sections.forEach(s => obs.observe(s));
+    </script>
+</body>
+
+</html>

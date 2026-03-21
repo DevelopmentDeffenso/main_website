@@ -1,0 +1,1059 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+    <title>Terms & Conditions — DEFFENSO ACADEMY</title>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=IBM+Plex+Mono:wght@300;400;700&display=swap"
+        rel="stylesheet" />
+    <style>
+        :root {
+            --blue: #007BFF;
+            --blue-hi: #3DA5FF;
+            --blue-dim: rgba(0, 123, 255, .07);
+            --green: #00FF41;
+            --amber: #FFB700;
+            --red: #FF3B3B;
+            --cream: #E2D9C8;
+            --cream-2: #A89E8D;
+            --cream-3: #5A5249;
+            --void: #030303;
+            --void-1: #0A0A0A;
+            --void-2: #0d0d0d;
+            --wire: #1c1c1c;
+            --wire-2: #242424;
+            --font-d: 'Bebas Neue', sans-serif;
+            --font-m: 'IBM Plex Mono', monospace;
+        }
+
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0
+        }
+
+        html {
+            scroll-behavior: smooth
+        }
+
+        body {
+            background: var(--void);
+            color: var(--cream);
+            font-family: var(--font-m);
+            font-size: 14px;
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+            overflow-x: hidden;
+        }
+
+        /* ── SCROLLBAR ── */
+        ::-webkit-scrollbar {
+            width: 2px
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--void)
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--blue)
+        }
+
+        /* ── CURSOR ── */
+
+
+        /* ── CRT SCANLINES ── */
+        #crt {
+            position: fixed;
+            inset: 0;
+            z-index: 9990;
+            pointer-events: none;
+            background: repeating-linear-gradient(to bottom, transparent 0, transparent 2px, rgba(0, 0, 0, .06) 2px, rgba(0, 0, 0, .06) 3px);
+            animation: crtf 7s steps(1) infinite
+        }
+
+        @keyframes crtf {
+
+            0%,
+            100% {
+                opacity: 1
+            }
+
+            12% {
+                opacity: .97
+            }
+
+            12.3% {
+                opacity: 1
+            }
+
+            44% {
+                opacity: .98
+            }
+
+            44.2% {
+                opacity: 1
+            }
+
+            71% {
+                opacity: .96
+            }
+
+            71.4% {
+                opacity: 1
+            }
+        }
+
+        /* ── CLASSIFICATION BANNER ── */
+
+
+        /* ── NAVBAR ── */
+        .navbar-wrapper {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            border-bottom: 1px solid var(--wire);
+            background: rgba(3, 3, 3, .97);
+            backdrop-filter: blur(20px);
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: stretch;
+            height: 52px;
+            max-width: 1440px;
+            margin: 0 auto;
+            padding: 0
+        }
+
+        .nav-logo {
+            display: flex;
+            align-items: center;
+            padding: 0 22px;
+            font-family: var(--font-d);
+            font-size: 22px;
+            letter-spacing: .06em;
+            color: var(--cream);
+            border-right: 1px solid var(--wire);
+            text-decoration: none;
+        }
+
+        .nav-right {
+            display: flex;
+            align-items: stretch;
+            margin-left: auto
+        }
+
+        .nav-back {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 0 22px;
+            font-size: 9px;
+            font-weight: 700;
+            letter-spacing: .2em;
+            text-transform: uppercase;
+            color: var(--cream-3);
+            border-left: 1px solid var(--wire);
+            text-decoration: none;
+            transition: color .18s;
+        }
+
+        .nav-back:hover {
+            color: var(--cream)
+        }
+
+        .nav-back::before {
+            content: '←';
+            color: var(--blue);
+            font-size: 11px
+        }
+
+        /* ── PAGE HERO ── */
+        .page-hero {
+            position: relative;
+            padding: 80px 40px 60px;
+            border-bottom: 1px solid var(--wire);
+            overflow: hidden;
+            background: var(--void-1);
+        }
+
+        .page-hero::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, rgba(0, 123, 255, .04) 0%, transparent 60%);
+            pointer-events: none;
+        }
+
+        /* big ghost text */
+        .page-hero::after {
+            content: 'T&C';
+            position: absolute;
+            right: -20px;
+            bottom: -20px;
+            font-family: var(--font-d);
+            font-size: clamp(120px, 18vw, 220px);
+            letter-spacing: .04em;
+            color: transparent;
+            -webkit-text-stroke: 1px rgba(0, 123, 255, .05);
+            pointer-events: none;
+            user-select: none;
+            line-height: 1;
+        }
+
+        .page-hero-inner {
+            max-width: 1440px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1
+        }
+
+        .page-doc-type {
+            font-size: 8px;
+            font-weight: 700;
+            letter-spacing: .4em;
+            text-transform: uppercase;
+            color: rgba(0, 123, 255, .5);
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .page-doc-type::before {
+            content: '// '
+        }
+
+        .page-title {
+            font-family: var(--font-d);
+            font-size: clamp(52px, 9vw, 100px);
+            line-height: .92;
+            letter-spacing: .02em;
+            color: var(--cream);
+            margin-bottom: 6px;
+        }
+
+        .page-title span {
+            color: var(--blue)
+        }
+
+        .page-subtitle {
+            font-size: 11px;
+            color: var(--cream-3);
+            letter-spacing: .14em;
+            text-transform: uppercase;
+            margin-top: 16px;
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+
+        .page-subtitle::before {
+            content: '';
+            width: 30px;
+            height: 1px;
+            background: var(--blue);
+            flex-shrink: 0
+        }
+
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 4px 10px;
+            border: 1px solid;
+            font-size: 8px;
+            font-weight: 700;
+            letter-spacing: .16em;
+            text-transform: uppercase;
+        }
+
+        .badge.critical {
+            color: var(--red);
+            border-color: rgba(255, 59, 59, .3);
+            background: rgba(255, 59, 59, .05)
+        }
+
+        .badge.binding {
+            color: var(--amber);
+            border-color: rgba(255, 183, 0, .3);
+            background: rgba(255, 183, 0, .05)
+        }
+
+        .badge.live {
+            color: var(--green);
+            border-color: rgba(0, 255, 65, .3);
+            background: rgba(0, 255, 65, .04)
+        }
+
+        .badge-dot {
+            width: 5px;
+            height: 5px;
+            border-radius: 50%;
+            background: currentColor;
+            animation: bdp 1.8s ease-in-out infinite
+        }
+
+        @keyframes bdp {
+
+            0%,
+            100% {
+                opacity: 1
+            }
+
+            50% {
+                opacity: .2
+            }
+        }
+
+        /* ── LAYOUT ── */
+        .layout {
+            display: grid;
+            grid-template-columns: 240px 1fr;
+            gap: 0;
+            max-width: 1440px;
+            margin: 0 auto
+        }
+
+        @media(max-width:900px) {
+            .layout {
+                grid-template-columns: 1fr
+            }
+        }
+
+        /* ── SIDEBAR ── */
+        .sidebar {
+            position: sticky;
+            top: 52px;
+            height: calc(100vh - 52px);
+            border-right: 1px solid var(--wire);
+            overflow-y: auto;
+            background: var(--void-1);
+            padding: 0;
+            align-self: start;
+        }
+
+        @media(max-width:900px) {
+            .sidebar {
+                display: none
+            }
+        }
+
+        .sidebar-head {
+            padding: 16px 20px;
+            border-bottom: 1px solid var(--wire);
+            font-size: 8px;
+            font-weight: 700;
+            letter-spacing: .24em;
+            text-transform: uppercase;
+            color: var(--blue);
+        }
+
+        .sidebar-head::before {
+            content: '[';
+            opacity: .5
+        }
+
+        .sidebar-head::after {
+            content: ']';
+            opacity: .5
+        }
+
+        .sidebar-link {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 11px 20px;
+            font-size: 9px;
+            font-weight: 700;
+            letter-spacing: .14em;
+            text-transform: uppercase;
+            color: var(--cream-3);
+            border-bottom: 1px solid rgba(255, 255, 255, .03);
+            text-decoration: none;
+            transition: all .18s;
+        }
+
+        .sidebar-link:hover,
+        .sidebar-link.active {
+            color: var(--cream);
+            background: rgba(0, 123, 255, .06);
+            border-left: 2px solid var(--blue);
+            padding-left: 18px
+        }
+
+        .sidebar-num {
+            color: var(--blue);
+            font-size: 8px;
+            opacity: .7
+        }
+
+        /* ── MAIN CONTENT ── */
+        .main {
+            padding: 0;
+            min-width: 0
+        }
+
+        /* section header bar */
+        .sec-hdr {
+            display: flex;
+            align-items: center;
+            height: 40px;
+            gap: 10px;
+            padding: 0 40px;
+            background: var(--void-2);
+            border-top: 1px solid var(--wire);
+            border-bottom: 1px solid var(--wire);
+            position: sticky;
+            top: 52px;
+            z-index: 50;
+        }
+
+        .sec-hdr-id {
+            font-size: 9px;
+            font-weight: 700;
+            letter-spacing: .2em;
+            text-transform: uppercase;
+            color: var(--blue);
+            padding-right: 10px;
+            border-right: 1px solid var(--wire);
+            white-space: nowrap;
+        }
+
+        .sec-hdr-title {
+            font-size: 8.5px;
+            letter-spacing: .2em;
+            text-transform: uppercase;
+            color: var(--cream-3)
+        }
+
+        .sec-hdr-ts {
+            margin-left: auto;
+            font-size: 8px;
+            letter-spacing: .1em;
+            color: var(--cream-3)
+        }
+
+        /* content sections */
+        .content-section {
+            padding: 48px 40px;
+            border-bottom: 1px solid var(--wire)
+        }
+
+        @media(max-width:640px) {
+            .content-section {
+                padding: 36px 20px
+            }
+        }
+
+        .section-num {
+            font-family: var(--font-d);
+            font-size: 60px;
+            color: rgba(0, 123, 255, .1);
+            letter-spacing: .02em;
+            line-height: 1;
+            margin-bottom: 0;
+            border-bottom: 1px solid var(--wire);
+            padding-bottom: 8px;
+            display: inline-block;
+        }
+
+        .section-title {
+            font-family: var(--font-d);
+            font-size: clamp(28px, 4vw, 38px);
+            letter-spacing: .02em;
+            color: var(--cream);
+            margin: 10px 0 6px;
+            line-height: 1;
+        }
+
+        .section-tag {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            margin-bottom: 20px;
+        }
+
+        .section-body {
+            color: var(--cream-2);
+            font-size: 12.5px;
+            line-height: 1.8;
+            max-width: 720px
+        }
+
+        .section-body p+p {
+            margin-top: 14px
+        }
+
+        .section-body strong {
+            color: var(--cream);
+            font-weight: 700
+        }
+
+        /* prohibited list */
+        .plist {
+            margin-top: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 0;
+            border: 1px solid var(--wire);
+            border-top: 2px solid var(--red)
+        }
+
+        .plist-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            padding: 12px 16px;
+            border-bottom: 1px solid var(--wire);
+            font-size: 11.5px;
+            color: var(--cream-2);
+            line-height: 1.55;
+        }
+
+        .plist-item:last-child {
+            border-bottom: none
+        }
+
+        .plist-item::before {
+            content: '✕';
+            color: var(--red);
+            font-size: 9px;
+            font-weight: 700;
+            flex-shrink: 0;
+            margin-top: 2px;
+            letter-spacing: .04em;
+        }
+
+        .plist.allowed {
+            border-top-color: var(--green)
+        }
+
+        .plist.allowed .plist-item::before {
+            content: '✓';
+            color: var(--green)
+        }
+
+        .plist.neutral {
+            border-top-color: var(--blue)
+        }
+
+        .plist.neutral .plist-item::before {
+            content: '//';
+            color: var(--blue);
+            font-size: 8px;
+            font-weight: 700;
+            font-family: var(--font-m)
+        }
+
+        /* warning box */
+        .warn-box {
+            margin-top: 20px;
+            padding: 16px 20px;
+            border: 1px solid rgba(255, 59, 59, .25);
+            border-left: 3px solid var(--red);
+            background: rgba(255, 59, 59, .04);
+        }
+
+        .warn-box-head {
+            font-size: 8.5px;
+            font-weight: 700;
+            letter-spacing: .22em;
+            text-transform: uppercase;
+            color: var(--red);
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .warn-box-head::before {
+            content: '⚠';
+            font-size: 11px
+        }
+
+        .warn-box p {
+            font-size: 11.5px;
+            color: var(--cream-2);
+            line-height: 1.7
+        }
+
+        /* info box */
+        .info-box {
+            margin-top: 20px;
+            padding: 16px 20px;
+            border: 1px solid rgba(0, 123, 255, .2);
+            border-left: 3px solid var(--blue);
+            background: rgba(0, 123, 255, .04);
+        }
+
+        .info-box-head {
+            font-size: 8.5px;
+            font-weight: 700;
+            letter-spacing: .22em;
+            text-transform: uppercase;
+            color: var(--blue);
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .info-box-head::before {
+            content: '//'
+        }
+
+        .info-box p {
+            font-size: 11.5px;
+            color: var(--cream-2);
+            line-height: 1.7
+        }
+
+        /* terminal acknowledgment */
+        .ack-terminal {
+            margin: 0;
+            background: var(--void-2);
+            border-top: 2px solid var(--blue);
+        }
+
+        .ack-bar {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            padding: 8px 20px;
+            background: rgba(0, 0, 0, .5);
+            border-bottom: 1px solid var(--wire);
+        }
+
+        .ack-dot {
+            width: 7px;
+            height: 7px;
+            border-radius: 50%
+        }
+
+        .ack-dot.r {
+            background: #FF5F57
+        }
+
+        .ack-dot.y {
+            background: #FEBC2E
+        }
+
+        .ack-dot.g {
+            background: #28C840
+        }
+
+        .ack-title {
+            margin-left: 8px;
+            font-size: 7.5px;
+            letter-spacing: .18em;
+            text-transform: uppercase;
+            color: var(--cream-3)
+        }
+
+        .ack-body {
+            padding: 28px 40px
+        }
+
+        @media(max-width:640px) {
+            .ack-body {
+                padding: 24px 20px
+            }
+        }
+
+        .ack-text {
+            font-size: 11.5px;
+            color: var(--cream-2);
+            line-height: 1.8;
+            border-left: 2px solid rgba(0, 123, 255, .3);
+            padding-left: 16px;
+            margin-bottom: 20px;
+        }
+
+        .ack-line {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 10px;
+            letter-spacing: .1em;
+            color: var(--cream-3);
+        }
+
+        .ack-prompt {
+            color: var(--blue);
+            font-weight: 700
+        }
+
+        .ack-blink::after {
+            content: '_';
+            color: var(--blue);
+            animation: ab .8s infinite
+        }
+
+        @keyframes ab {
+
+            0%,
+            49% {
+                opacity: 1
+            }
+
+            50%,
+            100% {
+                opacity: 0
+            }
+        }
+
+        /* footer */
+        .footer {
+            background: var(--void);
+            border-top: 2px solid var(--wire);
+            padding: 32px 40px
+        }
+
+        @media(max-width:640px) {
+            .footer {
+                padding: 24px 20px
+            }
+        }
+
+        .footer-inner {
+            max-width: 1440px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: gap-16px;
+            gap: 16px
+        }
+
+        .footer-logo {
+            font-family: var(--font-d);
+            font-size: 22px;
+            letter-spacing: .06em;
+            color: var(--cream)
+        }
+
+        .footer-meta {
+            font-size: 9px;
+            letter-spacing: .14em;
+            text-transform: uppercase;
+            color: var(--cream-3)
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 0
+        }
+
+        .footer-links a {
+            font-size: 9px;
+            font-weight: 700;
+            letter-spacing: .14em;
+            text-transform: uppercase;
+            color: var(--cream-3);
+            text-decoration: none;
+            padding: 0 14px;
+            border-left: 1px solid var(--wire);
+            transition: color .18s
+        }
+
+        .footer-links a:hover {
+            color: var(--blue)
+        }
+
+        .footer-links a:first-child {
+            border-left: none
+        }
+    </style>
+</head>
+
+<body>
+
+    <div id="crt"></div>
+
+
+
+    <!-- Navbar -->
+    <div class="navbar-wrapper">
+        <nav class="navbar">
+            <a class="nav-logo" href="index.html">DEFFENSO</a>
+            <div class="nav-right">
+                <a class="nav-back" href="index.html">Back to Academy</a>
+            </div>
+        </nav>
+    </div>
+
+    <!-- Page Hero -->
+    <div class="page-hero">
+        <div class="page-hero-inner">
+            <div class="page-doc-type">Legal Document</div>
+            <h1 class="page-title">Terms &<br /><span>Conditions</span></h1>
+            <div style="margin-top:16px;display:flex;align-items:center;gap:10px;flex-wrap:wrap">
+                <span class="badge critical"><span class="badge-dot"></span>Binding Agreement</span>
+                <span class="badge binding"><span class="badge-dot"></span>Zero Tolerance</span>
+                <span class="badge live"><span class="badge-dot"></span>Currently Active</span>
+            </div>
+            <div class="page-subtitle">Deffenso Hackers Academy & Development — Member Agreement &nbsp;·&nbsp; Last
+                Updated: 2025</div>
+        </div>
+    </div>
+
+    <!-- Layout -->
+    <div class="layout">
+
+        <!-- Sidebar TOC -->
+        <aside class="sidebar">
+            <div class="sidebar-head">Contents</div>
+            <a class="sidebar-link active" href="#s01"><span class="sidebar-num">01</span>Acceptance of Terms</a>
+            <a class="sidebar-link" href="#s02"><span class="sidebar-num">02</span>Ethical Conduct</a>
+            <a class="sidebar-link" href="#s03"><span class="sidebar-num">03</span>Confidentiality</a>
+            <a class="sidebar-link" href="#s04"><span class="sidebar-num">04</span>Member Responsibilities</a>
+            <a class="sidebar-link" href="#s05"><span class="sidebar-num">05</span>Code of Conduct</a>
+            <a class="sidebar-link" href="#s06"><span class="sidebar-num">06</span>Monitoring & Enforcement</a>
+            <a class="sidebar-link" href="#s07"><span class="sidebar-num">07</span>Lawful Use & Liability</a>
+            <a class="sidebar-link" href="#ack"><span class="sidebar-num">—</span>Acknowledgment</a>
+        </aside>
+
+        <!-- Main -->
+        <main class="main">
+
+            <div class="sec-hdr">
+                <span class="sec-hdr-id">[LEGAL]</span>
+                <span class="sec-hdr-title">Member Agreement — Deffenso Hackers Academy</span>
+                <span class="sec-hdr-ts" id="ts"></span>
+            </div>
+
+            <!-- 01 -->
+            <section class="content-section" id="s01">
+                <div class="section-num">01</div>
+                <h2 class="section-title">Acceptance of Terms</h2>
+                <div class="section-body">
+                    <p>By joining Deffenso Hackers Academy & Development ("the Academy"), all members
+                        <strong>unconditionally agree</strong> to strictly follow ethical, legal, and professional
+                        standards at all times. These terms constitute a binding agreement between the member and the
+                        Academy.</p>
+                    <p>The Academy reserves the right to amend these terms at any time. Continued participation
+                        following any update constitutes acceptance of the revised terms.</p>
+                </div>
+                <div class="info-box">
+                    <div class="info-box-head">Binding Nature</div>
+                    <p>By joining or continuing participation in the Academy, you confirm that you have read,
+                        understood, and agree to all terms outlined in this document. Non-compliance may result in
+                        immediate termination and legal action.</p>
+                </div>
+            </section>
+
+            <!-- 02 -->
+            <section class="content-section" id="s02">
+                <div class="section-num">02</div>
+                <h2 class="section-title">Ethical Conduct &<br />Prohibited Activities</h2>
+                <span class="section-tag"><span class="badge critical"><span
+                            class="badge-dot"></span>Critical</span></span>
+                <div class="section-body">
+                    <p>The Academy is committed to promoting ethical hacking practices within legal boundaries. The
+                        following activities are <strong>strictly prohibited</strong>:</p>
+                </div>
+                <div class="plist">
+                    <div class="plist-item">Unauthorized access to any computer system, network, or digital property
+                    </div>
+                    <div class="plist-item">Data theft, exfiltration, or unauthorized data access of any kind</div>
+                    <div class="plist-item">Misuse of cybersecurity tools, exploits, or techniques against
+                        non-consenting parties</div>
+                    <div class="plist-item">Any activity that constitutes illegal hacking under applicable laws</div>
+                    <div class="plist-item">Distribution of malware, ransomware, or harmful software</div>
+                    <div class="plist-item">Phishing, social engineering, or fraud targeting real individuals or
+                        organizations without explicit consent</div>
+                </div>
+                <div class="warn-box">
+                    <div class="warn-box-head">Enforcement</div>
+                    <p>Violations will result in <strong>immediate termination</strong> of membership and may be
+                        reported to relevant law enforcement authorities.</p>
+                </div>
+            </section>
+
+            <!-- 03 -->
+            <section class="content-section" id="s03">
+                <div class="section-num">03</div>
+                <h2 class="section-title">Confidentiality &<br />Information Security</h2>
+                <div class="section-body">
+                    <p>Members are bound by a duty of confidentiality with respect to all Academy resources, tools,
+                        knowledge, and internal communications.</p>
+                </div>
+                <div class="plist neutral" style="margin-top:20px">
+                    <div class="plist-item">Protect all sensitive information obtained through Academy participation
+                    </div>
+                    <div class="plist-item">Do not share internal tools, methodologies, or course materials with
+                        unauthorized individuals</div>
+                    <div class="plist-item">Do not disclose member details, internal discussions, or operational
+                        strategies externally</div>
+                    <div class="plist-item">Exercise caution when discussing Academy activities on public platforms or
+                        social media</div>
+                </div>
+            </section>
+
+            <!-- 04 -->
+            <section class="content-section" id="s04">
+                <div class="section-num">04</div>
+                <h2 class="section-title">Member Responsibilities<br />& Participation</h2>
+                <div class="section-body">
+                    <p>All members are expected to uphold the highest standards of professionalism and active
+                        engagement:</p>
+                </div>
+                <div class="plist neutral" style="margin-top:20px">
+                    <div class="plist-item">Actively participate in training sessions and assigned programs</div>
+                    <div class="plist-item">Complete tasks and assessments within designated timeframes</div>
+                    <div class="plist-item">Maintain discipline and a growth-oriented mindset throughout participation
+                    </div>
+                    <div class="plist-item">Contribute constructively to the Academy community and peer learning</div>
+                    <div class="plist-item">Report any suspected security violations or unethical behavior to Academy
+                        leadership</div>
+                </div>
+            </section>
+
+            <!-- 05 -->
+            <section class="content-section" id="s05">
+                <div class="section-num">05</div>
+                <h2 class="section-title">Code of Conduct &<br />Community Standards</h2>
+                <span class="section-tag"><span class="badge binding"><span class="badge-dot"></span>Zero
+                        Tolerance</span></span>
+                <div class="section-body">
+                    <p>Deffenso is a professional, merit-based community. Members must treat all individuals with
+                        respect and dignity. The following behaviors are absolutely prohibited:</p>
+                </div>
+                <div class="plist" style="margin-top:20px">
+                    <div class="plist-item">Harassment, bullying, or targeted intimidation of any member</div>
+                    <div class="plist-item">Discrimination based on race, gender, nationality, religion, or any
+                        protected characteristic</div>
+                    <div class="plist-item">Toxic, abusive, or demeaning behavior in any Academy channel or activity
+                    </div>
+                    <div class="plist-item">Spreading misinformation or deliberately harmful content within the
+                        community</div>
+                </div>
+                <div class="section-body" style="margin-top:20px">
+                    <p>Members are expected to:</p>
+                </div>
+                <div class="plist allowed" style="margin-top:12px">
+                    <div class="plist-item">Engage in respectful, constructive communication at all times</div>
+                    <div class="plist-item">Support fellow members and contribute to a positive learning environment
+                    </div>
+                </div>
+            </section>
+
+            <!-- 06 -->
+            <section class="content-section" id="s06">
+                <div class="section-num">06</div>
+                <h2 class="section-title">Monitoring, Enforcement<br />& Policy Updates</h2>
+                <div class="section-body">
+                    <p>The Academy reserves the right to <strong>monitor member activities</strong> within Academy
+                        platforms to ensure compliance with these terms and to maintain security and quality standards.
+                    </p>
+                    <p>Performance evaluations may be conducted periodically. The Academy may suspend or terminate
+                        membership at its sole discretion for any violation of these terms or conduct deemed detrimental
+                        to the Academy's mission.</p>
+                    <p>Policies may be updated at any time. Members will be notified of significant changes through
+                        official Academy channels.</p>
+                </div>
+            </section>
+
+            <!-- 07 -->
+            <section class="content-section" id="s07">
+                <div class="section-num">07</div>
+                <h2 class="section-title">Lawful Use & Liability</h2>
+                <div class="section-body">
+                    <p>Members acknowledge their <strong>sole and complete responsibility</strong> to use all skills,
+                        tools, and knowledge acquired through the Academy exclusively for lawful, authorized, and
+                        ethical purposes.</p>
+                    <p>The Academy is not liable for any misuse of knowledge or tools by its members. Any member who
+                        engages in illegal activity using skills obtained through the Academy does so entirely at their
+                        own risk and legal responsibility.</p>
+                    <p>By continuing participation, members affirm their commitment to contribute positively to the
+                        global cybersecurity and development community.</p>
+                </div>
+                <div class="warn-box" style="margin-top:20px">
+                    <div class="warn-box-head">Legal Responsibility</div>
+                    <p>Misuse of Academy knowledge or tools constitutes a violation of this agreement and applicable
+                        law. The Academy will cooperate fully with law enforcement authorities in any investigation
+                        involving member misconduct.</p>
+                </div>
+            </section>
+
+            <!-- Acknowledgment Terminal -->
+            <div class="ack-terminal" id="ack">
+                <div class="ack-bar">
+                    <div class="ack-dot r"></div>
+                    <div class="ack-dot y"></div>
+                    <div class="ack-dot g"></div>
+                    <span class="ack-title">member_acknowledgment.sh — binding confirmation</span>
+                </div>
+                <div class="ack-body">
+                    <div class="ack-text">
+                        By joining or continuing participation in Deffenso Hackers Academy & Development, you confirm
+                        that you have read, understood, and agree to all terms outlined in this document. This agreement
+                        is binding upon enrollment and all future participation.
+                    </div>
+                    <div class="ack-line">
+                        <span class="ack-prompt">member@deffenso:~$</span>
+                        <span style="color:var(--cream-2)">agree --terms=all --binding=true --date=2025</span>
+                        <span class="ack-blink"></span>
+                    </div>
+                    <div
+                        style="margin-top:20px;padding-top:16px;border-top:1px solid var(--wire);display:flex;align-items:center;gap:12px;font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:var(--cream-3)">
+                        <span style="color:var(--green);font-weight:700">STATUS: AGREEMENT ACTIVE</span>
+                        <span style="color:var(--wire-2)">·</span>
+                        <span>Last Updated: 2025</span>
+                        <span style="color:var(--wire-2)">·</span>
+                        <span>Deffenso Hackers Academy & Development</span>
+                    </div>
+                </div>
+            </div>
+
+        </main>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-inner">
+            <div>
+                <div class="footer-logo">DEFFENSO</div>
+                <div class="footer-meta" style="margin-top:4px">© 2025 Deffenso Hackers Academy & Development. All
+                    rights reserved.</div>
+            </div>
+            <div class="footer-links">
+                <a href="index.html">Home</a>
+                <a href="term&con.html">Terms</a>
+                <a href="privacy.html">Privacy</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        /* timestamp */
+        function ts() {
+            const n = new Date(), p = n => String(n).padStart(2, '0');
+            document.getElementById('ts').textContent = `${n.getFullYear()}.${p(n.getMonth() + 1)}.${p(n.getDate())} ${p(n.getHours())}:${p(n.getMinutes())}:${p(n.getSeconds())}`;
+        }
+        ts(); setInterval(ts, 1000);
+
+        /* active sidebar link on scroll */
+        const sections = document.querySelectorAll('[id^="s"]');
+        const links = document.querySelectorAll('.sidebar-link');
+        const obs = new IntersectionObserver(entries => {
+            entries.forEach(e => {
+                if (e.isIntersecting) {
+                    links.forEach(l => l.classList.remove('active'));
+                    const match = [...links].find(l => l.getAttribute('href') === '#' + e.target.id);
+                    if (match) match.classList.add('active');
+                }
+            });
+        }, { threshold: .4 });
+        sections.forEach(s => obs.observe(s));
+    </script>
+</body>
+
+</html>
