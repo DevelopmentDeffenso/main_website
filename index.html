@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
   <meta name="theme-color" content="#030303" />
 
-  <title>DEFFENSO | Hacker Academy — Learn Ethical Hacking & Cybersecurity</title>
+  <title>DEFFENSO</title>
   <meta name="description"
     content="DEFFENSO is an elite hacker academy offering hands-on ethical hacking, penetration testing, and cybersecurity courses. Master offensive security and defend the digital world." />
   <meta name="keywords"
@@ -5112,7 +5112,7 @@
       PROGRAMS
     </button>
     <!-- Events in bottom nav -->
-    <button class="bottom-nav-events" id="bnav-events" onclick="navigate('events')">
+    <button class="bottom-nav-events" id="bnav-events" onclick="window.location.href='event.html'">
       <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24">
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
           d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
@@ -6118,6 +6118,10 @@
     let currentPage = 'home';
 
     function navigate(page) {
+      if (page === 'events') {
+        window.location.href = 'event.html';
+        return;
+      }
       window.scrollTo({ top: 0, behavior: 'instant' });
       currentPage = page;
       window.location.hash = page === 'home' ? '' : page;
