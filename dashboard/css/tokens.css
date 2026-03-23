@@ -1,0 +1,89 @@
+/* ═══════════════════════════════════════════════════════
+   DEFFENSO ADMIN DASHBOARD — DESIGN TOKENS & RESET
+   Mirrors index.html design system exactly
+═══════════════════════════════════════════════════════ */
+
+/* --- Google Fonts --- */
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Satoshi:wght@300;400;500;700;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@300;400;500;700&display=swap');
+
+:root {
+  /* Colours — match index.html exactly */
+  --void:       #030303;
+  --void-1:     #0A0A0A;
+  --void-2:     #111111;
+  --void-3:     #1A1A1A;
+  --cream:      #E2D9C8;
+  --cream-2:    #A89E8D;
+  --cream-3:    #5A5249;
+  --blue:       #007BFF;
+  --blue-hi:    #3DA5FF;
+  --blue-dim:   rgba(0,123,255,.12);
+  --green:      #00FF41;
+  --red:        #E24B4A;
+  --amber:      #EF9F27;
+  --wire:       #1E1E1E;
+  --wire-2:     #2A2A2A;
+
+  /* Typography */
+  --font-d: 'Bebas Neue', sans-serif;
+  --font-body: 'Satoshi', 'IBM Plex Mono', sans-serif;
+  --font-m: 'IBM Plex Mono', monospace;
+
+  /* Spacing */
+  --sidebar-w: 260px;
+  --sidebar-collapsed: 68px;
+  --topbar-h: 56px;
+  --px: 24px;
+  --radius: 4px;
+  --safe-bottom: env(safe-area-inset-bottom, 0px);
+}
+
+/* ═══════════════════════════════════════════════════════
+   RESET
+═══════════════════════════════════════════════════════ */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+body {
+  background: var(--void);
+  color: var(--cream);
+  font-family: var(--font-body);
+  font-size: 14px;
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+a { text-decoration: none; color: inherit; }
+button { border: none; background: none; font-family: inherit; color: inherit; cursor: pointer; }
+img { max-width: 100%; display: block; }
+ul { list-style: none; }
+input, select, textarea {
+  font-family: var(--font-body);
+  font-size: 13px;
+  color: var(--cream);
+  background: var(--void-2);
+  border: 1px solid var(--wire-2);
+  border-radius: var(--radius);
+  padding: 10px 14px;
+  outline: none;
+  transition: border-color .18s;
+}
+input:focus, select:focus, textarea:focus { border-color: var(--blue); }
+* { -webkit-tap-highlight-color: transparent; }
+::-webkit-scrollbar { width: 4px; height: 4px; }
+::-webkit-scrollbar-track { background: var(--void); }
+::-webkit-scrollbar-thumb { background: var(--blue); border-radius: 2px; }
+
+/* ═══════════════════════════════════════════════════════
+   KEYFRAMES
+═══════════════════════════════════════════════════════ */
+@keyframes pulseDot { 0%,100%{opacity:1} 50%{opacity:.3} }
+@keyframes fadeUp { from{opacity:0;transform:translateY(18px)} to{opacity:1;transform:translateY(0)} }
+@keyframes slideIn { from{opacity:0;transform:translateX(-12px)} to{opacity:1;transform:translateX(0)} }
+@keyframes shimmer {
+  0%{background-position:-200% 0}
+  100%{background-position:200% 0}
+}
+@keyframes modalIn { from{opacity:0;transform:scale(.96)} to{opacity:1;transform:scale(1)} }
+@keyframes spin { to{transform:rotate(360deg)} }
+@keyframes countUp { from{opacity:0;transform:translateY(8px)} to{opacity:1;transform:translateY(0)} }
