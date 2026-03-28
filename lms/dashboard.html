@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>DEFFENSO LMS — DASHBOARD</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=IBM+Plex+Mono:wght@300;400;500;700&display=swap" rel="stylesheet"/>
+<style>
+:root{
+  --void:#030303;--void-1:#0A0A0A;--void-2:#111111;--void-3:#1A1A1A;
+  --cream:#E2D9C8;--cream-2:#A89E8D;--cream-3:#5A5249;
+  --blue:#007BFF;--blue-hi:#3DA5FF;--blue-dim:rgba(0,123,255,0.12);
+  --green:#00FF41;--wire:#1E1E1E;--wire-2:#2A2A2A;
+  --font-d:'Bebas Neue',sans-serif;--font-m:'IBM Plex Mono',monospace;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+body{background:var(--void);color:var(--cream);font-family:var(--font-m);font-size:14px;line-height:1.55;-webkit-font-smoothing:antialiased;min-height:100vh;}
+a{text-decoration:none;color:inherit;}
+button{border:none;background:none;font-family:inherit;color:inherit;cursor:pointer;}
+::-webkit-scrollbar{width:2px;}
+::-webkit-scrollbar-track{background:var(--void);}
+::-webkit-scrollbar-thumb{background:var(--blue);}
+
+/* ── NAVBAR ── */
+.navbar-wrapper {
+  position: sticky; top: 0; z-index: 100;
+  border-bottom: 1px solid var(--wire); background: rgba(3, 3, 3, 0.95); backdrop-filter: blur(10px);
+}
+.navbar {
+  display: flex; justify-content: space-between; align-items: stretch; height: 60px;
+  max-width: 1440px; margin: 0 auto;
+}
+.nav-logo {
+  display: flex; align-items: center; padding: 0 24px; gap: 12px;
+  border-right: 1px solid var(--wire); font-family: var(--font-d); font-size: 24px;
+  letter-spacing: .06em; cursor: pointer; transition: background .2s;
+}
+.nav-logo:hover { background: rgba(255,255,255,0.03); }
+.nav-logo span { color: var(--blue); }
+.nav-center {
+  flex: 1; display: flex; align-items: center; padding: 0 24px; gap: 10px;
+  font-size: 9px; font-weight: 700; letter-spacing: .18em; text-transform: uppercase; color: var(--cream-3);
+}
+.nav-center::before { content: '//'; color: var(--blue); }
+.nav-right { display: flex; align-items: stretch; }
+.nav-user {
+  display: flex; align-items: center; gap: 10px; padding: 0 20px;
+  border-left: 1px solid var(--wire); font-size: 9px; font-weight: 500;
+  letter-spacing: .14em; text-transform: uppercase; color: var(--cream-3);
+}
+.nav-user-dot {
+  width: 6px; height: 6px; background: var(--green); border-radius: 50%;
+  box-shadow: 0 0 6px var(--green); animation: pulse 1.6s infinite;
+}
+@keyframes pulse { 0%,100%{opacity:1;box-shadow:0 0 6px var(--green)} 50%{opacity:.3;box-shadow:none} }
+.btn-logout {
+  display: flex; align-items: center; gap: 10px; padding: 0 24px;
+  font-size: 9px; font-weight: 700; letter-spacing: .22em; text-transform: uppercase;
+  color: var(--blue); border-left: 1px solid var(--wire); transition: all .2s;
+  background: none; cursor: pointer;
+}
+.btn-logout:hover { background: var(--blue-dim); color: var(--blue-hi); }
+
+/* ── LAYOUT ── */
+.layout{display:grid;grid-template-columns:240px 1fr;min-height:calc(100vh - 52px);}
+@media(max-width:768px){.layout{grid-template-columns:1fr;}}
+
+/* ── SIDEBAR ── */
+.sidebar{background:var(--void-1);border-right:1px solid var(--wire);padding:0;}
+.sidebar-section{padding:20px 16px 8px;}
+.sidebar-label{font-size:8px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--cream-3);margin-bottom:12px;display:flex;align-items:center;gap:8px;}
+.sidebar-label::before{content:'[';opacity:.6;}
+.sidebar-label::after{content:']';opacity:.6;}
+.sidebar-item{display:flex;align-items:center;gap:10px;padding:10px 12px;font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--cream-3);border-radius:0;transition:all .18s;width:100%;border:none;background:none;cursor:pointer;text-align:left;}
+.sidebar-item:hover,.sidebar-item.active{color:var(--cream);background:rgba(0,123,255,.08);border-left:2px solid var(--blue);}
+.sidebar-item svg{flex-shrink:0;opacity:.6;}
+.sidebar-item:hover svg,.sidebar-item.active svg{opacity:1;}
+.sidebar-divider{height:1px;background:var(--wire);margin:8px 0;}
+
+/* Course list in sidebar */
+.sidebar-course{display:flex;flex-direction:column;}
+.sidebar-course-item{display:flex;align-items:center;gap:8px;padding:8px 12px;font-size:9px;letter-spacing:.1em;color:var(--cream-3);cursor:pointer;transition:all .18s;border-left:2px solid transparent;}
+.sidebar-course-item:hover{color:var(--cream);border-left-color:var(--wire-2);}
+.sidebar-course-item.active{color:var(--blue);border-left-color:var(--blue);background:rgba(0,123,255,.05);}
+.sidebar-course-progress{font-size:8px;margin-left:auto;color:var(--blue);}
+
+/* ── MAIN ── */
+.main{padding:0;}
+
+/* Section header bar */
+.section-hdr{display:flex;align-items:center;height:40px;gap:10px;padding:0 24px;background:var(--void-1);border-bottom:1px solid var(--wire);}
+.shdr-id{font-size:9px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--blue);padding-right:10px;border-right:1px solid var(--wire);}
+.shdr-title{font-size:8.5px;font-weight:500;letter-spacing:.2em;text-transform:uppercase;color:var(--cream-3);}
+.shdr-right{margin-left:auto;font-size:8.5px;letter-spacing:.12em;color:var(--cream-3);}
+
+/* Welcome strip */
+.welcome-strip{padding:28px 28px 24px;border-bottom:1px solid var(--wire);background:var(--void-1);}
+.welcome-eyebrow{font-size:9px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--blue);margin-bottom:6px;}
+.welcome-h{font-family:var(--font-d);font-size:clamp(32px,5vw,52px);line-height:.92;letter-spacing:.02em;margin-bottom:10px;}
+.welcome-h span{color:var(--blue);}
+.welcome-sub{font-size:12px;color:var(--cream-3);}
+
+/* Stats row */
+.stats-row{display:grid;grid-template-columns:repeat(3,1fr);border-bottom:1px solid var(--wire);}
+.stat-box{padding:20px 24px;border-right:1px solid var(--wire);display:flex;flex-direction:column;gap:4px;}
+.stat-box:last-child{border-right:none;}
+.stat-box-num{font-family:var(--font-d);font-size:40px;color:var(--blue);line-height:1;}
+.stat-box-label{font-size:8.5px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--cream-3);}
+
+/* Course grid */
+.course-grid{padding:24px;display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:1px;background:var(--wire);}
+.course-card{background:var(--void);padding:24px;display:flex;flex-direction:column;gap:0;cursor:pointer;transition:background .18s;position:relative;overflow:hidden;}
+.course-card:hover{background:var(--void-1);}
+.course-card::after{content:'';position:absolute;bottom:0;left:0;right:0;height:2px;background:var(--blue);transform:scaleX(0);transform-origin:left;transition:transform .3s;}
+.course-card:hover::after{transform:scaleX(1);}
+.course-card-num{font-size:9px;font-weight:700;letter-spacing:.2em;color:var(--cream-3);margin-bottom:12px;}
+.course-card-num span{color:var(--blue);}
+.course-card-title{font-family:var(--font-d);font-size:28px;line-height:.95;letter-spacing:.02em;color:var(--cream);margin-bottom:8px;}
+.course-card-desc{font-size:11px;color:var(--cream-3);line-height:1.65;margin-bottom:16px;flex:1;}
+.course-progress-wrap{margin-bottom:14px;}
+.course-progress-label{display:flex;justify-content:space-between;font-size:8.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--cream-3);margin-bottom:6px;}
+.course-progress-bar{height:2px;background:var(--wire-2);overflow:hidden;}
+.course-progress-fill{height:100%;background:var(--blue);transition:width .6s ease;}
+.course-card-videos{display:flex;flex-direction:column;gap:0;border-top:1px solid var(--wire);margin-top:4px;}
+.video-row{display:flex;align-items:center;gap:10px;padding:9px 0;border-bottom:1px solid rgba(30,30,30,.5);font-size:10px;color:var(--cream-3);cursor:pointer;transition:color .15s;}
+.video-row:last-child{border-bottom:none;}
+.video-row:hover{color:var(--cream);}
+.video-row.locked{cursor:not-allowed;opacity:.4;}
+.video-row.locked:hover{color:var(--cream-3);}
+.video-row.completed .vi-status{color:var(--green);}
+.video-row.current .vi-num{color:var(--blue);}
+.vi-num{font-size:8.5px;font-weight:700;color:var(--cream-3);flex-shrink:0;width:20px;}
+.vi-title{flex:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.vi-status{flex-shrink:0;font-size:10px;}
+
+/* Empty state */
+.empty-state{padding:80px 24px;text-align:center;display:flex;flex-direction:column;align-items:center;gap:12px;}
+.empty-state-icon{width:48px;height:48px;border:1px solid var(--wire-2);display:flex;align-items:center;justify-content:center;color:var(--cream-3);}
+.empty-state-title{font-family:var(--font-d);font-size:28px;letter-spacing:.02em;color:var(--cream-3);}
+.empty-state-sub{font-size:12px;color:var(--cream-3);max-width:280px;line-height:1.65;}
+
+/* No courses assigned */
+.no-courses{padding:60px 24px;text-align:center;}
+</style>
+</head>
+<body>
+
+<!-- Auth guard -->
+<script>
+const sess=sessionStorage.getItem('dflms_session');
+if(!sess){window.location.href='index.html';}
+const user=JSON.parse(sess||'{}');
+if(user.role==='admin'){window.location.href='admin.html';}
+</script>
+
+<!-- Navbar -->
+<div class="navbar-wrapper">
+  <nav class="navbar">
+    <div class="nav-logo" onclick="window.location.href='../index.html'">DEFFENSO<span>·LMS</span></div>
+    <div class="nav-center">STUDENT PORTAL</div>
+    <div class="nav-right">
+      <div class="nav-user"><div class="nav-user-dot"></div><span id="nav-name">AGENT</span></div>
+      <button class="btn-logout" onclick="logout()">
+        <svg width="14" height="14" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"/></svg>
+        LOGOUT
+      </button>
+    </div>
+  </nav>
+</div>
+
+<div class="layout">
+  <!-- Sidebar -->
+  <aside class="sidebar">
+    <div class="sidebar-section">
+      <div class="sidebar-label">Navigation</div>
+      <button class="sidebar-item active" onclick="showView('courses')">
+        <svg width="14" height="14" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/></svg>
+        My Courses
+      </button>
+      <button class="sidebar-item" onclick="showView('progress')">
+        <svg width="14" height="14" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/></svg>
+        Progress
+      </button>
+    </div>
+    <div class="sidebar-divider"></div>
+    <div class="sidebar-section">
+      <div class="sidebar-label">Courses</div>
+      <div class="sidebar-course" id="sidebar-courses"></div>
+    </div>
+  </aside>
+
+  <!-- Main -->
+  <main class="main" id="main-content"></main>
+</div>
+
+<script>
+/* ── Helpers ── */
+function getUsers(){return JSON.parse(localStorage.getItem('dflms_users')||'[]');}
+function getCourses(){return JSON.parse(localStorage.getItem('dflms_courses')||'[]');}
+function getProgress(){return JSON.parse(localStorage.getItem('dflms_progress')||'{}');}
+function saveProgress(p){localStorage.setItem('dflms_progress',JSON.stringify(p));}
+function logout(){sessionStorage.removeItem('dflms_session');window.location.href='index.html';}
+
+/* ── Per-user progress key ── */
+function userKey(videoId){return `${user.id}_${videoId}`;}
+
+function isWatched(videoId){
+  const p=getProgress();
+  return !!(p[userKey(videoId)]?.watched);
+}
+function isQuizPassed(videoId){
+  const p=getProgress();
+  return !!(p[userKey(videoId)]?.quizPassed);
+}
+
+/* ── Compute if video is unlocked ── */
+function isUnlocked(course,videoIndex){
+  if(videoIndex===0)return true;
+  const prevVideo=course.videos[videoIndex-1];
+  if(!prevVideo.quiz||!prevVideo.quiz.length)return isWatched(prevVideo.id);
+  return isQuizPassed(prevVideo.id);
+}
+
+/* ── Progress for a course ── */
+function courseProgress(course){
+  if(!course.videos||!course.videos.length)return {done:0,total:0,pct:0};
+  const done=course.videos.filter(v=>isQuizPassed(v.id)).length;
+  return {done,total:course.videos.length,pct:Math.round((done/course.videos.length)*100)};
+}
+
+/* ── Render sidebar course list ── */
+function renderSidebar(){
+  const courses=getCourses();
+  const el=document.getElementById('sidebar-courses');
+  if(!courses.length){el.innerHTML='<div style="font-size:9px;color:var(--cream-3);padding:8px 12px;">No courses yet</div>';return;}
+  el.innerHTML=courses.map(c=>{
+    const {pct}=courseProgress(c);
+    return `<div class="sidebar-course-item" onclick="scrollToCourse('${c.id}')">
+      <span style="color:var(--blue);font-size:8px;">//</span>
+      <span style="flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">${c.title}</span>
+      <span class="sidebar-course-progress">${pct}%</span>
+    </div>`;
+  }).join('');
+}
+
+/* ── Overall stats ── */
+function renderStats(){
+  const courses=getCourses();
+  let totalVideos=0,passedQuizzes=0,totalQuizzes=0;
+  courses.forEach(c=>{
+    (c.videos||[]).forEach(v=>{
+      totalVideos++;
+      if(v.quiz&&v.quiz.length)totalQuizzes++;
+      if(isQuizPassed(v.id))passedQuizzes++;
+    });
+  });
+  const watchedVideos=courses.reduce((acc,c)=>{
+    return acc+(c.videos||[]).filter(v=>isWatched(v.id)).length;
+  },0);
+  return {courses:courses.length,watchedVideos,passedQuizzes,totalVideos,totalQuizzes};
+}
+
+/* ── View: Courses ── */
+function showView(view){
+  document.querySelectorAll('.sidebar-item').forEach(b=>b.classList.remove('active'));
+  document.querySelectorAll('.sidebar-item')[view==='courses'?0:1]?.classList.add('active');
+
+  const courses=getCourses();
+  const stats=renderStats();
+  const main=document.getElementById('main-content');
+
+  if(view==='courses'){
+    if(!courses.length){
+      main.innerHTML=`
+        <div class="section-hdr"><span class="shdr-id">[DSH]</span><span class="shdr-title">MY COURSES</span><span class="shdr-right">STUDENT PORTAL</span></div>
+        <div class="welcome-strip">
+          <div class="welcome-eyebrow">// WELCOME BACK</div>
+          <h1 class="welcome-h">READY TO<br/><span>TRAIN.</span></h1>
+          <p class="welcome-sub">Your courses will appear here once assigned.</p>
+        </div>
+        <div class="empty-state">
+          <div class="empty-state-icon"><svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/></svg></div>
+          <div class="empty-state-title">NO COURSES YET</div>
+          <p class="empty-state-sub">Courses will be assigned by your admin. Check back soon.</p>
+        </div>`;
+      return;
+    }
+
+    main.innerHTML=`
+      <div class="section-hdr"><span class="shdr-id">[DSH]</span><span class="shdr-title">MY COURSES</span><span class="shdr-right">${courses.length} ACTIVE TRACKS</span></div>
+      <div class="welcome-strip">
+        <div class="welcome-eyebrow">// WELCOME BACK, ${user.name.toUpperCase()}</div>
+        <h1 class="welcome-h">READY TO<br/><span>TRAIN.</span></h1>
+        <p class="welcome-sub">Complete each video and pass the quiz to unlock the next lesson.</p>
+      </div>
+      <div class="stats-row">
+        <div class="stat-box"><div class="stat-box-num">${stats.courses}</div><div class="stat-box-label">Courses</div></div>
+        <div class="stat-box"><div class="stat-box-num">${stats.watchedVideos}</div><div class="stat-box-label">Videos watched</div></div>
+        <div class="stat-box"><div class="stat-box-num">${stats.passedQuizzes}</div><div class="stat-box-label">Quizzes passed</div></div>
+      </div>
+      <div style="padding:24px 24px 0;"><div style="font-size:8.5px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--blue);margin-bottom:20px;">// ENROLLED COURSES</div></div>
+      <div id="course-list" style="padding:0 24px 40px;display:flex;flex-direction:column;gap:24px;"></div>`;
+
+    renderCourseList(courses);
+  } else {
+    // Progress view
+    main.innerHTML=`
+      <div class="section-hdr"><span class="shdr-id">[PRG]</span><span class="shdr-title">MY PROGRESS</span><span class="shdr-right">LEARNING TRACKER</span></div>
+      <div class="welcome-strip">
+        <div class="welcome-eyebrow">// MISSION STATUS</div>
+        <h1 class="welcome-h">PROGRESS<br/><span>REPORT.</span></h1>
+      </div>
+      <div style="padding:24px;">
+        ${courses.map(c=>{
+          const {done,total,pct}=courseProgress(c);
+          return `<div style="margin-bottom:28px;padding:20px;border:1px solid var(--wire);border-left:2px solid var(--blue);">
+            <div style="font-size:9px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--blue);margin-bottom:6px;">${c.title}</div>
+            <div style="display:flex;justify-content:space-between;font-size:10px;color:var(--cream-3);margin-bottom:8px;">
+              <span>${done} / ${total} lessons complete</span><span>${pct}%</span>
+            </div>
+            <div style="height:3px;background:var(--wire-2);overflow:hidden;"><div style="height:100%;background:var(--blue);width:${pct}%;transition:width .8s;"></div></div>
+            ${(c.videos||[]).map((v,i)=>{
+              const watched=isWatched(v.id);
+              const passed=isQuizPassed(v.id);
+              return `<div style="display:flex;align-items:center;gap:10px;padding:8px 0;border-bottom:1px solid rgba(30,30,30,.6);font-size:10px;color:${passed?'var(--green)':watched?'var(--blue)':'var(--cream-3)'};">
+                <span style="font-size:8px;font-weight:700;flex-shrink:0;">${String(i+1).padStart(2,'0')}</span>
+                <span style="flex:1;">${v.title}</span>
+                <span style="font-size:9px;">${passed?'✓ PASSED':watched?'● WATCHED':'○ PENDING'}</span>
+              </div>`;
+            }).join('')}
+          </div>`;
+        }).join('')}
+      </div>`;
+  }
+}
+
+/* ── Render course cards ── */
+function renderCourseList(courses){
+  const el=document.getElementById('course-list');
+  if(!el)return;
+  el.innerHTML=courses.map(course=>{
+    const {done,total,pct}=courseProgress(course);
+    const videos=course.videos||[];
+    const videoRows=videos.map((v,i)=>{
+      const unlocked=isUnlocked(course,i);
+      const passed=isQuizPassed(v.id);
+      const watched=isWatched(v.id);
+      let cls='video-row';
+      if(!unlocked)cls+=' locked';
+      if(passed)cls+=' completed';
+      const onclick=unlocked?`openVideo('${course.id}','${v.id}')`:'';
+      return `<div class="${cls}" ${onclick?`onclick="${onclick}"`:''}
+        title="${unlocked?v.title:'Complete previous quiz to unlock'}">
+        <span class="vi-num">${String(i+1).padStart(2,'0')}</span>
+        <span class="vi-title">${v.title}</span>
+        <span class="vi-status">${passed?'✓':watched?'●':unlocked?'▶':'🔒'}</span>
+      </div>`;
+    }).join('');
+
+    return `<div id="course-${course.id}" style="border:1px solid var(--wire);border-top:2px solid var(--blue);">
+      <div style="padding:20px 20px 14px;border-bottom:1px solid var(--wire);background:var(--void-1);">
+        <div style="font-size:9px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--blue);margin-bottom:6px;">[CRS] ${course.id.slice(-4)}</div>
+        <div style="font-family:var(--font-d);font-size:28px;line-height:.95;letter-spacing:.02em;color:var(--cream);margin-bottom:6px;">${course.title}</div>
+        <div style="font-size:11px;color:var(--cream-3);margin-bottom:14px;">${course.description||''}</div>
+        <div style="display:flex;justify-content:space-between;font-size:8.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--cream-3);margin-bottom:6px;">
+          <span>${done}/${total} complete</span><span>${pct}%</span>
+        </div>
+        <div style="height:2px;background:var(--wire-2);"><div style="height:100%;background:var(--blue);width:${pct}%;"></div></div>
+      </div>
+      <div style="padding:0 20px;">${videoRows||'<div style="padding:16px 0;font-size:10px;color:var(--cream-3);">No videos added yet.</div>'}</div>
+    </div>`;
+  }).join('');
+}
+
+function scrollToCourse(id){
+  showView('courses');
+  setTimeout(()=>{
+    const el=document.getElementById('course-'+id);
+    if(el)el.scrollIntoView({behavior:'smooth',block:'start'});
+  },100);
+}
+
+function openVideo(courseId,videoId){
+  // Store context and navigate to player
+  sessionStorage.setItem('dflms_player',JSON.stringify({courseId,videoId}));
+  window.location.href='player.html';
+}
+
+/* ── Init ── */
+document.getElementById('nav-name').textContent=user.name.toUpperCase();
+renderSidebar();
+showView('courses');
+</script>
+</body>
+</html>

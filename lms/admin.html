@@ -1,0 +1,575 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>DEFFENSO LMS — ADMIN PANEL</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=IBM+Plex+Mono:wght@300;400;500;700&display=swap" rel="stylesheet"/>
+<style>
+:root{
+  --void:#030303;--void-1:#0A0A0A;--void-2:#111111;--void-3:#1A1A1A;
+  --cream:#E2D9C8;--cream-2:#A89E8D;--cream-3:#5A5249;
+  --blue:#007BFF;--blue-hi:#3DA5FF;--blue-dim:rgba(0,123,255,0.12);
+  --green:#00FF41;--red:#FF4444;--amber:#FF8C00;
+  --wire:#1E1E1E;--wire-2:#2A2A2A;
+  --font-d:'Bebas Neue',sans-serif;--font-m:'IBM Plex Mono',monospace;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+body{background:var(--void);color:var(--cream);font-family:var(--font-m);font-size:14px;line-height:1.55;-webkit-font-smoothing:antialiased;min-height:100vh;}
+button{border:none;background:none;font-family:inherit;color:inherit;cursor:pointer;}
+input,select,textarea{font-family:var(--font-m);}
+::-webkit-scrollbar{width:2px;}::-webkit-scrollbar-track{background:var(--void);}::-webkit-scrollbar-thumb{background:var(--blue);}
+
+/* ── NAVBAR ── */
+.navbar-wrapper {
+  position: sticky; top: 0; z-index: 100;
+  border-bottom: 1px solid var(--wire); background: rgba(3, 3, 3, 0.95); backdrop-filter: blur(10px);
+}
+.navbar {
+  display: flex; justify-content: space-between; align-items: stretch; height: 60px;
+  max-width: 1440px; margin: 0 auto;
+}
+.nav-logo {
+  display: flex; align-items: center; padding: 0 24px; gap: 12px;
+  border-right: 1px solid var(--wire); font-family: var(--font-d); font-size: 24px;
+  letter-spacing: .06em; cursor: pointer; transition: background .2s;
+}
+.nav-logo:hover { background: rgba(255,255,255,0.03); }
+.nav-logo span { color: var(--amber); }
+.nav-badge {
+  display: flex; align-items: center; padding: 0 16px; border-right: 1px solid var(--wire);
+  font-size: 8px; font-weight: 700; letter-spacing: .2em; text-transform: uppercase;
+  background: rgba(255, 140, 0, 0.08); color: var(--amber);
+}
+.nav-center {
+  flex: 1; display: flex; align-items: center; padding: 0 24px; gap: 10px;
+  font-size: 9px; font-weight: 700; letter-spacing: .18em; text-transform: uppercase; color: var(--cream-3);
+}
+.nav-center::before { content: '//'; color: var(--amber); }
+.nav-right { display: flex; align-items: stretch; }
+.btn-logout {
+  display: flex; align-items: center; gap: 10px; padding: 0 24px;
+  font-size: 9px; font-weight: 700; letter-spacing: .22em; text-transform: uppercase;
+  color: var(--amber); border-left: 1px solid var(--wire); transition: all .2s;
+  background: none; cursor: pointer;
+}
+.btn-logout:hover { background: rgba(255,140,0,0.08); color: #fff; }
+
+/* Layout */
+.layout{display:grid;grid-template-columns:220px 1fr;min-height:calc(100vh - 52px);}
+
+/* Sidebar */
+.sidebar{background:var(--void-1);border-right:1px solid var(--wire);padding-top:8px;}
+.sidebar-section{padding:16px 16px 8px;}
+.sidebar-label{font-size:8px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--cream-3);margin-bottom:10px;display:flex;align-items:center;gap:6px;}
+.sidebar-label::before{content:'[';opacity:.6;}
+.sidebar-label::after{content:']';opacity:.6;}
+.nav-btn{display:flex;align-items:center;gap:10px;padding:10px 12px;font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:var(--cream-3);transition:all .18s;width:100%;text-align:left;border-left:2px solid transparent;}
+.nav-btn:hover{color:var(--cream);background:rgba(255,255,255,.03);}
+.nav-btn.active{color:var(--cream);background:rgba(255,140,0,.06);border-left-color:var(--amber);}
+.nav-btn svg{flex-shrink:0;opacity:.6;}
+.nav-btn.active svg,.nav-btn:hover svg{opacity:1;}
+.sidebar-divider{height:1px;background:var(--wire);margin:8px 0;}
+
+/* Main */
+.main{overflow-y:auto;}
+.section-hdr{display:flex;align-items:center;height:40px;gap:10px;padding:0 24px;background:var(--void-1);border-bottom:1px solid var(--wire);position:sticky;top:0;z-index:10;}
+.shdr-id{font-size:9px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--amber);padding-right:10px;border-right:1px solid var(--wire);}
+.shdr-title{font-size:8.5px;font-weight:500;letter-spacing:.2em;text-transform:uppercase;color:var(--cream-3);}
+.shdr-right{margin-left:auto;font-size:8.5px;letter-spacing:.12em;color:var(--cream-3);}
+.page-content{padding:24px;}
+
+/* Cards */
+.card{border:1px solid var(--wire);border-top:2px solid var(--amber);background:var(--void-1);margin-bottom:20px;}
+.card-head{padding:16px 20px;border-bottom:1px solid var(--wire);display:flex;align-items:center;justify-content:space-between;}
+.card-head-title{font-family:var(--font-d);font-size:22px;letter-spacing:.02em;line-height:1;}
+.card-body{padding:20px;}
+
+/* Forms */
+.field{margin-bottom:18px;}
+.field-label{display:block;font-size:8.5px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--cream-3);margin-bottom:8px;}
+.field-input,.field-select,.field-textarea{width:100%;background:transparent;border:none;border-bottom:1px solid var(--wire-2);padding:10px 0;color:var(--cream);font-size:13px;outline:none;min-height:44px;transition:border-color .2s;}
+.field-input:focus,.field-select:focus,.field-textarea:focus{border-bottom-color:var(--amber);}
+.field-input::placeholder,.field-textarea::placeholder{color:var(--cream-3);}
+.field-select{-webkit-appearance:none;appearance:none;}
+.field-select option{background:var(--void-1);color:var(--cream);}
+.field-textarea{resize:vertical;min-height:80px;}
+.field-row{display:grid;grid-template-columns:1fr 1fr;gap:20px;}
+.field-hint{font-size:9px;color:var(--cream-3);margin-top:5px;letter-spacing:.1em;}
+
+/* Buttons */
+.btn-primary{display:inline-flex;align-items:center;gap:8px;padding:0 20px;min-height:44px;background:var(--amber);color:#000;font-size:9px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;transition:filter .18s;}
+.btn-primary:hover{filter:brightness(1.15);}
+.btn-secondary{display:inline-flex;align-items:center;gap:8px;padding:0 20px;min-height:44px;border:1px solid var(--wire-2);color:var(--cream-2);font-size:9px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;transition:all .18s;}
+.btn-secondary:hover{border-color:var(--amber);color:var(--cream);}
+.btn-danger{display:inline-flex;align-items:center;gap:8px;padding:0 14px;min-height:36px;border:1px solid rgba(255,68,68,.3);color:var(--red);font-size:8.5px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;transition:all .18s;}
+.btn-danger:hover{background:rgba(255,68,68,.08);}
+.btn-small{display:inline-flex;align-items:center;gap:6px;padding:0 12px;min-height:32px;border:1px solid var(--wire-2);color:var(--cream-3);font-size:8px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;transition:all .18s;}
+.btn-small:hover{border-color:var(--blue);color:var(--cream);}
+.btn-small.blue{border-color:rgba(0,123,255,.3);color:var(--blue);}
+.btn-small.blue:hover{background:var(--blue-dim);}
+
+/* Stats */
+.stats-row{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--wire);border-bottom:1px solid var(--wire);}
+.stat-box{padding:20px 24px;background:var(--void-1);}
+.stat-box-num{font-family:var(--font-d);font-size:44px;color:var(--amber);line-height:1;margin-bottom:4px;}
+.stat-box-label{font-size:8.5px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--cream-3);}
+
+/* Table */
+.data-table{width:100%;border-collapse:collapse;}
+.data-table th{padding:10px 14px;text-align:left;font-size:8.5px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--cream-3);border-bottom:1px solid var(--wire);background:var(--void-2);}
+.data-table td{padding:12px 14px;font-size:11px;color:var(--cream-2);border-bottom:1px solid rgba(30,30,30,.5);vertical-align:top;}
+.data-table tr:hover td{background:rgba(255,255,255,.015);}
+.badge{display:inline-block;padding:2px 8px;font-size:8px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;border:1px solid;}
+.badge.admin{color:var(--amber);border-color:rgba(255,140,0,.3);}
+.badge.student{color:var(--blue);border-color:rgba(0,123,255,.3);}
+
+/* Course list */
+.course-item{border:1px solid var(--wire);margin-bottom:12px;background:var(--void);}
+.course-item-head{padding:14px 16px;border-bottom:1px solid var(--wire);display:flex;align-items:center;gap:12px;}
+.course-item-title{font-family:var(--font-d);font-size:22px;letter-spacing:.02em;flex:1;line-height:1;}
+.course-item-body{padding:14px 16px;}
+
+/* Video list */
+.video-item{display:flex;align-items:center;gap:10px;padding:10px 12px;border:1px solid var(--wire);margin-bottom:6px;background:var(--void-1);cursor:pointer;transition:background .15s;}
+.video-item:hover{background:var(--void-2);}
+.vi-num{font-family:var(--font-d);font-size:22px;color:var(--wire-2);flex-shrink:0;}
+.vi-info{flex:1;min-width:0;}
+.vi-title{font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--cream-2);margin-bottom:3px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.vi-meta{font-size:9px;color:var(--cream-3);}
+.vi-quiz-badge{font-size:8px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;padding:2px 6px;border:1px solid;}
+
+/* Quiz editor */
+.quiz-editor{margin-top:8px;padding:14px;border:1px solid var(--wire);background:var(--void-2);}
+.quiz-q-item{padding:14px;border:1px solid var(--wire);margin-bottom:10px;background:var(--void-1);}
+.quiz-q-head{display:flex;align-items:center;gap:10px;margin-bottom:10px;}
+.quiz-q-num{font-family:var(--font-d);font-size:22px;color:var(--blue);flex-shrink:0;}
+
+/* Modal */
+.modal-overlay{position:fixed;inset:0;z-index:300;background:rgba(0,0,0,.85);backdrop-filter:blur(6px);display:flex;align-items:center;justify-content:center;padding:20px;opacity:0;pointer-events:none;transition:opacity .25s;}
+.modal-overlay.open{opacity:1;pointer-events:all;}
+.modal{width:100%;max-width:700px;max-height:90vh;overflow-y:auto;border:1px solid var(--wire);border-top:2px solid var(--amber);background:var(--void-1);}
+.modal-header{padding:20px 24px;border-bottom:1px solid var(--wire);display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;background:var(--void-1);z-index:1;}
+.modal-title{font-family:var(--font-d);font-size:26px;letter-spacing:.02em;}
+.modal-body{padding:24px;}
+
+/* Toast */
+.toast{position:fixed;bottom:24px;right:24px;z-index:9999;padding:12px 20px;background:var(--void-1);border:1px solid var(--wire);border-left:3px solid var(--green);font-size:10px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--green);transform:translateY(20px);opacity:0;transition:all .3s;pointer-events:none;}
+.toast.show{transform:translateY(0);opacity:1;}
+.toast.error{border-left-color:var(--red);color:var(--red);}
+</style>
+</head>
+<body>
+
+<script>
+const sess=sessionStorage.getItem('dflms_session');
+if(!sess){window.location.href='index.html';}
+const user=JSON.parse(sess||'{}');
+if(user.role!=='admin'){window.location.href='dashboard.html';}
+</script>
+
+<!-- Navbar -->
+<div class="navbar-wrapper">
+  <nav class="navbar">
+    <div class="nav-logo" onclick="window.location.href='../index.html'">DEFFENSO<span>·LMS</span></div>
+    <div class="nav-badge">ADMIN</div>
+    <div class="nav-center">ADMIN CONTROL PANEL</div>
+    <div class="nav-right">
+      <button class="btn-logout" onclick="logout()">
+        <svg width="14" height="14" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"/></svg>
+        LOGOUT
+      </button>
+    </div>
+  </nav>
+</div>
+
+<div class="layout">
+  <!-- Sidebar -->
+  <aside class="sidebar">
+    <div class="sidebar-section">
+      <div class="sidebar-label">Control Panel</div>
+      <button class="nav-btn active" onclick="showView('overview')" id="nav-overview">
+        <svg width="14" height="14" fill="none" stroke="currentColor" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/><rect x="14" y="3" width="7" height="7" rx="1" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/><rect x="3" y="14" width="7" height="7" rx="1" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/><rect x="14" y="14" width="7" height="7" rx="1" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/></svg>
+        Overview
+      </button>
+      <button class="nav-btn" onclick="showView('courses')" id="nav-courses">
+        <svg width="14" height="14" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/></svg>
+        Courses
+      </button>
+      <button class="nav-btn" onclick="showView('students')" id="nav-students">
+        <svg width="14" height="14" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+        Students
+      </button>
+    </div>
+    <div class="sidebar-divider"></div>
+    <div class="sidebar-section">
+      <div class="sidebar-label">Quick Add</div>
+      <button class="nav-btn" onclick="openModal('course')">
+        <svg width="14" height="14" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg>
+        New Course
+      </button>
+      <button class="nav-btn" onclick="openModal('student')">
+        <svg width="14" height="14" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18 9v3m0 0v3m0-3h3m-3 0h-3m-2-5a4 4 0 11-8 0 4 4 0 018 0zM3 20a6 6 0 0112 0v1H3v-1z"/></svg>
+        New Student
+      </button>
+    </div>
+  </aside>
+
+  <!-- Main -->
+  <main class="main" id="main"></main>
+</div>
+
+<!-- Modal -->
+<div class="modal-overlay" id="modal-overlay" onclick="closeModalOutside(event)">
+  <div class="modal" id="modal">
+    <div class="modal-header">
+      <div class="modal-title" id="modal-title">MODAL</div>
+      <button onclick="closeModal()" style="color:var(--cream-3);font-size:18px;padding:4px 8px;">✕</button>
+    </div>
+    <div class="modal-body" id="modal-body"></div>
+  </div>
+</div>
+
+<!-- Toast -->
+<div class="toast" id="toast"></div>
+
+<script>
+/* ── Helpers ── */
+function getCourses(){return JSON.parse(localStorage.getItem('dflms_courses')||'[]');}
+function saveCourses(c){localStorage.setItem('dflms_courses',JSON.stringify(c));}
+function getUsers(){return JSON.parse(localStorage.getItem('dflms_users')||'[]');}
+function saveUsers(u){localStorage.setItem('dflms_users',JSON.stringify(u));}
+function getProgress(){return JSON.parse(localStorage.getItem('dflms_progress')||'{}');}
+function logout(){sessionStorage.removeItem('dflms_session');window.location.href='index.html';}
+function uid(){return Date.now().toString(36)+Math.random().toString(36).slice(2,6);}
+
+function toast(msg,isError=false){
+  const el=document.getElementById('toast');
+  el.textContent=msg;el.className='toast'+(isError?' error':'');
+  el.classList.add('show');
+  setTimeout(()=>el.classList.remove('show'),2800);
+}
+
+/* ── Modal ── */
+function openModal(type,data){
+  document.getElementById('modal-overlay').classList.add('open');
+  if(type==='course')renderCourseModal(data);
+  else if(type==='student')renderStudentModal(data);
+  else if(type==='video')renderVideoModal(data);
+  else if(type==='quiz')renderQuizModal(data);
+}
+function closeModal(){document.getElementById('modal-overlay').classList.remove('open');}
+function closeModalOutside(e){if(e.target===document.getElementById('modal-overlay'))closeModal();}
+
+/* ── Navigation ── */
+function showView(view){
+  ['overview','courses','students'].forEach(v=>{
+    document.getElementById('nav-'+v)?.classList.toggle('active',v===view);
+  });
+  const main=document.getElementById('main');
+  if(view==='overview')renderOverview(main);
+  else if(view==='courses')renderCourses(main);
+  else if(view==='students')renderStudents(main);
+}
+
+/* ── Overview ── */
+function renderOverview(main){
+  const courses=getCourses();
+  const users=getUsers().filter(u=>u.role==='student');
+  const progress=getProgress();
+  const totalVideos=courses.reduce((a,c)=>a+(c.videos||[]).length,0);
+  const totalQuizzes=courses.reduce((a,c)=>a+(c.videos||[]).filter(v=>v.quiz?.length).length,0);
+
+  main.innerHTML=`
+    <div class="section-hdr"><span class="shdr-id">[OVR]</span><span class="shdr-title">OVERVIEW</span><span class="shdr-right">ADMIN CONTROL PANEL</span></div>
+    <div class="stats-row">
+      <div class="stat-box"><div class="stat-box-num">${courses.length}</div><div class="stat-box-label">Courses</div></div>
+      <div class="stat-box"><div class="stat-box-num">${totalVideos}</div><div class="stat-box-label">Videos</div></div>
+      <div class="stat-box"><div class="stat-box-num">${totalQuizzes}</div><div class="stat-box-label">Quizzes</div></div>
+      <div class="stat-box"><div class="stat-box-num">${users.length}</div><div class="stat-box-label">Students</div></div>
+    </div>
+    <div class="page-content">
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;">
+        <div class="card">
+          <div class="card-head"><div class="card-head-title">QUICK ACTIONS</div></div>
+          <div class="card-body" style="display:flex;flex-direction:column;gap:10px;">
+            <button class="btn-primary" style="width:100%;justify-content:center;" onclick="openModal('course')">+ NEW COURSE</button>
+            <button class="btn-secondary" style="width:100%;justify-content:center;" onclick="openModal('student')">+ NEW STUDENT</button>
+            <button class="btn-secondary" style="width:100%;justify-content:center;" onclick="showView('courses')">MANAGE COURSES →</button>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-head"><div class="card-head-title">RECENT COURSES</div></div>
+          <div class="card-body">
+            ${courses.slice(-4).reverse().map(c=>`
+              <div style="display:flex;align-items:center;gap:10px;padding:8px 0;border-bottom:1px solid var(--wire);font-size:10px;">
+                <span style="color:var(--amber);font-size:8px;font-weight:700;">CRS</span>
+                <span style="flex:1;color:var(--cream-2);">${c.title}</span>
+                <span style="color:var(--cream-3);">${(c.videos||[]).length} videos</span>
+              </div>`).join('')||'<div style="font-size:10px;color:var(--cream-3);">No courses yet.</div>'}
+          </div>
+        </div>
+      </div>
+    </div>`;
+}
+
+/* ── Courses ── */
+function renderCourses(main){
+  const courses=getCourses();
+  main.innerHTML=`
+    <div class="section-hdr"><span class="shdr-id">[CRS]</span><span class="shdr-title">COURSES</span>
+      <button class="btn-small blue" style="margin-left:auto;" onclick="openModal('course')">+ NEW COURSE</button>
+    </div>
+    <div class="page-content">
+      <div id="course-list">
+        ${courses.length?courses.map(c=>renderCourseItem(c)).join(''):`<div style="padding:40px;text-align:center;color:var(--cream-3);font-size:12px;">No courses yet. Create your first course.</div>`}
+      </div>
+    </div>`;
+}
+
+function renderCourseItem(course){
+  const videos=course.videos||[];
+  return `<div class="course-item" id="course-item-${course.id}">
+    <div class="course-item-head">
+      <div class="course-item-title">${course.title}</div>
+      <button class="btn-small blue" onclick="openModal('video',{courseId:'${course.id}'})">+ ADD VIDEO</button>
+      <button class="btn-danger" onclick="deleteCourse('${course.id}')">DELETE</button>
+    </div>
+    <div class="course-item-body">
+      ${course.description?`<div style="font-size:11px;color:var(--cream-3);margin-bottom:14px;">${course.description}</div>`:''}
+      <div style="font-size:8.5px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--cream-3);margin-bottom:10px;">${videos.length} LESSONS</div>
+      ${videos.map((v,i)=>`
+        <div class="video-item">
+          <div class="vi-num">${String(i+1).padStart(2,'0')}</div>
+          <div class="vi-info">
+            <div class="vi-title">${v.title}</div>
+            <div class="vi-meta">${v.youtubeUrl?'YouTube linked':'No URL set'} · 
+              <span class="vi-quiz-badge" style="color:${v.quiz?.length?'var(--green)':'var(--cream-3)'};border-color:${v.quiz?.length?'rgba(0,255,65,.3)':'var(--wire-2)'}">${v.quiz?.length?v.quiz.length+' Qs':'NO QUIZ'}</span>
+            </div>
+          </div>
+          <button class="btn-small blue" onclick="openModal('quiz',{courseId:'${course.id}',videoId:'${v.id}'})">QUIZ EDITOR</button>
+          <button class="btn-small" onclick="openModal('video',{courseId:'${course.id}',videoId:'${v.id}'})">EDIT</button>
+          <button class="btn-danger" onclick="deleteVideo('${course.id}','${v.id}')">✕</button>
+        </div>`).join('')||`<div style="font-size:10px;color:var(--cream-3);padding:10px 0;">No videos yet — add your first video.</div>`}
+    </div>
+  </div>`;
+}
+
+/* ── Students ── */
+function renderStudents(main){
+  const users=getUsers();
+  const progress=getProgress();
+  const courses=getCourses();
+
+  function studentProgress(uid){
+    let passed=0,total=0;
+    courses.forEach(c=>(c.videos||[]).forEach(v=>{total++;if(progress[`${uid}_${v.id}`]?.quizPassed)passed++;}));
+    return{passed,total};
+  }
+
+  main.innerHTML=`
+    <div class="section-hdr"><span class="shdr-id">[STU]</span><span class="shdr-title">STUDENTS</span>
+      <button class="btn-small blue" style="margin-left:auto;" onclick="openModal('student')">+ NEW STUDENT</button>
+    </div>
+    <div class="page-content">
+      <div class="card">
+        <div class="card-body" style="padding:0;">
+          <table class="data-table">
+            <thead><tr><th>Name</th><th>Email</th><th>Role</th><th>Progress</th><th>Actions</th></tr></thead>
+            <tbody>
+              ${users.map(u=>{
+                const{passed,total}=studentProgress(u.id);
+                return `<tr>
+                  <td style="font-weight:500;color:var(--cream);">${u.name}</td>
+                  <td>${u.email}</td>
+                  <td><span class="badge ${u.role}">${u.role.toUpperCase()}</span></td>
+                  <td>
+                    ${u.role==='student'?`<div style="display:flex;align-items:center;gap:8px;"><div style="flex:1;height:2px;background:var(--wire-2);overflow:hidden;"><div style="height:100%;background:var(--blue);width:${total?Math.round(passed/total*100):0}%;"></div></div><span style="font-size:9px;color:var(--blue);">${passed}/${total}</span></div>`:'—'}
+                  </td>
+                  <td>
+                    ${u.role==='student'?`<button class="btn-danger" onclick="deleteStudent('${u.id}')">REMOVE</button>`:'—'}
+                  </td>
+                </tr>`;
+              }).join('')}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>`;
+}
+
+/* ── Modal: New Course ── */
+function renderCourseModal(data){
+  document.getElementById('modal-title').textContent='NEW COURSE';
+  document.getElementById('modal-body').innerHTML=`
+    <div class="field"><label class="field-label">Course Title</label><input class="field-input" id="mc-title" placeholder="e.g. Jr Ethical Hacking"/></div>
+    <div class="field"><label class="field-label">Description</label><textarea class="field-textarea" id="mc-desc" placeholder="Brief course description..."></textarea></div>
+    <button class="btn-primary" onclick="saveCourse()">CREATE COURSE →</button>`;
+}
+function saveCourse(){
+  const title=document.getElementById('mc-title').value.trim();
+  if(!title){toast('Course title is required.',true);return;}
+  const courses=getCourses();
+  courses.push({id:uid(),title,description:document.getElementById('mc-desc').value.trim(),videos:[],createdAt:Date.now()});
+  saveCourses(courses);
+  closeModal();toast('Course created.');showView('courses');
+}
+
+/* ── Modal: Add/Edit Video ── */
+function renderVideoModal(data){
+  const courses=getCourses();
+  const course=courses.find(c=>c.id===data.courseId);
+  const video=data.videoId?course?.videos.find(v=>v.id===data.videoId):null;
+  document.getElementById('modal-title').textContent=video?'EDIT VIDEO':'ADD VIDEO';
+  document.getElementById('modal-body').innerHTML=`
+    <input type="hidden" id="mv-courseId" value="${data.courseId}"/>
+    <input type="hidden" id="mv-videoId" value="${data.videoId||''}"/>
+    <div class="field"><label class="field-label">Video Title</label><input class="field-input" id="mv-title" placeholder="e.g. Module 01: Introduction to Networking" value="${video?.title||''}"/></div>
+    <div class="field">
+      <label class="field-label">YouTube URL</label>
+      <input class="field-input" id="mv-url" placeholder="https://www.youtube.com/watch?v=..." value="${video?.youtubeUrl||''}"/>
+      <div class="field-hint">// Paste full YouTube video URL — both watch?v= and youtu.be links work</div>
+    </div>
+    <div class="field"><label class="field-label">Pass Score (%)</label><input class="field-input" id="mv-pass" type="number" min="1" max="100" value="${video?.passScore||70}" placeholder="70"/></div>
+    <button class="btn-primary" onclick="saveVideo()">SAVE VIDEO →</button>`;
+}
+function saveVideo(){
+  const courseId=document.getElementById('mv-courseId').value;
+  const videoId=document.getElementById('mv-videoId').value;
+  const title=document.getElementById('mv-title').value.trim();
+  const youtubeUrl=document.getElementById('mv-url').value.trim();
+  const passScore=parseInt(document.getElementById('mv-pass').value)||70;
+  if(!title){toast('Video title is required.',true);return;}
+  const courses=getCourses();
+  const course=courses.find(c=>c.id===courseId);
+  if(!course){toast('Course not found.',true);return;}
+  if(videoId){
+    const v=course.videos.find(v=>v.id===videoId);
+    if(v){v.title=title;v.youtubeUrl=youtubeUrl;v.passScore=passScore;}
+  } else {
+    course.videos.push({id:uid(),title,youtubeUrl,passScore,quiz:[],createdAt:Date.now()});
+  }
+  saveCourses(courses);closeModal();toast('Video saved.');showView('courses');
+}
+
+/* ── Modal: Quiz Editor ── */
+function renderQuizModal(data){
+  const courses=getCourses();
+  const course=courses.find(c=>c.id===data.courseId);
+  const video=course?.videos.find(v=>v.id===data.videoId);
+  if(!video){toast('Video not found.',true);return;}
+  document.getElementById('modal-title').textContent='QUIZ EDITOR';
+
+  const quiz=video.quiz||[];
+  // Always show 10 question slots
+  const qs=Array.from({length:10},(_, i)=>quiz[i]||{question:'',options:['','','',''],correct:0});
+
+  document.getElementById('modal-body').innerHTML=`
+    <input type="hidden" id="qe-courseId" value="${data.courseId}"/>
+    <input type="hidden" id="qe-videoId" value="${data.videoId}"/>
+    <div style="font-size:9px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--amber);margin-bottom:16px;">// ${video.title}</div>
+    <div style="font-size:10px;color:var(--cream-3);margin-bottom:20px;padding:10px 12px;border:1px solid var(--wire);border-left:2px solid var(--blue);">
+      Fill all 10 questions. Select the correct answer for each. Empty questions will be skipped.
+    </div>
+    <div id="quiz-questions">
+      ${qs.map((q,i)=>renderQuizQ(q,i)).join('')}
+    </div>
+    <button class="btn-primary" style="width:100%;justify-content:center;margin-top:8px;" onclick="saveQuiz()">SAVE QUIZ →</button>`;
+}
+
+function renderQuizQ(q,i){
+  const labels=['A','B','C','D'];
+  return `<div class="quiz-q-item" id="qq-${i}">
+    <div class="quiz-q-head">
+      <div class="quiz-q-num">${String(i+1).padStart(2,'0')}</div>
+      <input class="field-input" id="qq-q-${i}" placeholder="Question ${i+1}..." value="${q.question||''}" style="flex:1;font-size:12px;"/>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:10px;">
+      ${q.options.map((opt,j)=>`
+        <div style="display:flex;align-items:center;gap:6px;">
+          <span style="font-size:8.5px;font-weight:700;color:var(--cream-3);width:14px;">${labels[j]}</span>
+          <input class="field-input" id="qq-opt-${i}-${j}" value="${opt||''}" placeholder="Option ${labels[j]}" style="flex:1;font-size:11px;"/>
+        </div>`).join('')}
+    </div>
+    <div style="display:flex;align-items:center;gap:10px;font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:var(--cream-3);">
+      <span>Correct answer:</span>
+      <select id="qq-correct-${i}" class="field-select" style="width:auto;padding:4px 8px;border:1px solid var(--wire-2);font-size:11px;min-height:auto;border-bottom:none;">
+        ${labels.map((l,j)=>`<option value="${j}" ${q.correct===j?'selected':''}>${l}</option>`).join('')}
+      </select>
+    </div>
+  </div>`;
+}
+
+function saveQuiz(){
+  const courseId=document.getElementById('qe-courseId').value;
+  const videoId=document.getElementById('qe-videoId').value;
+  const courses=getCourses();
+  const course=courses.find(c=>c.id===courseId);
+  const video=course?.videos.find(v=>v.id===videoId);
+  if(!video){toast('Video not found.',true);return;}
+
+  const quiz=[];
+  for(let i=0;i<10;i++){
+    const question=document.getElementById(`qq-q-${i}`)?.value.trim();
+    if(!question)continue;
+    const options=[];
+    for(let j=0;j<4;j++){
+      options.push(document.getElementById(`qq-opt-${i}-${j}`)?.value.trim()||'');
+    }
+    const correct=parseInt(document.getElementById(`qq-correct-${i}`)?.value||'0');
+    quiz.push({question,options,correct});
+  }
+
+  if(!quiz.length){toast('Add at least 1 question.',true);return;}
+  video.quiz=quiz;
+  saveCourses(courses);closeModal();toast(`Quiz saved — ${quiz.length} questions.`);showView('courses');
+}
+
+/* ── Modal: New Student ── */
+function renderStudentModal(){
+  document.getElementById('modal-title').textContent='NEW STUDENT';
+  document.getElementById('modal-body').innerHTML=`
+    <div class="field-row">
+      <div class="field"><label class="field-label">Full Name</label><input class="field-input" id="ms-name" placeholder="Student Name"/></div>
+      <div class="field"><label class="field-label">Email</label><input class="field-input" id="ms-email" type="email" placeholder="student@email.com"/></div>
+    </div>
+    <div class="field"><label class="field-label">Password</label><input class="field-input" id="ms-pwd" type="password" placeholder="Set initial password"/>
+      <div class="field-hint">// Student can change this after first login</div>
+    </div>
+    <button class="btn-primary" onclick="saveStudent()">CREATE STUDENT →</button>`;
+}
+function saveStudent(){
+  const name=document.getElementById('ms-name').value.trim();
+  const email=document.getElementById('ms-email').value.trim().toLowerCase();
+  const password=document.getElementById('ms-pwd').value;
+  if(!name||!email||!password){toast('All fields required.',true);return;}
+  const users=getUsers();
+  if(users.find(u=>u.email.toLowerCase()===email)){toast('Email already exists.',true);return;}
+  users.push({id:uid(),name,email,password,role:'student',createdAt:Date.now()});
+  saveUsers(users);closeModal();toast('Student created.');showView('students');
+}
+
+/* ── Deletions ── */
+function deleteCourse(id){
+  if(!confirm('Delete this course and all its videos?'))return;
+  const courses=getCourses().filter(c=>c.id!==id);
+  saveCourses(courses);toast('Course deleted.');showView('courses');
+}
+function deleteVideo(courseId,videoId){
+  if(!confirm('Delete this video and its quiz?'))return;
+  const courses=getCourses();
+  const course=courses.find(c=>c.id===courseId);
+  if(course)course.videos=course.videos.filter(v=>v.id!==videoId);
+  saveCourses(courses);toast('Video deleted.');showView('courses');
+}
+function deleteStudent(id){
+  if(!confirm('Remove this student?'))return;
+  const users=getUsers().filter(u=>u.id!==id);
+  saveUsers(users);toast('Student removed.');showView('students');
+}
+
+/* ── Init ── */
+showView('overview');
+</script>
+</body>
+</html>
