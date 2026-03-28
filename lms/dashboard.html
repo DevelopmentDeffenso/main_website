@@ -1,277 +1,1904 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-<meta charset="UTF-8"/>
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>DEFFENSO LMS — DASHBOARD</title>
-<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=IBM+Plex+Mono:wght@300;400;500;700&display=swap" rel="stylesheet"/>
-<style>
-:root{
-  --void:#030303;--void-1:#0A0A0A;--void-2:#111111;--void-3:#1A1A1A;
-  --cream:#E2D9C8;--cream-2:#A89E8D;--cream-3:#5A5249;
-  --blue:#007BFF;--blue-hi:#3DA5FF;--blue-dim:rgba(0,123,255,0.12);
-  --green:#00FF41;--wire:#1E1E1E;--wire-2:#2A2A2A;
-  --font-d:'Bebas Neue',sans-serif;--font-m:'IBM Plex Mono',monospace;
-}
-*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
-body{background:var(--void);color:var(--cream);font-family:var(--font-m);font-size:14px;line-height:1.55;-webkit-font-smoothing:antialiased;min-height:100vh;}
-a{text-decoration:none;color:inherit;}
-button{border:none;background:none;font-family:inherit;color:inherit;cursor:pointer;}
-::-webkit-scrollbar{width:2px;}
-::-webkit-scrollbar-track{background:var(--void);}
-::-webkit-scrollbar-thumb{background:var(--blue);}
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>DEFFENSO LMS — DASHBOARD</title>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=IBM+Plex+Mono:wght@300;400;500;700&display=swap"
+    rel="stylesheet" />
+  <style>
+    :root {
+      --void: #030303;
+      --void-1: #0A0A0A;
+      --void-2: #111111;
+      --void-3: #1A1A1A;
+      --cream: #E2D9C8;
+      --cream-2: #A89E8D;
+      --cream-3: #5A5249;
+      --blue: #007BFF;
+      --blue-hi: #3DA5FF;
+      --blue-dim: rgba(0, 123, 255, 0.12);
+      --green: #00FF41;
+      --wire: #1E1E1E;
+      --wire-2: #2A2A2A;
+      --font-d: 'Bebas Neue', sans-serif;
+      --font-m: 'IBM Plex Mono', monospace;
+    }
 
-/* ── NAVBAR ── */
-.navbar-wrapper {
-  position: sticky; top: 0; z-index: 100;
-  border-bottom: 1px solid var(--wire); background: rgba(3, 3, 3, 0.95); backdrop-filter: blur(10px);
-}
-.navbar {
-  display: flex; justify-content: space-between; align-items: stretch; height: 60px;
-  max-width: 1440px; margin: 0 auto;
-}
-.nav-logo {
-  display: flex; align-items: center; padding: 0 24px; gap: 12px;
-  border-right: 1px solid var(--wire); font-family: var(--font-d); font-size: 24px;
-  letter-spacing: .06em; cursor: pointer; transition: background .2s;
-}
-.nav-logo:hover { background: rgba(255,255,255,0.03); }
-.nav-logo span { color: var(--blue); }
-.nav-center {
-  flex: 1; display: flex; align-items: center; padding: 0 24px; gap: 10px;
-  font-size: 9px; font-weight: 700; letter-spacing: .18em; text-transform: uppercase; color: var(--cream-3);
-}
-.nav-center::before { content: '//'; color: var(--blue); }
-.nav-right { display: flex; align-items: stretch; }
-.nav-user {
-  display: flex; align-items: center; gap: 10px; padding: 0 20px;
-  border-left: 1px solid var(--wire); font-size: 9px; font-weight: 500;
-  letter-spacing: .14em; text-transform: uppercase; color: var(--cream-3);
-}
-.nav-user-dot {
-  width: 6px; height: 6px; background: var(--green); border-radius: 50%;
-  box-shadow: 0 0 6px var(--green); animation: pulse 1.6s infinite;
-}
-@keyframes pulse { 0%,100%{opacity:1;box-shadow:0 0 6px var(--green)} 50%{opacity:.3;box-shadow:none} }
-.btn-logout {
-  display: flex; align-items: center; gap: 10px; padding: 0 24px;
-  font-size: 9px; font-weight: 700; letter-spacing: .22em; text-transform: uppercase;
-  color: var(--blue); border-left: 1px solid var(--wire); transition: all .2s;
-  background: none; cursor: pointer;
-}
-.btn-logout:hover { background: var(--blue-dim); color: var(--blue-hi); }
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
 
-/* ── LAYOUT ── */
-.layout{display:grid;grid-template-columns:240px 1fr;min-height:calc(100vh - 52px);}
-@media(max-width:768px){.layout{grid-template-columns:1fr;}}
+    body {
+      background: var(--void);
+      color: var(--cream);
+      font-family: var(--font-m);
+      font-size: 14px;
+      line-height: 1.55;
+      -webkit-font-smoothing: antialiased;
+      min-height: 100vh;
+    }
 
-/* ── SIDEBAR ── */
-.sidebar{background:var(--void-1);border-right:1px solid var(--wire);padding:0;}
-.sidebar-section{padding:20px 16px 8px;}
-.sidebar-label{font-size:8px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--cream-3);margin-bottom:12px;display:flex;align-items:center;gap:8px;}
-.sidebar-label::before{content:'[';opacity:.6;}
-.sidebar-label::after{content:']';opacity:.6;}
-.sidebar-item{display:flex;align-items:center;gap:10px;padding:10px 12px;font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--cream-3);border-radius:0;transition:all .18s;width:100%;border:none;background:none;cursor:pointer;text-align:left;}
-.sidebar-item:hover,.sidebar-item.active{color:var(--cream);background:rgba(0,123,255,.08);border-left:2px solid var(--blue);}
-.sidebar-item svg{flex-shrink:0;opacity:.6;}
-.sidebar-item:hover svg,.sidebar-item.active svg{opacity:1;}
-.sidebar-divider{height:1px;background:var(--wire);margin:8px 0;}
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
 
-/* Course list in sidebar */
-.sidebar-course{display:flex;flex-direction:column;}
-.sidebar-course-item{display:flex;align-items:center;gap:8px;padding:8px 12px;font-size:9px;letter-spacing:.1em;color:var(--cream-3);cursor:pointer;transition:all .18s;border-left:2px solid transparent;}
-.sidebar-course-item:hover{color:var(--cream);border-left-color:var(--wire-2);}
-.sidebar-course-item.active{color:var(--blue);border-left-color:var(--blue);background:rgba(0,123,255,.05);}
-.sidebar-course-progress{font-size:8px;margin-left:auto;color:var(--blue);}
+    button {
+      border: none;
+      background: none;
+      font-family: inherit;
+      color: inherit;
+      cursor: pointer;
+    }
 
-/* ── MAIN ── */
-.main{padding:0;}
+    ::-webkit-scrollbar {
+      width: 2px;
+    }
 
-/* Section header bar */
-.section-hdr{display:flex;align-items:center;height:40px;gap:10px;padding:0 24px;background:var(--void-1);border-bottom:1px solid var(--wire);}
-.shdr-id{font-size:9px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--blue);padding-right:10px;border-right:1px solid var(--wire);}
-.shdr-title{font-size:8.5px;font-weight:500;letter-spacing:.2em;text-transform:uppercase;color:var(--cream-3);}
-.shdr-right{margin-left:auto;font-size:8.5px;letter-spacing:.12em;color:var(--cream-3);}
+    ::-webkit-scrollbar-track {
+      background: var(--void);
+    }
 
-/* Welcome strip */
-.welcome-strip{padding:28px 28px 24px;border-bottom:1px solid var(--wire);background:var(--void-1);}
-.welcome-eyebrow{font-size:9px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--blue);margin-bottom:6px;}
-.welcome-h{font-family:var(--font-d);font-size:clamp(32px,5vw,52px);line-height:.92;letter-spacing:.02em;margin-bottom:10px;}
-.welcome-h span{color:var(--blue);}
-.welcome-sub{font-size:12px;color:var(--cream-3);}
+    ::-webkit-scrollbar-thumb {
+      background: var(--blue);
+    }
 
-/* Stats row */
-.stats-row{display:grid;grid-template-columns:repeat(3,1fr);border-bottom:1px solid var(--wire);}
-.stat-box{padding:20px 24px;border-right:1px solid var(--wire);display:flex;flex-direction:column;gap:4px;}
-.stat-box:last-child{border-right:none;}
-.stat-box-num{font-family:var(--font-d);font-size:40px;color:var(--blue);line-height:1;}
-.stat-box-label{font-size:8.5px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--cream-3);}
+    /* ── NAVBAR ── */
+    .navbar-wrapper {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      border-bottom: 1px solid var(--wire);
+      background: rgba(3, 3, 3, 0.95);
+      backdrop-filter: blur(10px);
+    }
 
-/* Course grid */
-.course-grid{padding:24px;display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:1px;background:var(--wire);}
-.course-card{background:var(--void);padding:24px;display:flex;flex-direction:column;gap:0;cursor:pointer;transition:background .18s;position:relative;overflow:hidden;}
-.course-card:hover{background:var(--void-1);}
-.course-card::after{content:'';position:absolute;bottom:0;left:0;right:0;height:2px;background:var(--blue);transform:scaleX(0);transform-origin:left;transition:transform .3s;}
-.course-card:hover::after{transform:scaleX(1);}
-.course-card-num{font-size:9px;font-weight:700;letter-spacing:.2em;color:var(--cream-3);margin-bottom:12px;}
-.course-card-num span{color:var(--blue);}
-.course-card-title{font-family:var(--font-d);font-size:28px;line-height:.95;letter-spacing:.02em;color:var(--cream);margin-bottom:8px;}
-.course-card-desc{font-size:11px;color:var(--cream-3);line-height:1.65;margin-bottom:16px;flex:1;}
-.course-progress-wrap{margin-bottom:14px;}
-.course-progress-label{display:flex;justify-content:space-between;font-size:8.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--cream-3);margin-bottom:6px;}
-.course-progress-bar{height:2px;background:var(--wire-2);overflow:hidden;}
-.course-progress-fill{height:100%;background:var(--blue);transition:width .6s ease;}
-.course-card-videos{display:flex;flex-direction:column;gap:0;border-top:1px solid var(--wire);margin-top:4px;}
-.video-row{display:flex;align-items:center;gap:10px;padding:9px 0;border-bottom:1px solid rgba(30,30,30,.5);font-size:10px;color:var(--cream-3);cursor:pointer;transition:color .15s;}
-.video-row:last-child{border-bottom:none;}
-.video-row:hover{color:var(--cream);}
-.video-row.locked{cursor:not-allowed;opacity:.4;}
-.video-row.locked:hover{color:var(--cream-3);}
-.video-row.completed .vi-status{color:var(--green);}
-.video-row.current .vi-num{color:var(--blue);}
-.vi-num{font-size:8.5px;font-weight:700;color:var(--cream-3);flex-shrink:0;width:20px;}
-.vi-title{flex:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
-.vi-status{flex-shrink:0;font-size:10px;}
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: stretch;
+      height: 60px;
+    }
 
-/* Empty state */
-.empty-state{padding:80px 24px;text-align:center;display:flex;flex-direction:column;align-items:center;gap:12px;}
-.empty-state-icon{width:48px;height:48px;border:1px solid var(--wire-2);display:flex;align-items:center;justify-content:center;color:var(--cream-3);}
-.empty-state-title{font-family:var(--font-d);font-size:28px;letter-spacing:.02em;color:var(--cream-3);}
-.empty-state-sub{font-size:12px;color:var(--cream-3);max-width:280px;line-height:1.65;}
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      padding: 0 16px;
+      gap: 12px;
+      font-family: var(--font-d);
+      font-size: 20px;
+      letter-spacing: .06em;
+      cursor: pointer;
+      transition: background .2s;
+      height: 100%;
+      width: 100%;
+    }
 
-/* No courses assigned */
-.no-courses{padding:60px 24px;text-align:center;}
-</style>
+    .nav-logo:hover {
+      background: rgba(255, 255, 255, 0.03);
+    }
+
+    .nav-logo span {
+      color: var(--blue);
+    }
+
+    .nav-center {
+      display: flex;
+      align-items: center;
+      padding: 0 16px;
+      gap: 10px;
+      font-size: 9px;
+      font-weight: 700;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+      color: var(--cream-3);
+    }
+
+    .nav-center::before {
+      content: '//';
+      color: var(--blue);
+    }
+
+    .nav-right {
+      display: flex;
+      align-items: stretch;
+    }
+
+    .nav-user {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 0 20px;
+      border-left: 1px solid var(--wire);
+      font-size: 9px;
+      font-weight: 500;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      color: var(--cream-3);
+    }
+
+    .nav-user-dot {
+      width: 6px;
+      height: 6px;
+      background: var(--green);
+      border-radius: 50%;
+      box-shadow: 0 0 6px var(--green);
+      animation: pulse 1.6s infinite;
+    }
+
+    @keyframes pulse {
+
+      0%,
+      100% {
+        opacity: 1;
+        box-shadow: 0 0 6px var(--green)
+      }
+
+      50% {
+        opacity: .3;
+        box-shadow: none
+      }
+    }
+
+    .btn-logout {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 0 24px;
+      font-size: 9px;
+      font-weight: 700;
+      letter-spacing: .22em;
+      text-transform: uppercase;
+      color: var(--blue);
+      border-left: 1px solid var(--wire);
+      transition: all .2s;
+      background: none;
+      cursor: pointer;
+    }
+
+    .btn-logout:hover {
+      background: var(--blue-dim);
+      color: var(--blue-hi);
+    }
+
+    /* ── LAYOUT ── */
+    .layout {
+      display: flex;
+      min-height: 100vh;
+    }
+
+    @media(max-width:768px) {
+      .layout {
+        flex-direction: column;
+      }
+    }
+
+    /* ── SIDEBAR ── */
+    .sidebar {
+      width: 240px;
+      background: var(--void-1);
+      border-right: 1px solid var(--wire);
+      display: flex;
+      flex-direction: column;
+      position: sticky;
+      top: 0;
+      height: 100vh;
+      flex-shrink: 0;
+    }
+
+    .sidebar-header {
+      height: 60px;
+      border-bottom: 1px solid var(--wire);
+      display: flex;
+      align-items: center;
+    }
+
+    .sidebar-content {
+      flex: 1;
+      overflow-y: auto;
+    }
+
+    @media(max-width:768px) {
+      .sidebar {
+        width: 100%;
+        height: auto;
+        position: relative;
+      }
+
+      .sidebar-content {
+        overflow-y: visible;
+      }
+    }
+
+    .sidebar-section {
+      padding: 20px 16px 8px;
+    }
+
+    .sidebar-label {
+      font-size: 8px;
+      font-weight: 700;
+      letter-spacing: .22em;
+      text-transform: uppercase;
+      color: var(--cream-3);
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .sidebar-label::before {
+      content: '[';
+      opacity: .6;
+    }
+
+    .sidebar-label::after {
+      content: ']';
+      opacity: .6;
+    }
+
+    .sidebar-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 12px;
+      font-size: 10px;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      color: var(--cream-3);
+      border-radius: 0;
+      transition: all .18s;
+      width: 100%;
+      border: none;
+      background: none;
+      cursor: pointer;
+      text-align: left;
+    }
+
+    .sidebar-item:hover,
+    .sidebar-item.active {
+      color: var(--cream);
+      background: rgba(0, 123, 255, .08);
+      border-left: 2px solid var(--blue);
+    }
+
+    .sidebar-item svg {
+      flex-shrink: 0;
+      opacity: .6;
+    }
+
+    .sidebar-item:hover svg,
+    .sidebar-item.active svg {
+      opacity: 1;
+    }
+
+    .sidebar-divider {
+      height: 1px;
+      background: var(--wire);
+      margin: 8px 0;
+    }
+
+    /* Course list in sidebar */
+    .sidebar-course {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .sidebar-course-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 12px;
+      font-size: 9px;
+      letter-spacing: .1em;
+      color: var(--cream-3);
+      cursor: pointer;
+      transition: all .18s;
+      border-left: 2px solid transparent;
+    }
+
+    .sidebar-course-item:hover {
+      color: var(--cream);
+      border-left-color: var(--wire-2);
+    }
+
+    .sidebar-course-item.active {
+      color: var(--blue);
+      border-left-color: var(--blue);
+      background: rgba(0, 123, 255, .05);
+    }
+
+    .sidebar-course-progress {
+      font-size: 8px;
+      margin-left: auto;
+      color: var(--blue);
+    }
+
+    /* ── MAIN ── */
+    .main-wrap {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      min-width: 0;
+    }
+
+    .main {
+      flex: 1;
+    }
+
+    /* Section header bar */
+    .section-hdr {
+      display: flex;
+      align-items: center;
+      height: 40px;
+      gap: 10px;
+      padding: 0 24px;
+      background: var(--void-1);
+      border-bottom: 1px solid var(--wire);
+    }
+
+    .shdr-id {
+      font-size: 9px;
+      font-weight: 700;
+      letter-spacing: .2em;
+      text-transform: uppercase;
+      color: var(--blue);
+      padding-right: 10px;
+      border-right: 1px solid var(--wire);
+    }
+
+    .shdr-title {
+      font-size: 8.5px;
+      font-weight: 500;
+      letter-spacing: .2em;
+      text-transform: uppercase;
+      color: var(--cream-3);
+    }
+
+    .shdr-right {
+      margin-left: auto;
+      font-size: 8.5px;
+      letter-spacing: .12em;
+      color: var(--cream-3);
+    }
+
+    /* Welcome strip */
+    .welcome-strip {
+      padding: 28px 28px 24px;
+      border-bottom: 1px solid var(--wire);
+      background: var(--void-1);
+    }
+
+    .welcome-eyebrow {
+      font-size: 9px;
+      font-weight: 700;
+      letter-spacing: .22em;
+      text-transform: uppercase;
+      color: var(--blue);
+      margin-bottom: 6px;
+    }
+
+    .welcome-h {
+      font-family: var(--font-d);
+      font-size: clamp(32px, 5vw, 52px);
+      line-height: .92;
+      letter-spacing: .02em;
+      margin-bottom: 10px;
+    }
+
+    .welcome-h span {
+      color: var(--blue);
+    }
+
+    .welcome-sub {
+      font-size: 12px;
+      color: var(--cream-3);
+    }
+
+    /* Stats row */
+    .stats-row {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      border-bottom: 1px solid var(--wire);
+    }
+
+    .stat-box {
+      padding: 20px 24px;
+      border-right: 1px solid var(--wire);
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .stat-box:last-child {
+      border-right: none;
+    }
+
+    .stat-box-num {
+      font-family: var(--font-d);
+      font-size: 40px;
+      color: var(--blue);
+      line-height: 1;
+    }
+
+    .stat-box-label {
+      font-size: 8.5px;
+      font-weight: 700;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+      color: var(--cream-3);
+    }
+
+    /* Course grid */
+    .course-grid {
+      padding: 24px;
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 1px;
+      background: var(--wire);
+    }
+
+    .course-card {
+      background: var(--void);
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+      cursor: pointer;
+      transition: background .18s;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .course-card:hover {
+      background: var(--void-1);
+    }
+
+    .course-card::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background: var(--blue);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform .3s;
+    }
+
+    .course-card:hover::after {
+      transform: scaleX(1);
+    }
+
+    .course-card-num {
+      font-size: 9px;
+      font-weight: 700;
+      letter-spacing: .2em;
+      color: var(--cream-3);
+      margin-bottom: 12px;
+    }
+
+    .course-card-num span {
+      color: var(--blue);
+    }
+
+    .course-card-title {
+      font-family: var(--font-d);
+      font-size: 28px;
+      line-height: .95;
+      letter-spacing: .02em;
+      color: var(--cream);
+      margin-bottom: 8px;
+    }
+
+    .course-card-desc {
+      font-size: 11px;
+      color: var(--cream-3);
+      line-height: 1.65;
+      margin-bottom: 16px;
+      flex: 1;
+    }
+
+    .course-progress-wrap {
+      margin-bottom: 14px;
+    }
+
+    .course-progress-label {
+      display: flex;
+      justify-content: space-between;
+      font-size: 8.5px;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: var(--cream-3);
+      margin-bottom: 6px;
+    }
+
+    .course-progress-bar {
+      height: 2px;
+      background: var(--wire-2);
+      overflow: hidden;
+    }
+
+    .course-progress-fill {
+      height: 100%;
+      background: var(--blue);
+      transition: width .6s ease;
+    }
+
+    .course-card-videos {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+      border-top: 1px solid var(--wire);
+      margin-top: 4px;
+    }
+
+    .video-row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 9px 0;
+      border-bottom: 1px solid rgba(30, 30, 30, .5);
+      font-size: 10px;
+      color: var(--cream-3);
+      cursor: pointer;
+      transition: color .15s;
+    }
+
+    .video-row:last-child {
+      border-bottom: none;
+    }
+
+    .video-row:hover {
+      color: var(--cream);
+    }
+
+    .video-row.locked {
+      cursor: not-allowed;
+      opacity: .4;
+    }
+
+    .video-row.locked:hover {
+      color: var(--cream-3);
+    }
+
+    .video-row.completed .vi-status {
+      color: var(--green);
+    }
+
+    .video-row.current .vi-num {
+      color: var(--blue);
+    }
+
+    .vi-num {
+      font-size: 8.5px;
+      font-weight: 700;
+      color: var(--cream-3);
+      flex-shrink: 0;
+      width: 20px;
+    }
+
+    .vi-title {
+      flex: 1;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .vi-status {
+      flex-shrink: 0;
+      font-size: 10px;
+    }
+
+    /* Empty state */
+    .empty-state {
+      padding: 80px 24px;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .empty-state-icon {
+      width: 48px;
+      height: 48px;
+      border: 1px solid var(--wire-2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--cream-3);
+    }
+
+    .empty-state-title {
+      font-family: var(--font-d);
+      font-size: 28px;
+      letter-spacing: .02em;
+      color: var(--cream-3);
+    }
+
+    .empty-state-sub {
+      font-size: 12px;
+      color: var(--cream-3);
+      max-width: 280px;
+      line-height: 1.65;
+    }
+
+    .no-courses {
+      padding: 60px 24px;
+      text-align: center;
+    }
+
+    /* ── PREMIUM QUIZ UI ── */
+    .quiz-wrapper {
+      position: relative;
+      z-index: 1;
+      max-width: 640px;
+      width: 100%;
+      margin: 40px auto 0;
+    }
+
+    .quiz-header {
+      margin-bottom: 32px;
+      animation: fadeDown .5s ease both;
+    }
+
+    @keyframes fadeDown {
+      from {
+        opacity: 0;
+        transform: translateY(-16px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .quiz-eyebrow {
+      font-size: 9px;
+      font-weight: 700;
+      letter-spacing: .3em;
+      text-transform: uppercase;
+      color: var(--blue);
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .quiz-eyebrow::before {
+      content: '//';
+      opacity: .6;
+    }
+
+    .quiz-title {
+      font-family: var(--font-d);
+      font-size: clamp(30px, 7vw, 58px);
+      line-height: 1;
+      letter-spacing: .02em;
+      color: var(--cream);
+      margin-bottom: 6px;
+    }
+
+    .quiz-title span {
+      color: var(--blue);
+    }
+
+    .quiz-meta {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      flex-wrap: wrap;
+      margin-top: 12px;
+    }
+
+    .quiz-badge {
+      font-size: 8px;
+      font-weight: 700;
+      letter-spacing: .2em;
+      text-transform: uppercase;
+      padding: 3px 10px;
+      border: 1px solid var(--wire-2);
+      color: var(--cream-3);
+    }
+
+    .quiz-badge.live {
+      border-color: rgba(0, 123, 255, .3);
+      color: var(--blue);
+      position: relative;
+    }
+
+    .quiz-badge.live::before {
+      content: '';
+      display: inline-block;
+      width: 5px;
+      height: 5px;
+      background: var(--blue);
+      border-radius: 50%;
+      margin-right: 7px;
+      vertical-align: middle;
+      animation: blink 1.3s ease-in-out infinite;
+    }
+
+    @keyframes blink {
+
+      0%,
+      100% {
+        opacity: 1
+      }
+
+      50% {
+        opacity: .2
+      }
+    }
+
+    .progress-wrap {
+      margin-bottom: 28px;
+      animation: fadeDown .5s .1s ease both;
+    }
+
+    .progress-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 8px;
+      font-size: 9px;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+      color: var(--cream-3);
+    }
+
+    .progress-track {
+      height: 3px;
+      background: var(--wire-2);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .progress-fill {
+      height: 100%;
+      background: linear-gradient(90deg, var(--blue), var(--blue-hi));
+      transition: width .5s cubic-bezier(.4, 0, .2, 1);
+      width: 10%;
+      position: relative;
+    }
+
+    .question-card {
+      background: var(--void-1);
+      border: 1px solid var(--wire);
+      border-top: 2px solid var(--blue);
+      position: relative;
+      overflow: hidden;
+      margin-bottom: 24px;
+      animation: cardIn .4s ease both;
+    }
+
+    @keyframes cardIn {
+      from {
+        opacity: 0;
+        transform: translateY(12px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .q-header {
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+      padding: 20px 22px 16px;
+      border-bottom: 1px solid var(--wire);
+    }
+
+    .q-num {
+      font-family: var(--font-d);
+      font-size: 28px;
+      color: var(--blue);
+      line-height: 1;
+      flex-shrink: 0;
+      min-width: 36px;
+      opacity: .7;
+    }
+
+    .q-text {
+      font-size: 13px;
+      font-weight: 500;
+      line-height: 1.65;
+      color: var(--cream);
+      padding-top: 4px;
+      font-family: var(--font-m);
+    }
+
+    .q-options {
+      padding: 16px 22px 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 9px;
+    }
+
+    .option-btn {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 12px 14px;
+      background: var(--void);
+      border: 1px solid var(--wire-2);
+      border-radius: 0;
+      color: var(--cream-2);
+      font-family: var(--font-m);
+      font-size: 11.5px;
+      text-align: left;
+      cursor: pointer;
+      transition: border-color .15s, background .15s, color .15s, transform .1s;
+      position: relative;
+      overflow: hidden;
+      width: 100%;
+    }
+
+    .option-btn::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      width: 0;
+      background: rgba(0, 123, 255, .08);
+      transition: width .2s;
+    }
+
+    .option-btn:hover:not(:disabled)::before {
+      width: 100%;
+    }
+
+    .option-btn:hover:not(:disabled) {
+      border-color: rgba(0, 123, 255, .4);
+      color: var(--cream);
+    }
+
+    .option-btn:active:not(:disabled) {
+      transform: scale(.99);
+    }
+
+    .option-key {
+      flex-shrink: 0;
+      width: 22px;
+      height: 22px;
+      border: 1px solid var(--wire-2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 9px;
+      font-weight: 700;
+      letter-spacing: .06em;
+      color: var(--cream-3);
+      transition: all .15s;
+      position: relative;
+      z-index: 1;
+    }
+
+    .option-btn:hover:not(:disabled) .option-key {
+      border-color: var(--blue);
+      color: var(--blue);
+    }
+
+    .option-label {
+      position: relative;
+      z-index: 1;
+    }
+
+    .option-btn:disabled {
+      cursor: not-allowed;
+      opacity: .7;
+    }
+
+    .q-nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-top: 4px;
+      gap: 12px;
+    }
+
+    .btn-nav {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 22px;
+      font-family: var(--font-m);
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: .2em;
+      text-transform: uppercase;
+      border: 1px solid var(--wire-2);
+      background: var(--void-1);
+      color: var(--cream-2);
+      cursor: pointer;
+      transition: all .15s;
+    }
+
+    .btn-nav:hover:not(:disabled) {
+      border-color: rgba(0, 123, 255, .4);
+      color: var(--cream);
+      background: rgba(0, 123, 255, .06);
+    }
+
+    .btn-nav.primary {
+      background: var(--blue);
+      color: #fff;
+      border-color: var(--blue);
+    }
+
+    .btn-nav.primary:hover:not(:disabled) {
+      background: var(--blue-hi);
+      border-color: var(--blue-hi);
+      box-shadow: 0 0 20px rgba(0, 123, 255, .35);
+    }
+
+    .results-card {
+      background: var(--void-1);
+      border: 1px solid var(--wire);
+      border-top: 2px solid var(--blue);
+      padding: 36px 28px;
+      text-align: center;
+      display: none;
+      animation: cardIn .5s ease both;
+      margin-top: 24px;
+    }
+
+    .results-card.show {
+      display: block;
+    }
+
+    .results-title {
+      font-family: var(--font-d);
+      font-size: clamp(36px, 8vw, 64px);
+      color: var(--cream);
+      margin-bottom: 6px;
+      line-height: 1;
+    }
+
+    .results-score-txt {
+      font-family: var(--font-d);
+      font-size: clamp(60px, 14vw, 110px);
+      color: var(--blue);
+      line-height: .9;
+      margin: 16px 0;
+      text-shadow: 0 0 40px rgba(0, 123, 255, .4);
+    }
+
+    .results-sub {
+      font-size: 11px;
+      letter-spacing: .18em;
+      color: var(--cream-3);
+      text-transform: uppercase;
+      margin-bottom: 28px;
+    }
+
+    .results-verdict {
+      font-size: 13px;
+      color: var(--cream-2);
+      line-height: 1.7;
+      max-width: 460px;
+      margin: 0 auto 28px;
+      padding: 14px 18px;
+      border: 1px solid var(--wire-2);
+      border-left: 2px solid var(--blue);
+      background: rgba(0, 123, 255, .04);
+      text-align: left;
+    }
+
+    .verdict-tag {
+      font-size: 8px;
+      font-weight: 700;
+      letter-spacing: .22em;
+      color: var(--blue);
+      text-transform: uppercase;
+      display: block;
+      margin-bottom: 5px;
+    }
+
+    .btn-restart {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 13px 32px;
+      background: var(--blue);
+      color: #fff;
+      font-family: var(--font-m);
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: .22em;
+      text-transform: uppercase;
+      border: none;
+      cursor: pointer;
+      transition: all .18s;
+    }
+
+    .btn-restart:hover {
+      background: var(--blue-hi);
+      box-shadow: 0 0 28px rgba(0, 123, 255, .4);
+    }
+
+    .btn-next {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 13px 32px;
+      background: var(--green);
+      color: #000;
+      font-family: var(--font-m);
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: .22em;
+      text-transform: uppercase;
+      border: none;
+      cursor: pointer;
+      transition: all .18s;
+    }
+
+    .btn-next:hover {
+      background: #00cc33;
+      box-shadow: 0 0 28px rgba(0, 255, 65, .35);
+    }
+
+    .term-status {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 9px;
+      letter-spacing: .16em;
+      text-transform: uppercase;
+      color: var(--cream-3);
+      margin-bottom: 20px;
+      justify-content: center;
+    }
+
+    .term-dot-g {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--green);
+      flex-shrink: 0;
+    }
+
+    .unlock-banner {
+      max-width: 500px;
+      margin: 0 auto 28px;
+      padding: 16px 20px;
+      font-family: var(--font-m);
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: .04em;
+      line-height: 1.6;
+      display: none;
+      animation: fadeIn .5s ease both;
+      border-radius: 0;
+    }
+
+    .unlock-banner.pass {
+      display: block;
+      border: 1px solid var(--green);
+      border-left: 3px solid var(--green);
+      background: rgba(0, 255, 65, .06);
+      color: var(--green);
+    }
+
+    .unlock-banner.fail {
+      display: block;
+      border: 1px solid var(--red);
+      border-left: 3px solid var(--red);
+      background: rgba(255, 95, 87, .06);
+      color: #FF5F57;
+    }
+
+    .unlock-banner .ub-icon {
+      font-size: 20px;
+      display: block;
+      margin-bottom: 8px;
+    }
+
+    .unlock-banner .ub-label {
+      font-size: 8px;
+      letter-spacing: .26em;
+      text-transform: uppercase;
+      opacity: .7;
+      display: block;
+      margin-bottom: 5px;
+    }
+
+    .review-list {
+      margin-top: 32px;
+      text-align: left;
+    }
+
+    .review-item {
+      padding: 12px 16px;
+      border: 1px solid var(--wire);
+      margin-bottom: 8px;
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      font-size: 11px;
+      color: var(--cream-2);
+      line-height: 1.6;
+      background: var(--void);
+    }
+
+    .review-q {
+      color: var(--cream-3);
+      font-size: 9.5px;
+      margin-bottom: 2px;
+      display: block;
+      letter-spacing: .04em;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0
+      }
+
+      to {
+        opacity: 1
+      }
+    }
+
+    /* ── START CARD UI ── */
+    .start-card {
+      position: relative;
+      z-index: 1;
+      max-width: 640px;
+      width: 100%;
+      background: var(--void-1);
+      border: 1px solid var(--wire);
+      border-top: 2px solid var(--blue);
+      padding: 40px 36px 36px;
+      animation: fadeUp .5s ease both;
+      margin: 0 auto;
+    }
+
+    @keyframes fadeUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .start-card::before,
+    .start-card::after {
+      content: '';
+      position: absolute;
+      width: 14px;
+      height: 14px;
+      border-color: rgba(0, 123, 255, .25);
+      border-style: solid;
+    }
+
+    .start-card::before {
+      bottom: 12px;
+      right: 12px;
+      border-width: 0 1px 1px 0;
+    }
+
+    .start-card::after {
+      bottom: 12px;
+      left: 12px;
+      border-width: 0 0 1px 1px;
+    }
+
+    .start-eyebrow {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 9px;
+      font-weight: 700;
+      letter-spacing: .28em;
+      text-transform: uppercase;
+      color: var(--blue);
+      margin-bottom: 20px;
+    }
+
+    .start-eyebrow::before {
+      content: '//';
+      opacity: .6;
+    }
+
+    .eyebrow-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--blue);
+      flex-shrink: 0;
+      animation: blink 1.3s ease-in-out infinite;
+    }
+
+    .start-icon {
+      width: 60px;
+      height: 60px;
+      border: 1px solid var(--wire-2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 22px;
+      background: rgba(0, 123, 255, .06);
+      position: relative;
+    }
+
+    .start-icon svg {
+      color: var(--blue);
+    }
+
+    .start-icon::after {
+      content: '';
+      position: absolute;
+      inset: -6px;
+      border: 1px solid rgba(0, 123, 255, .1);
+      animation: ringPulse 2.5s ease-out infinite;
+    }
+
+    @keyframes ringPulse {
+      0% {
+        transform: scale(.9);
+        opacity: .8;
+      }
+
+      70% {
+        transform: scale(1.2);
+        opacity: 0;
+      }
+
+      100% {
+        transform: scale(1.2);
+        opacity: 0;
+      }
+    }
+
+    .start-title {
+      font-family: var(--font-d);
+      font-size: clamp(32px, 7vw, 54px);
+      line-height: 1;
+      letter-spacing: .02em;
+      color: var(--cream);
+      margin-bottom: 8px;
+    }
+
+    .start-title span {
+      color: var(--blue);
+    }
+
+    .start-module {
+      font-size: 10px;
+      letter-spacing: .2em;
+      text-transform: uppercase;
+      color: var(--cream-3);
+      margin-bottom: 28px;
+    }
+
+    .start-divider {
+      height: 1px;
+      background: var(--wire);
+      margin-bottom: 24px;
+      position: relative;
+    }
+
+    .start-divider::after {
+      content: 'READ BEFORE STARTING';
+      position: absolute;
+      top: 50%;
+      left: 0;
+      transform: translateY(-50%);
+      background: var(--void-1);
+      padding-right: 12px;
+      font-size: 8px;
+      letter-spacing: .22em;
+      color: var(--cream-3);
+    }
+
+    .start-warning {
+      border: 1px solid rgba(254, 188, 46, .25);
+      border-left: 3px solid var(--yellow);
+      background: rgba(254, 188, 46, .04);
+      padding: 16px 18px;
+      margin-bottom: 24px;
+      display: flex;
+      gap: 14px;
+      align-items: flex-start;
+    }
+
+    .warn-icon {
+      font-size: 18px;
+      flex-shrink: 0;
+      margin-top: 1px;
+      filter: saturate(1.2);
+    }
+
+    .warn-title {
+      font-size: 9px;
+      font-weight: 700;
+      letter-spacing: .22em;
+      text-transform: uppercase;
+      color: var(--yellow);
+      margin-bottom: 6px;
+      display: block;
+    }
+
+    .warn-text {
+      font-size: 12px;
+      color: var(--cream-2);
+      line-height: 1.75;
+    }
+
+    .warn-text strong {
+      color: var(--cream);
+      font-weight: 500;
+    }
+
+    .start-info {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-bottom: 32px;
+    }
+
+    .info-row {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 11px;
+      color: var(--cream-2);
+    }
+
+    .info-row svg {
+      color: var(--blue);
+      flex-shrink: 0;
+    }
+
+    .info-label {
+      color: var(--cream-3);
+      font-size: 9px;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      margin-right: 4px;
+    }
+
+    .start-cta {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .btn-start {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 14px 32px;
+      background: var(--blue);
+      color: #fff;
+      font-family: var(--font-m);
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: .22em;
+      text-transform: uppercase;
+      border: none;
+      cursor: pointer;
+      transition: all .18s;
+      flex: 1;
+      justify-content: center;
+    }
+
+    .btn-start:hover {
+      background: var(--blue-hi);
+      box-shadow: 0 0 28px rgba(0, 123, 255, .4);
+    }
+
+    .start-note {
+      font-size: 9px;
+      letter-spacing: .12em;
+      color: var(--cream-3);
+      text-transform: uppercase;
+      text-align: center;
+      margin-top: 16px;
+      display: block;
+    }
+
+    .start-note a {
+      color: var(--blue);
+      text-decoration: none;
+      cursor: pointer;
+    }
+
+    .start-note a:hover {
+      text-decoration: underline;
+    }
+  </style>
 </head>
+
 <body>
 
-<!-- Auth guard -->
-<script>
-const sess=sessionStorage.getItem('dflms_session');
-if(!sess){window.location.href='index.html';}
-const user=JSON.parse(sess||'{}');
-if(user.role==='admin'){window.location.href='admin.html';}
-</script>
+  <!-- Auth guard -->
+  <script>
+    const sess = sessionStorage.getItem('dflms_session');
+    if (!sess) { window.location.href = 'index.html'; }
+    const user = JSON.parse(sess || '{}');
+    if (user.role === 'admin') { window.location.href = 'admin.html'; }
+  </script>
 
-<!-- Navbar -->
-<div class="navbar-wrapper">
-  <nav class="navbar">
-    <div class="nav-logo" onclick="window.location.href='../index.html'">DEFFENSO<span>·LMS</span></div>
-    <div class="nav-center">STUDENT PORTAL</div>
-    <div class="nav-right">
-      <div class="nav-user"><div class="nav-user-dot"></div><span id="nav-name">AGENT</span></div>
-      <button class="btn-logout" onclick="logout()">
-        <svg width="14" height="14" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"/></svg>
-        LOGOUT
-      </button>
+  <div class="layout">
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <div class="nav-logo" onclick="window.location.href='../index.html'"><img src="../assests/logos/text logo.png"
+            alt="DEFFENSO" style="height:50px; width:auto; object-fit:contain;"></div>
+      </div>
+      <div class="sidebar-content">
+        <div class="sidebar-section">
+          <div class="sidebar-label">Navigation</div>
+          <button class="sidebar-item active" onclick="showView('courses')">
+            <svg width="14" height="14" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
+            </svg>
+            My Courses
+          </button>
+          <button class="sidebar-item" onclick="showView('progress')">
+            <svg width="14" height="14" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+            </svg>
+            Progress
+          </button>
+          <button class="sidebar-item" onclick="showView('recorded')">
+            <svg width="14" height="14" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 02 2z" />
+            </svg>
+            Classroom
+          </button>
+        </div>
+        <div class="sidebar-divider"></div>
+        <div class="sidebar-section">
+          <div class="sidebar-label">Courses</div>
+          <div class="sidebar-course" id="sidebar-courses"></div>
+        </div>
+      </div>
+    </aside>
+
+    <div class="main-wrap">
+      <!-- Navbar -->
+      <div class="navbar-wrapper">
+        <nav class="navbar">
+          <div class="nav-center">STUDENT PORTAL</div>
+          <div class="nav-right">
+            <div class="nav-user">
+              <div class="nav-user-dot"></div><span id="nav-name">AGENT</span>
+            </div>
+            <button class="btn-logout" onclick="logout()">
+              <svg width="14" height="14" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                  d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
+              </svg>
+              LOGOUT
+            </button>
+          </div>
+        </nav>
+      </div>
+
+      <!-- Main -->
+      <main class="main" id="main-content"></main>
     </div>
-  </nav>
-</div>
+  </div>
 
-<div class="layout">
-  <!-- Sidebar -->
-  <aside class="sidebar">
-    <div class="sidebar-section">
-      <div class="sidebar-label">Navigation</div>
-      <button class="sidebar-item active" onclick="showView('courses')">
-        <svg width="14" height="14" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/></svg>
-        My Courses
-      </button>
-      <button class="sidebar-item" onclick="showView('progress')">
-        <svg width="14" height="14" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/></svg>
-        Progress
-      </button>
+  <script>
+    /* ── Local Helpers ── */
+    function getUsers() { return JSON.parse(localStorage.getItem('dflms_users') || '[]'); }
+    function getCourses() { return JSON.parse(localStorage.getItem('dflms_courses') || '[]'); }
+    function getProgress() { return JSON.parse(localStorage.getItem('dflms_progress') || '{}'); }
+    function saveProgress(p) { localStorage.setItem('dflms_progress', JSON.stringify(p)); }
+    function logout() { sessionStorage.removeItem('dflms_session'); window.location.href = 'index.html'; }
+
+    /* ── Per-user progress key ── */
+    function userKey(videoId) { return `${user.id || user.email}_${videoId}`; }
+
+    function isWatched(videoId) {
+      const p = getProgress();
+      return !!(p[userKey(videoId)]?.watched);
+    }
+    function isQuizPassed(videoId) {
+      const p = getProgress();
+      return !!(p[userKey(videoId)]?.quizPassed);
+    }
+
+    /* ── Compute if video is unlocked ── */
+    function isUnlocked(course, videoIndex) {
+      if (videoIndex === 0) return true;
+      const prevVideo = course.videos[videoIndex - 1];
+      if (!prevVideo.quiz || !prevVideo.quiz.length) return isWatched(prevVideo.id);
+      return isQuizPassed(prevVideo.id);
+    }
+
+    /* ── Progress for a course ── */
+    function courseProgress(course) {
+      if (!course.videos || !course.videos.length) return { done: 0, total: 0, pct: 0 };
+      const done = course.videos.filter(v => isQuizPassed(v.id)).length;
+      return { done, total: course.videos.length, pct: Math.round((done / course.videos.length) * 100) };
+    }
+
+    /* ── Recorded Class Quiz Data ── */
+    const RECORDED_MODULES = [
+      {
+        title: "Basic Commands", moduleTitle: "Ethical Hacking",
+        video: "cXGaUZtdv3I",
+        quiz: [
+          { question: "Which command is used in Linux to display IP address and network interface details?", options: ["ipconfig", "ifconfig", "netstat", "ping"], correct: 1 },
+          { question: "What does the nmap command primarily do?", options: ["Cracks passwords", "Encrypts hard drives", "Network exploration and security auditing (Port scanning)", "Installs a backdoor"], correct: 2 },
+          { question: "Which flag is used with nmap to perform an OS detection scan?", options: ["-sV", "-O", "-p-", "-Pn"], correct: 1 },
+          { question: "In a Linux terminal, what command is used to change the current directory?", options: ["chdir", "move", "cd", "ls"], correct: 2 },
+          { question: "What is the purpose of the whoami command?", options: ["To find the owner of a website", "To display the current logged-in username", "To list all users on a network", "To change the user password"], correct: 1 },
+          { question: "Which of the following is considered passive reconnaissance?", options: ["Running a vulnerability scan", "Searching a company's public LinkedIn profiles", "Brute-forcing a login page", "Pinging a server"], correct: 1 },
+          { question: "What does the sudo command stand for?", options: ["System User Direct Open", "Secure User Data Only", "Superuser Do", "Super User Delete Option"], correct: 2 },
+          { question: "Which command is used to view the contents of a file named passwords.txt?", options: ["read passwords.txt", "open passwords.txt", "cat passwords.txt", "view passwords.txt"], correct: 2 },
+          { question: "Which tool is commonly used for sniffing network traffic?", options: ["John the Ripper", "Wireshark", "Metasploit", "Burp Suite"], correct: 1 },
+          { question: "What is the first phase of a professional ethical hack?", options: ["Gaining Access", "Maintaining Access", "Reconnaissance (Footprinting)", "Clearing Tracks"], correct: 2 }
+        ]
+      },
+      {
+        title: "Scanning & Enumeration", moduleTitle: "Network Tools",
+        video: "5une30fIDww",
+        quiz: [
+          { question: "Which tool is primarily used for network scanning and port discovery?", options: ["Wireshark", "Metasploit", "Nmap", "Burp Suite"], correct: 2 },
+          { question: "What is the main purpose of Shodan?", options: ["Cracking passwords", "Searching exposed devices on the internet", "Encrypting data", "Monitoring CPU usage"], correct: 1 },
+          { question: "Which tool provides a framework of pre-built exploits for penetration testing?", options: ["Aircrack-ng", "Metasploit", "John the Ripper", "SQLMap"], correct: 1 },
+          { question: "Cobalt Strike is mainly used for:", options: ["Wi-Fi cracking", "Packet sniffing", "Advanced red team simulations", "Database management"], correct: 2 },
+          { question: "Which tool allows you to analyze network packets in real time?", options: ["Wireshark", "Nmap", "Impacket", "Shodan"], correct: 0 },
+          { question: "Mimikatz is known for:", options: ["Web scanning", "Extracting passwords from memory", "Port scanning", "Encrypting files"], correct: 1 },
+          { question: "Which tool is used to crack password hashes using wordlists?", options: ["Burp Suite", "SQLMap", "John the Ripper", "Wireshark"], correct: 2 },
+          { question: "Burp Suite is commonly used for:", options: ["Wireless attacks", "Web application security testing", "Network scanning", "File recovery"], correct: 1 },
+          { question: "Aircrack-ng is used for:", options: ["Database exploitation", "Wi-Fi password cracking", "System monitoring", "Malware analysis"], correct: 1 },
+          { question: "SQLMap is designed to:", options: ["Scan open ports", "Detect and exploit SQL injection vulnerabilities", "Analyze network traffic", "Crack Wi-Fi passwords"], correct: 1 }
+        ]
+      },
+      {
+        title: "OSINT Foundations", moduleTitle: "Open-Source Intelligence",
+        video: "7sMtlYkmLrk",
+        quiz: [
+          { question: "What does OSINT stand for?", options: ["Open Security Intelligence Network", "Online System Integration Network", "Open-Source Intelligence", "Offensive Security Internal Tool"], correct: 2 },
+          { question: "What is the primary goal of OSINT?", options: ["Breaking into secure systems", "Gathering intelligence from publicly available data", "Encrypting communications", "Deleting online traces"], correct: 1 },
+          { question: "Which of the following is an example of OSINT usage?", options: ["Brute-force password cracking", "Phishing attacks", "Investigating social media profiles", "Installing malware"], correct: 2 },
+          { question: "Which tool is commonly used to extract metadata (EXIF data) from images?", options: ["Wireshark", "ExifTool", "Burp Suite", "Nmap"], correct: 1 },
+          { question: "What kind of information can EXIF data reveal?", options: ["Passwords", "Firewall rules", "Camera details, timestamp, and GPS location", "Encryption keys"], correct: 2 },
+          { question: "Which method helps identify where an image appears online?", options: ["SQL Injection", "Reverse Image Search", "Port Scanning", "Packet Sniffing"], correct: 1 },
+          { question: "Tools like Sherlock and Mr. Holmes are used for:", options: ["Network monitoring", "Finding usernames across platforms", "Cracking Wi-Fi passwords", "Encrypting files"], correct: 1 },
+          { question: "What is geolocation in OSINT?", options: ["Tracking malware activity", "Identifying a physical location from clues in data/images", "Encrypting GPS signals", "Blocking IP addresses"], correct: 1 },
+          { question: "Which platform is commonly used to verify locations visually in OSINT investigations?", options: ["Photoshop", "Google Street View", "Notepad", "Blender"], correct: 1 },
+          { question: "What is an important ethical rule in OSINT?", options: ["Access private accounts without permission", "Use data for blackmail", "Stay within legal boundaries and respect privacy", "Share sensitive data publicly"], correct: 2 }
+        ]
+      },
+      {
+        title: "APK Analysis", moduleTitle: "Reverse Engineering",
+        video: "3ZFRPM9MMDA",
+        quiz: [
+          { question: "What is an APK file in Android?", options: ["A database file", "An Android application package", "A system log file", "A network protocol"], correct: 1 },
+          { question: "What is the main goal of APK reverse engineering?", options: ["Encrypting the app", "Understanding the app's internal logic", "Increasing app performance", "Compressing app size"], correct: 1 },
+          { question: "Which file inside an APK contains compiled bytecode?", options: ["AndroidManifest.xml", "resources.arsc", "classes.dex", "build.gradle"], correct: 2 },
+          { question: "What does the dex2jar tool do?", options: ["Converts APK to XML", "Converts DEX files to JAR format", "Encrypts Java code", "Compresses APK size"], correct: 1 },
+          { question: "Which tool is used to view decompiled Java code from a JAR file?", options: ["Wireshark", "JD-GUI", "Nmap", "Burp Suite"], correct: 1 },
+          { question: "What is the purpose of renaming an APK file to .zip?", options: ["To execute it faster", "To debug it", "To extract its contents like an archive", "To install it manually"], correct: 2 },
+          { question: "Which tool automates APK decompilation with a graphical interface?", options: ["Metasploit", "Bytecode Viewer", "Aircrack-ng", "SQLMap"], correct: 1 },
+          { question: "What type of code is stored inside classes.dex?", options: ["HTML code", "Machine code", "Dalvik/ART bytecode", "Python scripts"], correct: 2 },
+          { question: "Why do ethical hackers analyze app source code?", options: ["To redesign UI", "To find vulnerabilities and logic flaws", "To improve graphics", "To reduce file size"], correct: 1 },
+          { question: "What is an important ethical rule in reverse engineering?", options: ["Share cracked apps publicly", "Modify apps for profit", "Only perform analysis with permission and for learning/security", "Bypass payment systems"], correct: 2 }
+        ]
+      }
+    ];
+
+    window.activeCourseVideo = null;
+    function getActivePlaylist() { return window.activeCourseVideo ? [window.activeCourseVideo] : RECORDED_MODULES; }
+
+    const LABELS = ['A', 'B', 'C', 'D'];
+    const PASS_THRESHOLD = 8;
+    let current = 0; let score = 0;
+    let userPicks = []; let answered = false;
+    let activeModule = 0;
+
+    function renderStartScreen(m) {
+      const PLAYLIST = getActivePlaylist();
+      const qh = document.getElementById('quiz-header-' + m); if (qh) qh.style.display = 'none';
+      const pw = document.getElementById('progress-wrap-' + m); if (pw) pw.style.display = 'none';
+      const rc = document.getElementById('results-card-' + m); if (rc) rc.classList.remove('show');
+      const qc = document.getElementById('quiz-container-' + m);
+      if (!qc) return;
+      qc.innerHTML = `
+    <div class="start-card">
+      <div class="start-eyebrow"><div class="eyebrow-dot"></div>TRAINING MODULE — QUIZ 0${m + 1}</div>
+      <div class="start-icon">
+        <svg width="28" height="28" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"/>
+        </svg>
+      </div>
+      <h1 class="start-title">${PLAYLIST[m].title}<br/><span>${PLAYLIST[m].moduleTitle || 'COURSE MODULE'}</span></h1>
+      <p class="start-module">Quiz ${String(m + 1).padStart(2, '0')} &nbsp;·&nbsp; Beginner Level &nbsp;·&nbsp; ${PLAYLIST[m].quiz.length} Questions</p>
+      <div class="start-divider"></div>
+      <div class="start-warning">
+        <div class="warn-icon">
+          <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/></svg>
+        </div>
+        <div class="warn-body">
+          <span class="warn-title">// Attempt this quiz only after watching the class</span>
+          <p class="warn-text">
+            All questions are <strong>directly based on the recorded class.</strong>
+            If you haven't watched it yet, go back and complete the session first.
+          </p>
+        </div>
+      </div>
+      <div class="start-info">
+        <div class="info-row">
+          <svg width="15" height="15" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+          <span><span class="info-label">Questions</span> ${PLAYLIST[m].quiz.length} multiple choice, one correct answer each</span>
+        </div>
+        <div class="info-row">
+          <svg width="15" height="15" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+          <span><span class="info-label">To Pass</span> Score at least 80% to unlock the next class</span>
+        </div>
+        <div class="info-row">
+          <svg width="15" height="15" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+          <span><span class="info-label">Results</span> Answers and score revealed only at the end</span>
+        </div>
+        <div class="info-row">
+          <svg width="15" height="15" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/></svg>
+          <span><span class="info-label">Retries</span> Unlimited — you can retake until you pass</span>
+        </div>
+      </div>
+      <div class="start-cta">
+        <button class="btn-start" onclick="startQuiz(${m})">
+          START QUIZ
+          <svg width="14" height="14" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </button>
+      </div>
     </div>
-    <div class="sidebar-divider"></div>
-    <div class="sidebar-section">
-      <div class="sidebar-label">Courses</div>
-      <div class="sidebar-course" id="sidebar-courses"></div>
-    </div>
-  </aside>
+  `;
+    }
 
-  <!-- Main -->
-  <main class="main" id="main-content"></main>
-</div>
+    function startQuiz(m) {
+      activeModule = m;
+      const PLAYLIST = getActivePlaylist();
+      const QUESTIONS = PLAYLIST[m].quiz;
+      current = 0; score = 0; userPicks = new Array(QUESTIONS.length).fill(null); answered = false;
+      document.getElementById('results-card-' + m).classList.remove('show');
 
-<script>
-/* ── Helpers ── */
-function getUsers(){return JSON.parse(localStorage.getItem('dflms_users')||'[]');}
-function getCourses(){return JSON.parse(localStorage.getItem('dflms_courses')||'[]');}
-function getProgress(){return JSON.parse(localStorage.getItem('dflms_progress')||'{}');}
-function saveProgress(p){localStorage.setItem('dflms_progress',JSON.stringify(p));}
-function logout(){sessionStorage.removeItem('dflms_session');window.location.href='index.html';}
+      const header = document.getElementById('quiz-header-' + m);
+      if (header) header.style.display = 'block';
+      const prog = document.getElementById('progress-wrap-' + m);
+      if (prog) prog.style.display = '';
 
-/* ── Per-user progress key ── */
-function userKey(videoId){return `${user.id}_${videoId}`;}
+      renderQuestion();
+    }
 
-function isWatched(videoId){
-  const p=getProgress();
-  return !!(p[userKey(videoId)]?.watched);
-}
-function isQuizPassed(videoId){
-  const p=getProgress();
-  return !!(p[userKey(videoId)]?.quizPassed);
-}
+    function renderQuestion() {
+      const m = activeModule;
+      const PLAYLIST = getActivePlaylist();
+      const QUESTIONS = PLAYLIST[m].quiz;
+      answered = false; const q = QUESTIONS[current]; updateProgress();
+      const container = document.getElementById('quiz-container-' + m); container.innerHTML = '';
+      const card = document.createElement('div'); card.className = 'question-card';
+      card.innerHTML = `<div class="q-header"><div class="q-num">${String(current + 1).padStart(2, '0')}</div><div class="q-text">${q.question}</div></div>`;
+      const opts = document.createElement('div'); opts.className = 'q-options';
+      q.options.forEach((opt, i) => {
+        const btn = document.createElement('button'); btn.className = 'option-btn';
+        btn.innerHTML = `<span class="option-key">${LABELS[i]}</span><span class="option-label">${opt}</span>`;
+        btn.onclick = () => selectAnswer(i, card, q); opts.appendChild(btn);
+      });
+      card.appendChild(opts);
+      const nav = document.createElement('div'); nav.className = 'q-nav'; nav.style.cssText = 'padding:0 22px 20px;';
+      nav.innerHTML = `<div style="font-size:9px;letter-spacing:.14em;color:var(--cream-3);text-transform:uppercase">${current + 1} / ${QUESTIONS.length}</div>
+    <button class="btn-nav primary" id="next-btn" onclick="nextQuestion()" style="display:none">${current < QUESTIONS.length - 1 ? 'NEXT QUESTION' : 'SEE RESULTS'}</button>`;
+      card.appendChild(nav); container.appendChild(card);
+    }
 
-/* ── Compute if video is unlocked ── */
-function isUnlocked(course,videoIndex){
-  if(videoIndex===0)return true;
-  const prevVideo=course.videos[videoIndex-1];
-  if(!prevVideo.quiz||!prevVideo.quiz.length)return isWatched(prevVideo.id);
-  return isQuizPassed(prevVideo.id);
-}
+    function selectAnswer(idx, card, q) {
+      if (answered) return; answered = true; userPicks[current] = idx; if (idx === q.correct) score++;
+      card.querySelectorAll('.option-btn').forEach((b, i) => {
+        b.disabled = true;
+        if (i === idx) {
+          b.style.borderColor = 'rgba(0,123,255,.6)'; b.style.background = 'rgba(0,123,255,.1)'; b.style.color = 'var(--cream)';
+          b.querySelector('.option-key').style.borderColor = 'var(--blue)'; b.querySelector('.option-key').style.color = 'var(--blue)';
+        } else { b.style.opacity = '.35'; }
+      });
+      document.getElementById('next-btn').style.display = 'inline-flex'; updateProgress();
+    }
 
-/* ── Progress for a course ── */
-function courseProgress(course){
-  if(!course.videos||!course.videos.length)return {done:0,total:0,pct:0};
-  const done=course.videos.filter(v=>isQuizPassed(v.id)).length;
-  return {done,total:course.videos.length,pct:Math.round((done/course.videos.length)*100)};
-}
+    function nextQuestion() {
+      const m = activeModule;
+      const PLAYLIST = getActivePlaylist();
+      const QUESTIONS = PLAYLIST[m].quiz;
+      if (current < QUESTIONS.length - 1) { current++; renderQuestion(); } else { showResults(); }
+    }
 
-/* ── Render sidebar course list ── */
-function renderSidebar(){
-  const courses=getCourses();
-  const el=document.getElementById('sidebar-courses');
-  if(!courses.length){el.innerHTML='<div style="font-size:9px;color:var(--cream-3);padding:8px 12px;">No courses yet</div>';return;}
-  el.innerHTML=courses.map(c=>{
-    const {pct}=courseProgress(c);
-    return `<div class="sidebar-course-item" onclick="scrollToCourse('${c.id}')">
-      <span style="color:var(--blue);font-size:8px;">//</span>
-      <span style="flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">${c.title}</span>
-      <span class="sidebar-course-progress">${pct}%</span>
-    </div>`;
-  }).join('');
-}
+    function updateProgress() {
+      const m = activeModule;
+      const PLAYLIST = getActivePlaylist();
+      const QUESTIONS = PLAYLIST[m].quiz;
+      document.getElementById('progress-fill-' + m).style.width = Math.max(((current) / QUESTIONS.length) * 100, 5) + '%';
+      document.getElementById('progress-label-' + m).textContent = `QUESTION ${current + 1} / ${QUESTIONS.length}`;
+    }
 
-/* ── Overall stats ── */
-function renderStats(){
-  const courses=getCourses();
-  let totalVideos=0,passedQuizzes=0,totalQuizzes=0;
-  courses.forEach(c=>{
-    (c.videos||[]).forEach(v=>{
-      totalVideos++;
-      if(v.quiz&&v.quiz.length)totalQuizzes++;
-      if(isQuizPassed(v.id))passedQuizzes++;
-    });
-  });
-  const watchedVideos=courses.reduce((acc,c)=>{
-    return acc+(c.videos||[]).filter(v=>isWatched(v.id)).length;
-  },0);
-  return {courses:courses.length,watchedVideos,passedQuizzes,totalVideos,totalQuizzes};
-}
+    function showResults() {
+      const m = activeModule;
+      const PLAYLIST = getActivePlaylist();
+      const QUESTIONS = PLAYLIST[m].quiz;
+      document.getElementById('quiz-container-' + m).innerHTML = '';
+      const pwrap = document.getElementById('progress-wrap-' + m);
+      if (pwrap) pwrap.style.display = 'none';
 
-/* ── View: Courses ── */
-function showView(view){
-  document.querySelectorAll('.sidebar-item').forEach(b=>b.classList.remove('active'));
-  document.querySelectorAll('.sidebar-item')[view==='courses'?0:1]?.classList.add('active');
+      const PASS_COUNT = Math.ceil(QUESTIONS.length * 0.8);
+      const passed = score >= PASS_COUNT;
+      const pct = Math.round((score / QUESTIONS.length) * 100);
 
-  const courses=getCourses();
-  const stats=renderStats();
-  const main=document.getElementById('main-content');
+      document.getElementById('results-score-' + m).textContent = `${score}/${QUESTIONS.length}`;
+      document.getElementById('results-score-' + m).style.color = passed ? 'var(--green)' : 'var(--red)';
+      document.getElementById('results-pct-' + m).textContent = `${pct}% ACCURACY`;
+      document.getElementById('results-title-' + m).textContent = passed ? 'CLEARED' : 'FAILED';
+      document.getElementById('results-card-' + m).style.borderTopColor = passed ? 'var(--green)' : 'var(--red)';
 
-  if(view==='courses'){
-    if(!courses.length){
-      main.innerHTML=`
+      const banner = document.getElementById('unlock-banner-' + m);
+      if (passed) {
+        banner.className = 'unlock-banner pass'; banner.innerHTML = `<span class="ub-icon"><svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 11V7a4 4 0 118 0m-4 8v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2z"/></svg></span><span class="ub-label">// ACCESS GRANTED</span>Score: ${score}/${QUESTIONS.length}. Next class unlocked. You are cleared to proceed.`;
+        
+        if (window.activeCourseVideo) {
+          const p = getProgress();
+          const vId = window.activeCourseVideo.id;
+          if (!p[userKey(vId)]) p[userKey(vId)] = {};
+          p[userKey(vId)].quizPassed = true;
+          p[userKey(vId)].watched = true;
+          saveProgress(p);
+          renderSidebar(); 
+          // If we are in the Classroom view, we don't necessarily want to jump away, 
+          // but we want the "Back" button to show the updated "Course Complete" state.
+        } else {
+          localStorage.setItem('dflms_rec_passed_' + m, 'true');
+          // Unlock strictly the next module:
+          const nextM = m + 1;
+          const PLAYLIST = getActivePlaylist();
+          const nc = document.getElementById('mod-' + nextM);
+          if (nc && nextM < PLAYLIST.length) {
+            nc.style.borderColor = 'var(--green)'; nc.style.borderTopColor = 'var(--green)';
+            const e = document.getElementById('nc-eyebrow-' + nextM); if (e) { e.textContent = '[UNLOCKED] NEXT SESSION'; e.style.color = 'var(--green)'; }
+            const o = document.getElementById('nc-overlay-' + nextM); if (o) o.style.display = 'none';
+            const w = document.getElementById('nc-iframe-wrap-' + nextM); if (w) w.style.cssText = 'position:relative;padding-bottom:56.25%;height:0;overflow:hidden; pointer-events:auto; opacity:1; filter:none; transition:all 0.5s ease;';
+          }
+        }
+      } else {
+        banner.className = 'unlock-banner fail'; banner.innerHTML = `<span class="ub-icon"><svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/></svg></span><span class="ub-label">// ACCESS DENIED</span>Score: ${score}/${QUESTIONS.length}. You need at least 80% to unlock the next class.`;
+      }
+
+      document.getElementById('verdict-text-' + m).textContent = score === 10 ? 'Outstanding. Perfect score — you have mastered the fundamentals. Proceed to the next module immediately.' : passed ? `Strong performance. ${10 - score} question(s) missed — review the flagged answers below.` : `Below threshold. You missed ${10 - score} question(s). Retry this quiz before proceeding.`;
+
+      const reviewList = document.getElementById('review-list-' + m);
+      const wrongOnes = QUESTIONS.filter((q, i) => userPicks[i] !== q.answer);
+      if (wrongOnes.length === 0) {
+        reviewList.innerHTML = `<div style="font-size:9px;letter-spacing:.22em;color:var(--green);text-transform:uppercase;padding:16px 0;text-align:center;display:flex;align-items:center;justify-content:center;gap:8px;"><svg width="14" height="14" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg> ALL ANSWERS CORRECT</div>`;
+      } else {
+        reviewList.innerHTML = `<div style="font-size:9px;letter-spacing:.22em;color:var(--red);text-transform:uppercase;margin-bottom:12px;padding-bottom:10px;border-bottom:1px solid var(--wire)">// INCORRECT ANSWERS — ${wrongOnes.length} MISTAKE${wrongOnes.length > 1 ? 'S' : ''}</div>`;
+        QUESTIONS.forEach((q, i) => {
+          const picked = userPicks[i]; if (picked === q.answer) return;
+          const yourAnswer = picked !== null ? `${LABELS[picked]}) ${q.opts[picked]}` : 'No answer';
+          reviewList.innerHTML += `<div class="review-item" style="border-color:rgba(255,95,87,.25); border-left:2px solid var(--red);">
+        <div style="flex:1;min-width:0"><span class="review-q" style="margin-bottom:8px">Q${i + 1}: ${q.q}</span>
+        <div style="display:flex;flex-direction:column;gap:5px;margin-top:6px"><span style="font-size:10px;color:var(--red);display:flex;align-items:center;gap:6px;"><svg width="12" height="12" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg> Your answer: &nbsp;<strong>${yourAnswer}</strong></span></div></div></div>`;
+        });
+      }
+      document.getElementById('results-card-' + m).classList.add('show');
+
+      const btnNext = document.getElementById('btn-next-class-' + m);
+      if (btnNext) {
+        if (passed && m < RECORDED_MODULES.length - 1) {
+          btnNext.style.display = 'inline-flex';
+        } else {
+          btnNext.style.display = 'none';
+        }
+      }
+      document.getElementById('results-card-' + m).scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+
+    /* ── Render sidebar course list ── */
+    /* ── Sidebar: Assigned Courses ── */
+    function renderSidebar() {
+      const courses = getCourses();
+      const cont = document.getElementById('sidebar-courses');
+      if (!cont) return;
+
+      if (!courses.length) {
+        cont.innerHTML = '<div style="padding:16px; font-size:9px; color:var(--cream-3); text-transform:uppercase; border:1px dashed var(--wire);">No tracks assigned</div>';
+        return;
+      }
+
+      cont.innerHTML = courses.map(c => {
+        const { done, total } = courseProgress(c);
+        return `
+          <div class="sidebar-course-item" onclick="scrollToCourse('${c.id}')">
+            <span style="white-space:nowrap; overflow:hidden; text-overflow:ellipsis; flex:1;">${c.title}</span>
+            <span class="sidebar-course-progress">${done}/${total}</span>
+          </div>`;
+      }).join('');
+    }
+
+    /* ── Overall stats ── */
+    function renderStats() {
+      const courses = getCourses();
+      const p = getProgress();
+      let watchedVideos = 0, passedQuizzes = 0, totalVideos = 0;
+      
+      // Curriculum progress
+      courses.forEach(c => {
+        (c.videos || []).forEach(v => {
+          totalVideos++;
+          if (p[userKey(v.id)]?.watched) watchedVideos++;
+          if (p[userKey(v.id)]?.quizPassed) passedQuizzes++;
+        });
+      });
+
+      // Archive progress
+      RECORDED_MODULES.forEach((rec, i) => {
+        totalVideos++;
+        if (localStorage.getItem('dflms_rec_passed_' + i) === 'true') {
+          passedQuizzes++;
+          watchedVideos++;
+        }
+      });
+
+      return { courses: courses.length, watchedVideos, passedQuizzes, totalVideos };
+    }
+
+    /* ── View: Courses ── */
+    function showView(view, fromSidebar = true) {
+      if (fromSidebar && view === 'recorded') window.activeCourseVideo = null; 
+      
+      document.querySelectorAll('.sidebar-item').forEach(b => b.classList.remove('active'));
+      const navIndex = view === 'courses' ? 0 : view === 'progress' ? 1 : 2;
+      document.querySelectorAll('.sidebar-item')[navIndex]?.classList.add('active');
+
+      const courses = getCourses();
+      const stats = renderStats();
+      const main = document.getElementById('main-content');
+
+      if (view === 'courses') {
+        if (!courses.length) {
+          main.innerHTML = `
         <div class="section-hdr"><span class="shdr-id">[DSH]</span><span class="shdr-title">MY COURSES</span><span class="shdr-right">STUDENT PORTAL</span></div>
         <div class="welcome-strip">
           <div class="welcome-eyebrow">// WELCOME BACK</div>
@@ -283,10 +1910,10 @@ function showView(view){
           <div class="empty-state-title">NO COURSES YET</div>
           <p class="empty-state-sub">Courses will be assigned by your admin. Check back soon.</p>
         </div>`;
-      return;
-    }
+          return;
+        }
 
-    main.innerHTML=`
+        main.innerHTML = `
       <div class="section-hdr"><span class="shdr-id">[DSH]</span><span class="shdr-title">MY COURSES</span><span class="shdr-right">${courses.length} ACTIVE TRACKS</span></div>
       <div class="welcome-strip">
         <div class="welcome-eyebrow">// WELCOME BACK, ${user.name.toUpperCase()}</div>
@@ -301,95 +1928,284 @@ function showView(view){
       <div style="padding:24px 24px 0;"><div style="font-size:8.5px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--blue);margin-bottom:20px;">// ENROLLED COURSES</div></div>
       <div id="course-list" style="padding:0 24px 40px;display:flex;flex-direction:column;gap:24px;"></div>`;
 
-    renderCourseList(courses);
-  } else {
-    // Progress view
-    main.innerHTML=`
+        renderCourseList(courses);
+      } else if (view === 'progress') {
+        // Progress view
+        main.innerHTML = `
       <div class="section-hdr"><span class="shdr-id">[PRG]</span><span class="shdr-title">MY PROGRESS</span><span class="shdr-right">LEARNING TRACKER</span></div>
       <div class="welcome-strip">
         <div class="welcome-eyebrow">// MISSION STATUS</div>
         <h1 class="welcome-h">PROGRESS<br/><span>REPORT.</span></h1>
       </div>
       <div style="padding:24px;">
-        ${courses.map(c=>{
-          const {done,total,pct}=courseProgress(c);
-          return `<div style="margin-bottom:28px;padding:20px;border:1px solid var(--wire);border-left:2px solid var(--blue);">
+        ${courses.map(c => {
+          const { done, total, pct } = courseProgress(c);
+          return `<div style="margin-bottom:28px;padding:20px;border:1px solid var(--wire);border-top:2px solid var(--blue);background:var(--void-1);">
             <div style="font-size:9px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--blue);margin-bottom:6px;">${c.title}</div>
             <div style="display:flex;justify-content:space-between;font-size:10px;color:var(--cream-3);margin-bottom:8px;">
               <span>${done} / ${total} lessons complete</span><span>${pct}%</span>
             </div>
-            <div style="height:3px;background:var(--wire-2);overflow:hidden;"><div style="height:100%;background:var(--blue);width:${pct}%;transition:width .8s;"></div></div>
-            ${(c.videos||[]).map((v,i)=>{
-              const watched=isWatched(v.id);
-              const passed=isQuizPassed(v.id);
-              return `<div style="display:flex;align-items:center;gap:10px;padding:8px 0;border-bottom:1px solid rgba(30,30,30,.6);font-size:10px;color:${passed?'var(--green)':watched?'var(--blue)':'var(--cream-3)'};">
-                <span style="font-size:8px;font-weight:700;flex-shrink:0;">${String(i+1).padStart(2,'0')}</span>
-                <span style="flex:1;">${v.title}</span>
-                <span style="font-size:9px;">${passed?'✓ PASSED':watched?'● WATCHED':'○ PENDING'}</span>
+            <div style="height:3px;background:var(--wire-2);overflow:hidden;margin-bottom:12px;"><div style="height:100%;background:var(--blue);width:${pct}%;transition:width .8s;"></div></div>
+            <div style="display:grid;grid-template-columns:repeat(auto-fill, minmax(200px, 1fr));gap:10px;">
+            ${(c.videos || []).map((v, i) => {
+            const watched = isWatched(v.id);
+            const passed = isQuizPassed(v.id);
+            const unlocked = isUnlocked(c, i);
+            return `<div onclick="${unlocked ? `openVideo('${c.id}','${v.id}')` : ''}" style="display:flex;align-items:center;gap:10px;padding:10px;border:1px solid var(--wire);font-size:10px;color:${passed ? 'var(--green)' : watched ? 'var(--blue)' : 'var(--cream-3)'};cursor:${unlocked ? 'pointer' : 'not-allowed'};opacity:${unlocked ? 1 : 0.5};background:rgba(255,255,255,0.02)">
+                <span style="font-size:8px;font-weight:700;flex-shrink:0;">${String(i + 1).padStart(2, '0')}</span>
+                <span style="flex:1;text-overflow:ellipsis;overflow:hidden;white-space:nowrap;">${v.title}</span>
+                <span style="font-size:9px;">
+                  ${passed 
+                    ? '<svg width="12" height="12" fill="none" stroke="var(--green)" viewBox="0 0 24 24" style="filter: drop-shadow(0 0 4px var(--green))"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"/></svg>' 
+                    : watched 
+                      ? '<svg width="10" height="10" fill="var(--blue)" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"/></svg>' 
+                      : unlocked ? '<svg width="12" height="12" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"/></svg>'
+                      : '<svg width="12" height="12" fill="none" stroke="currentColor" viewBox="0 0 24 24" style="opacity:0.3"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/></svg>'}
+                </span>
               </div>`;
-            }).join('')}
+          }).join('')}
+            </div>
+          </div>`;
+        }).join('')}
+
+        <div style="margin-top:40px;margin-bottom:20px;font-size:8.5px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--amber);">// SESSION ARCHIVE PROGRESS</div>
+        <div style="display:grid;grid-template-columns:repeat(auto-fill, minmax(280px, 1fr));gap:20px;">
+          ${RECORDED_MODULES.map((rec, i) => {
+            const passed = localStorage.getItem('dflms_rec_passed_' + i) === 'true';
+            const prevPassed = i === 0 || localStorage.getItem('dflms_rec_passed_' + (i - 1)) === 'true';
+            const jumpToIdx = `showView('recorded', false); setTimeout(() => { if(window.switchRecVideo) { window.currentRecVideo = ${i}; window.switchRecVideo(0); } }, 100)`;
+            return `<div ${prevPassed ? `onclick="${jumpToIdx}"` : ''} style="padding:16px;border:1px solid var(--wire);border-left:2px solid ${passed ? 'var(--green)' : 'var(--amber)'};background:var(--void-1);cursor:${prevPassed?'pointer':'not-allowed'};opacity:${prevPassed?1:0.5};">
+              <div style="font-size:8px;color:var(--cream-3);margin-bottom:4px;">SESSION 0${i+1}</div>
+              <div style="font-size:12px;font-weight:500;margin-bottom:10px;text-transform:uppercase;">${rec.title}</div>
+              <div style="display:flex;align-items:center;gap:8px;">
+                <span style="font-size:8px;font-weight:700;padding:2px 6px;background:${passed?'var(--green)':'var(--void-2)'};color:${passed?'#000':'var(--cream-3)'};">${passed?'COMPLETED':'PENDING'}</span>
+                ${!passed && prevPassed ? '<span style="font-size:8px;color:var(--amber);">READY TO START →</span>' : ''}
+              </div>
+            </div>`;
+          }).join('')}
+        </div>
+      </div>`;
+      } else if (view === 'recorded') {
+        const PLAYLIST = getActivePlaylist();
+        const isArchive = !window.activeCourseVideo;
+
+        main.innerHTML = `
+      <div class="section-hdr"><span class="shdr-id">[REC]</span><span class="shdr-title">${isArchive ? 'RECORDED CLASSES' : 'ACTIVE LESSON'}</span><span class="shdr-right">${isArchive ? 'ARCHIVE' : 'CLASSROOM'}</span></div>
+      <div class="welcome-strip">
+        <div class="welcome-eyebrow">// ${isArchive ? 'VIDEO ARCHIVE' : 'CURRENT MODULE'}</div>
+        <h1 class="welcome-h">${isArchive ? 'PAST' : 'CLASS'}<br/><span>${isArchive ? 'SESSIONS.' : 'SESSION.'}</span></h1>
+        <p class="welcome-sub">${isArchive ? 'Access recordings of past live classes and seminars.' : 'Complete the lesson and pass the quiz to progress.'}</p>
+        <div id="rec-nav-controls" style="${isArchive ? 'display:none' : 'display:none'}; align-items:center; gap:12px; margin-top:24px;">
+           <button class="btn-nav" id="btn-prev-rec" onclick="switchRecVideo(-1)" disabled>&larr; PREVIOUS</button>
+           <button class="btn-nav primary" id="btn-next-rec" onclick="switchRecVideo(1)">NEXT SESSION &rarr;</button>
+        </div>
+      </div>
+
+      <div style="padding:24px;">
+        ${PLAYLIST.map((mod, i) => {
+          let lockedHTML = '';
+          let borderColor = i === 0 ? 'var(--blue)' : 'var(--wire)';
+          const passed = isArchive ? (localStorage.getItem('dflms_rec_passed_' + i) === 'true') : isQuizPassed(mod.id);
+          
+          if (i > 0 && isArchive) {
+            const prevPassed = localStorage.getItem('dflms_rec_passed_' + (i - 1)) === 'true';
+            if (!prevPassed) {
+              lockedHTML = `
+              <div id="nc-overlay-${i}" style="display:flex; position:absolute; inset:20px; z-index:10; background:rgba(10,10,10,0.85); backdrop-filter:blur(2px); flex-direction:column; align-items:center; justify-content:center; text-align:center; border:1px dashed var(--wire-2);">
+                <span style="margin-bottom:12px;color:var(--cream-3);"><svg width="32" height="32" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/></svg></span>
+                <div style="font-size:8px; letter-spacing:0.2em; text-transform:uppercase; color:var(--cream-3);">Locked: Pass previous test</div>
+              </div>`;
+            }
+          }
+          return `
+          <div id="mod-${i}" style="display:${i === 0 ? 'block' : 'none'}; margin-bottom:24px; border:1px solid ${borderColor};border-top:2px solid ${borderColor};background:var(--void-1); transition:all 0.4s ease;">
+            <div style="padding:20px 20px 14px;border-bottom:1px solid var(--wire);">
+              <div id="nc-eyebrow-${i}" style="font-size:9px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:${passed ? 'var(--green)' : i === 0 ? 'var(--blue)' : 'var(--cream-3)'};margin-bottom:6px; display:flex; align-items:center; gap:6px;">
+                ${passed ? '<svg width="10" height="10" fill="none" stroke="currentColor" viewBox="0 0 24 24" style="stroke-width:3"><path d="M5 13l4 4L19 7"/></svg>' : ''}
+                ${passed ? `[COMPLETED] SESSION 0${i+1}` : i === 0 ? `[REC] LATEST SESSION` : `[LOCKED] RESTRICTED ACCESS`}
+              </div>
+              <div style="font-family:var(--font-d);font-size:28px;line-height:.95;letter-spacing:.02em;color:var(--cream);margin-bottom:6px;">${mod.title}</div>
+            </div>
+            <div style="padding:20px; position:relative;">
+              ${lockedHTML}
+              <div id="nc-iframe-wrap-${i}" style="position:relative;padding-bottom:56.25%;height:0;overflow:hidden; ${i > 0 ? 'pointer-events:none; opacity:0.12; filter:grayscale(100%);' : 'pointer-events:auto;'}">
+                <iframe style="position:absolute;top:0;left:0;width:100%;height:100%;border:0;" src="https://www.youtube.com/embed/${mod.video}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+              </div>
+              
+              <div class="quiz-wrapper" style="margin-top:40px; border-top:1px solid var(--wire); padding-top:40px;">
+                <div class="quiz-header" id="quiz-header-${i}" style="display:none">
+                  <p class="quiz-eyebrow">TRAINING MODULE — QUIZ 0${i + 1}</p>
+                  <h1 class="quiz-title">${mod.moduleTitle}<br/><span>${mod.title}</span></h1>
+                  <div class="quiz-meta">
+                    <span class="quiz-badge live">INTERACTIVE</span>
+                    <span class="quiz-badge">10 QUESTIONS</span>
+                    <span class="quiz-badge">BEGINNER LEVEL</span>
+                  </div>
+                </div>
+                <div class="progress-wrap" id="progress-wrap-${i}">
+                  <div class="progress-top">
+                    <span id="progress-label-${i}">QUESTION 1 / 10</span>
+                    <span style="font-size:9px;letter-spacing:.14em;color:var(--cream-3);text-transform:uppercase">ANSWERS REVEALED AT END</span>
+                  </div>
+                  <div class="progress-track"><div class="progress-fill" id="progress-fill-${i}"></div></div>
+                </div>
+                <div id="quiz-container-${i}"></div>
+                
+                <div class="results-card" id="results-card-${i}">
+                  <div class="term-status"><div class="term-dot-g"></div>SESSION COMPLETE — RESULTS COMPILED</div>
+                  <div class="results-title" id="results-title-${i}">MISSION</div>
+                  <div class="results-score-txt" id="results-score-${i}">0/10</div>
+                  <div class="results-sub" id="results-pct-${i}">0% ACCURACY</div>
+                  <div class="unlock-banner" id="unlock-banner-${i}"></div>
+                  <div class="results-verdict" id="results-verdict-${i}">
+                    <span class="verdict-tag">// DEBRIEF</span><span id="verdict-text-${i}"></span>
+                  </div>
+                  <div class="review-list" id="review-list-${i}"></div>
+                  <br/>
+                  <div style="display:flex;align-items:center;justify-content:center;gap:12px;flex-wrap:wrap">
+                    <button class="btn-restart" onclick="startQuiz(${i})">
+                      <svg width="13" height="13" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/></svg>
+                      RETRY QUIZ
+                    </button>
+                    ${i < PLAYLIST.length - 1 ? `
+                    <button class="btn-next" id="btn-next-class-${i}" onclick="switchRecVideo(1); window.scrollTo({top:0, behavior:'smooth'});" style="display:none">
+                      PROCEED TO NEXT MODULE
+                      <svg width="13" height="13" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h14M12 5l7 7-7 7"/></svg>
+                    </button>` : (!isArchive ? `<button class="btn-next" style="background:var(--green); color:#000; display:none" id="btn-next-class-${i}" onclick="showView('courses')">COURSE COMPLETE — GO BACK</button>` : '')}
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>`;
         }).join('')}
       </div>`;
-  }
-}
 
-/* ── Render course cards ── */
-function renderCourseList(courses){
-  const el=document.getElementById('course-list');
-  if(!el)return;
-  el.innerHTML=courses.map(course=>{
-    const {done,total,pct}=courseProgress(course);
-    const videos=course.videos||[];
-    const videoRows=videos.map((v,i)=>{
-      const unlocked=isUnlocked(course,i);
-      const passed=isQuizPassed(v.id);
-      const watched=isWatched(v.id);
-      let cls='video-row';
-      if(!unlocked)cls+=' locked';
-      if(passed)cls+=' completed';
-      const onclick=unlocked?`openVideo('${course.id}','${v.id}')`:'';
-      return `<div class="${cls}" ${onclick?`onclick="${onclick}"`:''}
-        title="${unlocked?v.title:'Complete previous quiz to unlock'}">
-        <span class="vi-num">${String(i+1).padStart(2,'0')}</span>
+        PLAYLIST.forEach((mod, i) => { setTimeout(() => renderStartScreen(i), 0); });
+
+        setTimeout(() => {
+          const nav = document.getElementById('rec-nav-controls');
+          if (nav && isArchive) nav.style.display = 'flex';
+
+          if (!window.switchRecVideo) {
+            window.currentRecVideo = 0;
+            window.switchRecVideo = function (dir) {
+              const LIST = getActivePlaylist();
+              window.currentRecVideo += dir;
+              if (window.currentRecVideo < 0) window.currentRecVideo = 0;
+              if (window.currentRecVideo >= LIST.length) window.currentRecVideo = LIST.length - 1;
+
+              LIST.forEach((mod, idx) => {
+                const el = document.getElementById('mod-' + idx);
+                if (el) el.style.display = (window.currentRecVideo === idx) ? 'block' : 'none';
+              });
+
+              const prevB = document.getElementById('btn-prev-rec');
+              const nextB = document.getElementById('btn-next-rec');
+              if (prevB) prevB.disabled = (window.currentRecVideo === 0);
+              if (nextB) nextB.disabled = (window.currentRecVideo === LIST.length - 1);
+            };
+          }
+
+          window.switchRecVideo(0);
+
+          // Setup unlock states for archive
+          if (isArchive) {
+            RECORDED_MODULES.forEach((mod, idx) => {
+              if (idx > 0 && localStorage.getItem('dflms_rec_passed_' + (idx - 1)) === 'true') {
+                const nc = document.getElementById('mod-' + idx);
+                if (nc) {
+                  nc.style.borderColor = 'var(--green)'; nc.style.borderTopColor = 'var(--green)';
+                  const e = document.getElementById('nc-eyebrow-' + idx); if (e) { e.textContent = '[UNLOCKED] NEXT SESSION'; e.style.color = 'var(--green)'; }
+                  const o = document.getElementById('nc-overlay-' + idx); if (o) o.style.display = 'none';
+                  const w = document.getElementById('nc-iframe-wrap-' + idx); if (w) w.style.cssText = 'position:relative;padding-bottom:56.25%;height:0;overflow:hidden; pointer-events:auto; opacity:1; filter:none; transition:all 0.5s ease;';
+                }
+              }
+            });
+          }
+        }, 50);
+      }
+    }
+
+    /* ── Render course cards ── */
+    function renderCourseList(courses) {
+      const el = document.getElementById('course-list');
+      if (!el) return;
+      el.innerHTML = courses.map(course => {
+        const { done, total, pct } = courseProgress(course);
+        const videos = course.videos || [];
+        const videoRows = videos.map((v, i) => {
+          const unlocked = isUnlocked(course, i);
+          const passed = isQuizPassed(v.id);
+          const watched = isWatched(v.id);
+          let cls = 'video-row';
+          if (!unlocked) cls += ' locked';
+          if (passed) cls += ' completed';
+          const onclick = unlocked ? `openVideo('${course.id}','${v.id}')` : '';
+          return `<div class="${cls}" ${onclick ? `onclick="${onclick}"` : ''}
+        title="${unlocked ? v.title : 'Complete previous quiz to unlock'}">
+        <span class="vi-num">${String(i + 1).padStart(2, '0')}</span>
         <span class="vi-title">${v.title}</span>
-        <span class="vi-status">${passed?'✓':watched?'●':unlocked?'▶':'🔒'}</span>
+        <span class="vi-status" style="${passed ? 'color:var(--green)' : watched ? 'color:var(--blue)' : ''}">
+          ${passed 
+            ? '<svg width="14" height="14" fill="none" stroke="currentColor" viewBox="0 0 24 24" style="filter: drop-shadow(0 0 4px var(--green))"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"/></svg>' 
+            : watched 
+              ? '<svg width="10" height="10" fill="currentColor" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"/></svg>' 
+              : unlocked 
+                ? '<svg width="14" height="14" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"/></svg>' 
+                : '<svg width="14" height="14" fill="none" stroke="currentColor" viewBox="0 0 24 24" style="opacity:0.3"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/></svg>'}
+        </span>
       </div>`;
-    }).join('');
+        }).join('');
 
-    return `<div id="course-${course.id}" style="border:1px solid var(--wire);border-top:2px solid var(--blue);">
+        return `<div id="course-${course.id}" style="border:1px solid var(--wire);border-top:2px solid var(--blue);">
       <div style="padding:20px 20px 14px;border-bottom:1px solid var(--wire);background:var(--void-1);">
         <div style="font-size:9px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--blue);margin-bottom:6px;">[CRS] ${course.id.slice(-4)}</div>
         <div style="font-family:var(--font-d);font-size:28px;line-height:.95;letter-spacing:.02em;color:var(--cream);margin-bottom:6px;">${course.title}</div>
-        <div style="font-size:11px;color:var(--cream-3);margin-bottom:14px;">${course.description||''}</div>
+        <div style="font-size:11px;color:var(--cream-3);margin-bottom:14px;">${course.description || ''}</div>
         <div style="display:flex;justify-content:space-between;font-size:8.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--cream-3);margin-bottom:6px;">
           <span>${done}/${total} complete</span><span>${pct}%</span>
         </div>
         <div style="height:2px;background:var(--wire-2);"><div style="height:100%;background:var(--blue);width:${pct}%;"></div></div>
       </div>
-      <div style="padding:0 20px;">${videoRows||'<div style="padding:16px 0;font-size:10px;color:var(--cream-3);">No videos added yet.</div>'}</div>
+      <div style="padding:0 20px;">${videoRows || '<div style="padding:16px 0;font-size:10px;color:var(--cream-3);">No videos added yet.</div>'}</div>
     </div>`;
-  }).join('');
-}
+      }).join('');
+    }
 
-function scrollToCourse(id){
-  showView('courses');
-  setTimeout(()=>{
-    const el=document.getElementById('course-'+id);
-    if(el)el.scrollIntoView({behavior:'smooth',block:'start'});
-  },100);
-}
+    function scrollToCourse(id) {
+      showView('courses');
+      setTimeout(() => {
+        const el = document.getElementById('course-' + id);
+        if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }, 100);
+    }
 
-function openVideo(courseId,videoId){
-  // Store context and navigate to player
-  sessionStorage.setItem('dflms_player',JSON.stringify({courseId,videoId}));
-  window.location.href='player.html';
-}
+    function openVideo(courseId, videoId) {
+      // Find the specific video from course
+      const courses = getCourses();
+      const course = courses.find(c => c.id === courseId);
+      if (!course) return;
+      const video = course.videos.find(v => v.id === videoId);
+      if (!video) return;
 
-/* ── Init ── */
-document.getElementById('nav-name').textContent=user.name.toUpperCase();
-renderSidebar();
-showView('courses');
-</script>
+      // Inject this video into our "Current Classroom" session
+      window.activeCourseVideo = {
+        title: video.title,
+        moduleTitle: course.title,
+        video: video.youtubeUrl.split('v=')[1] || video.youtubeUrl.split('/').pop(),
+        quiz: video.quiz || [],
+        id: video.id,
+        isCourse: true
+      };
+
+      showView('recorded', false);
+    }
+
+    /* ── Init ── */
+    document.getElementById('nav-name').textContent = user.name.toUpperCase();
+    renderSidebar();
+    showView('courses');
+  </script>
 </body>
+
 </html>

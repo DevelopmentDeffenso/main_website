@@ -27,22 +27,22 @@ input,select,textarea{font-family:var(--font-m);}
 }
 .navbar {
   display: flex; justify-content: space-between; align-items: stretch; height: 60px;
-  max-width: 1440px; margin: 0 auto;
 }
 .nav-logo {
-  display: flex; align-items: center; padding: 0 24px; gap: 12px;
-  border-right: 1px solid var(--wire); font-family: var(--font-d); font-size: 24px;
+  display: flex; align-items: center; padding: 0 16px; gap: 12px;
+  font-family: var(--font-d); font-size: 20px;
   letter-spacing: .06em; cursor: pointer; transition: background .2s;
+  height: 100%; width: 100%;
 }
 .nav-logo:hover { background: rgba(255,255,255,0.03); }
 .nav-logo span { color: var(--amber); }
 .nav-badge {
-  display: flex; align-items: center; padding: 0 16px; border-right: 1px solid var(--wire);
+  display: flex; align-items: center; padding: 0 12px; border: 1px solid rgba(255, 140, 0, 0.2);
   font-size: 8px; font-weight: 700; letter-spacing: .2em; text-transform: uppercase;
-  background: rgba(255, 140, 0, 0.08); color: var(--amber);
+  background: rgba(255, 140, 0, 0.08); color: var(--amber); margin-left: 12px;
 }
 .nav-center {
-  flex: 1; display: flex; align-items: center; padding: 0 24px; gap: 10px;
+  flex: 1; display: flex; align-items: center; padding: 0 16px; gap: 10px;
   font-size: 9px; font-weight: 700; letter-spacing: .18em; text-transform: uppercase; color: var(--cream-3);
 }
 .nav-center::before { content: '//'; color: var(--amber); }
@@ -56,10 +56,20 @@ input,select,textarea{font-family:var(--font-m);}
 .btn-logout:hover { background: rgba(255,140,0,0.08); color: #fff; }
 
 /* Layout */
-.layout{display:grid;grid-template-columns:220px 1fr;min-height:calc(100vh - 52px);}
+.layout{display:flex;min-height:100vh;}
 
 /* Sidebar */
-.sidebar{background:var(--void-1);border-right:1px solid var(--wire);padding-top:8px;}
+.sidebar {
+  width: 220px; background: var(--void-1); border-right: 1px solid var(--wire);
+  display: flex; flex-direction: column; position: sticky; top: 0; height: 100vh;
+  flex-shrink: 0;
+}
+.sidebar-header {
+  height: 60px; border-bottom: 1px solid var(--wire); display: flex; align-items: center;
+}
+.sidebar-content {
+  flex: 1; overflow-y: auto; padding-top: 8px;
+}
 .sidebar-section{padding:16px 16px 8px;}
 .sidebar-label{font-size:8px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--cream-3);margin-bottom:10px;display:flex;align-items:center;gap:6px;}
 .sidebar-label::before{content:'[';opacity:.6;}
@@ -72,7 +82,8 @@ input,select,textarea{font-family:var(--font-m);}
 .sidebar-divider{height:1px;background:var(--wire);margin:8px 0;}
 
 /* Main */
-.main{overflow-y:auto;}
+.main-wrap { flex: 1; display: flex; flex-direction: column; min-width: 0; }
+.main{ flex: 1; overflow-y: auto; }
 .section-hdr{display:flex;align-items:center;height:40px;gap:10px;padding:0 24px;background:var(--void-1);border-bottom:1px solid var(--wire);position:sticky;top:0;z-index:10;}
 .shdr-id{font-size:9px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--amber);padding-right:10px;border-right:1px solid var(--wire);}
 .shdr-title{font-size:8.5px;font-weight:500;letter-spacing:.2em;text-transform:uppercase;color:var(--cream-3);}
@@ -168,55 +179,61 @@ const user=JSON.parse(sess||'{}');
 if(user.role!=='admin'){window.location.href='dashboard.html';}
 </script>
 
-<!-- Navbar -->
-<div class="navbar-wrapper">
-  <nav class="navbar">
-    <div class="nav-logo" onclick="window.location.href='../index.html'">DEFFENSO<span>·LMS</span></div>
-    <div class="nav-badge">ADMIN</div>
-    <div class="nav-center">ADMIN CONTROL PANEL</div>
-    <div class="nav-right">
-      <button class="btn-logout" onclick="logout()">
-        <svg width="14" height="14" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"/></svg>
-        LOGOUT
-      </button>
-    </div>
-  </nav>
-</div>
-
 <div class="layout">
   <!-- Sidebar -->
   <aside class="sidebar">
-    <div class="sidebar-section">
-      <div class="sidebar-label">Control Panel</div>
-      <button class="nav-btn active" onclick="showView('overview')" id="nav-overview">
-        <svg width="14" height="14" fill="none" stroke="currentColor" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/><rect x="14" y="3" width="7" height="7" rx="1" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/><rect x="3" y="14" width="7" height="7" rx="1" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/><rect x="14" y="14" width="7" height="7" rx="1" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/></svg>
-        Overview
-      </button>
-      <button class="nav-btn" onclick="showView('courses')" id="nav-courses">
-        <svg width="14" height="14" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/></svg>
-        Courses
-      </button>
-      <button class="nav-btn" onclick="showView('students')" id="nav-students">
-        <svg width="14" height="14" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
-        Students
-      </button>
+    <div class="sidebar-header">
+      <div class="nav-logo" onclick="window.location.href='../index.html'"><img src="../assests/logos/text logo.png" alt="DEFFENSO" style="height:28px; width:auto; object-fit:contain;"></div>
     </div>
-    <div class="sidebar-divider"></div>
-    <div class="sidebar-section">
-      <div class="sidebar-label">Quick Add</div>
-      <button class="nav-btn" onclick="openModal('course')">
-        <svg width="14" height="14" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg>
-        New Course
-      </button>
-      <button class="nav-btn" onclick="openModal('student')">
-        <svg width="14" height="14" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18 9v3m0 0v3m0-3h3m-3 0h-3m-2-5a4 4 0 11-8 0 4 4 0 018 0zM3 20a6 6 0 0112 0v1H3v-1z"/></svg>
-        New Student
-      </button>
+    <div class="sidebar-content">
+      <div class="sidebar-section">
+        <div class="sidebar-label">Control Panel</div>
+        <button class="nav-btn active" onclick="showView('overview')" id="nav-overview">
+          <svg width="14" height="14" fill="none" stroke="currentColor" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/><rect x="14" y="3" width="7" height="7" rx="1" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/><rect x="3" y="14" width="7" height="7" rx="1" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/><rect x="14" y="14" width="7" height="7" rx="1" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/></svg>
+          Overview
+        </button>
+        <button class="nav-btn" onclick="showView('courses')" id="nav-courses">
+          <svg width="14" height="14" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/></svg>
+          Courses
+        </button>
+        <button class="nav-btn" onclick="showView('students')" id="nav-students">
+          <svg width="14" height="14" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+          Students
+        </button>
+      </div>
+      <div class="sidebar-divider"></div>
+      <div class="sidebar-section">
+        <div class="sidebar-label">Quick Add</div>
+        <button class="nav-btn" onclick="openModal('course')">
+          <svg width="14" height="14" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg>
+          New Course
+        </button>
+        <button class="nav-btn" onclick="openModal('student')">
+          <svg width="14" height="14" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M18 9v3m0 0v3m0-3h3m-3 0h-3m-2-5a4 4 0 11-8 0 4 4 0 018 0zM3 20a6 6 0 0112 0v1H3v-1z"/></svg>
+          New Student
+        </button>
+      </div>
     </div>
   </aside>
 
-  <!-- Main -->
-  <main class="main" id="main"></main>
+  <div class="main-wrap">
+    <!-- Navbar -->
+    <div class="navbar-wrapper">
+      <nav class="navbar">
+        <div class="nav-badge">ADMIN</div>
+        <div class="nav-center">ADMIN CONTROL PANEL</div>
+        <div class="nav-right">
+          <button class="btn-logout" onclick="logout()">
+            <svg width="14" height="14" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"/></svg>
+            LOGOUT
+          </button>
+        </div>
+      </nav>
+    </div>
+
+    <!-- Main -->
+    <main class="main" id="main"></main>
+  </div>
 </div>
 
 <!-- Modal -->

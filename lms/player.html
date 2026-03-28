@@ -140,7 +140,7 @@ if(!ctx.courseId||!ctx.videoId){window.location.href='dashboard.html';}
 
 <!-- Navbar -->
 <nav class="navbar">
-  <div class="nav-logo">DEFFENSO<span>·LMS</span></div>
+  <div class="nav-logo"><img src="../assests/logos/text logo.png" alt="DEFFENSO" style="height:32px; width:auto; object-fit:contain;"> <span style="font-family:var(--font-m); font-size:12px; font-weight:700; letter-spacing:.2em;">LMS</span></div>
   <button class="nav-back" onclick="window.location.href='dashboard.html'">
     <svg width="12" height="12" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 12H5M12 19l-7-7 7-7"/></svg>
     BACK
@@ -304,19 +304,22 @@ function renderPlaylist(){
   const el=document.getElementById('playlist');
   el.innerHTML=course.videos.map((v,i)=>{
     const unlocked=isUnlocked(course,i);
-    const passed=isQuizPassed(v.id);
-    const isActive=v.id===video.id;
-    let statusCls='locked',statusTxt='LOCKED';
-    if(passed){statusCls='passed';statusTxt='COMPLETED';}
-    else if(unlocked&&isActive){statusCls='current';statusTxt='CURRENT';}
-    else if(unlocked){statusCls='current';statusTxt='AVAILABLE';}
-    const onclick=unlocked&&!isActive?`switchVideo('${v.id}')`:(!unlocked?'':'' );
+    const icon = passed 
+      ? '<svg width="10" height="10" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"/></svg>' 
+      : watched 
+        ? '<svg width="10" height="10" fill="currentColor" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"/></svg>' 
+        : unlocked && isActive 
+          ? '<svg width="10" height="10" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>'
+          : unlocked 
+            ? '<svg width="10" height="10" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"/></svg>'
+            : '<svg width="10" height="10" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/></svg>';
+
     return `<div class="playlist-item${isActive?' active':''}${!unlocked?' locked':''}" ${onclick?`onclick="${onclick}"`:''}
       title="${unlocked?v.title:'Complete previous quiz to unlock'}">
       <div class="pi-num">${String(i+1).padStart(2,'0')}</div>
       <div class="pi-info">
         <div class="pi-title">${v.title}</div>
-        <div class="pi-status ${statusCls}">${statusTxt}</div>
+        <div style="display:flex; align-items:center; gap:6px;" class="pi-status ${statusCls}">${icon} ${statusTxt}</div>
       </div>
     </div>`;
   }).join('');
@@ -346,7 +349,7 @@ function renderQuizGate(){
       <svg width="14" height="14" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
       QUIZ PASSED — LESSON COMPLETE
     </div>
-    ${hasNextVideo?`<button class="btn-take-quiz" onclick="goNext()">CONTINUE TO NEXT LESSON →</button>`:`<button class="btn-take-quiz" style="background:var(--green);color:#000;" onclick="window.location.href='dashboard.html'">✓ COURSE COMPLETE — BACK TO DASHBOARD</button>`}`;
+    ${hasNextVideo?`<button class="btn-take-quiz" onclick="goNext()">CONTINUE TO NEXT LESSON <svg width="14" height="14" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg></button>`:`<button class="btn-take-quiz" style="background:var(--green);color:#000;" onclick="window.location.href='dashboard.html'"><svg width="14" height="14" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg> COURSE COMPLETE — BACK TO DASHBOARD</button>`}`;
     return;
   }
 
@@ -451,9 +454,9 @@ function showResults(){
         <div class="rb-item"><div class="rb-num red">${quizQuestions.length-correct}</div><div class="rb-label">Wrong</div></div>
         <div class="rb-item"><div class="rb-num" style="color:var(--blue);">${score}%</div><div class="rb-label">Score</div></div>
       </div>
-      ${passed&&hasNext?`<button class="btn-next-lesson" onclick="closeQuiz();goNext()">CONTINUE TO NEXT LESSON →</button>`:''}
-      ${passed&&!hasNext?`<button class="btn-next-lesson" style="background:var(--green);color:#000;" onclick="closeQuiz();window.location.href='dashboard.html'">✓ COURSE COMPLETE!</button>`:''}
-      ${!passed?`<button class="btn-retry" onclick="openQuiz()">↺ RETRY QUIZ</button>`:''}
+      ${passed&&hasNext?`<button class="btn-next-lesson" onclick="closeQuiz();goNext()">CONTINUE TO NEXT LESSON <svg width="12" height="12" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg></button>`:''}
+      ${passed&&!hasNext?`<button class="btn-next-lesson" style="background:var(--green);color:#000;" onclick="closeQuiz();window.location.href='dashboard.html'"><svg width="12" height="12" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg> COURSE COMPLETE!</button>`:''}
+      ${!passed?`<button class="btn-retry" onclick="openQuiz()"><svg width="12" height="12" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/></svg> RETRY QUIZ</button>`:''}
       <button onclick="closeQuiz();renderQuizGate();renderPlaylist();" style="margin-top:10px;display:block;width:100%;max-width:280px;margin-left:auto;margin-right:auto;padding:12px;font-size:9px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--cream-3);background:none;border:none;cursor:pointer;">BACK TO LESSON</button>
     </div>`;
 }
