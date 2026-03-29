@@ -5,7 +5,22 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
     <meta name="theme-color" content="#030303" />
-    <title>EVENTS — DEFFENSO ACADEMY</title>
+    <title>Cyber Events & Competitions — DEFFENSO</title>
+    <meta name="description" content="Join live cybersecurity events, CTF challenges, bootcamps, and webinars at DEFFENSO Academy. Advance your career with hands-on training." />
+    <meta name="keywords" content="cybersecurity events, CTF challenges, hacking bootcamp, cyber webinars, DEFFENSO events" />
+    <link rel="canonical" href="https://www.deffenso.in/event.html" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Cyber Events & Competitions — DEFFENSO" />
+    <meta property="og:description" content="Join live cybersecurity events, CTF challenges, and webinars at DEFFENSO Academy." />
+    <meta property="og:url" content="https://www.deffenso.in/event.html" />
+    <meta property="og:image" content="https://www.deffenso.in/assests/logos/og-image.png" />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Cyber Events & Competitions — DEFFENSO" />
+    <meta name="twitter:description" content="Join live cybersecurity events, CTF challenges, and webinars at DEFFENSO Academy." />
+    <meta name="twitter:image" content="https://www.deffenso.in/assests/logos/og-image.png" />
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link
         href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=IBM+Plex+Mono:wght@300;400;500;700&display=swap"
@@ -1364,7 +1379,6 @@
             }
         }
 
-        .ec-detail-item {}
 
         .ec-detail-lbl {
             display: flex;
@@ -1876,20 +1890,7 @@
             <div class="nav-links">
                 <a class="nav-link" href="index.html">HOME</a>
                 <a class="nav-link" href="index.html#about">ABOUT</a>
-                <div class="nav-prog-wrapper">
-                    <button class="nav-link" style="cursor:pointer">
-                        PROGRAMS
-                        <svg class="nav-chevron" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
-                        </svg>
-                    </button>
-                    <div class="nav-dropdown">
-                        <a href="index.html#jreh">Jr Ethical Hacking</a>
-                        <a href="index.html#robotics">Robotics</a>
-                        <a href="index.html#coding">Coding</a>
-                        <a href="index.html#forensics">Cyber Forensics</a>
-                    </div>
-                </div>
+                <a class="nav-link" href="index.html#programs">PROGRAMS</a>
                 <button class="btn-nav-events current">
                     <svg width="12" height="12" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -1904,7 +1905,7 @@
                 <div class="nav-status">
                     <div class="status-dot"></div><span>SYSTEMS ONLINE</span>
                 </div>
-                <button class="btn-nav-enroll" onclick="window.location.href='index.html#contact'">ENROLL NOW</button>
+                <button class="btn-nav-enroll" onclick="window.location.href='lms/login.html'">LOGIN</button>
                 <button class="mob-hamburger" id="mob-ham" aria-label="Toggle menu" aria-expanded="false">
                     <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -1926,18 +1927,12 @@
                     width="14" height="14" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 18l6-6-6-6" />
                 </svg></button>
-            <div>
-                <button class="mob-nav-item" id="mob-prog-toggle"><span>Programs</span><svg class="nav-chevron"
-                        width="14" height="14" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
-                    </svg></button>
-                <div class="mob-programs-panel" id="mob-prog-panel">
-                    <a class="mob-program-link" href="index.html#jreh">Jr Ethical Hacking</a>
-                    <a class="mob-program-link" href="index.html#robotics">Robotics</a>
-                    <a class="mob-program-link" href="index.html#coding">Coding</a>
-                    <a class="mob-program-link" href="index.html#forensics">Cyber Forensics</a>
-                </div>
-            </div>
+            <button class="mob-nav-item" onclick="window.location.href='index.html#programs'">
+                <span>Programs</span>
+                <svg width="14" height="14" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 18l6-6-6-6" />
+                </svg>
+            </button>
             <div class="mob-events-active">⚡ Events — current page</div>
             <button class="mob-nav-item" onclick="window.location.href='index.html#contact'"><span>Contact</span><svg
                     width="14" height="14" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -1948,10 +1943,11 @@
             <div class="mob-status-row">
                 <div class="status-dot"></div><span>SYSTEMS ONLINE</span>
             </div>
-            <button class="mob-enroll-btn" onclick="window.location.href='index.html#contact'">
-                ENROLL NOW
+            <button class="mob-enroll-btn" onclick="window.location.href='lms/login.html'">
+                LOGIN
                 <svg width="14" height="14" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h14M12 5l7 7-7 7" />
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M11 16l-4-4m0 0l4-4m-4 4h14m-5 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h7a3 3 0 013 3v1" />
                 </svg>
             </button>
         </div>
@@ -2428,12 +2424,7 @@
             ham.setAttribute('aria-expanded', open ? 'true' : 'false');
             document.body.style.overflow = open ? 'hidden' : '';
         });
-        document.getElementById('mob-prog-toggle').addEventListener('click', () => {
-            const panel = document.getElementById('mob-prog-panel');
-            panel.classList.toggle('open');
-            const chev = document.getElementById('mob-prog-toggle').querySelector('.nav-chevron');
-            if (chev) chev.style.transform = panel.classList.contains('open') ? 'rotate(180deg)' : '';
-        });
+
 
         /* ─── Live clock ─── */
         function tickClock() {

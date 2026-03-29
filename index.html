@@ -11,16 +11,27 @@
     content="DEFFENSO is an elite hacker academy offering hands-on ethical hacking, penetration testing, and cybersecurity courses. Master offensive security and defend the digital world." />
   <meta name="keywords"
     content="hacker academy, ethical hacking, cybersecurity courses, penetration testing, learn hacking, CTF training, offensive security, bug bounty, red team, DEFFENSO" />
-  <meta name="author" content="DEFFENSO" />
-  <meta name="robots" content="index, follow" />
-  <link rel="canonical" href="https://www.deffenso.com/" />
+  <link rel="author" href="https://www.deffenso.in/humans.txt" />
+  <link rel="canonical" id="canonical-link" href="https://www.deffenso.in/" />
+
+  <!-- Google Site Verification (Placeholder) -->
+  <meta name="google-site-verification" content="YOUR_GSC_VERIFICATION_CODE" />
+
+  <!-- Google Analytics (GA4) Global Site Tag (Placeholder) -->
+  <!-- <script async src="https://www.googletagmanager.com/gtag/js?id=G-YOUR_GA4_ID"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-YOUR_GA4_ID');
+  </script> -->
 
   <meta property="og:type" content="website" />
   <meta property="og:title" content="DEFFENSO | Hacker Academy — Ethical Hacking & Cybersecurity" />
   <meta property="og:description"
     content="Join DEFFENSO's hacker academy. Learn ethical hacking, penetration testing, and real-world cybersecurity skills from the ground up." />
-  <meta property="og:url" content="https://www.deffenso.com/" />
-  <meta property="og:image" content="https://www.deffenso.com/assests/logos/og-image.png" />
+  <meta property="og:url" content="https://www.deffenso.in/" />
+  <meta property="og:image" content="https://www.deffenso.in/assests/logos/og-image.png" />
   <meta property="og:image:width" content="1200" />
   <meta property="og:image:height" content="627" />
   <meta property="og:locale" content="en_US" />
@@ -30,7 +41,7 @@
   <meta name="twitter:title" content="DEFFENSO | Hacker Academy — Ethical Hacking & Cybersecurity" />
   <meta name="twitter:description"
     content="Join DEFFENSO's hacker academy. Learn ethical hacking, penetration testing, and real-world cybersecurity skills from the ground up." />
-  <meta name="twitter:image" content="https://www.deffenso.com/assests/logos/og-image.png" />
+  <meta name="twitter:image" content="https://www.deffenso.in/assests/logos/og-image.png" />
   <meta name="twitter:site" content="@deffenso" />
 
   <meta property="og:linkedin:owner" content="your-linkedin-company-id" />
@@ -40,8 +51,8 @@
     "@context": "https://schema.org",
     "@type": "EducationalOrganization",
     "name": "DEFFENSO",
-    "url": "https://www.deffenso.com",
-    "logo": "https://www.deffenso.com/assests/logos/logo.png",
+    "url": "https://www.deffenso.in",
+    "logo": "https://www.deffenso.in/assests/logos/logo.png",
     "description": "DEFFENSO is a hacker academy specializing in ethical hacking, penetration testing, and cybersecurity education.",
     "sameAs": [
       "https://www.linkedin.com/company/deffenso"
@@ -718,8 +729,7 @@
       }
     }
 
-    .nav-link,
-    .nav-prog-btn {
+    .nav-link {
       display: flex;
       align-items: center;
       gap: 6px;
@@ -732,14 +742,11 @@
       border-right: 1px solid var(--wire);
       transition: color .18s, background .18s;
       background: none;
-      border-top: none;
-      border-bottom: none;
-      border-left: none;
+      border: none;
       cursor: pointer;
     }
 
-    .nav-link:hover,
-    .nav-prog-btn:hover {
+    .nav-link:hover {
       color: var(--cream);
       background: rgba(255, 255, 255, .03);
     }
@@ -780,76 +787,6 @@
       filter: brightness(1.15);
     }
 
-    .nav-prog-wrapper {
-      position: relative;
-      display: flex;
-      align-items: stretch;
-    }
-
-    .nav-chevron {
-      width: 10px;
-      height: 10px;
-      transition: transform .2s;
-      flex-shrink: 0;
-    }
-
-    .nav-prog-wrapper:hover .nav-chevron {
-      transform: rotate(180deg);
-    }
-
-    .nav-dropdown {
-      position: absolute;
-      top: 100%;
-      left: 0;
-      width: 260px;
-      background: var(--void-1);
-      border: 1px solid var(--wire);
-      border-top: 2px solid var(--blue);
-      opacity: 0;
-      visibility: hidden;
-      transition: all .18s ease;
-      transform: translateY(-4px);
-      z-index: 50;
-    }
-
-    .nav-prog-wrapper:hover .nav-dropdown {
-      opacity: 1;
-      visibility: visible;
-      transform: translateY(0);
-    }
-
-    .nav-dropdown a {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      padding: 13px 18px;
-      font-size: 9.5px;
-      letter-spacing: .16em;
-      text-transform: uppercase;
-      color: var(--cream-3);
-      border-bottom: 1px solid var(--wire);
-      transition: all .15s;
-      background: none;
-      width: 100%;
-      cursor: pointer;
-    }
-
-    .nav-dropdown a:last-child {
-      border-bottom: none;
-    }
-
-    .nav-dropdown a::before {
-      content: '›';
-      color: var(--blue);
-      font-size: 14px;
-      font-family: sans-serif;
-    }
-
-    .nav-dropdown a:hover {
-      color: var(--cream);
-      background: rgba(0, 123, 255, .06);
-      padding-left: 24px;
-    }
 
     .nav-right {
       display: flex;
@@ -5587,25 +5524,19 @@
 
       <div class="nav-links">
         <a class="nav-link" onclick="navigate('home')">
-          <svg width="14" height="14" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/></svg>
+          <svg width="14" height="14" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+              d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
+          </svg>
           HOME
         </a>
-        <div class="nav-prog-wrapper">
-          <button class="nav-prog-btn"
-            onclick="navigate('home');setTimeout(()=>document.getElementById('programs')?.scrollIntoView({behavior:'smooth'}),120)">
-            <svg width="14" height="14" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/></svg>
-            PROGRAMS
-            <svg class="nav-chevron" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
-            </svg>
-          </button>
-          <div class="nav-dropdown">
-            <a onclick="navigate('jreh')">Jr Ethical Hacking</a>
-            <a onclick="navigate('robotics')">Robotics</a>
-            <a onclick="navigate('coding')">Coding</a>
-            <a onclick="navigate('forensics')">Cyber Forensics</a>
-          </div>
-        </div>
+        <a class="nav-link" onclick="scrollToPrograms()">
+          <svg width="14" height="14" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+              d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
+          </svg>
+          PROGRAMS
+        </a>
         <button class="btn-nav-events" onclick="window.location.href='event.html'">
           <svg width="14" height="14" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -5614,11 +5545,17 @@
           EVENTS
         </button>
         <a class="nav-link" onclick="navigate('about')">
-          <svg width="14" height="14" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+          <svg width="14" height="14" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+              d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+          </svg>
           ABOUT
         </a>
         <a class="nav-link" onclick="navigate('contact')">
-          <svg width="14" height="14" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+          <svg width="14" height="14" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+              d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+          </svg>
           CONTACT
         </a>
       </div>
@@ -5628,7 +5565,10 @@
           <div class="status-dot"></div><span>SYSTEMS ONLINE</span>
         </div>
         <button class="btn-nav-enroll" onclick="navigate('login')">
-          <svg width="14" height="14" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 16l-4-4m0 0l4-4m-4 4h14m-5 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h7a3 3 0 013 3v1"/></svg>
+          <svg width="14" height="14" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+              d="M11 16l-4-4m0 0l4-4m-4 4h14m-5 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h7a3 3 0 013 3v1" />
+          </svg>
           LOGIN
         </button>
         <button class="mob-hamburger" id="mob-ham" aria-label="Toggle menu" aria-expanded="false">
@@ -5658,25 +5598,19 @@
             d="M11 16l-4-4m0 0l4-4m-4 4h14m-5 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h7a3 3 0 013 3v1" />
         </svg>
       </button>
-      <div>
-        <button class="mob-nav-item" id="mob-prog-toggle" style="width:100%">
-          <span>Programs</span>
-          <svg class="nav-chevron" width="14" height="14" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
-          </svg>
-        </button>
-        <div class="mob-programs-panel" id="mob-prog-panel">
-          <a class="mob-program-link" onclick="navigate('jreh');closeMobMenu()">Jr Ethical Hacking</a>
-          <a class="mob-program-link" onclick="navigate('robotics');closeMobMenu()">Robotics</a>
-          <a class="mob-program-link" onclick="navigate('coding');closeMobMenu()">Coding</a>
-          <a class="mob-program-link" onclick="navigate('forensics');closeMobMenu()">Cyber Forensics</a>
-        </div>
-      </div>
+      <button class="mob-nav-item" onclick="scrollToPrograms();closeMobMenu()">
+        <span>Programs</span>
+        <svg width="14" height="14" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 18l6-6-6-6" />
+        </svg>
+      </button>
       <!-- Mobile Events link -->
       <button class="mob-events-link" onclick="window.location.href='event.html';closeMobMenu()">
         <span>
-          <svg width="14" height="14" fill="none" stroke="currentColor" viewBox="0 0 24 24" style="display:inline-block;vertical-align:middle;margin-right:8px;margin-top:-2px">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+          <svg width="14" height="14" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+            style="display:inline-block;vertical-align:middle;margin-right:8px;margin-top:-2px">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+              d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
           </svg>
           Events
         </span>
@@ -5713,7 +5647,8 @@
        Gallery lightbox
   ═══════════════════════════════════════════════════════ -->
   <div class="gallery-lightbox" id="gallery-lightbox" onclick="closeLightbox()">
-    <img id="lightbox-img" src="" alt="Gallery" />
+    <img id="lightbox-img" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
+      alt="Gallery" />
     <div class="lightbox-close" onclick="closeLightbox()">✕</div>
     <div class="lightbox-caption" id="lightbox-caption"></div>
   </div>
@@ -5839,8 +5774,8 @@
        "Career Placement Support" → "Career Support"
     ═══════════════════════════════════════════════════════ */
     const PROG = {
-      jreh: {
-        num: '001', clr: '#FF4500', level: 'BEGINNER', l1: 'JR ETHICAL', l2: 'HACKING',
+      jeh: {
+        num: '001', clr: '#FF4500', level: 'BEGINNER', l1: 'JUNIOR', l2: 'ETHICAL HACKER',
         cmd: 'nmap -sV -O target.local',
         desc: 'Your launchpad into ethical hacking. Fundamentals of cyber offense and defense in a hands-on environment built for complete beginners.',
         duration: '8 Weeks', levelFull: 'Beginner', labs: '20+ Guided Labs', mentorship: 'Weekly Group',
@@ -5851,42 +5786,11 @@
           ['MODULE 03: EXPLOITATION', '"Controlled access."', ['Metasploit Framework', 'Web App Basics', 'Password Cracking']],
           ['MODULE 04: DEFENSE', '"Think like the defender."', ['Report Writing', 'Remediation', 'Ethics & Legal']]
         ],
-        // ▶ Changed "Career Placement Support" → "Career Support"
         roles: ['Junior Pen Tester', 'Cybersecurity Trainee', 'IT Security Support', 'Bug Bounty Beginner'],
-        defaultSubject: 'Jr Ethical Hacking'
+        defaultSubject: 'Junior Ethical Hacker'
       },
-      robotics: {
-        num: '002', clr: '#00BCD4', level: 'INTERMEDIATE', l1: 'ROBOTICS', l2: 'ENGINEERING',
-        cmd: 'ros2 run my_robot controller.py --sim',
-        desc: 'Build, program, and deploy intelligent robotic systems. Combines hardware interfacing, embedded systems, and AI-driven automation.',
-        duration: '12 Weeks', levelFull: 'Intermediate', labs: 'Hardware Lab Access', mentorship: 'Weekly 1-on-1',
-        currSub: 'From circuits to autonomous machines.',
-        modules: [
-          ['MODULE 01: HARDWARE BASICS', '"Circuits and sensors."', ['Microcontrollers', 'Sensor Integration', 'Motor Control']],
-          ['MODULE 02: EMBEDDED SYSTEMS', '"Programming the machine."', ['Arduino/Raspberry Pi', 'Real-time OS', 'Firmware Dev']],
-          ['MODULE 03: COMPUTER VISION', '"Giving machines sight."', ['OpenCV', 'Object Detection', 'SLAM Basics']],
-          ['MODULE 04: AI + ROBOTICS', '"Autonomous intelligence."', ['ROS2 Framework', 'Path Planning', 'Neural Control']]
-        ],
-        roles: ['Robotics Engineer', 'Embedded Systems Dev', 'Automation Specialist', 'IoT Developer'],
-        defaultSubject: 'Robotics Engineering'
-      },
-      coding: {
-        num: '003', clr: '#00C853', level: 'ALL LEVELS', l1: 'CODING', l2: 'FUNDAMENTALS',
-        cmd: 'python3 main.py --mode=build --target=prod',
-        desc: 'From zero to production-ready developer. Covers programming foundations, web development, APIs, databases, and deployment pipelines.',
-        duration: '10 Weeks', levelFull: 'All Levels', labs: 'Cloud IDE Access', mentorship: 'Daily Office Hours',
-        currSub: 'Build real software from day one.',
-        modules: [
-          ['MODULE 01: PYTHON CORE', '"The language of builders."', ['Syntax & Logic', 'Data Structures', 'File Handling']],
-          ['MODULE 02: WEB DEVELOPMENT', '"Build for the browser."', ['HTML/CSS/JS', 'React Basics', 'REST APIs']],
-          ['MODULE 03: DATABASES', '"Store and retrieve."', ['SQL Fundamentals', 'NoSQL Basics', 'ORM Usage']],
-          ['MODULE 04: DEPLOYMENT', '"Ship it."', ['Git & GitHub', 'Docker Basics', 'CI/CD Pipelines']]
-        ],
-        roles: ['Junior Developer', 'Full Stack Trainee', 'API Developer', 'Tech Entrepreneur'],
-        defaultSubject: 'Coding Fundamentals'
-      },
-      forensics: {
-        num: '004', clr: '#FF8C00', level: 'FORENSICS', l1: 'CYBER', l2: 'FORENSICS',
+      cf: {
+        num: '002', clr: '#FF8C00', level: 'INTERMEDIATE', l1: 'CYBER', l2: 'FORENSICS',
         cmd: 'volatility -f memory.dmp imageinfo',
         desc: 'Investigate cyber incidents, collect digital evidence, and respond to breaches using industry-standard forensics tools.',
         duration: '12 Weeks', levelFull: 'Intermediate', labs: 'Crime Scene Sims', mentorship: 'Expert-led',
@@ -5899,6 +5803,126 @@
         ],
         roles: ['Forensics Analyst', 'Incident Responder', 'Malware Analyst', 'Threat Intelligence'],
         defaultSubject: 'Cyber Forensics'
+      },
+      ceh: {
+        num: '003', clr: '#00BCD4', level: 'INTERMEDIATE', l1: 'CERTIFIED', l2: 'ETHICAL HACKER',
+        cmd: 'msfconsole -q -x "use exploit/multi/handler"',
+        desc: 'Learn advanced ethical hacking methodologies. Understand defensive mechanisms and hone your offensive skills.',
+        duration: '10 Weeks', levelFull: 'Intermediate', labs: 'Advanced Cyber Range', mentorship: 'Weekly Group',
+        currSub: 'Master the core of ethical hacking.',
+        modules: [
+          ['MODULE 01: ADVANCED RECON', '"Deeper look."', ['DNS Enumeration', 'Advanced OSINT', 'Custom Scanners']],
+          ['MODULE 02: SYSTEM HACKING', '"Bypass the guards."', ['Privilege Escalation', 'Hash Cracking', 'Living off the Land']],
+          ['MODULE 03: WEB EXPLOITS', '"Break the web."', ['SQLi Mastery', 'XSS & CSRF', 'WAF Bypass']],
+          ['MODULE 04: WIRELESS', '"Sniffing the air."', ['WPA2 Cracking', 'Rogue APs', 'Bluetooth Attacks']]
+        ],
+        roles: ['Security Analyst', 'Pen Test Consultant', 'Ethical Hacker', 'Security Engineer'],
+        defaultSubject: 'Certified Ethical Hacker'
+      },
+      cpt: {
+        num: '004', clr: '#00C853', level: 'ADVANCED', l1: 'CERTIFIED PENETRATION', l2: 'TESTER',
+        cmd: 'python3 pwn_target.py --exploit',
+        desc: 'Take your skills to the red team. Master end-to-end penetration testing from initial access to domain dominance.',
+        duration: '12 Weeks', levelFull: 'Advanced', labs: 'Red Team Ops Range', mentorship: '1-on-1 Mentor',
+        currSub: 'Execute advanced offensive operations.',
+        modules: [
+          ['MODULE 01: PAYLOAD DEV', '"Crafting control."', ['Custom Malware', 'Encoding bypass', 'In-memory Execution']],
+          ['MODULE 02: AD ATTACKS', '"Conquer the domain."', ['Kerberoasting', 'NTLM Relay', 'Golden/Silver Tickets']],
+          ['MODULE 03: POST EXPLOIT', '"Maintain access."', ['C2 Frameworks', 'Pivoting', 'Exfiltration']],
+          ['MODULE 04: REPORTING', '"Deliver value."', ['Exec Summary', 'Technical Findings', 'Risk Assessment']]
+        ],
+        roles: ['Penetration Tester', 'Red Team Operator', 'Offensive Security Engineer'],
+        defaultSubject: 'Certified Penetration Tester'
+      },
+      soc: {
+        num: '005', clr: '#9C27B0', level: 'ALL LEVELS', l1: 'SOC ANALYSIS', l2: 'TRACK',
+        cmd: 'tail -f /var/log/auth.log | grep "Failed password"',
+        desc: 'Become the first line of defense. Master SIEMs, threat hunting, and incident triage in a simulated Security Operations Center.',
+        duration: '8 Weeks', levelFull: 'All Levels', labs: 'Live SIEM Environment', mentorship: 'Daily Office Hours',
+        currSub: 'Detect, analyze, and respond to threats in real-time.',
+        modules: [
+          ['MODULE 01: SIEM BASICS', '"Monitor the network."', ['Splunk Fundamentals', 'ELK Stack', 'Log Ingestion']],
+          ['MODULE 02: TRIAGE', '"Filter the noise."', ['Alert Fatigue', 'False Positives', 'Incident prioritization']],
+          ['MODULE 03: THREAT HUNTING', '"Proactive defense."', ['Hypothesis Generation', 'IOC sweeps', 'Behavioral Analysis']],
+          ['MODULE 04: MITIGATION', '"Stop the bleed."', ['Playbooks', 'Firewall Rules', 'Endpoint Isolation']]
+        ],
+        roles: ['SOC Analyst L1/L2', 'Incident Responder', 'Security Analyst'],
+        defaultSubject: 'SOC Analysis Track'
+      },
+      bbh: {
+        num: '006', clr: '#E91E63', level: 'INTERMEDIATE', l1: 'BUG BOUNTY', l2: 'HUNTER',
+        cmd: 'ffuf -w wordlist.txt -u https://target.com/FUZZ',
+        desc: 'Learn web vulnerability research to earn bounties worldwide. From recon to critical severity exploiting and reporting.',
+        duration: '10 Weeks', levelFull: 'Intermediate', labs: 'Vulnerable Web Farms', mentorship: 'Bounty Hunters',
+        currSub: 'Find the flaws before the bad guys do.',
+        modules: [
+          ['MODULE 01: RECON FRAMEWORKS', '"Map the surface."', ['Subdomain Enum', 'Endpoint Discovery', 'Tech Stack ID']],
+          ['MODULE 02: SERVER-SIDE', '"Backend flaws."', ['SSRF', 'Command Injection', 'Insecure Deserialization']],
+          ['MODULE 03: CLIENT-SIDE', '"Browser attacks."', ['Dom-XSS', 'Prototype Pollution', 'CORS Misconfig']],
+          ['MODULE 04: REPORTING', '"Get paid."', ['PoC Creation', 'Impact Assessment', 'Platform Regs']]
+        ],
+        roles: ['Bug Bounty Hunter', 'Application Security Engineer', 'Freelance Pen Tester'],
+        defaultSubject: 'Bug Bounty Hunter'
+      },
+      ama: {
+        num: '007', clr: '#3F51B5', level: 'ADVANCED', l1: 'ADVANCED MALWARE', l2: 'ANALYSIS',
+        cmd: 'radare2 -A /tmp/malicious.exe',
+        desc: 'Reverse engineer advanced persistent threats. Unpack, decrypt, and dissect malware to understand attacker tradecraft.',
+        duration: '12 Weeks', levelFull: 'Advanced', labs: 'Isolated Sandbox', mentorship: 'Expert-led',
+        currSub: 'Dissect the most dangerous code in the world.',
+        modules: [
+          ['MODULE 01: ASSEMBLY', '"Language of the machine."', ['x86/x64 Basics', 'Registers', 'Calling Conventions']],
+          ['MODULE 02: DISASSEMBLY', '"Tearing it apart."', ['IDA Pro', 'Ghidra', 'Radare2']],
+          ['MODULE 03: DEBUGGING', '"Watch it execute."', ['x64dbg', 'Windbg', 'Anti-Debugging bypass']],
+          ['MODULE 04: UNPACKING', '"Reveal the core."', ['Packer ID', 'Manual Unpacking', 'IAT Reconstruction']]
+        ],
+        roles: ['Malware Analyst', 'Reverse Engineer', 'Threat Intel Analyst'],
+        defaultSubject: 'Advanced Malware Analysis'
+      },
+      csa: {
+        num: '008', clr: '#FFC107', level: 'INTERMEDIATE', l1: 'CERTIFIED SECURITY', l2: 'ANALYSIS',
+        cmd: 'nessus -q start',
+        desc: 'Bridge the gap between technical operations and security strategy. Focus on risk management, architecture, and compliance.',
+        duration: '10 Weeks', levelFull: 'Intermediate', labs: 'Enterprise Network Sims', mentorship: 'Security Architects',
+        currSub: 'Design and analyze resilient enterprise architectures.',
+        modules: [
+          ['MODULE 01: RISK MGMT', '"Measure the danger."', ['Risk Assessment', 'Threat Modeling', 'Frameworks (NIST, ISO)']],
+          ['MODULE 02: ARCHITECTURE', '"Build the fortress."', ['Zero Trust', 'Network Segmentation', 'Defense in Depth']],
+          ['MODULE 03: AUDITING', '"Verify the controls."', ['Compliance Checks', 'Vulnerability Mgmt', 'Reporting']],
+          ['MODULE 04: CLOUD SEC', '"Protecting the ether."', ['AWS Security', 'Azure Basics', 'Identity Access']]
+        ],
+        roles: ['Security Analyst', 'Security Consultant', 'Risk Analyst'],
+        defaultSubject: 'Certified Security Analysis'
+      },
+      cs: {
+        num: '009', clr: '#00ACC1', level: 'ADVANCED', l1: 'CLOUD', l2: 'SECURITY',
+        cmd: 'aws s3api get-bucket-acl --bucket target',
+        desc: 'Master securing cloud infrastructure. Defend AWS, Azure, and GCP environments from misconfigurations and cloud-native attacks.',
+        duration: '10 Weeks', levelFull: 'Advanced', labs: 'Multi-Cloud Sandboxes', mentorship: 'Cloud Architects',
+        currSub: 'In-depth defense for modern cloud environments.',
+        modules: [
+          ['MODULE 01: AWS SEC', '"Securing Amazon."', ['IAM Best Practices', 'S3 Security', 'CloudTrail']],
+          ['MODULE 02: AZURE SEC', '"Securing Microsoft."', ['Azure AD', 'NSGs', 'Defender for Cloud']],
+          ['MODULE 03: CLOUD ATTACKS', '"Exploiting the cloud."', ['Metadata SSRF', 'Keys Leakage', 'PrivEsc']],
+          ['MODULE 04: KUBERNETES', '"Container defense."', ['RBAC', 'Network Policies', 'Pod Security']]
+        ],
+        roles: ['Cloud Security Engineer', 'DevSecOps', 'Cloud Architect'],
+        defaultSubject: 'Cloud Security'
+      },
+      adcd: {
+        num: '010', clr: '#F44336', level: 'EXPERT', l1: 'ADVANCED DIPLOMA IN', l2: 'CYBER DEFENSE',
+        cmd: 'iptables -A INPUT -p tcp --dport 22 -j DROP',
+        desc: 'The ultimate pinnacle of our training. A rigorous, comprehensive program covering advanced offensive and defensive capabilities.',
+        duration: '24 Weeks', levelFull: 'Expert', labs: 'Full Cyber Range', mentorship: 'Chief InfoSec Officers',
+        currSub: 'Transform into a versatile, elite cyber operator.',
+        modules: [
+          ['MODULE 01: CORE SEC', '"Foundations reinforced."', ['Network Def', 'Cryptography', 'OS Hardening']],
+          ['MODULE 02: RED OPS', '"Advanced Offense."', ['Exploit Dev', 'C2 Infra', 'Evasion']],
+          ['MODULE 03: BLUE OPS', '"Advanced Defense."', ['Threat Hunt', 'Incident Response', 'Forensics']],
+          ['MODULE 04: CAPSTONE', '"Final operation."', ['Full-scale Red v Blue', 'Board Presentations', 'Crisis Mgmt']]
+        ],
+        roles: ['Elite Cyber Operator', 'Security Architect', 'Cybersecurity Director'],
+        defaultSubject: 'Advanced Diploma in Cyber Defense'
       }
     };
 
@@ -5921,20 +5945,20 @@
             <span class="ht-cmd">access --clearance=ALPHA</span>
             <span class="ht-cursor"></span>
           </div>
-          <div style="position:relative;width:100%;line-height:.9">
+          <h1 style="position:relative;width:100%;line-height:.9">
             <span class="ht-become">BECOME</span>
             <span class="ht-unstop">UNSTOPPABLE</span>
-          </div>
+          </h1>
           <div class="hero-divider"></div>
           <div class="hero-live-status">
             <div class="hls-dot"></div>
             <span>SYSTEMS ONLINE</span><span class="hls-sep">&nbsp;//&nbsp;</span>
-            <span>4 PROGRAMS ACTIVE</span><span class="hls-sep">&nbsp;//&nbsp;</span>
+            <span>10 PROGRAMS ACTIVE</span><span class="hls-sep">&nbsp;//&nbsp;</span>
             <span>GLOBAL REACH</span>
           </div>
           <p class="hero-desc">Building a digitally resilient generation capable of defending systems, data, and nations against modern cyber threats.</p>
           <div class="hero-actions">
-            <button class="btn-red" onclick="navigate('contact')">START JOURNEY &nbsp;${ARR}</button>
+            <button class="btn-red" onclick="scrollToPrograms()">START JOURNEY &nbsp;${ARR}</button>
             <button class="btn-outline" onclick="navigate('about')">OUR STORY</button>
           </div>
         </div>
@@ -5961,7 +5985,7 @@
               <div class="stat-ascii">▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓ 100%</div>
             </div>
             <div class="stat-cell">
-              <div class="stat-cell-label-row"><div class="stat-label">Defensive Mindset</div><span class="stat-ping" style="color:#28C840;border-color:rgba(40,200,64,.3)">ACK</span></div>
+              <div class="stat-cell-label-row"><div class="stat-label">Offensive Mindset</div><span class="stat-ping" style="color:#28C840;border-color:rgba(40,200,64,.3)">ACK</span></div>
               <div class="stat-num" id="cnt-def">0%</div>
               <div class="stat-sub">Every program. Every module. Always.</div>
               <div class="stat-ascii">▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓ 100%</div>
@@ -5986,7 +6010,7 @@
         </section>`;
     }
 
-    /** § 3.4 Programs (4 only) */
+    /** § 3.4 Programs */
     function programsSection() {
       const cards = Object.entries(PROG).map(([key, cfg]) => `
         <div class="program-card" style="--card-clr:${cfg.clr}" onclick="navigate('${key}')">
@@ -5998,13 +6022,18 @@
           <div class="card-cmd"><span class="cp">$</span><span class="cc">${cfg.cmd}</span></div>
           <p class="prog-desc">${cfg.desc}</p>
           <ul class="prog-modules">${cfg.modules.slice(0, 3).map(m => `<li class="prog-mod-item">${m[0]}</li>`).join('')}</ul>
-          <button class="prog-action">ACCESS PROGRAM ${ARR}</button>
+          <button class="prog-action">VIEW DETAILS</button>
         </div>`).join('');
 
       const dots = Object.keys(PROG).map((_, i) => `<div class="scroll-dot${i === 0 ? ' active' : ''}"></div>`).join('');
-      return `${SH('PRG', 'TRAINING PROGRAMS', '4 active tracks — swipe to explore')}
+      return `${SH('PRG', 'TRAINING PROGRAMS', '10 active tracks — swipe to explore')}
         <section id="programs" class="programs-section">
           <div class="programs-inner">
+            <div class="programs-header" style="text-align: left; padding: 0 var(--px); margin-bottom: 30px;">
+              <p style="color:var(--blue); font-size:10px; font-weight:700; letter-spacing:0.2em; margin-bottom:8px;">// DEFFENSO HACKERS ACADEMY</p>
+              <h2 style="font-family:var(--font-d); font-size:clamp(32px, 6vw, 48px); line-height:1; color:var(--cream); margin:0; text-transform:uppercase;">COURSES THAT WE <span style="color:var(--blue);">PROVIDE</span></h2>
+              <p style="color:var(--cream-3); font-size:12px; font-family:var(--font-m); letter-spacing:0.1em; margin-top:10px;">FINAL LIST — SELECT YOUR TRAINING TRACK</p>
+            </div>
             <div class="programs-scroll-wrap" id="prog-scroll">${cards}</div>
             <div class="scroll-hint" id="scroll-hint">${dots}</div>
           </div>
@@ -6034,6 +6063,7 @@
         <div class="tool-logo-wrap">
           <div class="tool-logo-scan"></div>
           <img class="tool-logo-img"
+            loading="lazy"
             src="assests/tools/kali.png"
             alt="Kali Linux"
             onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"
@@ -6052,6 +6082,7 @@
         <div class="tool-logo-wrap">
           <div class="tool-logo-scan"></div>
           <img class="tool-logo-img"
+            loading="lazy"
             src="assests/tools/nmap.png"
             alt="Nmap"
             onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"
@@ -6070,6 +6101,7 @@
         <div class="tool-logo-wrap">
           <div class="tool-logo-scan"></div>
           <img class="tool-logo-img"
+            loading="lazy"
             src="assests/tools/nessus.png"
             alt="Nessus"
             onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"
@@ -6088,6 +6120,7 @@
         <div class="tool-logo-wrap">
           <div class="tool-logo-scan"></div>
           <img class="tool-logo-img"
+            loading="lazy"
             src="assests/tools/tool-logo-aircrack-ng.svg"
             alt="Aircrack-ng"
             onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"
@@ -6106,6 +6139,7 @@
         <div class="tool-logo-wrap">
           <div class="tool-logo-scan"></div>
           <img class="tool-logo-img"
+            loading="lazy"
             src="assests/tools/wireshark_103123.webp"
             alt="Wireshark"
             onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"
@@ -6124,6 +6158,7 @@
         <div class="tool-logo-wrap">
           <div class="tool-logo-scan"></div>
           <img class="tool-logo-img"
+            loading="lazy"
             src="assests/tools/BurpSuite_logo.svg.png"
             alt="Burp Suite"
             onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"
@@ -6142,6 +6177,7 @@
         <div class="tool-logo-wrap">
           <div class="tool-logo-scan"></div>
           <img class="tool-logo-img"
+            loading="lazy"
             src="assests/tools/explotitedb.png"
             alt="Exploit Database"
             onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"
@@ -6160,6 +6196,7 @@
         <div class="tool-logo-wrap">
           <div class="tool-logo-scan"></div>
           <img class="tool-logo-img"
+            loading="lazy"
             src="assests/tools/meta spolit.png"
             alt="Metasploit"
             onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"
@@ -6194,9 +6231,7 @@
             <p class="why-eyebrow">// OPERATIONAL ADVANTAGE</p>
             <h2 class="why-h">BUILT FOR <br/><span>OPERATORS.</span></h2>
             <div class="why-grid">${WHY}</div>
-            <div class="why-cta-strip">
-              <button class="btn-red" onclick="navigate('contact')">VIEW ALL PROGRAMS &nbsp;${ARR}</button>
-            </div>
+
           </div>
         </section>`;
     }
@@ -6205,10 +6240,10 @@
     function gallerySection() {
       // Placeholder tiles — swap src="" for real image URLs when available
       const tiles = [
-        { label: 'Field Operation Alpha', tag: 'MISSION', src: 'assests/Gallary/WhatsApp Image 2026-03-21 at 2.39.58 PM (1).jpeg' },
+        { label: 'Field Operation Alpha', tag: 'EVENT', src: 'assests/Gallary/WhatsApp Image 2026-03-21 at 2.39.58 PM (1).jpeg' },
         { label: 'Tactical Briefing', tag: 'TRAINING', src: 'assests/Gallary/WhatsApp Image 2026-03-21 at 2.39.58 PM.jpeg' },
-        { label: 'Cyber Intelligence Sector', tag: 'TECH', src: 'assests/Gallary/WhatsApp Image 2026-03-21 at 2.52.32 PM.jpeg' },
-        { label: 'Operational Security', tag: 'SECURITY', src: 'assests/Gallary/WhatsApp Image 2026-03-21 at 2.52.33 PM.jpeg' },
+        { label: 'Cyber Intelligence Sector', tag: 'NETWORKING', src: 'assests/Gallary/WhatsApp Image 2026-03-21 at 2.52.32 PM.jpeg' },
+        { label: 'Operational Security', tag: 'TRAINING', src: 'assests/Gallary/WhatsApp Image 2026-03-21 at 2.52.33 PM.jpeg' },
       ];
 
       const items = tiles.map((t, i) => `
@@ -6547,7 +6582,7 @@
             <div class="footer-col">
               <h4 class="footer-col-h">Academy</h4>
               <ul>
-                <li><a onclick="navigate('home');setTimeout(()=>document.getElementById('programs')?.scrollIntoView({behavior:'smooth'}),100)">Programs</a></li>
+                <li><a onclick="scrollToPrograms()">Programs</a></li>
                 <li><a onclick="navigate('about')">About</a></li>
                 <li><a onclick="window.location.href='event.html'">Events</a></li>
                 <li><a onclick="navigate('contact')">Contact</a></li>
@@ -6694,8 +6729,8 @@
           </div>
           <h3 class="event-card-title">${ev.title}</h3>
           <p class="event-card-desc">${ev.desc}</p>
-          <div class="event-card-meta">
-            <div class="event-meta-row"><span class="event-meta-icon"><svg width="12" height="12" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/></svg></span><span>${ev.location}</span></div>
+            <div class="event-card-meta">
+            <div class="event-meta-row"><span class="event-meta-icon"><svg width="12" height="12" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg></span><span>${ev.location}</span></div>
             <div class="event-meta-row"><span class="event-meta-label">SEATS:</span><span>${ev.seats}</span></div>
           </div>
           <div class="event-card-action">${ev.action} ${ARR}</div>
@@ -6705,27 +6740,24 @@
       return `<div>
         <section class="events-hero">
           <div style="max-width:1440px;margin:0 auto;width:100%">
-            <p style="font-size:9px;font-weight:700;letter-spacing:.24em;text-transform:uppercase;color:var(--blue)">// UPCOMING & LIVE</p>
-            <h1 class="events-hero-h">EVENTS &amp;<br/><span style="color:var(--blue)">COMPETITIONS.</span></h1>
-            <p class="events-hero-sub">Workshops, CTF challenges, bootcamps, webinars, and graduation ceremonies — all in one place.</p>
+            <p style="font-size:9px;font-weight:700;letter-spacing:.24em;text-transform:uppercase;color:var(--blue)">// COMMUNITY EVENTS</p>
+            <h1 class="events-hero-h">CONNECT, COMPETE,<br/>AND <span style="color:var(--blue)">EVOLVE.</span></h1>
+            <p class="events-hero-sub">From local bootcamps to global capture-the-flag competitions — stay ahead of the curve with our community events.</p>
           </div>
         </section>
-        ${SH('EVT', 'ALL EVENTS', 'Sorted by date — most recent first')}
+        ${SH('EVT', 'EVENT SCHEDULE', 'Operational calendar')}
         <section class="events-section">
           <div class="events-inner">
             <div class="events-filter-row">
-              <button class="evt-filter-btn active">ALL</button>
+              <button class="evt-filter-btn active">ALL EVENTS</button>
               <button class="evt-filter-btn">LIVE</button>
-              <button class="evt-filter-btn">WORKSHOPS</button>
-              <button class="evt-filter-btn">COMPETITIONS</button>
-              <button class="evt-filter-btn">WEBINARS</button>
+              <button class="evt-filter-btn">TRAINING</button>
+              <button class="evt-filter-btn">VIRTUAL</button>
             </div>
             <div class="events-grid">${cards}</div>
             <div class="events-cta-strip">
-              <p class="events-cta-text">Want to be notified about upcoming events?<br/><strong>Subscribe to the Intel Dispatch</strong> — every new event drops there first.</p>
-              <button class="btn-red" onclick="navigate('home');setTimeout(()=>document.querySelector('.newsletter-section')?.scrollIntoView({behavior:'smooth'}),120)">
-                SUBSCRIBE TO INTEL &nbsp;${ARR}
-              </button>
+              <p class="events-cta-text">Looking for private team training or guest lectures? <strong>Contact our operations wing directly.</strong></p>
+              <button class="btn-red" onclick="navigate('contact')">GET IN TOUCH &nbsp;${ARR}</button>
             </div>
           </div>
         </section>
@@ -6744,14 +6776,8 @@
         ${toolsSection()}
         ${whySection()}
         ${hexStripSection(2)}
-        <!-- § PRICING SECTION — commented out
-        ${/* pricingSection() */''}
-        -->
         ${foundersSection()}
         ${newsletterSection()}
-        <!-- § FEEDBACK / TESTIMONIALS SECTION — commented out
-        ${/* testimonialsSection() */''}
-        -->
         ${gallerySection()}
         ${faqSection()}
         ${footerSection()}
@@ -6845,7 +6871,7 @@
 
     function navigate(page) {
       if (page === 'login') {
-        window.location.href = 'lms/index.html';
+        window.location.href = 'lms/login.html';
         return;
       }
       if (page === 'events') {
@@ -6858,16 +6884,37 @@
       render();
     }
 
+    function scrollToPrograms() {
+      if (currentPage !== 'home') {
+        navigate('home');
+        setTimeout(() => {
+          document.getElementById('programs')?.scrollIntoView({ behavior: 'smooth' });
+        }, 150);
+      } else {
+        document.getElementById('programs')?.scrollIntoView({ behavior: 'smooth' });
+      }
+    }
+
     function render() {
       const app = document.getElementById('app');
       const key = currentPage in PAGES ? currentPage : '404';
       app.innerHTML = PAGES[key]();
 
       const titles = {
-        home: 'DEFFENSO // BECOME UNSTOPPABLE', about: 'ABOUT — DEFFENSO ACADEMY',
-        contact: 'CONTACT — DEFFENSO ACADEMY', events: 'EVENTS — DEFFENSO ACADEMY',
-        jreh: 'JR ETHICAL HACKING — DEFFENSO', robotics: 'ROBOTICS — DEFFENSO',
-        coding: 'CODING — DEFFENSO', forensics: 'CYBER FORENSICS — DEFFENSO'
+        home: 'DEFFENSO // BECOME UNSTOPPABLE',
+        about: 'ABOUT — DEFFENSO ACADEMY',
+        contact: 'CONTACT — DEFFENSO ACADEMY',
+        events: 'EVENTS — DEFFENSO ACADEMY',
+        jeh: 'JR ETHICAL HACKING — DEFFENSO',
+        cf: 'CYBER FORENSICS — DEFFENSO',
+        ceh: 'CERTIFIED ETHICAL HACKER — DEFFENSO',
+        cpt: 'CERTIFIED PENETRATION TESTER — DEFFENSO',
+        soc: 'SOC ANALYSIS TRACK — DEFFENSO',
+        bbh: 'BUG BOUNTY HUNTER — DEFFENSO',
+        ama: 'ADVANCED MALWARE ANALYSIS — DEFFENSO',
+        csa: 'CERTIFIED SECURITY ANALYSIS — DEFFENSO',
+        cs: 'CLOUD SECURITY — DEFFENSO',
+        adcd: 'ADVANCED DIPLOMA IN CYBER DEFENSE — DEFFENSO'
       };
       document.title = titles[currentPage] || 'DEFFENSO ACADEMY';
 
@@ -6876,14 +6923,62 @@
         about: 'Learn about DEFFENSO Academy, our mission, and the architects of elite cybersecurity education.',
         contact: 'Contact DEFFENSO Academy for course inquiries, partnerships, or technical support.',
         events: 'Stay updated with live events, CTF challenges, bootcamps, and webinars at DEFFENSO.',
-        jreh: 'The Jr Ethical Hacking program at DEFFENSO: Master fundamentals of cyber offense and defense.',
-        robotics: 'Robotics Engineering at DEFFENSO: Build, program, and deploy intelligent robotic systems.',
-        coding: 'Coding Fundamentals at DEFFENSO: From zero to production-ready developer.',
-        forensics: 'Cyber Forensics at DEFFENSO: Investigate cyber incidents and respond to breaches.'
+        jeh: 'Jr Ethical Hacking: Master the fundamentals of cyber offense and defense.',
+        cf: 'Cyber Forensics: Investigate cyber incidents and collect digital evidence using industry-standard tools.',
+        ceh: 'Certified Ethical Hacker: Master advanced ethical hacking methodologies and defensive mechanisms.',
+        cpt: 'Certified Penetration Tester: Execute advanced offensive operations and master red team tactics.',
+        soc: 'SOC Analysis Track: Become a defender in a simulated Security Operations Center.',
+        bbh: 'Bug Bounty Hunter: Learn web vulnerability research and earn rewards globally.',
+        ama: 'Advanced Malware Analysis: Reverse engineer and dissect advanced persistent threats.',
+        csa: 'Certified Security Analysis: Focus on risk management, architecture, and compliance.',
+        cs: 'Cloud Security: Master securing AWS, Azure, and GCP environments.',
+        adcd: 'Advanced Diploma in Cyber Defense: Our most comprehensive expert-level cyber defense program.'
       };
       const desc = descriptions[currentPage] || descriptions.home;
       const metaDesc = document.querySelector('meta[name="description"]');
       if (metaDesc) metaDesc.setAttribute('content', desc);
+
+      // Update Canonical Link
+      const canLink = document.getElementById('canonical-link');
+      if (canLink) {
+        canLink.setAttribute('href', `https://www.deffenso.in/${window.location.hash}`);
+      }
+
+      // Update OG Meta
+      const updateMeta = (name, content) => {
+        const el = document.querySelector(`meta[property="${name}"]`) || document.querySelector(`meta[name="${name}"]`);
+        if (el) el.setAttribute('content', content);
+      }
+      updateMeta('og:title', titles[currentPage] || 'DEFFENSO ACADEMY');
+      updateMeta('og:description', desc);
+      updateMeta('og:url', `https://www.deffenso.in/${window.location.hash}`);
+      updateMeta('twitter:title', titles[currentPage] || 'DEFFENSO ACADEMY');
+      updateMeta('twitter:description', desc);
+
+      // Dynamic Breadcrumb Schema for Google
+      const breadcrumbData = {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.deffenso.in/" }
+        ]
+      };
+      if (currentPage !== 'home') {
+        breadcrumbData.itemListElement.push({
+          "@type": "ListItem",
+          "position": 2,
+          "name": titles[currentPage].split(' — ')[0],
+          "item": `https://www.deffenso.in/${window.location.hash}`
+        });
+      }
+      let bScript = document.getElementById('breadcrumb-schema');
+      if (!bScript) {
+        bScript = document.createElement('script');
+        bScript.id = 'breadcrumb-schema';
+        bScript.type = 'application/ld+json';
+        document.head.appendChild(bScript);
+      }
+      bScript.text = JSON.stringify(breadcrumbData);
 
       document.querySelectorAll('.nav-link').forEach(b => b.classList.remove('active'));
       document.querySelectorAll('.btn-nav-events').forEach(b => b.classList.remove('active'));
@@ -6932,15 +7027,6 @@
           ham.classList.toggle('open', open);
           ham.setAttribute('aria-expanded', open ? 'true' : 'false');
           document.body.classList.toggle('menu-open', open);
-        });
-      }
-      const progToggle = document.getElementById('mob-prog-toggle');
-      if (progToggle && !progToggle._bound) {
-        progToggle._bound = true;
-        progToggle.addEventListener('click', () => {
-          document.getElementById('mob-prog-panel')?.classList.toggle('open');
-          const chev = progToggle.querySelector('.nav-chevron');
-          if (chev) chev.style.transform = document.getElementById('mob-prog-panel')?.classList.contains('open') ? 'rotate(180deg)' : '';
         });
       }
       let openFaq = 0;
@@ -7030,7 +7116,7 @@
       if (!strip) return;
       const items = [
         { v: '1.2M+', l: 'CYBER ATTACKS TODAY', al: true }, { v: '3.5M', l: 'UNFILLED CYBER JOBS', al: false },
-        { v: '4', l: 'ACTIVE PROGRAMS', al: false }, { v: '500+', l: 'OPERATORS TRAINED', al: false },
+        { v: '10', l: 'ACTIVE PROGRAMS', al: false }, { v: '500+', l: 'OPERATORS TRAINED', al: false },
         { v: '39s', l: 'AVG ATTACK INTERVAL', al: true }, { v: '94%', l: 'COMPLETION RATE', al: false },
         { v: 'LIVE', l: 'MENTORS ONLINE', al: false }, { v: '$0', l: 'HIDDEN FEES', al: false }, { v: '24HRS', l: 'RESPONSE TIME', al: false },
       ];
@@ -7171,19 +7257,7 @@
     document.addEventListener('click', e => { const card = e.target.closest('.program-card'); if (card) { const t = card.querySelector('.prog-name'); if (t) scrambleEl(t); } });
 
 
-    /* ═══════════════════════════════════════════════════════
-       JS § 17. PRICING TOGGLE (kept for if re-enabled)
-    ═══════════════════════════════════════════════════════ */
-    function setPricing(mode) {
-      const prices = mode === 'annual' ? { recruit: 41, operator: 83, elite: 149 } : { recruit: 49, operator: 99, elite: 179 };
-      const period = mode === 'annual' ? 'PER MONTH, BILLED ANNUALLY' : 'PER MONTH';
-      ['recruit', 'operator', 'elite'].forEach(p => {
-        const pe = document.getElementById('price-' + p), pr = document.getElementById('period-' + p), ps = document.getElementById('save-' + p);
-        if (pe) pe.textContent = prices[p]; if (pr) pr.textContent = period; if (ps) ps.style.display = mode === 'annual' ? 'inline-block' : 'none';
-      });
-      document.getElementById('ptoggle-monthly')?.classList.toggle('active', mode === 'monthly');
-      document.getElementById('ptoggle-annual')?.classList.toggle('active', mode === 'annual');
-    }
+
 
 
     /* ═══════════════════════════════════════════════════════

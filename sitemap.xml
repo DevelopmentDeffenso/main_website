@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <!-- Core SPA Points -->
+  <url><loc>https://www.deffenso.in/</loc><priority>1.0</priority></url>
+  <url><loc>https://www.deffenso.in/#about</loc><priority>0.8</priority></url>
+  <url><loc>https://www.deffenso.in/#contact</loc><priority>0.8</priority></url>
+  <url><loc>https://www.deffenso.in/event.html</loc><priority>0.9</priority></url>
+  
+  <!-- Training Programs -->
+  <url><loc>https://www.deffenso.in/#jeh</loc><priority>0.7</priority></url>
+  <url><loc>https://www.deffenso.in/#cf</loc><priority>0.7</priority></url>
+  <url><loc>https://www.deffenso.in/#ceh</loc><priority>0.7</priority></url>
+  <url><loc>https://www.deffenso.in/#cpt</loc><priority>0.7</priority></url>
+  <url><loc>https://www.deffenso.in/#soc</loc><priority>0.7</priority></url>
+  <url><loc>https://www.deffenso.in/#bbh</loc><priority>0.7</priority></url>
+  <url><loc>https://www.deffenso.in/#ama</loc><priority>0.7</priority></url>
+  <url><loc>https://www.deffenso.in/#csa</loc><priority>0.7</priority></url>
+  <url><loc>https://www.deffenso.in/#cs</loc><priority>0.7</priority></url>
+  <url><loc>https://www.deffenso.in/#adcd</loc><priority>0.7</priority></url>
+  
+  <!-- Legal -->
+  <url><loc>https://www.deffenso.in/privacy.html</loc><priority>0.3</priority></url>
+  <url><loc>https://www.deffenso.in/term&con.html</loc><priority>0.3</priority></url>
+</urlset>

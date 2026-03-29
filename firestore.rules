@@ -1,0 +1,21 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // Users: authenticated users can read/write their own profile
+    match /users/{userId} {
+      allow read, write: if request.auth != null && request.auth.uid == userId;
+    }
+
+    // Courses: any authenticated user can read; authenticated users can write
+    // (admin-only enforcement handled client-side for now)
+    match /courses/{courseId} {
+      allow read, write: if request.auth != null;
+    }
+
+    // Progress: users can only read/write their OWN progress
+    match /progress/{userId} {
+      allow read, write: if request.auth != null && request.auth.uid == userId;
+    }
+  }
+}
