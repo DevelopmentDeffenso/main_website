@@ -20,5 +20,5 @@
   
   <!-- Legal -->
   <url><loc>https://www.deffenso.in/privacy.html</loc><priority>0.3</priority></url>
-  <url><loc>https://www.deffenso.in/term&con.html</loc><priority>0.3</priority></url>
+  <url><loc>https://www.deffenso.in/term&amp;con.html</loc><priority>0.3</priority></url>
 </urlset>
