@@ -23,8 +23,15 @@
   <meta property="og:image" content="https://www.deffenso.com/assests/logos/og-image.png" />
   <meta property="og:image:width" content="1200" />
   <meta property="og:image:height" content="627" />
-  <meta property="og:site_name" content="DEFFENSO" />
   <meta property="og:locale" content="en_US" />
+  <meta property="og:site_name" content="DEFFENSO" />
+
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="DEFFENSO | Hacker Academy — Ethical Hacking & Cybersecurity" />
+  <meta name="twitter:description"
+    content="Join DEFFENSO's hacker academy. Learn ethical hacking, penetration testing, and real-world cybersecurity skills from the ground up." />
+  <meta name="twitter:image" content="https://www.deffenso.com/assests/logos/og-image.png" />
+  <meta name="twitter:site" content="@deffenso" />
 
   <meta property="og:linkedin:owner" content="your-linkedin-company-id" />
 
@@ -112,7 +119,7 @@
       line-height: 1.55;
       -webkit-font-smoothing: antialiased;
       overflow-x: hidden;
-      padding-bottom: calc(64px + var(--safe-bottom));
+      padding-bottom: 0px;
     }
 
     a {
@@ -1085,102 +1092,7 @@
       color: var(--cream-3);
     }
 
-    /* ═══════════════════════════════════════════════════════
-       § 9. BOTTOM NAV BAR (mobile)
-    ═══════════════════════════════════════════════════════ */
-    .bottom-nav {
-      position: fixed;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      z-index: 90;
-      background: rgba(6, 6, 6, .98);
-      backdrop-filter: blur(20px);
-      -webkit-backdrop-filter: blur(20px);
-      border-top: 1px solid var(--wire);
-      display: grid;
-      grid-template-columns: repeat(5, 1fr);
-      height: calc(56px + var(--safe-bottom));
-      padding-bottom: var(--safe-bottom);
-    }
 
-    .bottom-nav-item {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      gap: 4px;
-      color: var(--cream-3);
-      font-size: 7px;
-      font-weight: 700;
-      letter-spacing: .1em;
-      text-transform: uppercase;
-      min-height: 56px;
-      transition: color .15s;
-      border: none;
-      background: none;
-      -webkit-appearance: none;
-      appearance: none;
-      cursor: pointer;
-    }
-
-    .bottom-nav-item svg {
-      width: 16px;
-      height: 16px;
-    }
-
-    .bottom-nav-item.active {
-      color: var(--blue);
-    }
-
-    .bottom-nav-item:active {
-      color: var(--cream);
-    }
-
-    .bottom-nav-events {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      gap: 3px;
-      font-size: 7px;
-      font-weight: 700;
-      letter-spacing: .08em;
-      text-transform: uppercase;
-      min-height: 56px;
-      border: none;
-      cursor: pointer;
-      background: linear-gradient(135deg, #0066CC, #3DA5FF);
-      color: #fff;
-    }
-
-    .bottom-nav-enroll {
-      background: linear-gradient(135deg, #0066CC, #3DA5FF);
-      color: #fff;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      gap: 3px;
-      font-size: 7px;
-      font-weight: 700;
-      letter-spacing: .1em;
-      text-transform: uppercase;
-      min-height: 56px;
-      border: none;
-      transition: filter .15s;
-      cursor: pointer;
-    }
-
-    .bottom-nav-enroll:active {
-      filter: brightness(1.2);
-    }
-
-    @media(min-width:1024px) {
-      .bottom-nav {
-        display: none;
-      }
-    }
 
     /* ═══════════════════════════════════════════════════════
        § 10. HERO SECTION
@@ -5674,10 +5586,14 @@
       </div>
 
       <div class="nav-links">
-        <a class="nav-link" onclick="navigate('about')">ABOUT</a>
+        <a class="nav-link" onclick="navigate('home')">
+          <svg width="14" height="14" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/></svg>
+          HOME
+        </a>
         <div class="nav-prog-wrapper">
           <button class="nav-prog-btn"
             onclick="navigate('home');setTimeout(()=>document.getElementById('programs')?.scrollIntoView({behavior:'smooth'}),120)">
+            <svg width="14" height="14" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/></svg>
             PROGRAMS
             <svg class="nav-chevron" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
@@ -5690,22 +5606,31 @@
             <a onclick="navigate('forensics')">Cyber Forensics</a>
           </div>
         </div>
-        <!-- ▶ Events button — blue gradient -->
         <button class="btn-nav-events" onclick="window.location.href='event.html'">
-          <svg width="12" height="12" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <svg width="14" height="14" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
               d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
           </svg>
           EVENTS
         </button>
-        <a class="nav-link" onclick="navigate('contact')">CONTACT</a>
+        <a class="nav-link" onclick="navigate('about')">
+          <svg width="14" height="14" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+          ABOUT
+        </a>
+        <a class="nav-link" onclick="navigate('contact')">
+          <svg width="14" height="14" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+          CONTACT
+        </a>
       </div>
 
       <div class="nav-right">
         <div class="nav-status">
           <div class="status-dot"></div><span>SYSTEMS ONLINE</span>
         </div>
-        <button class="btn-nav-enroll" onclick="navigate('login')">LOGIN</button>
+        <button class="btn-nav-enroll" onclick="navigate('login')">
+          <svg width="14" height="14" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 16l-4-4m0 0l4-4m-4 4h14m-5 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h7a3 3 0 013 3v1"/></svg>
+          LOGIN
+        </button>
         <button class="mob-hamburger" id="mob-ham" aria-label="Toggle menu" aria-expanded="false">
           <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
@@ -5749,7 +5674,12 @@
       </div>
       <!-- Mobile Events link -->
       <button class="mob-events-link" onclick="window.location.href='event.html';closeMobMenu()">
-        <span>⚡ Events</span>
+        <span>
+          <svg width="14" height="14" fill="none" stroke="currentColor" viewBox="0 0 24 24" style="display:inline-block;vertical-align:middle;margin-right:8px;margin-top:-2px">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+          </svg>
+          Events
+        </span>
         <svg width="14" height="14" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 18l6-6-6-6" />
         </svg>
@@ -5775,48 +5705,7 @@
     </div>
   </div>
 
-  <!-- ═══════════════════════════════════════════════════
-       PERSISTENT: Bottom Nav (5 items now — includes Events)
-  ═══════════════════════════════════════════════════════ -->
-  <nav class="bottom-nav" id="bottom-nav" aria-label="Mobile navigation">
-    <button class="bottom-nav-item active" id="bnav-home" onclick="navigate('home')">
-      <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-          d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
-      </svg>
-      HOME
-    </button>
-    <button class="bottom-nav-item" id="bnav-programs"
-      onclick="navigate('home');setTimeout(()=>document.getElementById('programs')?.scrollIntoView({behavior:'smooth'}),120)">
-      <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-          d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
-      </svg>
-      PROGRAMS
-    </button>
-    <!-- Events in bottom nav -->
-    <button class="bottom-nav-events" id="bnav-events" onclick="window.location.href='event.html'">
-      <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-          d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
-      </svg>
-      EVENTS
-    </button>
-    <button class="bottom-nav-item" id="bnav-about" onclick="navigate('about')">
-      <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-          d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-      </svg>
-      ABOUT
-    </button>
-    <button class="bottom-nav-enroll" onclick="navigate('login')">
-      <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-          d="M11 16l-4-4m0 0l4-4m-4 4h14m-5 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h7a3 3 0 013 3v1" />
-      </svg>
-      LOGIN
-    </button>
-  </nav>
+
 
   <!-- Toast container and IP tracker removed -->
 
@@ -6890,23 +6779,13 @@
             </div>
             <div class="about-stats">
               <div class="about-stat"><div class="about-stat-num">4+</div><div class="about-stat-label">Specialized Tracks</div></div>
-              <div class="about-stat"><div class="about-stat-num">500+</div><div class="about-stat-label">Students Trained</div></div>
+              <div class="about-stat"><div class="about-stat-num">10+</div><div class="about-stat-label">Students Trained</div></div>
               <div class="about-stat"><div class="about-stat-num">100+</div><div class="about-stat-label">Lab Scenarios</div></div>
               <div class="about-stat"><div class="about-stat-num">3.5M</div><div class="about-stat-label">Global Job Gap</div></div>
             </div>
           </div>
         </section>
-        ${SH('FND', 'FOUNDER PROFILE', 'Lead Instructor & Creator')}
-        <div class="founder-section">
-          <div class="founder-block">
-            <div class="founder-tag">FOUNDER FILE // CLASSIFIED</div>
-            <div>
-              <h2 class="founder-name">RAUL</h2>
-              <p class="founder-role">Founder & Lead Instructor</p>
-              <p class="founder-bio">A cybersecurity professional with years of hands-on experience in penetration testing, red teaming, and security operations. Raul founded Deffenso Academy to bridge the gap between academic theory and real-world cyber defense.</p>
-            </div>
-          </div>
-        </div>
+        ${foundersSection()}
         ${SH('VAL', 'CORE VALUES', 'What we stand for')}
         <section class="values-section">
           <div class="values-inner">
@@ -6992,11 +6871,23 @@
       };
       document.title = titles[currentPage] || 'DEFFENSO ACADEMY';
 
-      document.querySelectorAll('.bottom-nav-item').forEach(b => b.classList.remove('active'));
-      if (currentPage === 'home') document.getElementById('bnav-home')?.classList.add('active');
-      else if (currentPage === 'about') document.getElementById('bnav-about')?.classList.add('active');
-      else if (currentPage === 'events') document.getElementById('bnav-events')?.style && (document.getElementById('bnav-events').style.filter = 'brightness(1.2)');
+      const descriptions = {
+        home: 'DEFFENSO is an elite hacker academy offering hands-on ethical hacking, penetration testing, and cybersecurity courses.',
+        about: 'Learn about DEFFENSO Academy, our mission, and the architects of elite cybersecurity education.',
+        contact: 'Contact DEFFENSO Academy for course inquiries, partnerships, or technical support.',
+        events: 'Stay updated with live events, CTF challenges, bootcamps, and webinars at DEFFENSO.',
+        jreh: 'The Jr Ethical Hacking program at DEFFENSO: Master fundamentals of cyber offense and defense.',
+        robotics: 'Robotics Engineering at DEFFENSO: Build, program, and deploy intelligent robotic systems.',
+        coding: 'Coding Fundamentals at DEFFENSO: From zero to production-ready developer.',
+        forensics: 'Cyber Forensics at DEFFENSO: Investigate cyber incidents and respond to breaches.'
+      };
+      const desc = descriptions[currentPage] || descriptions.home;
+      const metaDesc = document.querySelector('meta[name="description"]');
+      if (metaDesc) metaDesc.setAttribute('content', desc);
 
+      document.querySelectorAll('.nav-link').forEach(b => b.classList.remove('active'));
+      document.querySelectorAll('.btn-nav-events').forEach(b => b.classList.remove('active'));
+      // Active state for top nav links if needed, or handled via CSS classes
       initInteractivity();
       if (currentPage === 'home') {
         initHeroCanvas();

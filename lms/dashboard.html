@@ -1454,7 +1454,7 @@
   <!-- Auth guard -->
   <script>
     const sess = sessionStorage.getItem('dflms_session');
-    if (!sess) { window.location.href = 'index.html'; }
+    if (!sess) { window.location.href = 'login.html'; }
     const user = JSON.parse(sess || '{}');
     if (user.role === 'admin') { window.location.href = 'admin.html'; }
   </script>
@@ -1530,7 +1530,7 @@
     function getCourses() { return JSON.parse(localStorage.getItem('dflms_courses') || '[]'); }
     function getProgress() { return JSON.parse(localStorage.getItem('dflms_progress') || '{}'); }
     function saveProgress(p) { localStorage.setItem('dflms_progress', JSON.stringify(p)); }
-    function logout() { sessionStorage.removeItem('dflms_session'); window.location.href = 'index.html'; }
+    function logout() { sessionStorage.removeItem('dflms_session'); window.location.href = 'login.html'; }
 
     /* ── Per-user progress key ── */
     function userKey(videoId) { return `${user.id || user.email}_${videoId}`; }

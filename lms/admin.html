@@ -174,7 +174,7 @@ input,select,textarea{font-family:var(--font-m);}
 
 <script>
 const sess=sessionStorage.getItem('dflms_session');
-if(!sess){window.location.href='index.html';}
+if(!sess){window.location.href='login.html';}
 const user=JSON.parse(sess||'{}');
 if(user.role!=='admin'){window.location.href='dashboard.html';}
 </script>
@@ -257,7 +257,7 @@ function saveCourses(c){localStorage.setItem('dflms_courses',JSON.stringify(c));
 function getUsers(){return JSON.parse(localStorage.getItem('dflms_users')||'[]');}
 function saveUsers(u){localStorage.setItem('dflms_users',JSON.stringify(u));}
 function getProgress(){return JSON.parse(localStorage.getItem('dflms_progress')||'{}');}
-function logout(){sessionStorage.removeItem('dflms_session');window.location.href='index.html';}
+function logout(){sessionStorage.removeItem('dflms_session');window.location.href='login.html';}
 function uid(){return Date.now().toString(36)+Math.random().toString(36).slice(2,6);}
 
 function toast(msg,isError=false){
