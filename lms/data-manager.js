@@ -8,6 +8,14 @@ const DataManager = {
     return typeof window.db !== 'undefined' && window.auth.currentUser;
   },
 
+  async waitForAuth() {
+    if (!window.auth) return null;
+    if (window.auth.currentUser) return window.auth.currentUser;
+    return new Promise(resolve => {
+      const unsub = window.auth.onAuthStateChanged(user => { unsub(); resolve(user); });
+    });
+  },
+
   // --- USERS ---
   async getProfile() {
     if (this.isFirestore()) {
@@ -63,6 +71,25 @@ const DataManager = {
   },
 
   // --- AUTH ---
+  async login(email, password) {
+    if (typeof window.auth !== 'undefined') {
+      const userCredential = await window.auth.signInWithEmailAndPassword(email, password);
+      const user = userCredential.user;
+      
+      // Fetch profile for role
+      let profile = await this.getProfile();
+      if (!profile) {
+        profile = { email: user.email, role: 'student', created_at: firebase.firestore.FieldValue.serverTimestamp() };
+        await window.db.collection('users').doc(user.uid).set(profile);
+      }
+      const session = { id: user.uid, email: user.email, role: profile.role };
+      sessionStorage.setItem('dflms_session', JSON.stringify(session));
+      return session;
+    } else {
+      throw new Error('Firebase Auth not initialized');
+    }
+  },
+
   async logout() {
     if (typeof window.auth !== 'undefined') {
       await window.auth.signOut();

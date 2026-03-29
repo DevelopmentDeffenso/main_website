@@ -203,20 +203,16 @@ body{background:var(--void);color:var(--cream);font-family:var(--font-m);-webkit
   <div class="loading-text" id="loading-text">AUTHENTICATING...</div>
 </div>
 
-<script>
-/* ── Seed default users if none exist ── */
-(function(){
-  if(!localStorage.getItem('dflms_users')){
-    const users=[
-      {id:'u1',name:'Admin',email:'admin@deffenso.com',password:'admin123',role:'admin'},
-      {id:'u2',name:'Student One',email:'student@deffenso.com',password:'student123',role:'student'}
-    ];
-    localStorage.setItem('dflms_users',JSON.stringify(users));
-  }
-  if(!localStorage.getItem('dflms_courses')) localStorage.setItem('dflms_courses',JSON.stringify([]));
-  if(!localStorage.getItem('dflms_progress')) localStorage.setItem('dflms_progress',JSON.stringify({}));
-})();
+<!-- Firebase SDK -->
+<script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore-compat.js"></script>
 
+<!-- Integration Config -->
+<script src="firebase-config.js"></script>
+<script src="data-manager.js"></script>
+
+<script>
 /* ── Matrix rain ── */
 (function(){
   const canvas=document.getElementById('bg-canvas');
@@ -256,42 +252,48 @@ function togglePwd(){
 document.addEventListener('keydown',e=>{if(e.key==='Enter')doLogin();});
 
 /* ── Login logic ── */
-function doLogin(){
+async function doLogin(){
   const email=document.getElementById('email').value.trim().toLowerCase();
   const password=document.getElementById('password').value;
   const errEl=document.getElementById('error-msg');
   const btn=document.getElementById('login-btn');
   errEl.classList.remove('show');
 
-  if(!email||!password){errEl.classList.add('show');return;}
+  if(!email||!password){errEl.textContent = '// ERROR: MISSING CREDENTIALS'; errEl.classList.add('show');return;}
 
-  const users=JSON.parse(localStorage.getItem('dflms_users')||'[]');
-  const user=users.find(u=>u.email.toLowerCase()===email&&u.password===password);
-
-  if(!user){errEl.classList.add('show');document.getElementById('password').value='';return;}
-
-  /* Store session */
-  sessionStorage.setItem('dflms_session',JSON.stringify({id:user.id,name:user.name,email:user.email,role:user.role}));
-
-  /* Show loading */
   const overlay=document.getElementById('loading-overlay');
   const bar=document.getElementById('loading-bar');
   const txt=document.getElementById('loading-text');
-  overlay.classList.add('show');
-  bar.classList.add('go');
-  btn.disabled=true;
 
-  const msgs=['AUTHENTICATING...','VERIFYING CLEARANCE...','LOADING SECURE MODULES...','ACCESS GRANTED'];
-  let i=0;
-  const iv=setInterval(()=>{
-    txt.textContent=msgs[Math.min(i,msgs.length-1)];i++;
-    if(i>msgs.length){
-      clearInterval(iv);
-      setTimeout(()=>{
-        window.location.href=user.role==='admin'?'admin.html':'dashboard.html';
-      },300);
-    }
-  },220);
+  try {
+    btn.disabled = true;
+    overlay.classList.add('show');
+    bar.classList.add('go');
+
+    // Use Firebase Auth via DataManager
+    const user = await window.DataManager.login(email, password);
+    
+    const msgs=['AUTHENTICATING...','VERIFYING CLEARANCE...','LOADING SECURE MODULES...','ACCESS GRANTED'];
+    let i=0;
+    const iv=setInterval(()=>{
+      txt.textContent=msgs[Math.min(i,msgs.length-1)];i++;
+      if(i>=msgs.length){
+        clearInterval(iv);
+        setTimeout(()=>{
+          window.location.href=user.role==='admin'?'admin.html':'dashboard.html';
+        },300);
+      }
+    },220);
+
+  } catch (error) {
+    console.error('Login Error:', error);
+    overlay.classList.remove('show');
+    bar.classList.remove('go');
+    btn.disabled = false;
+    errEl.textContent = `// AUTH FAILED: ${error.message.toUpperCase()}`;
+    errEl.classList.add('show');
+    document.getElementById('password').value='';
+  }
 }
 </script>
 </body>

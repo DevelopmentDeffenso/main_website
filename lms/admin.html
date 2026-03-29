@@ -172,12 +172,22 @@ input,select,textarea{font-family:var(--font-m);}
 </head>
 <body>
 
-<script>
-const sess=sessionStorage.getItem('dflms_session');
-if(!sess){window.location.href='login.html';}
-const user=JSON.parse(sess||'{}');
-if(user.role!=='admin'){window.location.href='dashboard.html';}
-</script>
+  <!-- Firebase SDK -->
+  <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore-compat.js"></script>
+
+  <!-- Integration Config -->
+  <script src="firebase-config.js"></script>
+  <script src="data-manager.js"></script>
+
+  <!-- Auth guard -->
+  <script>
+    const sess = sessionStorage.getItem('dflms_session');
+    if (!sess) { window.location.href = 'login.html'; }
+    const user = JSON.parse(sess || '{}');
+    if (user.role !== 'admin') { window.location.href = 'dashboard.html'; }
+  </script>
 
 <div class="layout">
   <!-- Sidebar -->

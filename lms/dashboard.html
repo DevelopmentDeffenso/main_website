@@ -1451,6 +1451,15 @@
 
 <body>
 
+  <!-- Firebase SDK -->
+  <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore-compat.js"></script>
+
+  <!-- Integration Config -->
+  <script src="firebase-config.js"></script>
+  <script src="data-manager.js"></script>
+
   <!-- Auth guard -->
   <script>
     const sess = sessionStorage.getItem('dflms_session');
@@ -1528,20 +1537,39 @@
     /* ── Local Helpers ── */
     function getUsers() { return JSON.parse(localStorage.getItem('dflms_users') || '[]'); }
     function getCourses() { return JSON.parse(localStorage.getItem('dflms_courses') || '[]'); }
-    function getProgress() { return JSON.parse(localStorage.getItem('dflms_progress') || '{}'); }
-    function saveProgress(p) { localStorage.setItem('dflms_progress', JSON.stringify(p)); }
+    let CACHED_PROGRESS = {};
+
+    async function getProgress() {
+      if (Object.keys(CACHED_PROGRESS).length === 0) {
+        CACHED_PROGRESS = await window.DataManager.getProgress();
+      }
+      return CACHED_PROGRESS;
+    }
+
+    async function saveProgressSync(videoId, data) {
+      // Update local cache
+      CACHED_PROGRESS[videoId] = { ...data };
+      // Save to Firebase/Local via DataManager
+      await window.DataManager.saveProgress(videoId, data);
+    }
+
+    function getProgressSync() { return CACHED_PROGRESS; }
+
     function logout() { sessionStorage.removeItem('dflms_session'); window.location.href = 'login.html'; }
 
     /* ── Per-user progress key ── */
     function userKey(videoId) { return `${user.id || user.email}_${videoId}`; }
 
     function isWatched(videoId) {
-      const p = getProgress();
-      return !!(p[userKey(videoId)]?.watched);
+      const p = getProgressSync();
+      const key = videoId; // Use simple videoId as key for Firebase
+      // Fallback for legacy local keys if needed, but per-user Firebase is preferred
+      return !!(p[key]?.watched || p[userKey(videoId)]?.watched);
     }
     function isQuizPassed(videoId) {
-      const p = getProgress();
-      return !!(p[userKey(videoId)]?.quizPassed);
+      const p = getProgressSync();
+      const key = videoId;
+      return !!(p[key]?.quizPassed || p[userKey(videoId)]?.quizPassed);
     }
 
     /* ── Compute if video is unlocked ── */
@@ -1780,22 +1808,19 @@
         banner.className = 'unlock-banner pass'; banner.innerHTML = `<span class="ub-icon"><svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 11V7a4 4 0 118 0m-4 8v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2z"/></svg></span><span class="ub-label">// ACCESS GRANTED</span>Score: ${score}/${QUESTIONS.length}. Next class unlocked. You are cleared to proceed.`;
         
         if (window.activeCourseVideo) {
-          const p = getProgress();
           const vId = window.activeCourseVideo.id;
-          if (!p[userKey(vId)]) p[userKey(vId)] = {};
-          p[userKey(vId)].quizPassed = true;
-          p[userKey(vId)].watched = true;
-          saveProgress(p);
-          renderSidebar(); 
-          // If we are in the Classroom view, we don't necessarily want to jump away, 
-          // but we want the "Back" button to show the updated "Course Complete" state.
+          saveProgressSync(vId, { quizPassed: true, watched: true });
+          renderSidebar();
         } else {
-          localStorage.setItem('dflms_rec_passed_' + m, 'true');
+          // Record module progress
+          const recVideoId = PLAYLIST[m].video;
+          saveProgressSync(recVideoId, { quizPassed: true, watched: true });
+        }
           // Unlock strictly the next module:
           const nextM = m + 1;
-          const PLAYLIST = getActivePlaylist();
+          const PLAYLIST_NEXT = getActivePlaylist();
           const nc = document.getElementById('mod-' + nextM);
-          if (nc && nextM < PLAYLIST.length) {
+          if (nc && nextM < PLAYLIST_NEXT.length) {
             nc.style.borderColor = 'var(--green)'; nc.style.borderTopColor = 'var(--green)';
             const e = document.getElementById('nc-eyebrow-' + nextM); if (e) { e.textContent = '[UNLOCKED] NEXT SESSION'; e.style.color = 'var(--green)'; }
             const o = document.getElementById('nc-overlay-' + nextM); if (o) o.style.display = 'none';
@@ -1809,16 +1834,16 @@
       document.getElementById('verdict-text-' + m).textContent = score === 10 ? 'Outstanding. Perfect score — you have mastered the fundamentals. Proceed to the next module immediately.' : passed ? `Strong performance. ${10 - score} question(s) missed — review the flagged answers below.` : `Below threshold. You missed ${10 - score} question(s). Retry this quiz before proceeding.`;
 
       const reviewList = document.getElementById('review-list-' + m);
-      const wrongOnes = QUESTIONS.filter((q, i) => userPicks[i] !== q.answer);
+      const wrongOnes = QUESTIONS.filter((q, i) => userPicks[i] !== q.correct);
       if (wrongOnes.length === 0) {
         reviewList.innerHTML = `<div style="font-size:9px;letter-spacing:.22em;color:var(--green);text-transform:uppercase;padding:16px 0;text-align:center;display:flex;align-items:center;justify-content:center;gap:8px;"><svg width="14" height="14" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg> ALL ANSWERS CORRECT</div>`;
       } else {
         reviewList.innerHTML = `<div style="font-size:9px;letter-spacing:.22em;color:var(--red);text-transform:uppercase;margin-bottom:12px;padding-bottom:10px;border-bottom:1px solid var(--wire)">// INCORRECT ANSWERS — ${wrongOnes.length} MISTAKE${wrongOnes.length > 1 ? 'S' : ''}</div>`;
         QUESTIONS.forEach((q, i) => {
-          const picked = userPicks[i]; if (picked === q.answer) return;
-          const yourAnswer = picked !== null ? `${LABELS[picked]}) ${q.opts[picked]}` : 'No answer';
+          const picked = userPicks[i]; if (picked === q.correct) return;
+          const yourAnswer = picked !== null ? `${LABELS[picked]}) ${q.options[picked]}` : 'No answer';
           reviewList.innerHTML += `<div class="review-item" style="border-color:rgba(255,95,87,.25); border-left:2px solid var(--red);">
-        <div style="flex:1;min-width:0"><span class="review-q" style="margin-bottom:8px">Q${i + 1}: ${q.q}</span>
+        <div style="flex:1;min-width:0"><span class="review-q" style="margin-bottom:8px">Q${i + 1}: ${q.question}</span>
         <div style="display:flex;flex-direction:column;gap:5px;margin-top:6px"><span style="font-size:10px;color:var(--red);display:flex;align-items:center;gap:6px;"><svg width="12" height="12" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg> Your answer: &nbsp;<strong>${yourAnswer}</strong></span></div></div></div>`;
         });
       }
@@ -1971,8 +1996,8 @@
         <div style="margin-top:40px;margin-bottom:20px;font-size:8.5px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--amber);">// SESSION ARCHIVE PROGRESS</div>
         <div style="display:grid;grid-template-columns:repeat(auto-fill, minmax(280px, 1fr));gap:20px;">
           ${RECORDED_MODULES.map((rec, i) => {
-            const passed = localStorage.getItem('dflms_rec_passed_' + i) === 'true';
-            const prevPassed = i === 0 || localStorage.getItem('dflms_rec_passed_' + (i - 1)) === 'true';
+            const passed = isQuizPassed(rec.video);
+            const prevPassed = i === 0 || isQuizPassed(RECORDED_MODULES[i-1].video);
             const jumpToIdx = `showView('recorded', false); setTimeout(() => { if(window.switchRecVideo) { window.currentRecVideo = ${i}; window.switchRecVideo(0); } }, 100)`;
             return `<div ${prevPassed ? `onclick="${jumpToIdx}"` : ''} style="padding:16px;border:1px solid var(--wire);border-left:2px solid ${passed ? 'var(--green)' : 'var(--amber)'};background:var(--void-1);cursor:${prevPassed?'pointer':'not-allowed'};opacity:${prevPassed?1:0.5};">
               <div style="font-size:8px;color:var(--cream-3);margin-bottom:4px;">SESSION 0${i+1}</div>
@@ -2005,10 +2030,10 @@
         ${PLAYLIST.map((mod, i) => {
           let lockedHTML = '';
           let borderColor = i === 0 ? 'var(--blue)' : 'var(--wire)';
-          const passed = isArchive ? (localStorage.getItem('dflms_rec_passed_' + i) === 'true') : isQuizPassed(mod.id);
+          const passed = isArchive ? isQuizPassed(mod.video) : isQuizPassed(mod.id);
           
           if (i > 0 && isArchive) {
-            const prevPassed = localStorage.getItem('dflms_rec_passed_' + (i - 1)) === 'true';
+            const prevPassed = isQuizPassed(RECORDED_MODULES[i-1].video);
             if (!prevPassed) {
               lockedHTML = `
               <div id="nc-overlay-${i}" style="display:flex; position:absolute; inset:20px; z-index:10; background:rgba(10,10,10,0.85); backdrop-filter:blur(2px); flex-direction:column; align-items:center; justify-content:center; text-align:center; border:1px dashed var(--wire-2);">
@@ -2202,9 +2227,24 @@
     }
 
     /* ── Init ── */
-    document.getElementById('nav-name').textContent = user.name.toUpperCase();
-    renderSidebar();
-    showView('courses');
+    async function init() {
+      try {
+        // 1. Wait for Auth to be ready
+        await window.DataManager.waitForAuth();
+        
+        // 2. Initial load of progress
+        CACHED_PROGRESS = await window.DataManager.getProgress();
+        
+        // 3. Render UI
+        document.getElementById('nav-name').textContent = user.name.toUpperCase();
+        renderSidebar();
+        showView('courses');
+      } catch (err) {
+        console.error('Init Error:', err);
+        // Fallback or show error
+      }
+    }
+    init();
   </script>
 </body>
 
