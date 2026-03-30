@@ -61,10 +61,14 @@
       "@type": "OfferCatalog",
       "name": "Cybersecurity Courses",
       "itemListElement": [
-        { "@type": "Course", "name": "Ethical Hacking" },
-        { "@type": "Course", "name": "Penetration Testing" },
-        { "@type": "Course", "name": "CTF Training" },
-        { "@type": "Course", "name": "Bug Bounty Hunting" }
+        { "@type": "Course", "name": "DEFFENSO JUNIOR ETHICAL HACKER (DJEH)" },
+        { "@type": "Course", "name": "DEFFENSO ADVANCED PENETRATION TESTER (DAPT)" },
+        { "@type": "Course", "name": "DEFFENSO SOC ANALYST PROFESSIONAL (DSAP)" },
+        { "@type": "Course", "name": "DEFFENSO CLOUD PROTECTION ENGINEER (DCPE)" },
+        { "@type": "Course", "name": "DEFFENSO CYBER ATTACK SPECIALIST (DCAS)" },
+        { "@type": "Course", "name": "DEFFENSO MALWARE INTELLIGENCE SPECIALIST (DMIS)" },
+        { "@type": "Course", "name": "DEFFENSO BUG HUNTING PROFESSIONAL (DBHP)" },
+        { "@type": "Course", "name": "DEFFENSO CYBER MATRIX PROGRAM (DCMP)" }
       ]
     }
   }
@@ -5670,7 +5674,15 @@
         <label class="form-label">Subject</label>
         <select class="form-select" name="subject" style="margin-bottom:20px">
           <option>${sub}</option>
-          <option>Jr Ethical Hacking</option><option>Robotics</option><option>Coding</option><option>Cyber Forensics</option>
+          <option>DEFFENSO JUNIOR ETHICAL HACKER (DJEH)</option>
+          <option>DEFFENSO CYBER ATTACK SPECIALIST (DCAS)</option>
+          <option>DEFFENSO ADVANCED PENETRATION TESTER (DAPT)</option>
+          <option>DEFFENSO SOC ANALYST PROFESSIONAL (DSAP)</option>
+          <option>DEFFENSO BUG HUNTING PROFESSIONAL (DBHP)</option>
+          <option>DEFFENSO MALWARE INTELLIGENCE SPECIALIST (DMIS)</option>
+          <option>DEFFENSO CLOUD PROTECTION ENGINEER (DCPE)</option>
+          <option>DEFFENSO CYBER MATRIX PROGRAM (DCMP)</option>
+          <option>Cyber Forensics</option>
           <option>Technical Support</option><option>Business Collaboration</option><option>Feedback</option>
         </select>
         <label class="form-label">Message</label>
@@ -5686,7 +5698,7 @@
     ═══════════════════════════════════════════════════════ */
     const PROG = {
       jeh: {
-        num: '001', clr: '#FF4500', level: 'BEGINNER', l1: 'JUNIOR', l2: 'ETHICAL HACKER',
+        num: '001', clr: '#FF4500', level: 'BEGINNER', l1: 'DEFFENSO JUNIOR', l2: 'ETHICAL HACKER (DJEH)',
         cmd: 'nmap -sV -O target.local',
         desc: 'Your launchpad into ethical hacking. Fundamentals of cyber offense and defense in a hands-on environment built for complete beginners.',
         duration: '8 Weeks', levelFull: 'Beginner', labs: '20+ Guided Labs', mentorship: 'Weekly Group',
@@ -5698,7 +5710,7 @@
           ['MODULE 04: DEFENSE', '"Think like the defender."', ['Report Writing', 'Remediation', 'Ethics & Legal']]
         ],
         roles: ['Junior Pen Tester', 'Cybersecurity Trainee', 'IT Security Support', 'Bug Bounty Beginner'],
-        defaultSubject: 'Junior Ethical Hacker'
+        defaultSubject: 'DEFFENSO JUNIOR ETHICAL HACKER (DJEH)'
       },
       cf: {
         num: '002', clr: '#FF8C00', level: 'INTERMEDIATE', l1: 'CYBER', l2: 'FORENSICS',
@@ -5716,7 +5728,7 @@
         defaultSubject: 'Cyber Forensics'
       },
       ceh: {
-        num: '003', clr: '#00BCD4', level: 'INTERMEDIATE', l1: 'CERTIFIED', l2: 'ETHICAL HACKER',
+        num: '003', clr: '#00BCD4', level: 'INTERMEDIATE', l1: 'DEFFENSO CYBER', l2: 'ATTACK SPECIALIST (DCAS)',
         cmd: 'msfconsole -q -x "use exploit/multi/handler"',
         desc: 'Learn advanced ethical hacking methodologies. Understand defensive mechanisms and hone your offensive skills.',
         duration: '10 Weeks', levelFull: 'Intermediate', labs: 'Advanced Cyber Range', mentorship: 'Weekly Group',
@@ -5728,10 +5740,10 @@
           ['MODULE 04: WIRELESS', '"Sniffing the air."', ['WPA2 Cracking', 'Rogue APs', 'Bluetooth Attacks']]
         ],
         roles: ['Security Analyst', 'Pen Test Consultant', 'Ethical Hacker', 'Security Engineer'],
-        defaultSubject: 'Certified Ethical Hacker'
+        defaultSubject: 'DEFFENSO CYBER ATTACK SPECIALIST (DCAS)'
       },
       cpt: {
-        num: '004', clr: '#00C853', level: 'ADVANCED', l1: 'CERTIFIED PENETRATION', l2: 'TESTER',
+        num: '004', clr: '#00C853', level: 'ADVANCED', l1: 'DEFFENSO ADVANCED', l2: 'PENETRATION TESTER (DAPT)',
         cmd: 'python3 pwn_target.py --exploit',
         desc: 'Take your skills to the red team. Master end-to-end penetration testing from initial access to domain dominance.',
         duration: '12 Weeks', levelFull: 'Advanced', labs: 'Red Team Ops Range', mentorship: '1-on-1 Mentor',
@@ -5743,10 +5755,10 @@
           ['MODULE 04: REPORTING', '"Deliver value."', ['Exec Summary', 'Technical Findings', 'Risk Assessment']]
         ],
         roles: ['Penetration Tester', 'Red Team Operator', 'Offensive Security Engineer'],
-        defaultSubject: 'Certified Penetration Tester'
+        defaultSubject: 'DEFFENSO ADVANCED PENETRATION TESTER (DAPT)'
       },
       soc: {
-        num: '005', clr: '#9C27B0', level: 'ALL LEVELS', l1: 'SOC ANALYSIS', l2: 'TRACK',
+        num: '005', clr: '#9C27B0', level: 'ALL LEVELS', l1: 'DEFFENSO SOC ANALYST', l2: 'PROFESSIONAL (DSAP)',
         cmd: 'tail -f /var/log/auth.log | grep "Failed password"',
         desc: 'Become the first line of defense. Master SIEMs, threat hunting, and incident triage in a simulated Security Operations Center.',
         duration: '8 Weeks', levelFull: 'All Levels', labs: 'Live SIEM Environment', mentorship: 'Daily Office Hours',
@@ -5758,10 +5770,10 @@
           ['MODULE 04: MITIGATION', '"Stop the bleed."', ['Playbooks', 'Firewall Rules', 'Endpoint Isolation']]
         ],
         roles: ['SOC Analyst L1/L2', 'Incident Responder', 'Security Analyst'],
-        defaultSubject: 'SOC Analysis Track'
+        defaultSubject: 'DEFFENSO SOC ANALYST PROFESSIONAL (DSAP)'
       },
       bbh: {
-        num: '006', clr: '#E91E63', level: 'INTERMEDIATE', l1: 'BUG BOUNTY', l2: 'HUNTER',
+        num: '006', clr: '#E91E63', level: 'INTERMEDIATE', l1: 'DEFFENSO BUG HUNTING', l2: 'PROFESSIONAL (DBHP)',
         cmd: 'ffuf -w wordlist.txt -u https://target.com/FUZZ',
         desc: 'Learn web vulnerability research to earn bounties worldwide. From recon to critical severity exploiting and reporting.',
         duration: '10 Weeks', levelFull: 'Intermediate', labs: 'Vulnerable Web Farms', mentorship: 'Bounty Hunters',
@@ -5773,10 +5785,10 @@
           ['MODULE 04: REPORTING', '"Get paid."', ['PoC Creation', 'Impact Assessment', 'Platform Regs']]
         ],
         roles: ['Bug Bounty Hunter', 'Application Security Engineer', 'Freelance Pen Tester'],
-        defaultSubject: 'Bug Bounty Hunter'
+        defaultSubject: 'DEFFENSO BUG HUNTING PROFESSIONAL (DBHP)'
       },
       ama: {
-        num: '007', clr: '#3F51B5', level: 'ADVANCED', l1: 'ADVANCED MALWARE', l2: 'ANALYSIS',
+        num: '007', clr: '#3F51B5', level: 'ADVANCED', l1: 'DEFFENSO MALWARE', l2: 'INTELLIGENCE SPECIALIST (DMIS)',
         cmd: 'radare2 -A /tmp/malicious.exe',
         desc: 'Reverse engineer advanced persistent threats. Unpack, decrypt, and dissect malware to understand attacker tradecraft.',
         duration: '12 Weeks', levelFull: 'Advanced', labs: 'Isolated Sandbox', mentorship: 'Expert-led',
@@ -5788,7 +5800,7 @@
           ['MODULE 04: UNPACKING', '"Reveal the core."', ['Packer ID', 'Manual Unpacking', 'IAT Reconstruction']]
         ],
         roles: ['Malware Analyst', 'Reverse Engineer', 'Threat Intel Analyst'],
-        defaultSubject: 'Advanced Malware Analysis'
+        defaultSubject: 'DEFFENSO MALWARE INTELLIGENCE SPECIALIST (DMIS)'
       },
       csa: {
         num: '008', clr: '#FFC107', level: 'INTERMEDIATE', l1: 'CERTIFIED SECURITY', l2: 'ANALYSIS',
@@ -5806,7 +5818,7 @@
         defaultSubject: 'Certified Security Analysis'
       },
       cs: {
-        num: '009', clr: '#00ACC1', level: 'ADVANCED', l1: 'CLOUD', l2: 'SECURITY',
+        num: '009', clr: '#00ACC1', level: 'ADVANCED', l1: 'DEFFENSO CLOUD', l2: 'PROTECTION ENGINEER (DCPE)',
         cmd: 'aws s3api get-bucket-acl --bucket target',
         desc: 'Master securing cloud infrastructure. Defend AWS, Azure, and GCP environments from misconfigurations and cloud-native attacks.',
         duration: '10 Weeks', levelFull: 'Advanced', labs: 'Multi-Cloud Sandboxes', mentorship: 'Cloud Architects',
@@ -5818,10 +5830,10 @@
           ['MODULE 04: KUBERNETES', '"Container defense."', ['RBAC', 'Network Policies', 'Pod Security']]
         ],
         roles: ['Cloud Security Engineer', 'DevSecOps', 'Cloud Architect'],
-        defaultSubject: 'Cloud Security'
+        defaultSubject: 'DEFFENSO CLOUD PROTECTION ENGINEER (DCPE)'
       },
       adcd: {
-        num: '010', clr: '#F44336', level: 'EXPERT', l1: 'ADVANCED DIPLOMA IN', l2: 'CYBER DEFENSE',
+        num: '010', clr: '#F44336', level: 'EXPERT', l1: 'DEFFENSO CYBER', l2: 'MATRIX PROGRAM (DCMP)',
         cmd: 'iptables -A INPUT -p tcp --dport 22 -j DROP',
         desc: 'The ultimate pinnacle of our training. A rigorous, comprehensive program covering advanced offensive and defensive capabilities.',
         duration: '24 Weeks', levelFull: 'Expert', labs: 'Full Cyber Range', mentorship: 'Chief InfoSec Officers',
@@ -5833,7 +5845,7 @@
           ['MODULE 04: CAPSTONE', '"Final operation."', ['Full-scale Red v Blue', 'Board Presentations', 'Crisis Mgmt']]
         ],
         roles: ['Elite Cyber Operator', 'Security Architect', 'Cybersecurity Director'],
-        defaultSubject: 'Advanced Diploma in Cyber Defense'
+        defaultSubject: 'DEFFENSO CYBER MATRIX PROGRAM (DCMP)'
       }
     };
 
@@ -6421,7 +6433,7 @@
     /** § 3.9 FAQ */
     function faqSection() {
       const faqs = [
-        ['Do I need prior experience?', 'Most programs start from zero. The Jr Ethical Hacking track is built for complete beginners — all you need is curiosity and commitment.'],
+        ['Do I need prior experience?', 'Most programs start from zero. The DEFFENSO JUNIOR ETHICAL HACKER (DJEH) track is built for complete beginners — all you need is curiosity and commitment.'],
         ['Are courses self-paced or live?', 'Programs combine self-paced video content with live weekly mentorship sessions, so you get the best of both formats.'],
         ['What certifications can I earn?', 'Depending on your track, you receive Deffenso Academy completion certificates aligned with industry standards.'],
         ['Is there career support?', 'Yes — career coaching, resume reviews, and introductions to our hiring partner network upon graduation.'],
@@ -6583,7 +6595,7 @@
     function eventsPage() {
       const EVENTS = [
         { type: 'live', typeLabel: 'LIVE NOW', day: '20', month: 'MAR', year: '2026', title: 'CAPTURE THE FLAG — LIVE', desc: 'Join our live CTF challenge session. Solve real-world cyber puzzles alongside fellow operators in real time. Prizes for top 3 finishers.', location: 'Online · Discord Server', seats: 'Open', action: 'JOIN LIVE SESSION', featured: true },
-        { type: 'upcoming', typeLabel: 'UPCOMING', day: '28', month: 'MAR', year: '2026', title: 'JR ETHICAL HACKING BOOTCAMP', desc: 'Intensive 3-day bootcamp covering network scanning, vulnerability assessment, and basic exploitation using Kali Linux.', location: 'Deffenso HQ, Kochi', seats: '18 seats left', action: 'REGISTER NOW' },
+        { type: 'upcoming', typeLabel: 'UPCOMING', day: '28', month: 'MAR', year: '2026', title: 'DEFFENSO JUNIOR ETHICAL HACKER (DJEH) BOOTCAMP', desc: 'Intensive 3-day bootcamp covering network scanning, vulnerability assessment, and basic exploitation using Kali Linux.', location: 'Deffenso HQ, Kochi', seats: '18 seats left', action: 'REGISTER NOW' },
         { type: 'workshop', typeLabel: 'WORKSHOP', day: '05', month: 'APR', year: '2026', title: 'ROBOTICS BUILD DAY', desc: 'Hands-on hardware session. Bring your ideas, we provide the components. Build, wire, and program a basic autonomous bot in a day.', location: 'Engineering Lab, Block C', seats: '12 seats left', action: 'SECURE YOUR SPOT' },
         { type: 'webinar', typeLabel: 'WEBINAR', day: '10', month: 'APR', year: '2026', title: 'CYBER FORENSICS: LIVE CASE STUDY', desc: 'Walk through a real-world forensic investigation with our lead instructor. Evidence collection, memory analysis, and report drafting.', location: 'Online · Zoom', seats: 'Unlimited', action: 'REGISTER FREE' },
         { type: 'competition', typeLabel: 'COMPETITION', day: '19', month: 'APR', year: '2026', title: 'INTER-ACADEMY CODING SPRINT', desc: '48-hour coding competition open to all Deffenso enrolled students. Build a tool, app, or automation script. Top entries get featured.', location: 'Online', seats: 'Open to all students', action: 'ENTER NOW' },
@@ -6800,16 +6812,16 @@
         about: 'ABOUT — DEFFENSO ACADEMY',
         contact: 'CONTACT — DEFFENSO ACADEMY',
         events: 'EVENTS — DEFFENSO ACADEMY',
-        jeh: 'JR ETHICAL HACKING — DEFFENSO',
+        jeh: 'DEFFENSO JUNIOR ETHICAL HACKER (DJEH) — DEFFENSO',
         cf: 'CYBER FORENSICS — DEFFENSO',
-        ceh: 'CERTIFIED ETHICAL HACKER — DEFFENSO',
-        cpt: 'CERTIFIED PENETRATION TESTER — DEFFENSO',
-        soc: 'SOC ANALYSIS TRACK — DEFFENSO',
-        bbh: 'BUG BOUNTY HUNTER — DEFFENSO',
-        ama: 'ADVANCED MALWARE ANALYSIS — DEFFENSO',
+        ceh: 'DEFFENSO CYBER ATTACK SPECIALIST (DCAS) — DEFFENSO',
+        cpt: 'DEFFENSO ADVANCED PENETRATION TESTER (DAPT) — DEFFENSO',
+        soc: 'DEFFENSO SOC ANALYST PROFESSIONAL (DSAP) — DEFFENSO',
+        bbh: 'DEFFENSO BUG HUNTING PROFESSIONAL (DBHP) — DEFFENSO',
+        ama: 'DEFFENSO MALWARE INTELLIGENCE SPECIALIST (DMIS) — DEFFENSO',
         csa: 'CERTIFIED SECURITY ANALYSIS — DEFFENSO',
-        cs: 'CLOUD SECURITY — DEFFENSO',
-        adcd: 'ADVANCED DIPLOMA IN CYBER DEFENSE — DEFFENSO'
+        cs: 'DEFFENSO CLOUD PROTECTION ENGINEER (DCPE) — DEFFENSO',
+        adcd: 'DEFFENSO CYBER MATRIX PROGRAM (DCMP) — DEFFENSO'
       };
       document.title = titles[currentPage] || 'DEFFENSO ACADEMY';
 
@@ -6818,16 +6830,16 @@
         about: 'Learn about DEFFENSO Academy, our mission, and the architects of elite cybersecurity education.',
         contact: 'Contact DEFFENSO Academy for course inquiries, partnerships, or technical support.',
         events: 'Stay updated with live events, CTF challenges, bootcamps, and webinars at DEFFENSO.',
-        jeh: 'Jr Ethical Hacking: Master the fundamentals of cyber offense and defense.',
+        jeh: 'DEFFENSO JUNIOR ETHICAL HACKER (DJEH): Master the fundamentals of cyber offense and defense.',
         cf: 'Cyber Forensics: Investigate cyber incidents and collect digital evidence using industry-standard tools.',
-        ceh: 'Certified Ethical Hacker: Master advanced ethical hacking methodologies and defensive mechanisms.',
-        cpt: 'Certified Penetration Tester: Execute advanced offensive operations and master red team tactics.',
-        soc: 'SOC Analysis Track: Become a defender in a simulated Security Operations Center.',
-        bbh: 'Bug Bounty Hunter: Learn web vulnerability research and earn rewards globally.',
-        ama: 'Advanced Malware Analysis: Reverse engineer and dissect advanced persistent threats.',
+        ceh: 'DEFFENSO CYBER ATTACK SPECIALIST (DCAS): Master advanced ethical hacking methodologies and defensive mechanisms.',
+        cpt: 'DEFFENSO ADVANCED PENETRATION TESTER (DAPT): Execute advanced offensive operations and master red team tactics.',
+        soc: 'DEFFENSO SOC ANALYST PROFESSIONAL (DSAP): Become a defender in a simulated Security Operations Center.',
+        bbh: 'DEFFENSO BUG HUNTING PROFESSIONAL (DBHP): Learn web vulnerability research and earn rewards globally.',
+        ama: 'DEFFENSO MALWARE INTELLIGENCE SPECIALIST (DMIS): Reverse engineer and dissect advanced persistent threats.',
         csa: 'Certified Security Analysis: Focus on risk management, architecture, and compliance.',
-        cs: 'Cloud Security: Master securing AWS, Azure, and GCP environments.',
-        adcd: 'Advanced Diploma in Cyber Defense: Our most comprehensive expert-level cyber defense program.'
+        cs: 'DEFFENSO CLOUD PROTECTION ENGINEER (DCPE): Master securing AWS, Azure, and GCP environments.',
+        adcd: 'DEFFENSO CYBER MATRIX PROGRAM (DCMP): Our most comprehensive expert-level cyber defense program.'
       };
       const desc = descriptions[currentPage] || descriptions.home;
       const metaDesc = document.querySelector('meta[name="description"]');
