@@ -3892,6 +3892,7 @@
       letter-spacing: .18em;
       text-transform: uppercase;
       color: var(--cream-3);
+
     }
 
     .event-card-year {
@@ -5712,21 +5713,6 @@
         roles: ['Junior Pen Tester', 'Cybersecurity Trainee', 'IT Security Support', 'Bug Bounty Beginner'],
         defaultSubject: 'DEFFENSO JUNIOR ETHICAL HACKER (DJEH)'
       },
-      cf: {
-        num: '002', clr: '#FF8C00', level: 'INTERMEDIATE', l1: 'CYBER', l2: 'FORENSICS',
-        cmd: 'volatility -f memory.dmp imageinfo',
-        desc: 'Investigate cyber incidents, collect digital evidence, and respond to breaches using industry-standard forensics tools.',
-        duration: '12 Weeks', levelFull: 'Intermediate', labs: 'Crime Scene Sims', mentorship: 'Expert-led',
-        currSub: 'From evidence collection to courtroom-ready reporting.',
-        modules: [
-          ['MODULE 01: EVIDENCE', '"Preserving the crime scene."', ['Chain of Custody', 'Disk Imaging', 'Memory Acquisition']],
-          ['MODULE 02: OS FORENSICS', '"Artifacts in the system."', ['Registry Analysis', 'Linux Log Forensics', 'Browser Artifacts']],
-          ['MODULE 03: NETWORK', '"Following the data trail."', ['PCAP Analysis', 'Log Correlation', 'Email Headers']],
-          ['MODULE 04: MALWARE', '"Understanding the weapon."', ['Static Analysis', 'Dynamic Analysis', 'IOC Extraction']]
-        ],
-        roles: ['Forensics Analyst', 'Incident Responder', 'Malware Analyst', 'Threat Intelligence'],
-        defaultSubject: 'Cyber Forensics'
-      },
       ceh: {
         num: '003', clr: '#00BCD4', level: 'INTERMEDIATE', l1: 'DEFFENSO CYBER', l2: 'ATTACK SPECIALIST (DCAS)',
         cmd: 'msfconsole -q -x "use exploit/multi/handler"',
@@ -5802,21 +5788,6 @@
         roles: ['Malware Analyst', 'Reverse Engineer', 'Threat Intel Analyst'],
         defaultSubject: 'DEFFENSO MALWARE INTELLIGENCE SPECIALIST (DMIS)'
       },
-      csa: {
-        num: '008', clr: '#FFC107', level: 'INTERMEDIATE', l1: 'CERTIFIED SECURITY', l2: 'ANALYSIS',
-        cmd: 'nessus -q start',
-        desc: 'Bridge the gap between technical operations and security strategy. Focus on risk management, architecture, and compliance.',
-        duration: '10 Weeks', levelFull: 'Intermediate', labs: 'Enterprise Network Sims', mentorship: 'Security Architects',
-        currSub: 'Design and analyze resilient enterprise architectures.',
-        modules: [
-          ['MODULE 01: RISK MGMT', '"Measure the danger."', ['Risk Assessment', 'Threat Modeling', 'Frameworks (NIST, ISO)']],
-          ['MODULE 02: ARCHITECTURE', '"Build the fortress."', ['Zero Trust', 'Network Segmentation', 'Defense in Depth']],
-          ['MODULE 03: AUDITING', '"Verify the controls."', ['Compliance Checks', 'Vulnerability Mgmt', 'Reporting']],
-          ['MODULE 04: CLOUD SEC', '"Protecting the ether."', ['AWS Security', 'Azure Basics', 'Identity Access']]
-        ],
-        roles: ['Security Analyst', 'Security Consultant', 'Risk Analyst'],
-        defaultSubject: 'Certified Security Analysis'
-      },
       cs: {
         num: '009', clr: '#00ACC1', level: 'ADVANCED', l1: 'DEFFENSO CLOUD', l2: 'PROTECTION ENGINEER (DCPE)',
         cmd: 'aws s3api get-bucket-acl --bucket target',
@@ -5876,7 +5847,7 @@
           <div class="hero-live-status">
             <div class="hls-dot"></div>
             <span>SYSTEMS ONLINE</span><span class="hls-sep">&nbsp;//&nbsp;</span>
-            <span>10 PROGRAMS ACTIVE</span><span class="hls-sep">&nbsp;//&nbsp;</span>
+            <span>8 PROGRAMS ACTIVE</span><span class="hls-sep">&nbsp;//&nbsp;</span>
             <span>GLOBAL REACH</span>
           </div>
           <p class="hero-desc">Building a digitally resilient generation capable of defending systems, data, and nations against modern cyber threats.</p>
@@ -5922,7 +5893,7 @@
     function programsSection() {
       const cards = Object.entries(PROG).map(([key, cfg]) => `
         <div class="program-card" style="--card-clr:${cfg.clr}" onclick="navigate('${key}')">
-          <div class="prog-num"><span>[CRS-${cfg.num}]</span>&nbsp;${key.toUpperCase()}</div>
+          <div class="prog-num">${key.toUpperCase()}</div>
           <div class="prog-level">${cfg.level}</div>
           <div class="prog-title-wrap">
             <div class="prog-name">${cfg.l1}<br/><span class="prog-sub">${cfg.l2}</span></div>
@@ -6543,9 +6514,7 @@
       // ▶ "Career Placement Support" renamed to "Career Support" in plan features too
       return `<div>
         <section class="prog-hero-page">
-          <div class="prog-bg-num">${cfg.num}</div>
           <div class="prog-badges">
-            <span class="prog-badge-tag" style="color:${cfg.clr};border-color:${cfg.clr}">[CRS-${cfg.num}]</span>
             <span class="prog-badge-tag" style="color:var(--cream-3);border-color:var(--wire)">${cfg.level}</span>
           </div>
           <h1 class="prog-h">${cfg.l1}<br/><span style="color:${cfg.clr}">${cfg.l2}</span></h1>
@@ -6813,13 +6782,11 @@
         contact: 'CONTACT — DEFFENSO ACADEMY',
         events: 'EVENTS — DEFFENSO ACADEMY',
         jeh: 'DEFFENSO JUNIOR ETHICAL HACKER (DJEH) — DEFFENSO',
-        cf: 'CYBER FORENSICS — DEFFENSO',
         ceh: 'DEFFENSO CYBER ATTACK SPECIALIST (DCAS) — DEFFENSO',
         cpt: 'DEFFENSO ADVANCED PENETRATION TESTER (DAPT) — DEFFENSO',
         soc: 'DEFFENSO SOC ANALYST PROFESSIONAL (DSAP) — DEFFENSO',
         bbh: 'DEFFENSO BUG HUNTING PROFESSIONAL (DBHP) — DEFFENSO',
         ama: 'DEFFENSO MALWARE INTELLIGENCE SPECIALIST (DMIS) — DEFFENSO',
-        csa: 'CERTIFIED SECURITY ANALYSIS — DEFFENSO',
         cs: 'DEFFENSO CLOUD PROTECTION ENGINEER (DCPE) — DEFFENSO',
         adcd: 'DEFFENSO CYBER MATRIX PROGRAM (DCMP) — DEFFENSO'
       };
@@ -6831,13 +6798,11 @@
         contact: 'Contact DEFFENSO Academy for course inquiries, partnerships, or technical support.',
         events: 'Stay updated with live events, CTF challenges, bootcamps, and webinars at DEFFENSO.',
         jeh: 'DEFFENSO JUNIOR ETHICAL HACKER (DJEH): Master the fundamentals of cyber offense and defense.',
-        cf: 'Cyber Forensics: Investigate cyber incidents and collect digital evidence using industry-standard tools.',
         ceh: 'DEFFENSO CYBER ATTACK SPECIALIST (DCAS): Master advanced ethical hacking methodologies and defensive mechanisms.',
         cpt: 'DEFFENSO ADVANCED PENETRATION TESTER (DAPT): Execute advanced offensive operations and master red team tactics.',
         soc: 'DEFFENSO SOC ANALYST PROFESSIONAL (DSAP): Become a defender in a simulated Security Operations Center.',
         bbh: 'DEFFENSO BUG HUNTING PROFESSIONAL (DBHP): Learn web vulnerability research and earn rewards globally.',
         ama: 'DEFFENSO MALWARE INTELLIGENCE SPECIALIST (DMIS): Reverse engineer and dissect advanced persistent threats.',
-        csa: 'Certified Security Analysis: Focus on risk management, architecture, and compliance.',
         cs: 'DEFFENSO CLOUD PROTECTION ENGINEER (DCPE): Master securing AWS, Azure, and GCP environments.',
         adcd: 'DEFFENSO CYBER MATRIX PROGRAM (DCMP): Our most comprehensive expert-level cyber defense program.'
       };
