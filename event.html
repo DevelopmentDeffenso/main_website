@@ -2151,7 +2151,7 @@
 
         addEvent({
             id: 'evt-networking-pentesting',
-            date: '2024-03-18',
+            date: '18/03/26',
             status: 'done',
             title: 'Networking and Pentesting',
             subtitle: 'Probe every packet, exploit every weakness, protect every system.',
@@ -2167,7 +2167,7 @@
 
         addEvent({
             id: 'evt-cyber-awareness',
-            date: '2024-02-14',
+            date: '14/02/26',
             status: 'done',
             title: 'Cyber Awareness',
             subtitle: 'Think. Verify. Secure.',
@@ -2177,6 +2177,23 @@
             seats: 'Closed',
             poster: 'assests/event poster/Artboard 1.png',
             organizations: 'Deffenso Hackers Academy',
+            speaker: 'Calvin Shejin George',
+            speakerRole: 'Founder / CEO of Deffenso',
+            action: 'CLOSED'
+        });
+
+        addEvent({
+            id: 'evt-nss-digital-hygiene',
+            date: '20/09/25',
+            status: 'done',
+            title: 'NSS Digital Hygiene',
+            subtitle: 'Navigating the digital landscape safely and securely.',
+            type: 'WORKSHOP',
+            time: '08:00 AM IST',
+            location: 'On-site MHSS Puthencavu',
+            seats: 'Closed',
+            poster: 'assests/event poster/nss Digital Hygine.png',
+            organizations: 'NSS + Deffenso Hackers Academy',
             speaker: 'Calvin Shejin George',
             speakerRole: 'Founder / CEO of Deffenso',
             action: 'CLOSED'
@@ -2195,11 +2212,12 @@
         };
 
         function fmtDate(iso) {
-            const d = new Date(iso + 'T00:00:00');
+            // Unused since we format directly to dd/mm/yy, 
+            // but kept for compatibility.
             return {
-                day: d.getDate().toString().padStart(2, '0'),
-                month: d.toLocaleString('en-GB', { month: 'short' }).toUpperCase(),
-                year: d.getFullYear(),
+                day: iso,
+                month: '',
+                year: ''
             };
         }
         function esc(s) { return String(s).replace(/'/g, "\\'").replace(/"/g, '&quot;'); }
@@ -2333,7 +2351,7 @@
                         <div class="ec-details">
                             <div class="ec-detail-item">
                                 <div class="ec-detail-lbl">${iDate} DATE</div>
-                                <div class="ec-detail-val">${d.day} ${d.month}</div>
+                                <div class="ec-detail-val">${ev.date}</div>
                             </div>
                             <div class="ec-detail-item">
                                 <div class="ec-detail-lbl">${iTime} TIME</div>

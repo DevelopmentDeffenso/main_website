@@ -1612,7 +1612,6 @@
       border: 1px solid var(--wire);
       transition: background .2s;
       animation: none;
-      cursor: pointer;
     }
 
     @media(min-width:640px) {
@@ -1729,7 +1728,8 @@
     .prog-action {
       display: flex;
       align-items: center;
-      justify-content: space-between;
+      justify-content: center;
+      gap: 8px;
       padding: 12px 0;
       border-top: 1px solid var(--wire);
       font-size: 9.5px;
@@ -1738,22 +1738,38 @@
       text-transform: uppercase;
       color: var(--cream-3);
       width: 100%;
-      transition: color .18s;
+      transition: color .18s, background .18s;
       min-height: 44px;
       cursor: pointer;
+      background: none;
+      border-left: none;
+      border-right: none;
+      border-bottom: none;
+      font-family: var(--font-m);
     }
 
     .prog-action svg {
       transition: transform .2s;
     }
 
+    .prog-action.brochure-ready {
+      color: var(--blue);
+    }
+
+    .prog-action.brochure-dummy {
+      color: var(--cream-3);
+      opacity: .5;
+      cursor: default;
+    }
+
     @media(hover:hover) {
-      .prog-action:hover {
-        color: var(--cream);
+      .prog-action.brochure-ready:hover {
+        color: #fff;
+        background: rgba(0, 123, 255, .15);
       }
 
-      .prog-action:hover svg {
-        transform: translateX(4px);
+      .prog-action.brochure-ready:hover svg {
+        transform: translateY(-2px);
       }
     }
 
@@ -5665,6 +5681,19 @@
       </div>`;
     }
 
+    function downloadBrochure(key) {
+      const prog = PROG[key];
+      if (prog && prog.brochure) {
+        const link = document.createElement('a');
+        link.href = prog.brochure;
+        link.download = `${prog.l1} ${prog.l2} Brochure.pdf`.replace(/<br\/>/g, ' ');
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+      }
+      // Dummy buttons do nothing — brochures will be added later
+    }
+
     function contactFormHTML(sub) {
       sub = sub || 'Course Inquiry';
       return `<form onsubmit="sendEmail(event)" style="display:flex;flex-direction:column">
@@ -5711,7 +5740,8 @@
           ['MODULE 04: DEFENSE', '"Think like the defender."', ['Report Writing', 'Remediation', 'Ethics & Legal']]
         ],
         roles: ['Junior Pen Tester', 'Cybersecurity Trainee', 'IT Security Support', 'Bug Bounty Beginner'],
-        defaultSubject: 'DEFFENSO JUNIOR ETHICAL HACKER (DJEH)'
+        defaultSubject: 'DEFFENSO JUNIOR ETHICAL HACKER (DJEH)',
+        brochure: 'assests/Brochure/DJEH brochure.pdf'
       },
       ceh: {
         num: '003', clr: '#00BCD4', level: 'INTERMEDIATE', l1: 'DEFFENSO CYBER', l2: 'ATTACK SPECIALIST (DCAS)',
@@ -5726,7 +5756,8 @@
           ['MODULE 04: WIRELESS', '"Sniffing the air."', ['WPA2 Cracking', 'Rogue APs', 'Bluetooth Attacks']]
         ],
         roles: ['Security Analyst', 'Pen Test Consultant', 'Ethical Hacker', 'Security Engineer'],
-        defaultSubject: 'DEFFENSO CYBER ATTACK SPECIALIST (DCAS)'
+        defaultSubject: 'DEFFENSO CYBER ATTACK SPECIALIST (DCAS)',
+        brochure: null
       },
       cpt: {
         num: '004', clr: '#00C853', level: 'ADVANCED', l1: 'DEFFENSO ADVANCED', l2: 'PENETRATION TESTER (DAPT)',
@@ -5741,7 +5772,8 @@
           ['MODULE 04: REPORTING', '"Deliver value."', ['Exec Summary', 'Technical Findings', 'Risk Assessment']]
         ],
         roles: ['Penetration Tester', 'Red Team Operator', 'Offensive Security Engineer'],
-        defaultSubject: 'DEFFENSO ADVANCED PENETRATION TESTER (DAPT)'
+        defaultSubject: 'DEFFENSO ADVANCED PENETRATION TESTER (DAPT)',
+        brochure: null
       },
       soc: {
         num: '005', clr: '#9C27B0', level: 'ALL LEVELS', l1: 'DEFFENSO SOC ANALYST', l2: 'PROFESSIONAL (DSAP)',
@@ -5756,7 +5788,8 @@
           ['MODULE 04: MITIGATION', '"Stop the bleed."', ['Playbooks', 'Firewall Rules', 'Endpoint Isolation']]
         ],
         roles: ['SOC Analyst L1/L2', 'Incident Responder', 'Security Analyst'],
-        defaultSubject: 'DEFFENSO SOC ANALYST PROFESSIONAL (DSAP)'
+        defaultSubject: 'DEFFENSO SOC ANALYST PROFESSIONAL (DSAP)',
+        brochure: null
       },
       bbh: {
         num: '006', clr: '#E91E63', level: 'INTERMEDIATE', l1: 'DEFFENSO BUG HUNTING', l2: 'PROFESSIONAL (DBHP)',
@@ -5771,7 +5804,8 @@
           ['MODULE 04: REPORTING', '"Get paid."', ['PoC Creation', 'Impact Assessment', 'Platform Regs']]
         ],
         roles: ['Bug Bounty Hunter', 'Application Security Engineer', 'Freelance Pen Tester'],
-        defaultSubject: 'DEFFENSO BUG HUNTING PROFESSIONAL (DBHP)'
+        defaultSubject: 'DEFFENSO BUG HUNTING PROFESSIONAL (DBHP)',
+        brochure: null
       },
       ama: {
         num: '007', clr: '#3F51B5', level: 'ADVANCED', l1: 'DEFFENSO MALWARE', l2: 'INTELLIGENCE SPECIALIST (DMIS)',
@@ -5786,7 +5820,8 @@
           ['MODULE 04: UNPACKING', '"Reveal the core."', ['Packer ID', 'Manual Unpacking', 'IAT Reconstruction']]
         ],
         roles: ['Malware Analyst', 'Reverse Engineer', 'Threat Intel Analyst'],
-        defaultSubject: 'DEFFENSO MALWARE INTELLIGENCE SPECIALIST (DMIS)'
+        defaultSubject: 'DEFFENSO MALWARE INTELLIGENCE SPECIALIST (DMIS)',
+        brochure: null
       },
       cs: {
         num: '009', clr: '#00ACC1', level: 'ADVANCED', l1: 'DEFFENSO CLOUD', l2: 'PROTECTION ENGINEER (DCPE)',
@@ -5801,7 +5836,8 @@
           ['MODULE 04: KUBERNETES', '"Container defense."', ['RBAC', 'Network Policies', 'Pod Security']]
         ],
         roles: ['Cloud Security Engineer', 'DevSecOps', 'Cloud Architect'],
-        defaultSubject: 'DEFFENSO CLOUD PROTECTION ENGINEER (DCPE)'
+        defaultSubject: 'DEFFENSO CLOUD PROTECTION ENGINEER (DCPE)',
+        brochure: null
       },
       adcd: {
         num: '010', clr: '#F44336', level: 'EXPERT', l1: 'DEFFENSO CYBER', l2: 'MATRIX PROGRAM (DCMP)',
@@ -5816,7 +5852,8 @@
           ['MODULE 04: CAPSTONE', '"Final operation."', ['Full-scale Red v Blue', 'Board Presentations', 'Crisis Mgmt']]
         ],
         roles: ['Elite Cyber Operator', 'Security Architect', 'Cybersecurity Director'],
-        defaultSubject: 'DEFFENSO CYBER MATRIX PROGRAM (DCMP)'
+        defaultSubject: 'DEFFENSO CYBER MATRIX PROGRAM (DCMP)',
+        brochure: null
       }
     };
 
@@ -5891,8 +5928,16 @@
 
     /** § 3.4 Programs */
     function programsSection() {
-      const cards = Object.entries(PROG).map(([key, cfg]) => `
-        <div class="program-card" style="--card-clr:${cfg.clr}" onclick="navigate('${key}')">
+      const DL_ICON = `<svg width="14" height="14" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>`;
+      const SOON_ICON = `<svg width="14" height="14" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>`;
+      const cards = Object.entries(PROG).map(([key, cfg]) => {
+        const hasBrochure = !!cfg.brochure;
+        const btnClass = hasBrochure ? 'brochure-ready' : 'brochure-dummy';
+        const btnLabel = hasBrochure ? 'DOWNLOAD BROCHURE' : 'BROCHURE COMING SOON';
+        const btnIcon = hasBrochure ? DL_ICON : SOON_ICON;
+        const btnClick = hasBrochure ? `onclick="downloadBrochure('${key}')"` : '';
+        return `
+        <div class="program-card" style="--card-clr:${cfg.clr}">
           <div class="prog-num">${key.toUpperCase()}</div>
           <div class="prog-level">${cfg.level}</div>
           <div class="prog-title-wrap">
@@ -5901,8 +5946,9 @@
           <div class="card-cmd"><span class="cp">$</span><span class="cc">${cfg.cmd}</span></div>
           <p class="prog-desc">${cfg.desc}</p>
           <ul class="prog-modules">${cfg.modules.slice(0, 3).map(m => `<li class="prog-mod-item">${m[0]}</li>`).join('')}</ul>
-          <button class="prog-action">VIEW DETAILS</button>
-        </div>`).join('');
+          <button class="prog-action ${btnClass}" ${btnClick}>${btnIcon} ${btnLabel}</button>
+        </div>`;
+      }).join('');
 
       const dots = Object.keys(PROG).map((_, i) => `<div class="scroll-dot${i === 0 ? ' active' : ''}"></div>`).join('');
       return `${SH('PRG', 'TRAINING PROGRAMS', '10 active tracks — swipe to explore')}
@@ -6123,6 +6169,11 @@
         { label: 'Tactical Briefing', tag: 'TRAINING', src: 'assests/Gallary/WhatsApp Image 2026-03-21 at 2.39.58 PM.jpeg' },
         { label: 'Cyber Intelligence Sector', tag: 'NETWORKING', src: 'assests/Gallary/WhatsApp Image 2026-03-21 at 2.52.32 PM.jpeg' },
         { label: 'Operational Security', tag: 'TRAINING', src: 'assests/Gallary/WhatsApp Image 2026-03-21 at 2.52.33 PM.jpeg' },
+        { label: 'Cyber Warfare Drill', tag: 'COMPETITION', src: 'assests/Gallary/1754358463156.jpg' },
+        { label: 'Red Team Operations', tag: 'TRAINING', src: 'assests/Gallary/1756385385310.jpg' },
+        { label: 'Hacker Assembly', tag: 'EVENT', src: 'assests/Gallary/1763472060429.jpg' },
+        { label: 'Command Center Briefing', tag: 'NETWORKING', src: 'assests/Gallary/IMG-20250920-WA0034.jpg' },
+        { label: 'Academy Field Day', tag: 'EVENT', src: 'assests/Gallary/IMG-20250920-WA0035.jpg' },
       ];
 
       const items = tiles.map((t, i) => `
@@ -6509,56 +6560,7 @@
        JS § 4. PAGE COMPOSERS
     ═══════════════════════════════════════════════════════ */
 
-    /** Program detail */
-    function programPage(cfg) {
-      // ▶ "Career Placement Support" renamed to "Career Support" in plan features too
-      return `<div>
-        <section class="prog-hero-page">
-          <div class="prog-badges">
-            <span class="prog-badge-tag" style="color:var(--cream-3);border-color:var(--wire)">${cfg.level}</span>
-          </div>
-          <h1 class="prog-h">${cfg.l1}<br/><span style="color:${cfg.clr}">${cfg.l2}</span></h1>
-          <p class="prog-hero-desc">${cfg.desc}</p>
-        </section>
-        <div class="prog-meta-strip">
-          <div class="prog-meta-row">
-            <div class="prog-meta-cell"><div class="pm-key">Duration</div><div class="pm-val">${cfg.duration}</div></div>
-            <div class="prog-meta-cell"><div class="pm-key">Level</div><div class="pm-val">${cfg.levelFull}</div></div>
-            <div class="prog-meta-cell"><div class="pm-key">Labs</div><div class="pm-val">${cfg.labs}</div></div>
-            <div class="prog-meta-cell"><div class="pm-key">Mentorship</div><div class="pm-val">${cfg.mentorship}</div></div>
-          </div>
-        </div>
-        ${SH('CURR', 'CURRICULUM', cfg.currSub)}
-        <section class="curriculum-section">
-          <div class="curriculum-inner">
-            <div class="curriculum-grid">
-              ${cfg.modules.map(m => `
-                <div class="curriculum-card" style="border-left-color:${cfg.clr}">
-                  <h3 class="curr-title">${m[0]}</h3>
-                  <p class="curr-sub">${m[1]}</p>
-                  <ul class="curr-topics">${m[2].map(t => `<li>${t}</li>`).join('')}</ul>
-                </div>`).join('')}
-            </div>
-          </div>
-        </section>
-        ${SH('ROLES', 'CAREER OUTCOMES', 'Post-graduation paths')}
-        <section class="roles-section">
-          <div class="roles-inner">
-            <h2 class="roles-h">Roles You<br/>Can Pursue</h2>
-            <div class="roles-chips">${cfg.roles.map(r => `<div class="role-chip">${r}</div>`).join('')}</div>
-          </div>
-        </section>
-        ${SH('ENROLL', 'APPLICATION', 'Limited seats')}
-        <section class="inquiry-section">
-          <div class="inquiry-inner">
-            <h2 class="inquiry-h">BEGIN YOUR<br/>MISSION</h2>
-            <p class="inquiry-sub">Apply for ${cfg.l1} ${cfg.l2}. Our team responds within 24 hours.</p>
-            <div class="inquiry-form-wrap">${contactFormHTML(cfg.defaultSubject)}</div>
-          </div>
-        </section>
-        ${footerSection()}
-      </div>`;
-    }
+    /* Program detail page removed — brochure download replaces view detail */
 
     /** Events page */
     function eventsPage() {
@@ -6737,7 +6739,7 @@
       </div>`
     };
 
-    Object.keys(PROG).forEach(k => { PAGES[k] = () => programPage(PROG[k]); });
+    /* Program detail pages removed — download brochure replaces view detail */
 
 
     /* ═══════════════════════════════════════════════════════
@@ -6781,14 +6783,7 @@
         about: 'ABOUT — DEFFENSO ACADEMY',
         contact: 'CONTACT — DEFFENSO ACADEMY',
         events: 'EVENTS — DEFFENSO ACADEMY',
-        jeh: 'DEFFENSO JUNIOR ETHICAL HACKER (DJEH) — DEFFENSO',
-        ceh: 'DEFFENSO CYBER ATTACK SPECIALIST (DCAS) — DEFFENSO',
-        cpt: 'DEFFENSO ADVANCED PENETRATION TESTER (DAPT) — DEFFENSO',
-        soc: 'DEFFENSO SOC ANALYST PROFESSIONAL (DSAP) — DEFFENSO',
-        bbh: 'DEFFENSO BUG HUNTING PROFESSIONAL (DBHP) — DEFFENSO',
-        ama: 'DEFFENSO MALWARE INTELLIGENCE SPECIALIST (DMIS) — DEFFENSO',
-        cs: 'DEFFENSO CLOUD PROTECTION ENGINEER (DCPE) — DEFFENSO',
-        adcd: 'DEFFENSO CYBER MATRIX PROGRAM (DCMP) — DEFFENSO'
+
       };
       document.title = titles[currentPage] || 'DEFFENSO ACADEMY';
 
@@ -6797,14 +6792,7 @@
         about: 'Learn about DEFFENSO Academy, our mission, and the architects of elite cybersecurity education.',
         contact: 'Contact DEFFENSO Academy for course inquiries, partnerships, or technical support.',
         events: 'Stay updated with live events, CTF challenges, bootcamps, and webinars at DEFFENSO.',
-        jeh: 'DEFFENSO JUNIOR ETHICAL HACKER (DJEH): Master the fundamentals of cyber offense and defense.',
-        ceh: 'DEFFENSO CYBER ATTACK SPECIALIST (DCAS): Master advanced ethical hacking methodologies and defensive mechanisms.',
-        cpt: 'DEFFENSO ADVANCED PENETRATION TESTER (DAPT): Execute advanced offensive operations and master red team tactics.',
-        soc: 'DEFFENSO SOC ANALYST PROFESSIONAL (DSAP): Become a defender in a simulated Security Operations Center.',
-        bbh: 'DEFFENSO BUG HUNTING PROFESSIONAL (DBHP): Learn web vulnerability research and earn rewards globally.',
-        ama: 'DEFFENSO MALWARE INTELLIGENCE SPECIALIST (DMIS): Reverse engineer and dissect advanced persistent threats.',
-        cs: 'DEFFENSO CLOUD PROTECTION ENGINEER (DCPE): Master securing AWS, Azure, and GCP environments.',
-        adcd: 'DEFFENSO CYBER MATRIX PROGRAM (DCMP): Our most comprehensive expert-level cyber defense program.'
+
       };
       const desc = descriptions[currentPage] || descriptions.home;
       const metaDesc = document.querySelector('meta[name="description"]');
