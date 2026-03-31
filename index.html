@@ -2048,22 +2048,9 @@
       gap: 2px;
     }
 
-    @media(min-width:640px) {
+    @media(min-width:768px) {
       .gallery-grid {
         grid-template-columns: repeat(3, 1fr);
-      }
-    }
-
-    @media(min-width:1024px) {
-      .gallery-grid {
-        grid-template-columns: repeat(4, 1fr);
-      }
-    }
-
-    /* Make first item span 2 cols on md+ */
-    @media(min-width:640px) {
-      .gallery-item:first-child {
-        grid-column: span 2;
       }
     }
 
@@ -6857,8 +6844,19 @@
     }
 
     window.addEventListener('hashchange', () => {
-      currentPage = window.location.hash.replace('#', '') || 'home';
-      render();
+      const hash = window.location.hash.replace('#', '');
+      
+      if (hash === 'programs' || hash === 'newsletter') {
+        currentPage = 'home';
+        render();
+        setTimeout(() => {
+          const el = document.getElementById(hash);
+          if (el) el.scrollIntoView({ behavior: 'smooth' });
+        }, 100);
+      } else {
+        currentPage = hash || 'home';
+        render();
+      }
     });
 
 
@@ -7100,8 +7098,18 @@
     /* ═══════════════════════════════════════════════════════
        JS § 20. BOOT
     ═══════════════════════════════════════════════════════ */
-    currentPage = window.location.hash.replace('#', '') || 'home';
-    render();
+    const initHash = window.location.hash.replace('#', '');
+    if (initHash === 'programs' || initHash === 'newsletter') {
+      currentPage = 'home';
+      render();
+      setTimeout(() => {
+        const el = document.getElementById(initHash);
+        if (el) el.scrollIntoView({ behavior: 'smooth' });
+      }, 500); // give enough time for everything to render
+    } else {
+      currentPage = initHash || 'home';
+      render();
+    }
 
     // Global observer for founders skill bars
     const f_observer = new MutationObserver(() => {
