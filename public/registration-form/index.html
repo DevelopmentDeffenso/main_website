@@ -385,6 +385,45 @@
       from { opacity: 0; transform: translateY(12px); }
       to { opacity: 1; transform: translateY(0); }
     }
+
+    /* ═══════════════════════════════════════════════════════
+       MOBILE REFINEMENTS
+    ═══════════════════════════════════════════════════════ */
+    @media (max-width: 600px) {
+      :root { --px: 16px; }
+      .navbar { padding: 0 10px; }
+      .nav-logo { padding: 0 10px; gap: 8px; }
+      .nav-logo img { height: 30px; }
+      .nav-pill { font-size: 8px; padding: 0 10px; }
+      .nav-status { padding: 0 10px; }
+      .nav-status span { display: none; } /* Hide text, keep dot on mobile */
+
+      .hero { padding: 60px var(--px) 40px; }
+      .hero h1 { font-size: 48px; }
+      .hero-terminal { font-size: 10px; padding: 8px 12px; margin-bottom: 24px; }
+      .hero-badges { gap: 8px; }
+      .hero-badge { padding: 6px 12px; }
+
+      .sec-hdr { margin: 40px 0 20px; gap: 12px; }
+      .sec-idx { font-size: 32px; }
+
+      .card { padding: 24px 16px; }
+      .radio-group { flex-direction: column; gap: 12px; }
+
+      .submit-area { gap: 24px; flex-direction: column; text-align: center; margin-top: 48px; }
+      .btn-main { width: 100%; padding: 16px 20px; font-size: 20px; }
+
+      .success-overlay h2 { font-size: 40px; }
+      .success-overlay p { font-size: 10px; }
+
+      /* Footer Mobile Adjustments */
+      .footer-cols { grid-template-columns: 1fr; gap: 32px; text-align: center; }
+      .footer-col ul { align-items: center; }
+      .footer-top { text-align: center; }
+      .footer-social { justify-content: center; width: 100%; }
+      .footer-tagline { margin: 0 auto 24px; }
+      .footer-loc-info { text-align: center; align-items: center; }
+    }
   </style>
 </head>
 <body>
@@ -719,7 +758,7 @@ function scrollToPrograms() {
 /* ═══════════════════════════════════════════════════════
    SUBMISSION LOGIC (GOOGLE SHEETS INTEGRATION)
 ═══════════════════════════════════════════════════════ */
-const scriptURL = 'ADD_YOUR_GOOGLE_APPS_SCRIPT_URL_HERE';
+const scriptURL = 'https://script.google.com/macros/s/AKfycbzWU05EfcIsmdARtqxVpth0aDpS5MWjMxv7anCLEVKqjEZF6ls5khyy8OaNN1UgF-4/exec';
 
 async function toBase64(file) {
   return new Promise((resolve, reject) => {
@@ -769,7 +808,9 @@ document.getElementById('regForm').addEventListener('submit', async function(e){
     if (receiptFile && data.payment === 'yes') data.receipt = await toBase64(receiptFile);
 
     // Send to Google Apps Script
-    // Note: We use fetch with 'POST'
+    // Note: Use 'POST' with mode: 'no-cors' if redirect issues occur, 
+    // though 'no-cors' will prevent you from reading the success JSON. 
+    // Better to use the default 'cors' but ensure the Apps Script returns a valid JSON output.
     const response = await fetch(scriptURL, {
       method: 'POST',
       body: JSON.stringify(data)
@@ -792,52 +833,6 @@ document.getElementById('regForm').addEventListener('submit', async function(e){
     btn.disabled = false;
   }
 });
-
-/* 
-  GOOGLE APPS SCRIPT CODE (Paste this into script.google.com):
-  
-  function doPost(e) {
-    var sheet = SpreadsheetApp.openById('1lE1ZGJy2D79-yiYRWpWXz0VS_kRY0h9PhgkcQe_Xq0g').getSheets()[0];
-    var folder = DriveApp.getFolderById('REPLACE_WITH_A_GOOGLE_DRIVE_FOLDER_ID');
-    var data = JSON.parse(e.postData.contents);
-    
-    function uploadFile(fileData) {
-      if (!fileData) return "";
-      var decoded = Utilities.base64Decode(fileData.base64);
-      var blob = Utilities.newBlob(decoded, fileData.type, fileData.name);
-      var file = folder.createFile(blob);
-      return file.getUrl();
-    }
-    
-    var photoUrl = uploadFile(data.photo);
-    var idUrl = uploadFile(data.idProof);
-    var receiptUrl = uploadFile(data.receipt);
-    
-    var row = [
-      data.full_name,
-      data.contact_number,
-      data.dob,
-      data.email,
-      data.qualification,
-      data.status,
-      data.address,
-      data.city,
-      data.pincode,
-      data.course,
-      data.doa,
-      data.whatsapp,
-      photoUrl,
-      idUrl,
-      data.payment === 'yes' ? 'PAID' : 'PENDING',
-      receiptUrl || "N/A"
-    ];
-    
-    sheet.appendRow(row);
-    
-    return ContentService.createTextOutput(JSON.stringify({ status: 'success' }))
-      .setMimeType(ContentService.MimeType.JSON);
-  }
-*/
 </script>
 </body>
 </html>
