@@ -1507,13 +1507,7 @@
       <div class="sidebar-content">
         <div class="sidebar-section">
           <div class="sidebar-label">Navigation</div>
-          <button class="sidebar-item active" onclick="showView('courses')">
-            <svg width="14" height="14" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
-            </svg>
-            My Courses
-          </button>
+
           <button class="sidebar-item" onclick="showView('progress')">
             <svg width="14" height="14" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -1529,11 +1523,7 @@
             Classroom
           </button>
         </div>
-        <div class="sidebar-divider"></div>
-        <div class="sidebar-section">
-          <div class="sidebar-label">Courses</div>
-          <div class="sidebar-course" id="sidebar-courses"></div>
-        </div>
+
       </div>
     </aside>
 
@@ -1943,47 +1933,13 @@
       if (fromSidebar && view === 'recorded') window.activeCourseVideo = null; 
       
       document.querySelectorAll('.sidebar-item').forEach(b => b.classList.remove('active'));
-      const navIndex = view === 'courses' ? 0 : view === 'progress' ? 1 : 2;
+      const navIndex = view === 'progress' ? 0 : 1;
       document.querySelectorAll('.sidebar-item')[navIndex]?.classList.add('active');
 
       const courses = getCourses();
       const stats = renderStats();
       const main = document.getElementById('main-content');
-
-      if (view === 'courses') {
-        if (!courses.length) {
-          main.innerHTML = `
-        <div class="section-hdr"><span class="shdr-id">[DSH]</span><span class="shdr-title">MY COURSES</span><span class="shdr-right">STUDENT PORTAL</span></div>
-        <div class="welcome-strip">
-          <div class="welcome-eyebrow">// WELCOME BACK</div>
-          <h1 class="welcome-h">READY TO<br/><span>TRAIN.</span></h1>
-          <p class="welcome-sub">Your courses will appear here once assigned.</p>
-        </div>
-        <div class="empty-state">
-          <div class="empty-state-icon"><svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/></svg></div>
-          <div class="empty-state-title">NO COURSES YET</div>
-          <p class="empty-state-sub">Courses will be assigned by your admin. Check back soon.</p>
-        </div>`;
-          return;
-        }
-
-        main.innerHTML = `
-      <div class="section-hdr"><span class="shdr-id">[DSH]</span><span class="shdr-title">MY COURSES</span><span class="shdr-right">${courses.length} ACTIVE TRACKS</span></div>
-      <div class="welcome-strip">
-        <div class="welcome-eyebrow">// WELCOME BACK, ${(user.name || user.email || 'AGENT').toUpperCase()}</div>
-        <h1 class="welcome-h">READY TO<br/><span>TRAIN.</span></h1>
-        <p class="welcome-sub">Complete each video and pass the quiz to unlock the next lesson.</p>
-      </div>
-      <div class="stats-row">
-        <div class="stat-box"><div class="stat-box-num">${stats.courses}</div><div class="stat-box-label">Courses</div></div>
-        <div class="stat-box"><div class="stat-box-num">${stats.watchedVideos}</div><div class="stat-box-label">Videos watched</div></div>
-        <div class="stat-box"><div class="stat-box-num">${stats.passedQuizzes}</div><div class="stat-box-label">Quizzes passed</div></div>
-      </div>
-      <div style="padding:24px 24px 0;"><div style="font-size:8.5px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--blue);margin-bottom:20px;">// ENROLLED COURSES</div></div>
-      <div id="course-list" style="padding:0 24px 40px;display:flex;flex-direction:column;gap:24px;"></div>`;
-
-        renderCourseList(courses);
-      } else if (view === 'progress') {
+      if (view === 'progress') {
         // Progress view
         main.innerHTML = `
       <div class="section-hdr"><span class="shdr-id">[PRG]</span><span class="shdr-title">MY PROGRESS</span><span class="shdr-right">LEARNING TRACKER</span></div>
@@ -1992,35 +1948,6 @@
         <h1 class="welcome-h">PROGRESS<br/><span>REPORT.</span></h1>
       </div>
       <div style="padding:24px;">
-        ${courses.map(c => {
-          const { done, total, pct } = courseProgress(c);
-          return `<div style="margin-bottom:28px;padding:20px;border:1px solid var(--wire);border-top:2px solid var(--blue);background:var(--void-1);">
-            <div style="font-size:9px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--blue);margin-bottom:6px;">${c.title}</div>
-            <div style="display:flex;justify-content:space-between;font-size:10px;color:var(--cream-3);margin-bottom:8px;">
-              <span>${done} / ${total} lessons complete</span><span>${pct}%</span>
-            </div>
-            <div style="height:3px;background:var(--wire-2);overflow:hidden;margin-bottom:12px;"><div style="height:100%;background:var(--blue);width:${pct}%;transition:width .8s;"></div></div>
-            <div style="display:grid;grid-template-columns:repeat(auto-fill, minmax(200px, 1fr));gap:10px;">
-            ${(c.videos || []).map((v, i) => {
-            const watched = isWatched(v.id);
-            const passed = isQuizPassed(v.id);
-            const unlocked = isUnlocked(c, i);
-            return `<div onclick="${unlocked ? `openVideo('${c.id}','${v.id}')` : ''}" style="display:flex;align-items:center;gap:10px;padding:10px;border:1px solid var(--wire);font-size:10px;color:${passed ? 'var(--green)' : watched ? 'var(--blue)' : 'var(--cream-3)'};cursor:${unlocked ? 'pointer' : 'not-allowed'};opacity:${unlocked ? 1 : 0.5};background:rgba(255,255,255,0.02)">
-                <span style="font-size:8px;font-weight:700;flex-shrink:0;">${String(i + 1).padStart(2, '0')}</span>
-                <span style="flex:1;text-overflow:ellipsis;overflow:hidden;white-space:nowrap;">${v.title}</span>
-                <span style="font-size:9px;">
-                  ${passed 
-                    ? '<svg width="12" height="12" fill="none" stroke="var(--green)" viewBox="0 0 24 24" style="filter: drop-shadow(0 0 4px var(--green))"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"/></svg>' 
-                    : watched 
-                      ? '<svg width="10" height="10" fill="var(--blue)" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"/></svg>' 
-                      : unlocked ? '<svg width="12" height="12" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"/></svg>'
-                      : '<svg width="12" height="12" fill="none" stroke="currentColor" viewBox="0 0 24 24" style="opacity:0.3"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/></svg>'}
-                </span>
-              </div>`;
-          }).join('')}
-            </div>
-          </div>`;
-        }).join('')}
 
         <div style="margin-top:40px;margin-bottom:20px;font-size:8.5px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--amber);">// SESSION ARCHIVE PROGRESS</div>
         <div style="display:grid;grid-template-columns:repeat(auto-fill, minmax(280px, 1fr));gap:20px;">
@@ -2165,7 +2092,7 @@
           // Setup unlock states for archive
           if (isArchive) {
             RECORDED_MODULES.forEach((mod, idx) => {
-              if (idx > 0 && localStorage.getItem('dflms_rec_passed_' + (idx - 1)) === 'true') {
+              if (idx > 0 && isQuizPassed(RECORDED_MODULES[idx - 1].video)) {
                 const nc = document.getElementById('mod-' + idx);
                 if (nc) {
                   nc.style.borderColor = 'var(--green)'; nc.style.borderTopColor = 'var(--green)';
@@ -2269,13 +2196,11 @@
         
         // 4. Render UI
         document.getElementById('nav-name').textContent = (user.name || user.email || 'AGENT').toUpperCase();
-        renderSidebar();
-        showView('courses');
+        showView('recorded');
       } catch (err) {
         console.error('Init Error:', err);
         document.getElementById('nav-name').textContent = (user.name || user.email || 'AGENT').toUpperCase();
-        renderSidebar();
-        showView('courses');
+        showView('recorded');
       }
     }
     init();

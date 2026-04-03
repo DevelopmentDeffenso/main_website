@@ -9,7 +9,7 @@ This document outlines the transition from a **Local Storage Prototype** to a **
 | **Authentication** | `sessionStorage` (Insecure) | **Firebase Auth** (Industry Standard) |
 | **User Data** | `localStorage` (Device-specific) | **Cloud Firestore** (Cloud Sync) |
 | **Progress Tracking** | `localStorage` (Lost on logout/reset) | **Firestore** (Permanent / Cross-device) |
-| **Course Content** | Hardcoded/Local | **Firestore (Admin Managed)** |
+| **Classroom Content** | Hardcoded/Local | **Firestore (Admin Managed)** |
 | **Security** | None (Client-side bypassable) | **Firebase Security Rules** |
 
 ---
@@ -62,8 +62,8 @@ async function logout() {
 Replace your local storage helpers with asynchronous calls to `DataManager`:
 
 ```javascript
-async function getCourses() {
-  return await window.DataManager.getCourses();
+async function getArchive() {
+  return await window.DataManager.getArchive();
 }
 
 async function getProgress() {
@@ -86,8 +86,8 @@ To prevent users from modifying courses or seeing other students' progress, set 
 rules_version = '2';
 service cloud.firestore {
   match /databases/{database}/documents {
-    // Courses: Everyone can read, only Admin can write
-    match /courses/{courseId} {
+    // Classroom: Everyone can read, only Admin can write
+    match /archive/{classId} {
       allow read: if request.auth != null;
       allow write: if get(/databases/$(database)/documents/users/$(request.auth.uid)).data.role == 'admin';
     }

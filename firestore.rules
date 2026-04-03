@@ -7,10 +7,10 @@ service cloud.firestore {
       allow read, write: if request.auth != null && request.auth.uid == userId;
     }
 
-    // Courses: any authenticated user can read; authenticated users can write
-    // (admin-only enforcement handled client-side for now)
+    // Courses: any authenticated user can read; ONLY admins can write
     match /courses/{courseId} {
-      allow read, write: if request.auth != null;
+      allow read: if request.auth != null;
+      allow write: if request.auth != null && request.auth.token.admin == true;
     }
 
     // Progress: users can only read/write their OWN progress

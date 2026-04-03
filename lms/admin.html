@@ -121,7 +121,7 @@ input,select,textarea{font-family:var(--font-m);}
 .btn-small.blue:hover{background:var(--blue-dim);}
 
 /* Stats */
-.stats-row{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--wire);border-bottom:1px solid var(--wire);}
+.stats-row{display:grid;grid-template-columns:1fr;gap:1px;background:var(--wire);border-bottom:1px solid var(--wire);}
 .stat-box{padding:20px 24px;background:var(--void-1);}
 .stat-box-num{font-family:var(--font-d);font-size:44px;color:var(--amber);line-height:1;margin-bottom:4px;}
 .stat-box-label{font-size:8.5px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--cream-3);}
@@ -202,10 +202,7 @@ input,select,textarea{font-family:var(--font-m);}
           <svg width="14" height="14" fill="none" stroke="currentColor" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/><rect x="14" y="3" width="7" height="7" rx="1" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/><rect x="3" y="14" width="7" height="7" rx="1" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/><rect x="14" y="14" width="7" height="7" rx="1" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/></svg>
           Overview
         </button>
-        <button class="nav-btn" onclick="showView('courses')" id="nav-courses">
-          <svg width="14" height="14" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/></svg>
-          Courses
-        </button>
+
         <button class="nav-btn" onclick="showView('students')" id="nav-students">
           <svg width="14" height="14" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
           Students
@@ -214,10 +211,7 @@ input,select,textarea{font-family:var(--font-m);}
       <div class="sidebar-divider"></div>
       <div class="sidebar-section">
         <div class="sidebar-label">Quick Add</div>
-        <button class="nav-btn" onclick="openModal('course')">
-          <svg width="14" height="14" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg>
-          New Course
-        </button>
+
         <button class="nav-btn" onclick="openModal('student')">
           <svg width="14" height="14" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M18 9v3m0 0v3m0-3h3m-3 0h-3m-2-5a4 4 0 11-8 0 4 4 0 018 0zM3 20a6 6 0 0112 0v1H3v-1z"/></svg>
           New Student
@@ -308,12 +302,11 @@ function closeModalOutside(e){if(e.target===document.getElementById('modal-overl
 
 /* ── Navigation ── */
 function showView(view){
-  ['overview','courses','students'].forEach(v=>{
+  ['overview','students'].forEach(v=>{
     document.getElementById('nav-'+v)?.classList.toggle('active',v===view);
   });
   const main=document.getElementById('main');
   if(view==='overview')renderOverview(main);
-  else if(view==='courses')renderCourses(main);
   else if(view==='students')renderStudents(main);
 }
 
@@ -328,9 +321,7 @@ function renderOverview(main){
   main.innerHTML=`
     <div class="section-hdr"><span class="shdr-id">[OVR]</span><span class="shdr-title">OVERVIEW</span><span class="shdr-right">ADMIN CONTROL PANEL</span></div>
     <div class="stats-row">
-      <div class="stat-box"><div class="stat-box-num">${courses.length}</div><div class="stat-box-label">Courses</div></div>
-      <div class="stat-box"><div class="stat-box-num">${totalVideos}</div><div class="stat-box-label">Videos</div></div>
-      <div class="stat-box"><div class="stat-box-num">${totalQuizzes}</div><div class="stat-box-label">Quizzes</div></div>
+
       <div class="stat-box"><div class="stat-box-num">${users.length}</div><div class="stat-box-label">Students</div></div>
     </div>
     <div class="page-content">
@@ -338,22 +329,10 @@ function renderOverview(main){
         <div class="card">
           <div class="card-head"><div class="card-head-title">QUICK ACTIONS</div></div>
           <div class="card-body" style="display:flex;flex-direction:column;gap:10px;">
-            <button class="btn-primary" style="width:100%;justify-content:center;" onclick="openModal('course')">+ NEW COURSE</button>
-            <button class="btn-secondary" style="width:100%;justify-content:center;" onclick="openModal('student')">+ NEW STUDENT</button>
-            <button class="btn-secondary" style="width:100%;justify-content:center;" onclick="showView('courses')">MANAGE COURSES →</button>
+            <button class="btn-primary" style="width:100%;justify-content:center;" onclick="openModal('student')">+ NEW STUDENT</button>
           </div>
         </div>
-        <div class="card">
-          <div class="card-head"><div class="card-head-title">RECENT COURSES</div></div>
-          <div class="card-body">
-            ${courses.slice(-4).reverse().map(c=>`
-              <div style="display:flex;align-items:center;gap:10px;padding:8px 0;border-bottom:1px solid var(--wire);font-size:10px;">
-                <span style="color:var(--amber);font-size:8px;font-weight:700;">CRS</span>
-                <span style="flex:1;color:var(--cream-2);">${c.title}</span>
-                <span style="color:var(--cream-3);">${(c.videos||[]).length} videos</span>
-              </div>`).join('')||'<div style="font-size:10px;color:var(--cream-3);">No courses yet.</div>'}
-          </div>
-        </div>
+
       </div>
     </div>`;
 }
