@@ -252,6 +252,23 @@
       font-size: 11px; color: var(--cream-3);
       flex: 1; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
     }
+    .file-preview {
+      margin-top: 16px; border: 1px solid rgba(226, 217, 200, 0.1);
+      width: 140px; height: 140px; border-radius: 4px;
+      display: none; background: rgba(0,0,0,0.3); overflow: hidden;
+      position: relative; align-items: center; justify-content: center;
+      transition: all 0.3s ease;
+    }
+    .file-preview.active { display: flex; animation: pIn 0.3s forwards; }
+    .file-preview img { width: 100%; height: 100%; object-fit: cover; }
+    .file-preview .file-ext { font-family: 'Outfit'; font-size: 14px; color: var(--cream-2); letter-spacing: 2px; }
+    .file-preview .clear-file {
+      position: absolute; top: 0; right: 0; padding: 4px 8px;
+      background: var(--red-glow); color: #000; font-weight: 700;
+      font-size: 10px; cursor: pointer; visibility: hidden; opacity: 0;
+      transition: .2s;
+    }
+    .file-preview:hover .clear-file { visibility: visible; opacity: 1; }
 
     /* RADIO BUTTONS */
     .radio-group { display: flex; gap: 24px; margin-top: 8px; }
@@ -489,7 +506,7 @@
       </div>
       <div class="field">
         <span class="fl">Contact Number <span class="req">*</span></span>
-        <input type="tel" name="contact_number" placeholder="+91 00000 00000" required/>
+        <input type="tel" name="contact_number" pattern="[0-9]{10}" title="Please enter exactly 10 digits" placeholder="9876543210" required/>
       </div>
       <div class="field">
         <span class="fl">Date of Birth <span class="req">*</span></span>
@@ -497,7 +514,7 @@
       </div>
       <div class="field">
         <span class="fl">Email Address <span class="req">*</span></span>
-        <input type="email" name="email" placeholder="you@example.com" required/>
+        <input type="email" name="email" placeholder="yourname@domain.com" required/>
       </div>
       <div class="field">
         <span class="fl">Qualification</span>
@@ -583,16 +600,18 @@
             <span class="file-name">Select Image File</span>
           </div>
         </div>
+        <div class="file-preview" id="p-file_photo"></div>
       </div>
       <div class="field">
         <span class="fl">ID Proof <span class="req">*</span></span>
         <div class="file-input-wrapper">
-          <input type="file" name="file_id" accept="image/*,application/pdf" onchange="setFile(this)"/>
+          <input type="file" name="file_id" accept="image/png,image/jpeg" onchange="setFile(this)"/>
           <div class="file-custom-btn">
             <span class="file-icon">⇪</span>
-            <span class="file-name">Select Document (PDF/JPG)</span>
+            <span class="file-name">Select Document (PNG/JPG)</span>
           </div>
         </div>
+        <div class="file-preview" id="p-file_id"></div>
       </div>
     </div>
 
@@ -610,12 +629,13 @@
         <div class="field" style="margin-top: 24px;">
           <span class="fl">Transaction Receipt</span>
           <div class="file-input-wrapper">
-            <input type="file" name="file_receipt" accept="image/*,application/pdf" onchange="setFile(this)"/>
+            <input type="file" name="file_receipt" accept="image/png,image/jpeg" onchange="setFile(this)"/>
             <div class="file-custom-btn">
               <span class="file-icon">⇪</span>
-              <span class="file-name">Select Receipt File</span>
+              <span class="file-name">Select Receipt (PNG/JPG)</span>
             </div>
           </div>
+          <div class="file-preview" id="p-file_receipt"></div>
         </div>
       </div>
     </div>
@@ -726,12 +746,29 @@
 /* FILE SELECTION */
 function setFile(input){
   const n = input.parentElement.querySelector('.file-name');
+  const preview = document.getElementById('p-' + input.name);
   if(input.files && input.files[0]){
-    n.textContent = input.files[0].name;
+    const file = input.files[0];
+    n.textContent = file.name;
     n.style.color = '#E2D9C8';
+    
+    // Preview logic
+    preview.innerHTML = '';
+    preview.classList.add('active');
+    if (file.type.startsWith('image/')) {
+      const img = document.createElement('img');
+      img.src = URL.createObjectURL(file);
+      preview.appendChild(img);
+    } else {
+      const ext = document.createElement('div');
+      ext.className = 'file-ext';
+      ext.textContent = file.name.split('.').pop().toUpperCase();
+      preview.appendChild(ext);
+    }
   } else {
     n.textContent = 'Select File';
     n.style.color = '';
+    preview.classList.remove('active');
   }
 }
 
