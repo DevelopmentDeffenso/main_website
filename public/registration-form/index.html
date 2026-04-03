@@ -1,0 +1,843 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <link rel="icon" href="../assests/logos/logo.png" type="image/png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=IBM+Plex+Mono:wght@300;400;500;700&display=swap" rel="stylesheet" />
+  <style>
+    /* ═══════════════════════════════════════════════════════
+       § 1. DESIGN TOKENS (MATCHING MAIN SITE)
+    ═══════════════════════════════════════════════════════ */
+    :root {
+      --void: #030303;
+      --void-1: #0A0A0A;
+      --void-2: #111111;
+      --void-3: #1A1A1A;
+      --cream: #E2D9C8;
+      --cream-2: #A89E8D;
+      --cream-3: #5A5249;
+      --blue: #007BFF;
+      --blue-hi: #3DA5FF;
+      --blue-dim: rgba(0, 123, 255, 0.12);
+      --green: #00FF41;
+      --wire: #1E1E1E;
+      --wire-2: #2A2A2A;
+      --font-d: 'Bebas Neue', sans-serif;
+      --font-m: 'IBM Plex Mono', monospace;
+      --px: 20px;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--void);
+      color: var(--cream);
+      font-family: var(--font-m);
+      font-size: 14px;
+      line-height: 1.55;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+
+    /* ═══════════════════════════════════════════════════════
+       SCROLLBAR
+    ═══════════════════════════════════════════════════════ */
+    ::-webkit-scrollbar { width: 2px; }
+    ::-webkit-scrollbar-track { background: var(--void); }
+    ::-webkit-scrollbar-thumb { background: var(--blue); }
+
+    /* STATUS DOT & NAV RIGHT (FROM MAIN) */
+    .nav-right { display: flex; align-items: stretch; margin-left: auto; }
+    .nav-status {
+      display: flex; align-items: center; gap: 8px;
+      padding: 0 18px; font-size: 9px; letter-spacing: .14em;
+      text-transform: uppercase; color: var(--cream-3);
+      border-left: 1px solid var(--wire);
+    }
+    .status-dot {
+      width: 6px; height: 6px; background: var(--green);
+      border-radius: 50%; flex-shrink: 0;
+      animation: pulseDot 2s ease-in-out infinite;
+    }
+    @keyframes pulseDot {
+      0%, 100% { opacity: 0.4; }
+      50% { opacity: 1; }
+    }
+
+    /* MATRIX BACKGROUND (SUBTLE) */
+    #matrix {
+      position: fixed; inset: 0; z-index: 0; opacity: 0.12;
+      pointer-events: none;
+    }
+    .vignette {
+      position: fixed; inset: 0; z-index: 1; pointer-events: none;
+      background: radial-gradient(ellipse at center, transparent 20%, rgba(3,3,3,0.95) 100%);
+    }
+
+    /* ═══════════════════════════════════════════════════════
+       NAVBAR (SYNCCED WITH MAIN)
+    ═══════════════════════════════════════════════════════ */
+    .navbar-wrapper {
+      position: sticky; top: 0; z-index: 200;
+      width: 100%; height: 52px;
+      background: rgba(3,3,3,0.85);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--wire);
+    }
+    .navbar {
+      max-width: 1440px; margin: 0 auto; height: 100%;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 var(--px);
+    }
+    .nav-logo {
+      display: flex; align-items: center; gap: 12px;
+      padding: 0 16px; border-right: 1px solid var(--wire);
+      flex-shrink: 0; cursor: pointer;
+    }
+    .nav-logo img { height: 38px; width: auto; }
+    .nav-pill {
+      font-size: 9px; font-weight: 700; letter-spacing: .24em;
+      text-transform: uppercase; color: var(--blue);
+      padding: 0 14px; display: flex; align-items: center;
+    }
+
+    /* ═══════════════════════════════════════════════════════
+       HERO
+    ═══════════════════════════════════════════════════════ */
+    .hero {
+      position: relative; z-index: 10;
+      text-align: center; padding: 100px var(--px) 60px;
+      animation: pIn 0.8s ease both;
+    }
+    .hero-terminal {
+      display: inline-flex; align-items: center; gap: 8px;
+      margin-bottom: 32px; padding: 10px 20px;
+      background: var(--void-1); border: 1px solid var(--wire);
+      font-size: 11px; letter-spacing: .1em;
+    }
+    .ht-prompt { color: var(--blue); font-weight: 700; }
+    .hero h1 {
+      font-family: var(--font-d);
+      font-size: clamp(56px, 10vw, 110px);
+      line-height: 0.9; letter-spacing: .02em; color: var(--cream);
+      text-transform: uppercase;
+    }
+    .hero h1 span { color: var(--blue); }
+    
+    .hero-badges {
+      display: flex; justify-content: center;
+      gap: 12px; flex-wrap: wrap; margin-top: 32px;
+    }
+    .hero-badge {
+      font-size: 9px; font-weight: 600;
+      letter-spacing: .18em; text-transform: uppercase; color: var(--cream-2);
+      border: 1px solid var(--wire); padding: 7px 16px;
+      background: var(--void-1);
+    }
+    .hero-badge.hi { border-color: rgba(0, 123, 255, 0.3); color: var(--blue); }
+
+    .hero-desc {
+      margin-top: 24px; font-size: 14px; color: var(--cream-2);
+      max-width: 500px; margin-left: auto; margin-right: auto; line-height: 1.8;
+    }
+
+    /* ═══════════════════════════════════════════════════════
+       MAIN LAYOUT
+    ═══════════════════════════════════════════════════════ */
+    .page {
+      position: relative; z-index: 10;
+      max-width: 1000px; margin: 0 auto; padding: 0 var(--px) 120px;
+    }
+
+    /* SECTION HEADERS */
+    .sec-hdr {
+      display: flex; align-items: center; gap: 16px;
+      margin: 64px 0 24px;
+    }
+    .sec-idx {
+      font-family: var(--font-d); font-size: 44px;
+      color: var(--blue-dim); line-height: 1;
+    }
+    .sec-label {
+      font-size: 10px; font-weight: 700; letter-spacing: .3em;
+      text-transform: uppercase; color: var(--blue);
+    }
+    .sec-line {
+      flex: 1; height: 1px;
+      background: linear-gradient(90deg, var(--wire), transparent);
+    }
+
+    /* ═══════════════════════════════════════════════════════
+       CARDS (GLASSMORPHISM)
+    ═══════════════════════════════════════════════════════ */
+    .card {
+      background: var(--void-1);
+      border: 1px solid var(--wire);
+      padding: 40px; position: relative;
+      animation: pIn 0.6s ease both;
+    }
+    .card::before {
+      content: ''; position: absolute; top: 0; left: 0;
+      width: 2px; height: 40px; background: var(--blue);
+    }
+    .card-corner {
+      position: absolute; top: 0; right: 0;
+      width: 20px; height: 20px;
+      border-top: 1px solid var(--blue);
+      border-right: 1px solid var(--blue);
+      opacity: .5;
+    }
+
+    /* GRIDS */
+    .g3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+    .g2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; }
+    .span2 { grid-column: span 2; }
+
+    @media (max-width: 768px) {
+      .g3, .g2 { grid-template-columns: 1fr; }
+      .span2 { grid-column: span 1; }
+      .card { padding: 32px 20px; }
+    }
+
+    /* ═══════════════════════════════════════════════════════
+       FORM ELEMENTS
+    ═══════════════════════════════════════════════════════ */
+    .field { display: flex; flex-direction: column; gap: 8px; }
+    .fl {
+      font-size: 9px; font-weight: 700; letter-spacing: .2em;
+      text-transform: uppercase; color: var(--cream-3);
+    }
+    .fl .req { color: var(--blue); margin-left: 2px; }
+
+    input, select, textarea {
+      background: var(--void-2); border: 1px solid var(--wire-2);
+      color: var(--cream); font-family: var(--font-m);
+      font-size: 13px; padding: 14px 16px; width: 100%;
+      outline: none; transition: all .2s;
+    }
+    input:focus, select:focus, textarea:focus {
+      border-color: var(--blue);
+      background: var(--void-3);
+      box-shadow: 0 0 15px rgba(0, 123, 255, 0.05);
+    }
+    input::placeholder { color: var(--cream-3); }
+    
+    select {
+      appearance: none; cursor: pointer;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%235A5249'/%3E%3C/svg%3E");
+      background-repeat: no-repeat; background-position: right 16px center;
+      padding-right: 40px;
+    }
+
+    textarea { resize: vertical; min-height: 100px; }
+
+    /* CUSTOM FILE UPLOAD */
+    .file-input-wrapper { position: relative; cursor: pointer; }
+    .file-input-wrapper input[type="file"] {
+      position: absolute; inset: 0; opacity: 0; cursor: pointer;
+    }
+    .file-custom-btn {
+      display: flex; align-items: center; gap: 12px;
+      padding: 12px 16px; background: var(--void-2);
+      border: 1px dashed var(--wire-2); transition: all .2s;
+    }
+    .file-input-wrapper:hover .file-custom-btn {
+      border-color: var(--blue); background: var(--void-3);
+    }
+    .file-icon { color: var(--blue); font-size: 16px; }
+    .file-name {
+      font-size: 11px; color: var(--cream-3);
+      flex: 1; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+    }
+
+    /* RADIO BUTTONS */
+    .radio-group { display: flex; gap: 24px; margin-top: 8px; }
+    .radio-label {
+      display: flex; align-items: center; gap: 8px;
+      cursor: pointer; font-size: 13px; color: var(--cream-2);
+    }
+    .radio-label input { width: auto; accent-color: var(--blue); }
+
+    /* PAYMENT BLOCK */
+    .payment-notice {
+      margin-top: 32px; padding: 24px;
+      background: rgba(0, 123, 255, 0.03);
+      border: 1px solid var(--blue-dim);
+    }
+    .pn-title {
+      font-size: 10px; font-weight: 700; letter-spacing: .2em;
+      color: var(--blue); margin-bottom: 20px; display: block;
+    }
+    .receipt-area { display: none; margin-top: 16px; }
+    .receipt-area.on { display: block; }
+
+    /* ═══════════════════════════════════════════════════════
+       SUBMIT SECTION
+    ═══════════════════════════════════════════════════════ */
+    .submit-area {
+      display: flex; align-items: center; gap: 40px;
+      margin-top: 64px; flex-wrap: wrap;
+    }
+    .btn-main {
+      font-family: var(--font-d); font-size: 22px;
+      letter-spacing: .15em; text-transform: uppercase;
+      padding: 18px 60px; cursor: pointer;
+      background: var(--blue); color: #fff;
+      transition: all .25s ease;
+      position: relative; overflow: hidden;
+    }
+    .btn-main:hover {
+      background: var(--blue-hi);
+      transform: translateY(-2px);
+      box-shadow: 0 10px 30px rgba(0, 123, 255, 0.3);
+    }
+    .btn-main:active { transform: translateY(0); }
+    
+    .submit-info {
+      font-size: 10px; color: var(--cream-3);
+      letter-spacing: .1em; line-height: 1.8;
+      text-transform: uppercase;
+    }
+
+    /* ═══════════════════════════════════════════════════════
+       FOOTER (SYNCCED)
+    ═══════════════════════════════════════════════════════ */
+    .footer { background: var(--void); border-top: 2px solid var(--wire); overflow: hidden; margin-top: 80px; }
+    .footer-top {
+      padding: 44px var(--px) 0; display: grid; grid-template-columns: 1fr;
+      gap: 44px; border-bottom: 1px solid var(--wire); padding-bottom: 44px;
+      max-width: 1440px; margin: 0 auto;
+    }
+    @media(min-width:900px) {
+      .footer-top { grid-template-columns: 1fr auto; gap: 80px; padding: 56px 48px 56px; }
+    }
+    .footer-logo-img { height: 38px; width: auto; margin-bottom: 14px; }
+    .footer-tagline { font-size: 12px; color: var(--cream-3); line-height: 1.7; max-width: 260px; margin-bottom: 14px; }
+    .footer-tagline .acc { color: var(--blue); }
+    .footer-social {
+      display: inline-flex; align-items: center; gap: 8px; padding: 10px 14px;
+      border: 1px solid var(--wire); font-size: 11px; font-weight: 700;
+      letter-spacing: .14em; text-transform: uppercase; color: var(--cream-3);
+      min-height: 44px; transition: all .18s; text-decoration: none;
+    }
+    .footer-social svg { width: 12px; height: 12px; fill: currentColor; flex-shrink: 0; }
+    .footer-social:hover { border-color: var(--cream-3); color: var(--cream); }
+    .footer-copy { font-size: 9px; letter-spacing: .12em; text-transform: uppercase; color: var(--cream-3); margin-top: 14px; }
+    .footer-cols { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+    @media(min-width:480px) { .footer-cols { gap: 40px; } }
+    .footer-col-h { font-size: 9px; font-weight: 700; letter-spacing: .2em; text-transform: uppercase; color: var(--blue); margin-bottom: 16px; }
+    .footer-col-h::before { content: '['; opacity: .6; }
+    .footer-col-h::after { content: ']'; opacity: .6; }
+    .footer-col ul { display: flex; flex-direction: column; gap: 10px; list-style: none; padding: 0; }
+    .footer-col ul a { font-size: 12px; color: var(--cream-3); transition: color .18s; cursor: pointer; text-decoration: none; }
+    .footer-col ul a:hover { color: var(--cream); }
+    .footer-location { border-top: 1px solid var(--wire); padding: 32px var(--px); max-width: 1440px; margin: 0 auto; display: grid; grid-template-columns: 1fr; gap: 24px; }
+    @media(min-width:768px) { .footer-location { grid-template-columns: 1fr 1fr; gap: 32px; align-items: start; } }
+    .footer-loc-info { display: flex; flex-direction: column; gap: 14px; }
+    .footer-loc-h { font-size: 9px; font-weight: 700; letter-spacing: .2em; text-transform: uppercase; color: var(--blue); }
+    .footer-loc-h::before { content: '['; opacity: .6; }
+    .footer-loc-h::after { content: ']'; opacity: .6; }
+    .footer-loc-address { font-size: 12px; color: var(--cream-2); line-height: 1.75; }
+    .footer-loc-link {
+      display: inline-flex; align-items: center; gap: 8px; padding: 10px 16px; border: 1px solid var(--wire);
+      font-size: 9px; font-weight: 700; letter-spacing: .16em; text-transform: uppercase;
+      color: var(--cream-3); transition: all .18s; min-height: 44px; width: fit-content; cursor: pointer; text-decoration: none;
+    }
+    .footer-loc-link:hover { border-color: var(--blue); color: var(--cream); }
+    .footer-loc-link svg { width: 14px; height: 14px; flex-shrink: 0; }
+    .footer-map-wrap { border: 1px solid var(--wire); overflow: hidden; position: relative; aspect-ratio: 16/9; max-height: 220px; width: 100%; max-width: 400px; }
+    @media(min-width:768px) { .footer-map-wrap { justify-self: end; } }
+    .footer-map-wrap iframe { width: 100%; height: 100%; border: none; filter: invert(90%) hue-rotate(180deg) brightness(0.95) contrast(1.1); }
+    .footer-terminal-line { display: flex; align-items: center; gap: 8px; padding: 14px var(--px); border-top: 1px solid var(--wire); font-family: var(--font-m); font-size: 10px; color: var(--cream-3); max-width: 1440px; margin: 0 auto; }
+    .ftr-prompt { color: var(--blue); font-weight: 700; }
+
+    /* ═══════════════════════════════════════════════════════
+       SUCCESS OVERLAY
+    ═══════════════════════════════════════════════════════ */
+    .success-overlay {
+      display: none; position: fixed; inset: 0; z-index: 1000;
+      background: rgba(3,3,3,0.98);
+      flex-direction: column; align-items: center; justify-content: center;
+      text-align: center; padding: var(--px);
+    }
+    .success-overlay.visible { display: flex; animation: pIn 0.5s ease; }
+    
+    .success-circle {
+      width: 100px; height: 100px; border-radius: 50%;
+      border: 2px solid var(--blue); color: var(--blue);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 40px; margin-bottom: 32px;
+      box-shadow: 0 0 30px rgba(0, 123, 255, 0.2);
+    }
+    .success-overlay h2 {
+      font-family: var(--font-d); font-size: 64px;
+      color: var(--cream); margin-bottom: 16px;
+    }
+    .success-overlay p {
+      font-size: 12px; color: var(--cream-3);
+      letter-spacing: .2em; text-transform: uppercase; line-height: 2;
+    }
+
+    @keyframes pIn {
+      from { opacity: 0; transform: translateY(12px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+<body>
+
+<canvas id="matrix"></canvas>
+<div class="vignette"></div>
+
+<!-- SUCCESS OVERLAY -->
+<div class="success-overlay" id="successOverlay">
+  <div class="success-circle">✓</div>
+  <h2>ENROLLMENT INITIATED</h2>
+  <p>TRANSMISSION RECEIVED // OUR TEAM WILL VALIDATE YOUR CLEARANCE<br>CHECK YOUR EMAIL FOR NEXT STEPS</p>
+</div>
+
+<!-- NAV (SYNCCED) -->
+<div class="navbar-wrapper">
+  <nav class="navbar">
+    <div style="display:flex; height:100%;">
+      <div class="nav-logo" onclick="window.location.href='/'">
+        <img src="../assests/logos/text logo.png" alt="Deffenso" />
+      </div>
+      <div class="nav-pill">// ADMISSION DESK</div>
+    </div>
+    <div class="nav-right">
+      <div class="nav-status">
+        <div class="status-dot"></div><span>SYSTEMS ONLINE</span>
+      </div>
+    </div>
+  </nav>
+</div>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-terminal">
+    <span class="ht-prompt">root@deffenso:~$</span> access --enrollment=ALPHA --secure=true
+  </div>
+  <h1>ADMISSION <span>GATEWAY</span></h1>
+  <div class="hero-badges">
+    <div class="hero-badge hi">● Systems Active</div>
+    <div class="hero-badge">// End-to-End Encrypted</div>
+    <div class="hero-badge">// Professional Intake 2026</div>
+  </div>
+  <p class="hero-desc">Initiate your defensive intelligence training by providing the required credentials below.</p>
+</div>
+
+<!-- FORM -->
+<main class="page">
+<form id="regForm" novalidate>
+
+  <!-- 01 PERSONAL -->
+  <div class="sec-hdr">
+    <span class="sec-idx">01</span>
+    <span class="sec-label">Personal Identity</span>
+    <div class="sec-line"></div>
+  </div>
+  <div class="card">
+    <div class="card-bar"></div>
+    <div class="card-corner"></div>
+    <div class="g3">
+      <div class="field">
+        <span class="fl">Full Name <span class="req">*</span></span>
+        <input type="text" name="full_name" placeholder="John Doe" required/>
+      </div>
+      <div class="field">
+        <span class="fl">Contact Number <span class="req">*</span></span>
+        <input type="tel" name="contact_number" placeholder="+91 00000 00000" required/>
+      </div>
+      <div class="field">
+        <span class="fl">Date of Birth <span class="req">*</span></span>
+        <input type="date" name="dob" required/>
+      </div>
+      <div class="field">
+        <span class="fl">Email Address <span class="req">*</span></span>
+        <input type="email" name="email" placeholder="you@example.com" required/>
+      </div>
+      <div class="field">
+        <span class="fl">Qualification</span>
+        <input type="text" name="qualification" placeholder="B.Tech / BCA / MCA..."/>
+      </div>
+      <div class="field">
+        <span class="fl">Student or Professional <span class="req">*</span></span>
+        <select name="status" required>
+          <option value="" disabled selected>— Select —</option>
+          <option>Student</option>
+          <option>Professional</option>
+          <option>Other</option>
+        </select>
+      </div>
+      <div class="field span2">
+        <span class="fl">Address</span>
+        <textarea name="address" placeholder="Street, Area, Landmark..."></textarea>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:16px;">
+        <div class="field">
+          <span class="fl">City</span>
+          <input type="text" name="city" placeholder="Kochi"/>
+        </div>
+        <div class="field">
+          <span class="fl">Pincode</span>
+          <input type="text" name="pincode" placeholder="682001"/>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 02 ACADEMIC -->
+  <div class="sec-hdr">
+    <span class="sec-idx">02</span>
+    <span class="sec-label">Admission Details</span>
+    <div class="sec-line"></div>
+  </div>
+  <div class="card">
+    <div class="card-bar"></div>
+    <div class="card-corner"></div>
+    <div class="g3">
+      <div class="field">
+        <span class="fl">Enrolled Course <span class="req">*</span></span>
+        <select name="course" required>
+          <option value="" disabled selected>— Select Course —</option>
+          <option>Deffenso Junior — Ethical Hacker</option>
+          <option>Deffenso Cyber Systems</option>
+          <option>Deffenso Advanced — Penetration Tester</option>
+          <option>Deffenso SOC — Analyst</option>
+          <option>Deffenso NIIT Professional</option>
+          <option>Deffenso Malware Specialist</option>
+          <option>Deffenso Cloud — Penetration Tester</option>
+          <option>Deffenso Cyber — Hacker Program</option>
+        </select>
+      </div>
+      <div class="field">
+        <span class="fl">Date of Admission <span class="req">*</span></span>
+        <input type="date" name="doa" required/>
+      </div>
+      <div class="field">
+        <span class="fl">WhatsApp Number</span>
+        <input type="tel" name="whatsapp" placeholder="+91 00000 00000"/>
+      </div>
+    </div>
+  </div>
+
+  <!-- 03 DOCUMENTS -->
+  <div class="sec-hdr">
+    <span class="sec-idx">03</span>
+    <span class="sec-label">Verification Assets</span>
+    <div class="sec-line"></div>
+  </div>
+  <div class="card">
+    <div class="card-bar"></div>
+    <div class="card-corner"></div>
+    <div class="g2">
+      <div class="field">
+        <span class="fl">Your photo <span class="req">*</span></span>
+        <div class="file-input-wrapper">
+          <input type="file" name="file_photo" accept="image/*" onchange="setFile(this)"/>
+          <div class="file-custom-btn">
+            <span class="file-icon">⇪</span>
+            <span class="file-name">Select Image File</span>
+          </div>
+        </div>
+      </div>
+      <div class="field">
+        <span class="fl">ID Proof <span class="req">*</span></span>
+        <div class="file-input-wrapper">
+          <input type="file" name="file_id" accept="image/*,application/pdf" onchange="setFile(this)"/>
+          <div class="file-custom-btn">
+            <span class="file-icon">⇪</span>
+            <span class="file-name">Select Document (PDF/JPG)</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="payment-notice">
+      <span class="pn-title">// FEE STATUS VALIDATION</span>
+      <div class="radio-group">
+        <label class="radio-label">
+          <input type="radio" name="payment" value="yes" onchange="toggleReceipt(this)"/> YES, PAID
+        </label>
+        <label class="radio-label">
+          <input type="radio" name="payment" value="no" onchange="toggleReceipt(this)" checked/> NO, PENDING
+        </label>
+      </div>
+      <div class="receipt-area" id="receiptArea">
+        <div class="field" style="margin-top: 24px;">
+          <span class="fl">Transaction Receipt</span>
+          <div class="file-input-wrapper">
+            <input type="file" name="file_receipt" accept="image/*,application/pdf" onchange="setFile(this)"/>
+            <div class="file-custom-btn">
+              <span class="file-icon">⇪</span>
+              <span class="file-name">Select Receipt File</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SUBMIT -->
+  <div class="submit-area">
+    <button type="submit" class="btn-main">DEPLOY REQUEST →</button>
+    <div class="submit-info">
+      Transmission secured via Alpha Protocol<br>
+      Validation usually completes within 24-48 hours
+    </div>
+  </div>
+
+</form>
+</main>
+
+<!-- FOOTER (SYNCCED) -->
+<footer class="footer">
+  <div class="footer-top">
+    <div>
+      <span onclick="navigate('home')" style="display:inline-block;margin-bottom:14px;cursor:pointer">
+        <img src="../assests/logos/logo.png" alt="Deffenso" class="footer-logo-img" onerror="this.style.display='none'"/>
+      </span>
+      <p class="footer-tagline">Securing the future by<br/><span class="acc">training the next generation.</span></p>
+      <a href="https://www.linkedin.com/company/deffenso" target="_blank" rel="noreferrer" class="footer-social">
+        <svg viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg> 
+        Follow on LinkedIn
+      </a>
+      <p class="footer-copy">&copy; 2024 DEFFENSO ACADEMY. ALL RIGHTS RESERVED.</p>
+    </div>
+    <div class="footer-cols">
+      <div class="footer-col">
+        <h4 class="footer-col-h">Academy</h4>
+        <ul>
+          <li><a onclick="scrollToPrograms()">Programs</a></li>
+          <li><a onclick="navigate('about')">About</a></li>
+          <li><a onclick="navigate('events')">Events</a></li>
+          <li><a onclick="navigate('contact')">Contact</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4 class="footer-col-h">Connect</h4>
+        <ul>
+          <li><a href="https://www.linkedin.com/company/deffenso" target="_blank" rel="noreferrer">LinkedIn</a></li>
+          <li><a href="#">Instagram</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4 class="footer-col-h">Legal</h4>
+        <ul>
+          <li><a onclick="window.location.href='/privacy/'">Privacy</a></li>
+          <li><a onclick="window.location.href='/terms/'">Terms</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="footer-location">
+    <div class="footer-loc-info">
+      <h4 class="footer-loc-h">Headquarters</h4>
+      <p class="footer-loc-address">KMEA Engineering College,<br/>Kuzhivelipady, Edathala,<br/>Aluva, Kerala 683561</p>
+      <a href="https://www.google.com/maps/search/?api=1&query=KMEA+Engineering+College+Kuzhivelipady+Edathala+Aluva+Kerala+683561" target="_blank" rel="noreferrer" class="footer-loc-link">
+        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+        Open in Google Maps
+      </a>
+    </div>
+    <div class="footer-map-wrap">
+      <iframe src="https://www.google.com/maps?q=KMEA+Engineering+College+Kuzhivelipady+Edathala+Aluva+Kerala+683561&output=embed" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+    </div>
+  </div>
+  <div class="footer-terminal-line">
+    <span class="ftr-prompt">root@deffenso:~$</span>
+    <span>logout — session terminated. stay vigilant.</span>
+    <span class="u-cursor"></span>
+  </div>
+</footer>
+
+<script>
+/* MATRIX RAIN */
+(function(){
+  const c = document.getElementById('matrix');
+  const x = c.getContext('2d');
+  const chars = '01アイウエオカキクケコサシスセソ';
+  let W, H, cols, drops;
+  function init(){
+    W = c.width = window.innerWidth;
+    H = c.height = window.innerHeight;
+    cols = Math.floor(W / 20);
+    drops = Array(cols).fill(1);
+  }
+  function draw(){
+    x.fillStyle = 'rgba(3,3,3,0.07)';
+    x.fillRect(0,0,W,H);
+    x.font = '14px "Share Tech Mono",monospace';
+    drops.forEach((y,i)=>{
+      const bright = Math.random() > 0.92;
+      x.fillStyle = bright ? '#60a0ff' : '#1a5faa';
+      x.fillText(chars[Math.floor(Math.random()*chars.length)], i*20, y*20);
+      if(y*20 > H && Math.random() > 0.975) drops[i] = 0;
+      drops[i]++;
+    });
+  }
+  init();
+  window.addEventListener('resize', init);
+  setInterval(draw, 50);
+})();
+
+/* FILE SELECTION */
+function setFile(input){
+  const n = input.parentElement.querySelector('.file-name');
+  if(input.files && input.files[0]){
+    n.textContent = input.files[0].name;
+    n.style.color = '#E2D9C8';
+  } else {
+    n.textContent = 'Select File';
+    n.style.color = '';
+  }
+}
+
+/* PAYMENT */
+function toggleReceipt(r){
+  document.getElementById('receiptArea').classList.toggle('on', r.value==='yes');
+}
+
+/* HELPER FUNCS */
+function navigate(page) {
+  const paths = {
+    home: '/',
+    about: '/about/',
+    contact: '/contact/',
+    events: '/event/',
+    login: '/lms/login/'
+  };
+  if (page in paths) { window.location.href = paths[page]; }
+}
+function scrollToPrograms() {
+  window.location.href = '/#programs';
+}
+
+/* ═══════════════════════════════════════════════════════
+   SUBMISSION LOGIC (GOOGLE SHEETS INTEGRATION)
+═══════════════════════════════════════════════════════ */
+const scriptURL = 'ADD_YOUR_GOOGLE_APPS_SCRIPT_URL_HERE';
+
+async function toBase64(file) {
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onload = () => resolve({
+      base64: reader.result.split(',')[1],
+      type: file.type,
+      name: file.name
+    });
+    reader.onerror = error => reject(error);
+  });
+}
+
+document.getElementById('regForm').addEventListener('submit', async function(e){
+  e.preventDefault();
+  const form = e.target;
+  const btn = form.querySelector('button[type="submit"]');
+  const originalBtnText = btn.textContent;
+  
+  if (!form.checkValidity()) {
+    form.reportValidity();
+    return;
+  }
+
+  try {
+    btn.textContent = 'TRANSMITTING DATA...';
+    btn.disabled = true;
+
+    const data = {};
+    const formData = new FormData(form);
+    
+    // Standard fields
+    formData.forEach((value, key) => {
+      if (!(value instanceof File)) {
+        data[key] = value;
+      }
+    });
+
+    // Handle files
+    const photoFile = form.querySelector('input[name="file_photo"]').files[0];
+    const idFile = form.querySelector('input[name="file_id"]').files[0];
+    const receiptFile = form.querySelector('input[name="file_receipt"]').files[0];
+
+    if (photoFile) data.photo = await toBase64(photoFile);
+    if (idFile) data.idProof = await toBase64(idFile);
+    if (receiptFile && data.payment === 'yes') data.receipt = await toBase64(receiptFile);
+
+    // Send to Google Apps Script
+    // Note: We use fetch with 'POST'
+    const response = await fetch(scriptURL, {
+      method: 'POST',
+      body: JSON.stringify(data)
+    });
+
+    const result = await response.json();
+    
+    if (result.status === 'success') {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      document.getElementById('successOverlay').classList.add('visible');
+      document.body.style.overflow = 'hidden';
+    } else {
+      throw new Error(result.message || 'Transmission error');
+    }
+
+  } catch (err) {
+    console.error('Submission Failed:', err);
+    alert('TRANSMISSION FAILED: ' + err.message + '\n\nEnsure you have configured the Apps Script URL correctly.');
+    btn.textContent = originalBtnText;
+    btn.disabled = false;
+  }
+});
+
+/* 
+  GOOGLE APPS SCRIPT CODE (Paste this into script.google.com):
+  
+  function doPost(e) {
+    var sheet = SpreadsheetApp.openById('1lE1ZGJy2D79-yiYRWpWXz0VS_kRY0h9PhgkcQe_Xq0g').getSheets()[0];
+    var folder = DriveApp.getFolderById('REPLACE_WITH_A_GOOGLE_DRIVE_FOLDER_ID');
+    var data = JSON.parse(e.postData.contents);
+    
+    function uploadFile(fileData) {
+      if (!fileData) return "";
+      var decoded = Utilities.base64Decode(fileData.base64);
+      var blob = Utilities.newBlob(decoded, fileData.type, fileData.name);
+      var file = folder.createFile(blob);
+      return file.getUrl();
+    }
+    
+    var photoUrl = uploadFile(data.photo);
+    var idUrl = uploadFile(data.idProof);
+    var receiptUrl = uploadFile(data.receipt);
+    
+    var row = [
+      data.full_name,
+      data.contact_number,
+      data.dob,
+      data.email,
+      data.qualification,
+      data.status,
+      data.address,
+      data.city,
+      data.pincode,
+      data.course,
+      data.doa,
+      data.whatsapp,
+      photoUrl,
+      idUrl,
+      data.payment === 'yes' ? 'PAID' : 'PENDING',
+      receiptUrl || "N/A"
+    ];
+    
+    sheet.appendRow(row);
+    
+    return ContentService.createTextOutput(JSON.stringify({ status: 'success' }))
+      .setMimeType(ContentService.MimeType.JSON);
+  }
+*/
+</script>
+</body>
+</html>
