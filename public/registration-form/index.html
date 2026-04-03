@@ -441,12 +441,50 @@
       .footer-tagline { margin: 0 auto 24px; }
       .footer-loc-info { text-align: center; align-items: center; }
     }
+
+    /* ═══════════════════════════════════════════════════════
+       LOADING OVERLAY
+    ═══════════════════════════════════════════════════════ */
+    .loading-overlay {
+      display: none; position: fixed; inset: 0; z-index: 2000;
+      background: rgba(3,3,3,0.9); backdrop-filter: blur(10px);
+      flex-direction: column; align-items: center; justify-content: center;
+      text-align: center;
+    }
+    .loading-overlay.visible { display: flex; animation: fadeIn 0.3s ease forwards; }
+    
+    .loader-box { position: relative; width: 60px; height: 60px; margin-bottom: 24px; }
+    .loader-ring {
+      position: absolute; inset: 0; border: 2px solid var(--wire); border-radius: 50%;
+    }
+    .loader-progress {
+      position: absolute; inset: 0; border: 2px solid transparent;
+      border-top-color: var(--blue); border-radius: 50%;
+      animation: spin 1s linear infinite;
+    }
+    .loader-text {
+      font-family: var(--font-m); font-size: 11px; color: var(--blue);
+      letter-spacing: .3em; text-transform: uppercase;
+      animation: pulseText 1.5s ease-in-out infinite;
+    }
+    @keyframes spin { 100% { transform: rotate(360deg); } }
+    @keyframes pulseText { 0%, 100% { opacity: 0.5; } 50% { opacity: 1; } }
+    @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
   </style>
 </head>
 <body>
 
 <canvas id="matrix"></canvas>
 <div class="vignette"></div>
+
+<!-- LOADING OVERLAY -->
+<div id="loadingOverlay" class="loading-overlay">
+  <div class="loader-box">
+    <div class="loader-ring"></div>
+    <div class="loader-progress"></div>
+  </div>
+  <div class="loader-text">TRANSMITTING DATA...</div>
+</div>
 
 <!-- SUCCESS OVERLAY -->
 <div class="success-overlay" id="successOverlay">
@@ -509,6 +547,10 @@
         <input type="tel" name="contact_number" pattern="[0-9]{10}" title="Please enter exactly 10 digits" placeholder="+91 00000 00000" required/>
       </div>
       <div class="field">
+        <span class="fl">Parents Number <span class="req">*</span></span>
+        <input type="tel" name="parents_number" pattern="[0-9]{10}" title="Please enter exactly 10 digits" placeholder="+91 00000 00000" required/>
+      </div>
+      <div class="field">
         <span class="fl">Date of Birth <span class="req">*</span></span>
         <input type="date" name="dob" required/>
       </div>
@@ -560,14 +602,16 @@
         <span class="fl">Enrolled Course <span class="req">*</span></span>
         <select name="course" required>
           <option value="" disabled selected>— Select Course —</option>
-          <option>Deffenso Junior — Ethical Hacker</option>
-          <option>Deffenso Cyber Systems</option>
-          <option>Deffenso Advanced — Penetration Tester</option>
-          <option>Deffenso SOC — Analyst</option>
-          <option>Deffenso NIIT Professional</option>
-          <option>Deffenso Malware Specialist</option>
-          <option>Deffenso Cloud — Penetration Tester</option>
-          <option>Deffenso Cyber — Hacker Program</option>
+          <option>DEFFENSO Junior Ethical Hacker (DJEH)</option>
+          <option>DEFFENSO Advanced Penetration Tester (DAPT)</option>
+          <option>DEFFENSO SOC Analyst Professional (DSAP)</option>
+          <option>DEFFENSO Cloud Protection Engineer (DCPE)</option>
+          <option>DEFFENSO Cyber Attack Specialist (DCAS)</option>
+          <option>DEFFENSO Malware Intelligence Specialist (DMIS)</option>
+          <option>DEFFENSO Bug Hunting Professional (DBHP)</option>
+          <option>DEFFENSO Cyber Matrix Program (DCMP)</option>
+          <option>DEFFENSO IoT Hacking & Security (DIHS)</option>
+          <option>DEFFENSO IoT Tool Development R&D (DITD)</option>
         </select>
       </div>
       <div class="field">
@@ -577,6 +621,18 @@
       <div class="field">
         <span class="fl">WhatsApp Number</span>
         <input type="tel" name="whatsapp" placeholder="+91 00000 00000"/>
+      </div>
+      <div class="field">
+        <span class="fl">Course Fee <span class="req">*</span></span>
+        <input type="text" name="course_fee" placeholder="Amount" required/>
+      </div>
+      <div class="field">
+        <span class="fl">Course Mode <span class="req">*</span></span>
+        <select name="course_mode" required>
+          <option value="" disabled selected>— Select Mode —</option>
+          <option>Online</option>
+          <option>Offline</option>
+        </select>
       </div>
     </div>
   </div>
@@ -795,7 +851,7 @@ function scrollToPrograms() {
 /* ═══════════════════════════════════════════════════════
    SUBMISSION LOGIC (GOOGLE SHEETS INTEGRATION)
 ═══════════════════════════════════════════════════════ */
-const scriptURL = 'https://script.google.com/macros/s/AKfycbzWU05EfcIsmdARtqxVpth0aDpS5MWjMxv7anCLEVKqjEZF6ls5khyy8OaNN1UgF-4/exec';
+const scriptURL = 'https://script.google.com/macros/s/AKfycbwgxDoJb21ui5XR0sMlVlzChWzSkxgBQs_ezoF58_1IServtLwHE-pRyOesOU-6cMjn/exec';
 
 async function toBase64(file) {
   return new Promise((resolve, reject) => {
@@ -822,6 +878,7 @@ document.getElementById('regForm').addEventListener('submit', async function(e){
   }
 
   try {
+    document.getElementById('loadingOverlay').classList.add('visible');
     btn.textContent = 'TRANSMITTING DATA...';
     btn.disabled = true;
 
@@ -856,6 +913,7 @@ document.getElementById('regForm').addEventListener('submit', async function(e){
     const result = await response.json();
     
     if (result.status === 'success') {
+      document.getElementById('loadingOverlay').classList.remove('visible');
       window.scrollTo({ top: 0, behavior: 'smooth' });
       document.getElementById('successOverlay').classList.add('visible');
       document.body.style.overflow = 'hidden';
@@ -864,6 +922,7 @@ document.getElementById('regForm').addEventListener('submit', async function(e){
     }
 
   } catch (err) {
+    document.getElementById('loadingOverlay').classList.remove('visible');
     console.error('Submission Failed:', err);
     alert('TRANSMISSION FAILED: ' + err.message + '\n\nEnsure you have configured the Apps Script URL correctly.');
     btn.textContent = originalBtnText;

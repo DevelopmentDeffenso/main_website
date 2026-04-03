@@ -61,14 +61,16 @@
       "@type": "OfferCatalog",
       "name": "Cybersecurity Courses",
       "itemListElement": [
-        { "@type": "Course", "name": "DEFFENSO JUNIOR ETHICAL HACKER (DJEH)" },
-        { "@type": "Course", "name": "DEFFENSO ADVANCED PENETRATION TESTER (DAPT)" },
-        { "@type": "Course", "name": "DEFFENSO SOC ANALYST PROFESSIONAL (DSAP)" },
-        { "@type": "Course", "name": "DEFFENSO CLOUD PROTECTION ENGINEER (DCPE)" },
-        { "@type": "Course", "name": "DEFFENSO CYBER ATTACK SPECIALIST (DCAS)" },
-        { "@type": "Course", "name": "DEFFENSO MALWARE INTELLIGENCE SPECIALIST (DMIS)" },
-        { "@type": "Course", "name": "DEFFENSO BUG HUNTING PROFESSIONAL (DBHP)" },
-        { "@type": "Course", "name": "DEFFENSO CYBER MATRIX PROGRAM (DCMP)" }
+        { "@type": "Course", "name": "DEFFENSO Junior Ethical Hacker (DJEH)" },
+        { "@type": "Course", "name": "DEFFENSO Advanced Penetration Tester (DAPT)" },
+        { "@type": "Course", "name": "DEFFENSO SOC Analyst Professional (DSAP)" },
+        { "@type": "Course", "name": "DEFFENSO Cloud Protection Engineer (DCPE)" },
+        { "@type": "Course", "name": "DEFFENSO Cyber Attack Specialist (DCAS)" },
+        { "@type": "Course", "name": "DEFFENSO Malware Intelligence Specialist (DMIS)" },
+        { "@type": "Course", "name": "DEFFENSO Bug Hunting Professional (DBHP)" },
+        { "@type": "Course", "name": "DEFFENSO Cyber Matrix Program (DCMP)" },
+        { "@type": "Course", "name": "DEFFENSO IoT Hacking & Security (DIHS)" },
+        { "@type": "Course", "name": "DEFFENSO IoT Tool Development R&D (DITD)" }
       ]
     }
   }
@@ -5625,7 +5627,7 @@
         input.disabled = true;
 
         // URL of your deployed Google Apps Script Web App
-        const scriptURL = 'https://script.google.com/macros/s/AKfycbzP1GLt0laeVlqG0yWyjcAksmWXyfOh1zqhfh5vMT_Xh6srhH0sSFSkLKw6MK9-GP_hMQ/exec';
+        const scriptURL = 'https://script.google.com/macros/s/AKfycbwgxDoJb21ui5XR0sMlVlzChWzSkxgBQs_ezoF58_1IServtLwHE-pRyOesOU-6cMjn/exec';
 
         if (scriptURL === 'YOUR_GOOGLE_APPS_SCRIPT_WEB_APP_URL') {
           console.warn('Developer Note: You must replace YOUR_GOOGLE_APPS_SCRIPT_WEB_APP_URL with your Apps Script Web App URL.');
@@ -5691,15 +5693,16 @@
         <label class="form-label">Subject</label>
         <select class="form-select" name="subject" style="margin-bottom:20px">
           <option>${sub}</option>
-          <option>DEFFENSO JUNIOR ETHICAL HACKER (DJEH)</option>
-          <option>DEFFENSO CYBER ATTACK SPECIALIST (DCAS)</option>
-          <option>DEFFENSO ADVANCED PENETRATION TESTER (DAPT)</option>
-          <option>DEFFENSO SOC ANALYST PROFESSIONAL (DSAP)</option>
-          <option>DEFFENSO BUG HUNTING PROFESSIONAL (DBHP)</option>
-          <option>DEFFENSO MALWARE INTELLIGENCE SPECIALIST (DMIS)</option>
-          <option>DEFFENSO CLOUD PROTECTION ENGINEER (DCPE)</option>
-          <option>DEFFENSO CYBER MATRIX PROGRAM (DCMP)</option>
-          <option>Cyber Forensics</option>
+          <option>DEFFENSO Junior Ethical Hacker (DJEH)</option>
+          <option>DEFFENSO Advanced Penetration Tester (DAPT)</option>
+          <option>DEFFENSO SOC Analyst Professional (DSAP)</option>
+          <option>DEFFENSO Cloud Protection Engineer (DCPE)</option>
+          <option>DEFFENSO Cyber Attack Specialist (DCAS)</option>
+          <option>DEFFENSO Malware Intelligence Specialist (DMIS)</option>
+          <option>DEFFENSO Bug Hunting Professional (DBHP)</option>
+          <option>DEFFENSO Cyber Matrix Program (DCMP)</option>
+          <option>DEFFENSO IoT Hacking & Security (DIHS)</option>
+          <option>DEFFENSO IoT Tool Development R&D (DITD)</option>
           <option>Technical Support</option><option>Business Collaboration</option><option>Feedback</option>
         </select>
         <label class="form-label">Message</label>
@@ -5715,7 +5718,7 @@
     ═══════════════════════════════════════════════════════ */
     const PROG = {
       jeh: {
-        num: '001', clr: '#FF4500', level: 'BEGINNER', l1: 'DEFFENSO JUNIOR', l2: 'ETHICAL HACKER (DJEH)',
+        num: '001', clr: '#FF4500', level: 'BEGINNER', l1: 'DEFFENSO Junior', l2: 'Ethical Hacker (DJEH)',
         cmd: 'nmap -sV -O target.local',
         desc: 'Your launchpad into ethical hacking. Fundamentals of cyber offense and defense in a hands-on environment built for complete beginners.',
         duration: '8 Weeks', levelFull: 'Beginner', labs: '20+ Guided Labs', mentorship: 'Weekly Group',
@@ -5727,11 +5730,11 @@
           ['MODULE 04: DEFENSE', '"Think like the defender."', ['Report Writing', 'Remediation', 'Ethics & Legal']]
         ],
         roles: ['Junior Pen Tester', 'Cybersecurity Trainee', 'IT Security Support', 'Bug Bounty Beginner'],
-        defaultSubject: 'DEFFENSO JUNIOR ETHICAL HACKER (DJEH)',
+        defaultSubject: 'DEFFENSO Junior Ethical Hacker (DJEH)',
         brochure: 'assests/Brochure/DJEH brochure.pdf'
       },
       ceh: {
-        num: '003', clr: '#00BCD4', level: 'INTERMEDIATE', l1: 'DEFFENSO CYBER', l2: 'ATTACK SPECIALIST (DCAS)',
+        num: '003', clr: '#00BCD4', level: 'INTERMEDIATE', l1: 'DEFFENSO Cyber', l2: 'Attack Specialist (DCAS)',
         cmd: 'msfconsole -q -x "use exploit/multi/handler"',
         desc: 'Learn advanced ethical hacking methodologies. Understand defensive mechanisms and hone your offensive skills.',
         duration: '10 Weeks', levelFull: 'Intermediate', labs: 'Advanced Cyber Range', mentorship: 'Weekly Group',
@@ -5743,11 +5746,11 @@
           ['MODULE 04: WIRELESS', '"Sniffing the air."', ['WPA2 Cracking', 'Rogue APs', 'Bluetooth Attacks']]
         ],
         roles: ['Security Analyst', 'Pen Test Consultant', 'Ethical Hacker', 'Security Engineer'],
-        defaultSubject: 'DEFFENSO CYBER ATTACK SPECIALIST (DCAS)',
+        defaultSubject: 'DEFFENSO Cyber Attack Specialist (DCAS)',
         brochure: null
       },
       cpt: {
-        num: '004', clr: '#00C853', level: 'ADVANCED', l1: 'DEFFENSO ADVANCED', l2: 'PENETRATION TESTER (DAPT)',
+        num: '004', clr: '#00C853', level: 'ADVANCED', l1: 'DEFFENSO Advanced', l2: 'Penetration Tester (DAPT)',
         cmd: 'python3 pwn_target.py --exploit',
         desc: 'Take your skills to the red team. Master end-to-end penetration testing from initial access to domain dominance.',
         duration: '12 Weeks', levelFull: 'Advanced', labs: 'Red Team Ops Range', mentorship: '1-on-1 Mentor',
@@ -5759,11 +5762,11 @@
           ['MODULE 04: REPORTING', '"Deliver value."', ['Exec Summary', 'Technical Findings', 'Risk Assessment']]
         ],
         roles: ['Penetration Tester', 'Red Team Operator', 'Offensive Security Engineer'],
-        defaultSubject: 'DEFFENSO ADVANCED PENETRATION TESTER (DAPT)',
+        defaultSubject: 'DEFFENSO Advanced Penetration Tester (DAPT)',
         brochure: null
       },
       soc: {
-        num: '005', clr: '#9C27B0', level: 'ALL LEVELS', l1: 'DEFFENSO SOC ANALYST', l2: 'PROFESSIONAL (DSAP)',
+        num: '005', clr: '#9C27B0', level: 'ALL LEVELS', l1: 'DEFFENSO SOC Analyst', l2: 'Professional (DSAP)',
         cmd: 'tail -f /var/log/auth.log | grep "Failed password"',
         desc: 'Become the first line of defense. Master SIEMs, threat hunting, and incident triage in a simulated Security Operations Center.',
         duration: '8 Weeks', levelFull: 'All Levels', labs: 'Live SIEM Environment', mentorship: 'Daily Office Hours',
@@ -5775,11 +5778,11 @@
           ['MODULE 04: MITIGATION', '"Stop the bleed."', ['Playbooks', 'Firewall Rules', 'Endpoint Isolation']]
         ],
         roles: ['SOC Analyst L1/L2', 'Incident Responder', 'Security Analyst'],
-        defaultSubject: 'DEFFENSO SOC ANALYST PROFESSIONAL (DSAP)',
+        defaultSubject: 'DEFFENSO SOC Analyst Professional (DSAP)',
         brochure: null
       },
       bbh: {
-        num: '006', clr: '#E91E63', level: 'INTERMEDIATE', l1: 'DEFFENSO BUG HUNTING', l2: 'PROFESSIONAL (DBHP)',
+        num: '006', clr: '#E91E63', level: 'INTERMEDIATE', l1: 'DEFFENSO Bug Hunting', l2: 'Professional (DBHP)',
         cmd: 'ffuf -w wordlist.txt -u https://target.com/FUZZ',
         desc: 'Learn web vulnerability research to earn bounties worldwide. From recon to critical severity exploiting and reporting.',
         duration: '10 Weeks', levelFull: 'Intermediate', labs: 'Vulnerable Web Farms', mentorship: 'Bounty Hunters',
@@ -5791,11 +5794,11 @@
           ['MODULE 04: REPORTING', '"Get paid."', ['PoC Creation', 'Impact Assessment', 'Platform Regs']]
         ],
         roles: ['Bug Bounty Hunter', 'Application Security Engineer', 'Freelance Pen Tester'],
-        defaultSubject: 'DEFFENSO BUG HUNTING PROFESSIONAL (DBHP)',
+        defaultSubject: 'DEFFENSO Bug Hunting Professional (DBHP)',
         brochure: null
       },
       ama: {
-        num: '007', clr: '#3F51B5', level: 'ADVANCED', l1: 'DEFFENSO MALWARE', l2: 'INTELLIGENCE SPECIALIST (DMIS)',
+        num: '007', clr: '#3F51B5', level: 'ADVANCED', l1: 'DEFFENSO Malware', l2: 'Intelligence Specialist (DMIS)',
         cmd: 'radare2 -A /tmp/malicious.exe',
         desc: 'Reverse engineer advanced persistent threats. Unpack, decrypt, and dissect malware to understand attacker tradecraft.',
         duration: '12 Weeks', levelFull: 'Advanced', labs: 'Isolated Sandbox', mentorship: 'Expert-led',
@@ -5807,11 +5810,11 @@
           ['MODULE 04: UNPACKING', '"Reveal the core."', ['Packer ID', 'Manual Unpacking', 'IAT Reconstruction']]
         ],
         roles: ['Malware Analyst', 'Reverse Engineer', 'Threat Intel Analyst'],
-        defaultSubject: 'DEFFENSO MALWARE INTELLIGENCE SPECIALIST (DMIS)',
+        defaultSubject: 'DEFFENSO Malware Intelligence Specialist (DMIS)',
         brochure: null
       },
       cs: {
-        num: '009', clr: '#00ACC1', level: 'ADVANCED', l1: 'DEFFENSO CLOUD', l2: 'PROTECTION ENGINEER (DCPE)',
+        num: '009', clr: '#00ACC1', level: 'ADVANCED', l1: 'DEFFENSO Cloud', l2: 'Protection Engineer (DCPE)',
         cmd: 'aws s3api get-bucket-acl --bucket target',
         desc: 'Master securing cloud infrastructure. Defend AWS, Azure, and GCP environments from misconfigurations and cloud-native attacks.',
         duration: '10 Weeks', levelFull: 'Advanced', labs: 'Multi-Cloud Sandboxes', mentorship: 'Cloud Architects',
@@ -5823,11 +5826,11 @@
           ['MODULE 04: KUBERNETES', '"Container defense."', ['RBAC', 'Network Policies', 'Pod Security']]
         ],
         roles: ['Cloud Security Engineer', 'DevSecOps', 'Cloud Architect'],
-        defaultSubject: 'DEFFENSO CLOUD PROTECTION ENGINEER (DCPE)',
+        defaultSubject: 'DEFFENSO Cloud Protection Engineer (DCPE)',
         brochure: null
       },
       adcd: {
-        num: '010', clr: '#F44336', level: 'EXPERT', l1: 'DEFFENSO CYBER', l2: 'MATRIX PROGRAM (DCMP)',
+        num: '010', clr: '#F44336', level: 'EXPERT', l1: 'DEFFENSO Cyber', l2: 'Matrix Program (DCMP)',
         cmd: 'iptables -A INPUT -p tcp --dport 22 -j DROP',
         desc: 'The ultimate pinnacle of our training. A rigorous, comprehensive program covering advanced offensive and defensive capabilities.',
         duration: '24 Weeks', levelFull: 'Expert', labs: 'Full Cyber Range', mentorship: 'Chief InfoSec Officers',
@@ -5839,7 +5842,39 @@
           ['MODULE 04: CAPSTONE', '"Final operation."', ['Full-scale Red v Blue', 'Board Presentations', 'Crisis Mgmt']]
         ],
         roles: ['Elite Cyber Operator', 'Security Architect', 'Cybersecurity Director'],
-        defaultSubject: 'DEFFENSO CYBER MATRIX PROGRAM (DCMP)',
+        defaultSubject: 'DEFFENSO Cyber Matrix Program (DCMP)',
+        brochure: null
+      },
+      dihs: {
+        num: '011', clr: '#E67E22', level: 'ADVANCED', l1: 'DEFFENSO IoT', l2: 'Hacking & Security (DIHS)',
+        cmd: 'gatttool -b <mac> --interactive',
+        desc: 'Uncover vulnerabilities in the world of connected devices. Master IoT protocols, firmware analysis, and hardware exploitation.',
+        duration: '10 Weeks', levelFull: 'Advanced', labs: 'Hardware Labs', mentorship: 'Weekly Group',
+        currSub: 'Secure the internet of everything.',
+        modules: [
+          ['MODULE 01: IOT PROTOCOLS', '"Understanding the mesh."', ['MQTT', 'ZigBee', 'CoAP']],
+          ['MODULE 02: FIRMWARE', '"Digital heart."', ['Binwalk', 'QEMU Emulation', 'Static Analysis']],
+          ['MODULE 03: HARDWARE', '"Physical access."', ['UART/JTAG', 'SPI/I2C', 'Hardware Debugging']],
+          ['MODULE 04: BLE & SDR', '"Over the air."', ['Bluetooth Low Energy', 'SDR Fundamentals', 'Signal Replay']]
+        ],
+        roles: ['IoT Security Specialist', 'Embedded Security Researcher', 'Hardware Hacker'],
+        defaultSubject: 'DEFFENSO IoT Hacking & Security (DIHS)',
+        brochure: null
+      },
+      ditd: {
+        num: '012', clr: '#95A5A6', level: 'EXPERT', l1: 'DEFFENSO IoT Tool', l2: 'Development R&D (DITD)',
+        cmd: 'arm-none-eabi-gcc -o firmware.bin main.c',
+        desc: 'Advanced research and development for IoT security tools. Design, build, and test your own custom security assessment hardware and software.',
+        duration: '12 Weeks', levelFull: 'Expert', labs: 'R&D Workshop', mentorship: 'Mentorship 1-on-1',
+        currSub: 'Engineer the future of security tools.',
+        modules: [
+          ['MODULE 01: ARM ARCH', '"Embedded core."', ['Assembly', 'Memory Layout', 'Instruction Sets']],
+          ['MODULE 02: RTOS SEC', '"Real-time defense."', ['FreeRTOS', 'Zephyr', 'Microkernel Security']],
+          ['MODULE 03: TOOL DEV', '"Building weapons."', ['Custom Scanners', 'Hardware Fuzzers', 'Logic Analyzers']],
+          ['MODULE 04: R&D CAPSTONE', '"Invention phase."', ['Design Project', 'Prototyping', 'Final Validation']]
+        ],
+        roles: ['Security Researcher', 'R&D Engineer', 'Embedded Developer'],
+        defaultSubject: 'DEFFENSO IoT Tool Development R&D (DITD)',
         brochure: null
       }
     };
@@ -5871,7 +5906,7 @@
           <div class="hero-live-status">
             <div class="hls-dot"></div>
             <span>SYSTEMS ONLINE</span><span class="hls-sep">&nbsp;//&nbsp;</span>
-            <span>8 PROGRAMS ACTIVE</span><span class="hls-sep">&nbsp;//&nbsp;</span>
+            <span>10 PROGRAMS ACTIVE</span><span class="hls-sep">&nbsp;//&nbsp;</span>
             <span>GLOBAL REACH</span>
           </div>
           <p class="hero-desc">Building a digitally resilient generation capable of defending systems, data, and nations against modern cyber threats.</p>
