@@ -1610,67 +1610,19 @@
     /* ── Recorded Class Quiz Data ── */
     const RECORDED_MODULES = [
       {
-        title: "Basic Commands", moduleTitle: "Ethical Hacking",
-        video: "cXGaUZtdv3I",
+        title: "Class 1", moduleTitle: "Deffenso Junior Ethical Hacker",
+        video: "_d4St8aXBTc",
         quiz: [
-          { question: "Which command is used in Linux to display IP address and network interface details?", options: ["ipconfig", "ifconfig", "netstat", "ping"], correct: 1 },
-          { question: "What does the nmap command primarily do?", options: ["Cracks passwords", "Encrypts hard drives", "Network exploration and security auditing (Port scanning)", "Installs a backdoor"], correct: 2 },
-          { question: "Which flag is used with nmap to perform an OS detection scan?", options: ["-sV", "-O", "-p-", "-Pn"], correct: 1 },
-          { question: "In a Linux terminal, what command is used to change the current directory?", options: ["chdir", "move", "cd", "ls"], correct: 2 },
-          { question: "What is the purpose of the whoami command?", options: ["To find the owner of a website", "To display the current logged-in username", "To list all users on a network", "To change the user password"], correct: 1 },
-          { question: "Which of the following is considered passive reconnaissance?", options: ["Running a vulnerability scan", "Searching a company's public LinkedIn profiles", "Brute-forcing a login page", "Pinging a server"], correct: 1 },
-          { question: "What does the sudo command stand for?", options: ["System User Direct Open", "Secure User Data Only", "Superuser Do", "Super User Delete Option"], correct: 2 },
-          { question: "Which command is used to view the contents of a file named passwords.txt?", options: ["read passwords.txt", "open passwords.txt", "cat passwords.txt", "view passwords.txt"], correct: 2 },
-          { question: "Which tool is commonly used for sniffing network traffic?", options: ["John the Ripper", "Wireshark", "Metasploit", "Burp Suite"], correct: 1 },
-          { question: "What is the first phase of a professional ethical hack?", options: ["Gaining Access", "Maintaining Access", "Reconnaissance (Footprinting)", "Clearing Tracks"], correct: 2 }
-        ]
-      },
-      {
-        title: "Scanning & Enumeration", moduleTitle: "Network Tools",
-        video: "5une30fIDww",
-        quiz: [
-          { question: "Which tool is primarily used for network scanning and port discovery?", options: ["Wireshark", "Metasploit", "Nmap", "Burp Suite"], correct: 2 },
-          { question: "What is the main purpose of Shodan?", options: ["Cracking passwords", "Searching exposed devices on the internet", "Encrypting data", "Monitoring CPU usage"], correct: 1 },
-          { question: "Which tool provides a framework of pre-built exploits for penetration testing?", options: ["Aircrack-ng", "Metasploit", "John the Ripper", "SQLMap"], correct: 1 },
-          { question: "Cobalt Strike is mainly used for:", options: ["Wi-Fi cracking", "Packet sniffing", "Advanced red team simulations", "Database management"], correct: 2 },
-          { question: "Which tool allows you to analyze network packets in real time?", options: ["Wireshark", "Nmap", "Impacket", "Shodan"], correct: 0 },
-          { question: "Mimikatz is known for:", options: ["Web scanning", "Extracting passwords from memory", "Port scanning", "Encrypting files"], correct: 1 },
-          { question: "Which tool is used to crack password hashes using wordlists?", options: ["Burp Suite", "SQLMap", "John the Ripper", "Wireshark"], correct: 2 },
-          { question: "Burp Suite is commonly used for:", options: ["Wireless attacks", "Web application security testing", "Network scanning", "File recovery"], correct: 1 },
-          { question: "Aircrack-ng is used for:", options: ["Database exploitation", "Wi-Fi password cracking", "System monitoring", "Malware analysis"], correct: 1 },
-          { question: "SQLMap is designed to:", options: ["Scan open ports", "Detect and exploit SQL injection vulnerabilities", "Analyze network traffic", "Crack Wi-Fi passwords"], correct: 1 }
-        ]
-      },
-      {
-        title: "OSINT Foundations", moduleTitle: "Open-Source Intelligence",
-        video: "7sMtlYkmLrk",
-        quiz: [
-          { question: "What does OSINT stand for?", options: ["Open Security Intelligence Network", "Online System Integration Network", "Open-Source Intelligence", "Offensive Security Internal Tool"], correct: 2 },
-          { question: "What is the primary goal of OSINT?", options: ["Breaking into secure systems", "Gathering intelligence from publicly available data", "Encrypting communications", "Deleting online traces"], correct: 1 },
-          { question: "Which of the following is an example of OSINT usage?", options: ["Brute-force password cracking", "Phishing attacks", "Investigating social media profiles", "Installing malware"], correct: 2 },
-          { question: "Which tool is commonly used to extract metadata (EXIF data) from images?", options: ["Wireshark", "ExifTool", "Burp Suite", "Nmap"], correct: 1 },
-          { question: "What kind of information can EXIF data reveal?", options: ["Passwords", "Firewall rules", "Camera details, timestamp, and GPS location", "Encryption keys"], correct: 2 },
-          { question: "Which method helps identify where an image appears online?", options: ["SQL Injection", "Reverse Image Search", "Port Scanning", "Packet Sniffing"], correct: 1 },
-          { question: "Tools like Sherlock and Mr. Holmes are used for:", options: ["Network monitoring", "Finding usernames across platforms", "Cracking Wi-Fi passwords", "Encrypting files"], correct: 1 },
-          { question: "What is geolocation in OSINT?", options: ["Tracking malware activity", "Identifying a physical location from clues in data/images", "Encrypting GPS signals", "Blocking IP addresses"], correct: 1 },
-          { question: "Which platform is commonly used to verify locations visually in OSINT investigations?", options: ["Photoshop", "Google Street View", "Notepad", "Blender"], correct: 1 },
-          { question: "What is an important ethical rule in OSINT?", options: ["Access private accounts without permission", "Use data for blackmail", "Stay within legal boundaries and respect privacy", "Share sensitive data publicly"], correct: 2 }
-        ]
-      },
-      {
-        title: "APK Analysis", moduleTitle: "Reverse Engineering",
-        video: "3ZFRPM9MMDA",
-        quiz: [
-          { question: "What is an APK file in Android?", options: ["A database file", "An Android application package", "A system log file", "A network protocol"], correct: 1 },
-          { question: "What is the main goal of APK reverse engineering?", options: ["Encrypting the app", "Understanding the app's internal logic", "Increasing app performance", "Compressing app size"], correct: 1 },
-          { question: "Which file inside an APK contains compiled bytecode?", options: ["AndroidManifest.xml", "resources.arsc", "classes.dex", "build.gradle"], correct: 2 },
-          { question: "What does the dex2jar tool do?", options: ["Converts APK to XML", "Converts DEX files to JAR format", "Encrypts Java code", "Compresses APK size"], correct: 1 },
-          { question: "Which tool is used to view decompiled Java code from a JAR file?", options: ["Wireshark", "JD-GUI", "Nmap", "Burp Suite"], correct: 1 },
-          { question: "What is the purpose of renaming an APK file to .zip?", options: ["To execute it faster", "To debug it", "To extract its contents like an archive", "To install it manually"], correct: 2 },
-          { question: "Which tool automates APK decompilation with a graphical interface?", options: ["Metasploit", "Bytecode Viewer", "Aircrack-ng", "SQLMap"], correct: 1 },
-          { question: "What type of code is stored inside classes.dex?", options: ["HTML code", "Machine code", "Dalvik/ART bytecode", "Python scripts"], correct: 2 },
-          { question: "Why do ethical hackers analyze app source code?", options: ["To redesign UI", "To find vulnerabilities and logic flaws", "To improve graphics", "To reduce file size"], correct: 1 },
-          { question: "What is an important ethical rule in reverse engineering?", options: ["Share cracked apps publicly", "Modify apps for profit", "Only perform analysis with permission and for learning/security", "Bypass payment systems"], correct: 2 }
+          { question: "What is cyber security mainly about?", options: ["Speeding up your internet", "Protecting devices and networks from unauthorized access", "Increasing phone battery life", "Installing more games"], correct: 1 },
+          { question: "Which of these is a good example of a cyber security risk mentioned in the video?", options: ["Low mobile signal", "Someone changing your UPI ID and taking the money", "Phone screen brightness too high", "Slow charging"], correct: 1 },
+          { question: "What is phishing?", options: ["Sending large files online", "Using Wi-Fi without password", "Fake emails/websites that steal your login or PIN", "Speeding up downloads"], correct: 2 },
+          { question: "Which option is a type of malware?", options: ["Virus", "Fiber", "Buffer", "Scanner"], correct: 0 },
+          { question: "What does ransomware do?", options: ["Cleans junk files", "Encrypts/locks your files and asks for money to unlock", "Increases RAM", "Improves Wi-Fi speed"], correct: 1 },
+          { question: "Who are white-hat hackers?", options: ["Hackers who steal money from banks", "Hackers who do only prank hacks", "Ethical hackers who legally test and secure systems", "Hackers who never use the internet"], correct: 2 },
+          { question: "Which group uses ready-made tools/scripts without much deep knowledge?", options: ["White-hat hackers", "Script kiddies", "State-supported hackers", "Bankers"], correct: 1 },
+          { question: "In the CIA triad, what does \"C\" stand for?", options: ["Control", "Communication", "Confidentiality", "Connection"], correct: 2 },
+          { question: "In the CIA triad, Availability means:", options: ["Data is always free of cost", "File or service exists and can be accessed when needed", "Internet is very fast", "Apps are updated every day"], correct: 1 },
+          { question: "According to the instructor, which statement is correct about security?", options: ["Hacking is impossible", "We can be 100% secure forever", "Hacking is not impossible and defending is never 100% perfect", "Only banks get hacked, not normal people"], correct: 2 }
         ]
       }
     ];
