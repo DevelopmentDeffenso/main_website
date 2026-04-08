@@ -1,0 +1,17 @@
+{
+  "projects": {
+    "default": "deffenso-academy-lms-v1"
+  },
+  "targets": {
+    "deffenso-academy-lms-v1": {
+      "hosting": {
+        "main": [
+          "deffenso-academy-lms-v1"
+        ],
+        "lms": [
+          "lms-deffenso-academy"
+        ]
+      }
+    }
+  }
+}

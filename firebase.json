@@ -2,37 +2,61 @@
   "firestore": {
     "rules": "firestore.rules"
   },
-  "hosting": {
-    "public": "public",
-    "ignore": [
-      "firebase.json",
-      "**/.*",
-      "**/node_modules/**"
-    ],
-    "headers": [
-      {
-        "source": "**",
-        "headers": [
-          { "key": "X-Frame-Options", "value": "DENY" },
-          { "key": "X-Content-Type-Options", "value": "nosniff" },
-          { "key": "Strict-Transport-Security", "value": "max-age=31536000; includeSubDomains" },
-          { "key": "Referrer-Policy", "value": "strict-origin-when-cross-origin" }
-        ]
-      }
-    ],
-    "rewrites": [
-      {
-        "source": "/sitemap.xml",
-        "destination": "/sitemap.xml"
-      },
-      {
-        "source": "/robots.txt",
-        "destination": "/robots.txt"
-      },
-      {
-        "source": "**",
-        "destination": "/index.html"
-      }
-    ]
-  }
+  "hosting": [
+    {
+      "target": "main",
+      "public": "public",
+      "ignore": [
+        "firebase.json",
+        "**/.*",
+        "**/node_modules/**",
+        "lms/**"
+      ],
+      "headers": [
+        {
+          "source": "**",
+          "headers": [
+            { "key": "X-Frame-Options", "value": "DENY" },
+            { "key": "X-Content-Type-Options", "value": "nosniff" },
+            { "key": "Strict-Transport-Security", "value": "max-age=31536000; includeSubDomains" },
+            { "key": "Referrer-Policy", "value": "strict-origin-when-cross-origin" }
+          ]
+        }
+      ],
+      "rewrites": [
+        {
+          "source": "/sitemap.xml",
+          "destination": "/sitemap.xml"
+        },
+        {
+          "source": "/robots.txt",
+          "destination": "/robots.txt"
+        },
+        {
+          "source": "**",
+          "destination": "/index.html"
+        }
+      ]
+    },
+    {
+      "target": "lms",
+      "public": "public/lms",
+      "ignore": [
+        "firebase.json",
+        "**/.*",
+        "**/node_modules/**"
+      ],
+      "headers": [
+        {
+          "source": "**",
+          "headers": [
+            { "key": "X-Frame-Options", "value": "DENY" },
+            { "key": "X-Content-Type-Options", "value": "nosniff" },
+            { "key": "Strict-Transport-Security", "value": "max-age=31536000; includeSubDomains" },
+            { "key": "Referrer-Policy", "value": "strict-origin-when-cross-origin" }
+          ]
+        }
+      ]
+    }
+  ]
 }
